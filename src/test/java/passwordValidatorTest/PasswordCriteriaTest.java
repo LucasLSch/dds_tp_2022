@@ -1,18 +1,16 @@
-package pwdValidator;
+package passwordValidatorTest;
 
 import org.junit.jupiter.api.Test;
-import passwordValidator.*;
 import security.passwordValidator.*;
-import security.passwordValidator.passwordValidator.*;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class CriteriosPwdTest{
+public class PasswordCriteriaTest {
 
-    // ---------- Longitud Minima ---------- //
+    // --- Longitud Minima --- //
+
     @Test
-    public void longitudMinimaAceptaBien() {
+    public void longitudMinimaRechazaBien() {
         String aPassword = "menosD8";
 
         PasswordException thrown = assertThrows(
@@ -24,9 +22,19 @@ public class CriteriosPwdTest{
         assertTrue(thrown.getMessage().contains("The password must have 8 characters"));
     }
 
-    // ---------- Peores 10k Passwords ---------- //
     @Test
-    public void diccionarioRestringeBien(){
+    public void longitudMinimaAceptaBien() {
+        String aPassword = "tengo mas de 8 caracteres";
+        assertDoesNotThrow(
+                () -> new ValidateMinLength().validatePassword(aPassword)
+        );
+    }
+
+
+    // --- Peores 10k Passwords --- //
+
+    @Test
+    public void passwordsComunesRechazaBien(){
         String aPassword = "spiderman";
 
         PasswordException thrown = assertThrows(
@@ -38,9 +46,19 @@ public class CriteriosPwdTest{
         assertTrue(thrown.getMessage().contains("The password is not a safe password"));
     }
 
+    @Test
+    public void passwordsComunesAceptaBien() {
+        String aPassword = "no soy comun";
+        assertDoesNotThrow(
+                () -> new ValidateCommonPassword().validatePassword(aPassword)
+        );
+    }
+
+
+    // --- Mayuscula Requerida --- //
 
     @Test
-    public void noTieneMayuscula(){
+    public void mayusculaRequeridaRechazaBien(){
         String aPassword = "no tengo mayuscula";
 
         PasswordException thrown = assertThrows(
@@ -52,9 +70,19 @@ public class CriteriosPwdTest{
         assertTrue(thrown.getMessage().contains("The password does not have a capital letter"));
     }
 
+    @Test
+    public void mayusculaRequeridaAceptaBien() {
+        String aPassword = "tengo una Mayuscula";
+        assertDoesNotThrow(
+                () -> new ValidateCapitalLetter().validatePassword(aPassword)
+        );
+    }
+
+
+    // --- Numero Requerido --- //
 
     @Test
-    public void noTieneNumero(){
+    public void numeroRequeridoRechazaBien(){
         String aPassword = "no tengo numero";
 
         PasswordException thrown = assertThrows(
@@ -66,9 +94,19 @@ public class CriteriosPwdTest{
         assertTrue(thrown.getMessage().contains("The password must have a number"));
     }
 
+    @Test
+    public void numeroRequeridoAceptaBien() {
+        String aPassword = "tengo 1 numero";
+        assertDoesNotThrow(
+                () -> new ValidateNumber().validatePassword(aPassword)
+        );
+    }
+
+
+    // --- Caracter Especial Requerido --- //
 
     @Test
-    public void noTieneCaracterEspecial(){
+    public void caracterEspecialRechazaBien(){
         String aPassword = "no tengo caracter especial";
 
         PasswordException thrown = assertThrows(
@@ -80,6 +118,12 @@ public class CriteriosPwdTest{
         assertTrue(thrown.getMessage().contains("The password must have a special character"));
     }
 
-
+    @Test
+    public void caracterEspecialAceptaBien() {
+        String aPassword = "tengo caracter e$pecial";
+        assertDoesNotThrow(
+                () -> new ValidateSpecialChar().validatePassword(aPassword)
+        );
+    }
 
 }
