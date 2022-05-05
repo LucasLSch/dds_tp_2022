@@ -2,15 +2,19 @@ package security.user;
 
 public abstract class User {
 
-    private String username;
-    private String password;
-/*
+  private String username;
+  private String password;
 
-    public void login(String aUsername, String aPassword) {
-        // TODO
-    }
+  public Boolean successfulLogin(String someUsername, String somePassword) {
+    return someUsername.equals(this.username) && somePassword.equals(this.password);
+  }
 
-    private validatePassword(String aPassword) {
-        // TODO
-    }*/
+  protected User(String someUsername, String somePassword) {
+    this.username = someUsername;
+    this.password = somePassword;
+  }
+
+  public String getUsername() {
+    return this.username;
+  }
 }
