@@ -1,8 +1,8 @@
 package domain.organization;
 
 public enum DocType {
-    ID,
-    CUIL,
-    CUIT,
-    PASSPORT
+  ID,
+  CUIL,
+  CUIT,
+  PASSPORT
 }

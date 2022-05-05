@@ -4,8 +4,8 @@ import domain.journey.transport.Transport;
 
 public class Leg {
 
-    private String start;
-    private String end;
+  private String start;
+  private String end;
 
-    private Transport transport;
+  private Transport transport;
 }

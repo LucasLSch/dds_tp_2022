@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Journey {
 
-    private String start;
-    private String end;
+  private String start;
+  private String end;
 
-    private List<Leg> legList;
+  private List<Leg> legList;
 
 }

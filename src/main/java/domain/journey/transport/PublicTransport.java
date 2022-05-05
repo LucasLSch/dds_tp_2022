@@ -4,5 +4,5 @@ import java.util.List;
 
 public class PublicTransport implements Transport {
 
-    private List<Stop> stopList;
+  private List<Stop> stopList;
 }
