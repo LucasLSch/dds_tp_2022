@@ -14,7 +14,7 @@ public class UserTest {
   @Test
   public void seCreaAdminCorrectamente() {
     String someUsername = "usuario";
-    String somePassword = "contrasenia";
+    String somePassword = "1Contra$eña";
 
     AtomicReference<Administrator> newAdmin = new AtomicReference<>();
 
@@ -25,7 +25,7 @@ public class UserTest {
   @Test
   public void seCreaUsuarioCorrectamente() {
     String someUsername = "usuario";
-    String somePassword = "contrasenia";
+    String somePassword = "1Contra$eña";
 
     AtomicReference<StandardUser> newStandardUser = new AtomicReference<>();
 
