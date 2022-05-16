@@ -21,7 +21,7 @@ public class Organization {
     this.sectorList = new ArrayList<>();
   }
 
-  public void singUpSector(Sector aSector) {
+  public void registerSector(Sector aSector) {
     //this.validateSector(aSector) por si es necesario en un futuro
     this.sectorList.add(aSector);
   }
