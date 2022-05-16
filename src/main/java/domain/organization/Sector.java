@@ -9,4 +9,9 @@ public class Sector {
     this.sectorName = sectorName;
     this.organization = organization;
   }
+
+  public void acceptMember(Member member) {
+    this.organization.acceptMember(member);
+    //TODO
+  }
 }

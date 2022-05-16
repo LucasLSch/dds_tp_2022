@@ -21,5 +21,9 @@ public class Member {
     this.journeyList = new ArrayList<>();
   }
 
+  public void linkSector(Sector aSector) {
+    aSector.acceptMember(this);
+    this.sectorList.add(aSector);
+  }
 
 }

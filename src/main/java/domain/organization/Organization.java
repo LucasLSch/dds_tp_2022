@@ -12,6 +12,11 @@ public class Organization {
   private String clasification;
   private OrgType orgType;
 
+  public Organization() {
+    this.memberList = new ArrayList<>();
+    this.sectorList = new ArrayList<>();
+  }
+
   public Organization(String socObj, String locat, String clasific, OrgType orgType) {
     this.socialObjective = socObj;
     this.location = locat;
@@ -26,4 +31,16 @@ public class Organization {
     this.sectorList.add(aSector);
   }
 
+  public void acceptMember(Member member) {
+    //TODO criterios de aceptacion o rechazo
+    if(this.isNewMember(member))  this.registerMember(member);
+  }
+
+  private void registerMember(Member aMember) {
+    this.memberList.add(aMember);
+  }
+
+  private Boolean isNewMember(Member aMember) {
+    return !this.memberList.contains(aMember);
+  }
 }
