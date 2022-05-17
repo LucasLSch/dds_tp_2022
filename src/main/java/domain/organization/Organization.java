@@ -37,7 +37,9 @@ public class Organization {
   }
 
   private void registerMember(Member someMember, Sector someSector) {
-    if(this.isNewMember(someMember)) this.memberList.add(someMember);
+    if (this.isNewMember(someMember)) {
+      this.memberList.add(someMember);
+    }
     someMember.addSector(someSector);
   }
 

@@ -1,7 +1,6 @@
 package domain.organization;
 
 import domain.journey.Journey;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +26,10 @@ public class Member {
 
   public void addSector(Sector someSector) {
     this.sectorList.add(someSector);
+  }
+
+  public void addJourney(Journey someJourney) {
+    this.journeyList.add(someJourney);
   }
 
 }
