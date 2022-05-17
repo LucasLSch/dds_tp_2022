@@ -26,21 +26,23 @@ public class Organization {
     this.sectorList = new ArrayList<>();
   }
 
-  public void registerSector(Sector aSector) {
-    //this.validateSector(aSector) por si es necesario en un futuro
-    this.sectorList.add(aSector);
+  public void registerSector(Sector someSector) {
+    //this.validateSector(someSector) por si es necesario en un futuro
+    this.sectorList.add(someSector);
   }
 
-  public void acceptMember(Member member) {
-    //TODO criterios de aceptacion o rechazo
-    if(this.isNewMember(member))  this.registerMember(member);
+  public void acceptMember(Member someMember, Sector someSector) {
+    //TODO this.validate(someMember, someSector) //Criterios desconocidos
+    this.registerMember(someMember, someSector);
   }
 
-  private void registerMember(Member aMember) {
-    this.memberList.add(aMember);
+  private void registerMember(Member someMember, Sector someSector) {
+    if(this.isNewMember(someMember)) this.memberList.add(someMember);
+    someMember.addSector(someSector);
   }
 
-  private Boolean isNewMember(Member aMember) {
-    return !this.memberList.contains(aMember);
+  private Boolean isNewMember(Member someMember) {
+    return !this.memberList.contains(someMember);
   }
+
 }

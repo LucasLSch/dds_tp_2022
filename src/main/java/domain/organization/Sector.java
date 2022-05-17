@@ -11,7 +11,7 @@ public class Sector {
   }
 
   public void acceptMember(Member member) {
-    this.organization.acceptMember(member);
-    //TODO
+    this.organization.acceptMember(member, this);
   }
+
 }
