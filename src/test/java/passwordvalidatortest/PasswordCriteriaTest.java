@@ -17,11 +17,11 @@ public class PasswordCriteriaTest {
 
   @Test
   public void longitudMinimaRechazaBien() {
-    String aPassword = "menosD8";
+    String somePassword = "menosD8";
 
     PasswordException thrown = assertThrows(
         PasswordException.class,
-        () -> new ValidateMinLength().validatePassword(aPassword),
+        () -> new ValidateMinLength().validatePassword(somePassword),
         "Esperaba que la validacion falle y no lo hizo."
     );
 
@@ -30,9 +30,9 @@ public class PasswordCriteriaTest {
 
   @Test
   public void longitudMinimaAceptaBien() {
-    String aPassword = "tengo mas de 8 caracteres";
+    String somePassword = "tengo mas de 8 caracteres";
     assertDoesNotThrow(
-        () -> new ValidateMinLength().validatePassword(aPassword)
+        () -> new ValidateMinLength().validatePassword(somePassword)
     );
   }
 
@@ -41,11 +41,11 @@ public class PasswordCriteriaTest {
 
   @Test
   public void passwordsComunesRechazaBien(){
-    String aPassword = "spiderman";
+    String somePassword = "spiderman";
 
     PasswordException thrown = assertThrows(
         PasswordException.class,
-        () -> new ValidateCommonPassword().validatePassword(aPassword),
+        () -> new ValidateCommonPassword().validatePassword(somePassword),
         "Esperaba que la validacion falle y no lo hizo."
     );
 
@@ -54,9 +54,9 @@ public class PasswordCriteriaTest {
 
   @Test
   public void passwordsComunesAceptaBien() {
-    String aPassword = "no soy comun";
+    String somePassword = "no soy comun";
     assertDoesNotThrow(
-        () -> new ValidateCommonPassword().validatePassword(aPassword)
+        () -> new ValidateCommonPassword().validatePassword(somePassword)
     );
   }
 
@@ -65,11 +65,11 @@ public class PasswordCriteriaTest {
 
   @Test
   public void mayusculaRequeridaRechazaBien(){
-    String aPassword = "no tengo mayuscula";
+    String somePassword = "no tengo mayuscula";
 
     PasswordException thrown = assertThrows(
         PasswordException.class,
-        () -> new ValidateCapitalLetter().validatePassword(aPassword),
+        () -> new ValidateCapitalLetter().validatePassword(somePassword),
         "Esperaba que la validacion falle y no lo hizo."
     );
 
@@ -78,9 +78,9 @@ public class PasswordCriteriaTest {
 
   @Test
   public void mayusculaRequeridaAceptaBien() {
-    String aPassword = "tengo una Mayuscula";
+    String somePassword = "tengo una Mayuscula";
     assertDoesNotThrow(
-        () -> new ValidateCapitalLetter().validatePassword(aPassword)
+        () -> new ValidateCapitalLetter().validatePassword(somePassword)
     );
   }
 
@@ -89,11 +89,11 @@ public class PasswordCriteriaTest {
 
   @Test
   public void numeroRequeridoRechazaBien(){
-    String aPassword = "no tengo numero";
+    String somePassword = "no tengo numero";
 
     PasswordException thrown = assertThrows(
         PasswordException.class,
-        () -> new ValidateNumber().validatePassword(aPassword),
+        () -> new ValidateNumber().validatePassword(somePassword),
         "Esperaba que la validacion falle y no lo hizo."
     );
 
@@ -102,9 +102,9 @@ public class PasswordCriteriaTest {
 
   @Test
   public void numeroRequeridoAceptaBien() {
-    String aPassword = "tengo 1 numero";
+    String somePassword = "tengo 1 numero";
     assertDoesNotThrow(
-        () -> new ValidateNumber().validatePassword(aPassword)
+        () -> new ValidateNumber().validatePassword(somePassword)
     );
   }
 
@@ -113,11 +113,11 @@ public class PasswordCriteriaTest {
 
   @Test
   public void caracterEspecialRechazaBien(){
-    String aPassword = "no tengo caracter especial";
+    String somePassword = "no tengo caracter especial";
 
     PasswordException thrown = assertThrows(
         PasswordException.class,
-        () -> new ValidateSpecialChar().validatePassword(aPassword),
+        () -> new ValidateSpecialChar().validatePassword(somePassword),
         "Esperaba que la validacion falle y no lo hizo."
     );
 
@@ -126,9 +126,9 @@ public class PasswordCriteriaTest {
 
   @Test
   public void caracterEspecialAceptaBien() {
-    String aPassword = "tengo caracter e$pecial";
+    String somePassword = "tengo caracter e$pecial";
     assertDoesNotThrow(
-        () -> new ValidateSpecialChar().validatePassword(aPassword)
+        () -> new ValidateSpecialChar().validatePassword(somePassword)
     );
   }
 
