@@ -13,9 +13,14 @@ public class Line {
 
   public Line(List<Stop> someStopList, String someName, PublicTransportType someType) {
     this.stopList = someStopList;
+    this.registerStops();
     this.validateStops();
     this.name = someName;
     this.pptype = someType;
+  }
+
+  public void registerStops() {
+    this.stopList.forEach(stop -> stop.linkToLine(this));
   }
 
   public void validateStops() {
