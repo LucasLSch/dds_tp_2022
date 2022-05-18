@@ -1,5 +1,7 @@
 package domain.organization;
 
+import domain.exceptions.InvalidSectorForOrgException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +29,15 @@ public class Organization {
   }
 
   public void registerSector(Sector someSector) {
-    //this.validateSector(someSector) por si es necesario en un futuro
+    this.validateSector(someSector);
     this.sectorList.add(someSector);
+  }
+
+  //Posiblemente cambie cuando haya mas validaciones
+  private void validateSector(Sector someSector){
+    if(!someSector.belongsTo(this)){
+      throw new InvalidSectorForOrgException(someSector.getSectorName(), this.socialObjective);
+    }
   }
 
   public void acceptMember(Member someMember, Sector someSector) {
