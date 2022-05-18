@@ -7,8 +7,7 @@ import domain.organization.Sector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class OrganizationTest {
   private Organization dummyOrganization;
@@ -30,10 +29,18 @@ public class OrganizationTest {
   @Test
   public void sectorCreationIsCorrect() {
     assertNotNull(dummySector);
+    assertTrue(dummyOrganization.sectorIsRegistered(dummySector));
   }
 
   @Test
   public void memberCreationIsCorrect() {
     assertNotNull(dummyMember);
+  }
+
+  @Test
+  public void memberCorrectlyLinksToSector() {
+    dummyMember.linkSector(dummySector);
+    assertTrue(dummyMember.worksIn(dummyOrganization));
+    assertTrue(dummyMember.worksIn(dummySector));
   }
 }

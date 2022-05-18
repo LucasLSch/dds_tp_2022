@@ -55,4 +55,7 @@ public class Organization {
     return !this.memberList.contains(someMember);
   }
 
+  public Boolean sectorIsRegistered(Sector someSector) {
+    return this.sectorList.contains(someSector);
+  }
 }

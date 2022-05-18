@@ -32,4 +32,11 @@ public class Member {
     this.journeyList.add(someJourney);
   }
 
+  public Boolean worksIn(Sector someSector) {
+    return this.sectorList.contains(someSector);
+  }
+
+  public Boolean worksIn(Organization someOrganization) {
+    return this.sectorList.stream().anyMatch(sector -> sector.belongsTo(someOrganization));
+  }
 }
