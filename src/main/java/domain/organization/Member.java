@@ -15,7 +15,11 @@ public class Member {
   private DocType docType;
   private String document;
 
-  public Member() {
+  public Member(String name, String lastName, DocType docType, String document) {
+    this.name = name;
+    this.lastName = lastName;
+    this.docType = docType;
+    this.document = document;
     this.sectorList = new ArrayList<>();
     this.journeyList = new ArrayList<>();
   }
