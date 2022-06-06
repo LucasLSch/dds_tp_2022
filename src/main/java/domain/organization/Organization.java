@@ -13,11 +13,6 @@ public class Organization {
   private String clasification;
   private OrgType orgType;
 
-  public Organization() {
-    this.memberList = new ArrayList<>();
-    this.sectorList = new ArrayList<>();
-  }
-
   public Organization(String socObj, String locat, String clasific, OrgType orgType) {
     this.socialObjective = socObj;
     this.location = locat;
@@ -39,12 +34,8 @@ public class Organization {
     }
   }
 
-  public void acceptMember(Member someMember, Sector someSector) {
-    //TODO this.validate(someMember, someSector) //Criterios desconocidos
-    this.registerMember(someMember, someSector);
-  }
-
-  private void registerMember(Member someMember, Sector someSector) {
+  public void registerMember(Member someMember, Sector someSector) {
+    //TODO this.validate(someMember, someSector) Criterios desconocidos
     if (this.isNewMember(someMember)) {
       this.memberList.add(someMember);
     }

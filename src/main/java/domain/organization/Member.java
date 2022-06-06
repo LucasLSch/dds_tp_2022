@@ -21,7 +21,7 @@ public class Member {
   }
 
   public void linkSector(Sector someSector) {
-    someSector.acceptMember(this);
+    someSector.registerMember(this);
   }
 
   public void addSector(Sector someSector) {

@@ -15,8 +15,8 @@ public class Sector {
     return sectorName;
   }
 
-  public void acceptMember(Member member) {
-    this.organization.acceptMember(member, this);
+  public void registerMember(Member member) {
+    this.organization.registerMember(member, this);
   }
 
   public Boolean belongsTo(Organization organization) {
