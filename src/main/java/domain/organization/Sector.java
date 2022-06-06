@@ -8,7 +8,6 @@ public class Sector {
   public Sector(String sectorName, Organization organization) {
     this.sectorName = sectorName;
     this.organization = organization;
-    organization.registerSector(this);
   }
 
   public String getSectorName() {
