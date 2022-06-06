@@ -19,12 +19,12 @@ public class Journey {
     this.updateStartLocation();
   }
 
-  public void updateStartLocation() {
+  private void updateStartLocation() {
     Leg firstLeg = this.legList.get(0);
     this.start = firstLeg.getStart();
   }
 
-  public void updateEndLocation() {
+  private void updateEndLocation() {
     Leg lastLeg = this.legList.get(legList.size() - 1);
     this.end = lastLeg.getEnd();
   }
