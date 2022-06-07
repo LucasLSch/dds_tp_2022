@@ -12,7 +12,7 @@ public class Location {
   }
 
   public Integer getDistanceTo(Location someLocation) {
-    //TODO
-    return 0;
+    DistanceCalculatorAPIAdapter adapter = new DistanceCalculatorAPIAdapter();
+    return adapter.getDistance(this, someLocation);
   }
 }
