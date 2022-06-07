@@ -38,7 +38,8 @@ public class Member {
 
   public void addSharedJourney(Journey someJourney, Member someMember){
     //TODO validacion org
-    //TODO validacion shareable
+
+    someJourney.isJourneyShareable();
     this.addJourney(someJourney);
     someMember.addJourney(someJourney);
   }
