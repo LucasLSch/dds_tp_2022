@@ -1,6 +1,8 @@
 package domain.organization;
 
 import domain.exceptions.InvalidSectorForOrgException;
+import domain.location.Location;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,11 +11,11 @@ public class Organization {
   private List<Member> memberList;
   private List<Sector> sectorList;
   private String socialObjective;
-  private String location;
+  private Location location;
   private String clasification;
   private OrgType orgType;
 
-  public Organization(String socObj, String locat, String clasific, OrgType orgType) {
+  public Organization(String socObj, Location locat, String clasific, OrgType orgType) {
     this.socialObjective = socObj;
     this.location = locat;
     this.clasification = clasific;

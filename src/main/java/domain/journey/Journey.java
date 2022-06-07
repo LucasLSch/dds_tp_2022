@@ -1,12 +1,14 @@
 package domain.journey;
 
 import domain.exceptions.EmptyJourneyException;
+import domain.location.Location;
+
 import java.util.List;
 
 public class Journey {
 
-  private String start;
-  private String end;
+  private Location start;
+  private Location end;
 
   private List<Leg> legList;
 

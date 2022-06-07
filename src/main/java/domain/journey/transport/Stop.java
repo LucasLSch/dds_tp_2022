@@ -1,15 +1,17 @@
 package domain.journey.transport;
 
+import domain.location.Location;
+
 public class Stop {
 
   private Line line;
-  private String location;
+  private Location location;
 
-  public Stop(String someLocation) {
+  public Stop(Location someLocation) {
     this.location = someLocation;
   }
 
-  public Stop(Line someLine, String someLocation) {
+  public Stop(Line someLine, Location someLocation) {
     this.line = someLine;
     this.location = someLocation;
   }
