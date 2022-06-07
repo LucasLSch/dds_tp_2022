@@ -1,9 +1,6 @@
 package OrganizationTest.Model;
 
-import domain.organization.Member;
-import domain.organization.OrgType;
-import domain.organization.Organization;
-import domain.organization.Sector;
+import domain.organization.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,23 +15,13 @@ public class OrganizationTest {
   public void beforeTest() {
     this.dummyOrganization = new Organization("Cool Org", "Somewhere", "10/10", OrgType.ONG);
     this.dummySector = new Sector("Cool Sector", dummyOrganization);
-    this.dummyMember = new Member();
+    this.dummyMember = new Member("Roberto", "Gomez", DocType.ID, "28.375.012");
   }
 
   @Test
-  public void organizationCreationIsCorrect() {
-    assertNotNull(dummyOrganization);
-  }
-
-  @Test
-  public void sectorCreationIsCorrect() {
-    assertNotNull(dummySector);
+  public void organizationRegistersASector() {
+    dummyOrganization.registerSector(dummySector);
     assertTrue(dummyOrganization.sectorIsRegistered(dummySector));
-  }
-
-  @Test
-  public void memberCreationIsCorrect() {
-    assertNotNull(dummyMember);
   }
 
   @Test
