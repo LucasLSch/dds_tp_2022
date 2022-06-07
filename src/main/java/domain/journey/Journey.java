@@ -31,4 +31,9 @@ public class Journey {
     this.end = lastLeg.getEnd();
   }
 
+  public Integer getJourneyDistance() {
+    return this.legList.stream().
+        mapToInt(leg -> leg.getLegDistance()).
+        sum();
+  }
 }

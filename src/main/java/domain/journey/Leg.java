@@ -24,4 +24,7 @@ public class Leg {
     return this.end;
   }
 
+  public Integer getLegDistance() {
+    return this.getStart().getDistanceTo(this.getEnd());
+  }
 }
