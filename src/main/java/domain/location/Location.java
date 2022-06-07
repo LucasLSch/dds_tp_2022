@@ -11,5 +11,8 @@ public class Location {
     this.height = someHeight;
   }
 
-
+  public Integer getDistanceTo(Location someLocation) {
+    //TODO
+    return 0;
+  }
 }
