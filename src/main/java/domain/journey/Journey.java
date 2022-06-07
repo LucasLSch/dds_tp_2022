@@ -36,4 +36,11 @@ public class Journey {
         mapToInt(leg -> leg.getLegDistance()).
         sum();
   }
+
+  public Integer getDistanceFromTo(Leg someLeg, Leg anotherLeg) {
+    List<Leg> betweenLegs = this.legList.subList(someLeg.getOrderInList(), anotherLeg.getOrderInList());
+    return betweenLegs.stream().
+        mapToInt(leg -> leg.getLegDistance()).
+        sum();
+  }
 }

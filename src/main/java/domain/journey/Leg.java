@@ -7,7 +7,7 @@ public class Leg {
 
   private Location start;
   private Location end;
-
+  private Integer orderInList;
   private Transport transport;
 
   public Leg(Location someStartLocation, Location someEndLocation, Transport someTransport) {
@@ -24,7 +24,11 @@ public class Leg {
     return this.end;
   }
 
+  public Integer getOrderInList() {
+    return orderInList;
+  }
+
   public Integer getLegDistance() {
-    return this.getStart().getDistanceTo(this.getEnd());
+    return this.transport.getDistance(this.getStart(), this.getEnd());
   }
 }
