@@ -48,4 +48,8 @@ public class Line {
     }
   }
 
+  public Integer getDistanceBetween(Stop startStop, Stop endStop) {
+    List<Stop> stopsBetween = this.stopList.subList(startStop.getOrderInList(), endStop.getOrderInList());
+    return stopsBetween.stream().mapToInt(stop -> stop.getDistanceToNextStop()).sum();
+  }
 }

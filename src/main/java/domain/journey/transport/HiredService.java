@@ -1,5 +1,7 @@
 package domain.journey.transport;
 
+import domain.location.Location;
+
 public class HiredService implements Transport {
 
   private HiredServiceType hsType;
@@ -10,4 +12,8 @@ public class HiredService implements Transport {
     this.serviceName = someServiceName;
   }
 
+  @Override
+  public Integer getDistance(Location start, Location end) {
+    return start.getDistanceTo(end);
+  }
 }
