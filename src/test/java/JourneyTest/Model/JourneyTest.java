@@ -24,9 +24,4 @@ public class JourneyTest {
                                                                           "Cabbagefy")));
     dummyJourney = new Journey(dummyLegs);
   }
-
-  @Test
-  public void journeyCreationIsCorrect() {
-    assertNotNull(dummyJourney);
-  }
 }

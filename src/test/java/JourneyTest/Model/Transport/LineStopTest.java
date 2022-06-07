@@ -23,14 +23,4 @@ public class LineStopTest {
     dummyLine = new Line(dummyStops, "Cool Line", PublicTransportType.TRAIN);
     dummyStop = new Stop(dummyLine, "Coolest Place");
   }
-
-  @Test
-  public void lineCreationIsCorrect() {
-    assertNotNull(dummyLine);
-  }
-
-  @Test
-  public void stopCreationIsCorrect() {
-    assertNotNull(dummyStop);
-  }
 }
