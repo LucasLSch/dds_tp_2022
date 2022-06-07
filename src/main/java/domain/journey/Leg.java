@@ -23,4 +23,8 @@ public class Leg {
     return this.end;
   }
 
+  public Boolean transportIsShareable(){
+    return transport.isShareable();
+  }
+
 }

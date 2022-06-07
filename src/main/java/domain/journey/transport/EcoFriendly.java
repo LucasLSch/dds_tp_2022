@@ -5,7 +5,7 @@ public class EcoFriendly implements Transport {
   private EcoFriendlyType efType;
 
   @Override
-  public boolean isShareable() {
+  public Boolean isShareable() {
     return false;
   }
 }

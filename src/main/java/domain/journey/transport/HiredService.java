@@ -11,7 +11,7 @@ public class HiredService implements Transport {
   }
 
   @Override
-  public boolean isShareable() {
+  public Boolean isShareable() {
     return true;
   }
 }

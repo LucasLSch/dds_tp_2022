@@ -7,7 +7,7 @@ public class PublicTransport implements Transport {
   private List<Stop> stopList;
 
   @Override
-  public boolean isShareable() {
+  public Boolean isShareable() {
     return false;
   }
 }

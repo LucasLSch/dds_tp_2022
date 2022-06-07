@@ -7,7 +7,7 @@ public class ParticularVehicle implements Transport {
 
 
   @Override
-  public boolean isShareable() {
+  public Boolean isShareable() {
     return true;
   }
 }
