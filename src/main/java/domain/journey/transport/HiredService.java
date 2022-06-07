@@ -10,4 +10,8 @@ public class HiredService implements Transport {
     this.serviceName = someServiceName;
   }
 
+  @Override
+  public boolean isShareable() {
+    return true;
+  }
 }

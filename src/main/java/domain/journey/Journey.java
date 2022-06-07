@@ -28,5 +28,5 @@ public class Journey {
     Leg lastLeg = this.legList.get(legList.size() - 1);
     this.end = lastLeg.getEnd();
   }
-
+//TODO exceptions shareable
 }

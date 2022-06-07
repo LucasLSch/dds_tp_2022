@@ -36,6 +36,15 @@ public class Member {
     this.journeyList.add(someJourney);
   }
 
+  public void addSharedJourney(Journey someJourney, Member someMember){
+    //TODO validacion org
+    //TODO validacion shareable
+    this.addJourney(someJourney);
+    someMember.addJourney(someJourney);
+  }
+
+
+
   public Boolean worksIn(Sector someSector) {
     return this.sectorList.contains(someSector);
   }
