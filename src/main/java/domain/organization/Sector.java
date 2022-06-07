@@ -3,6 +3,11 @@ package domain.organization;
 public class Sector {
 
   private String sectorName;
+
+  public Organization getOrganization() {
+    return organization;
+  }
+
   private Organization organization;
 
   public Sector(String sectorName, Organization organization) {
@@ -17,6 +22,7 @@ public class Sector {
   public void registerMember(Member member) {
     this.organization.registerMember(member, this);
   }
+
 
   public Boolean belongsTo(Organization organization) {
     return this.organization.equals(organization);

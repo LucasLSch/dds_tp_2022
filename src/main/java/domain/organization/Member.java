@@ -37,15 +37,21 @@ public class Member {
   }
 
   public void addSharedJourney(Journey someJourney, Member someMember){
-    //TODO validacion org
-
+    this.memberOrgValidation(someMember);
     someJourney.isJourneyShareable();
     this.addJourney(someJourney);
     someMember.addJourney(someJourney);
   }
 
+  public void memberOrgValidation(Member someMember){
+      if(!this.memberSharesOrg(someMember)){
+        throw new RuntimeException("Members do not share org.");
+      }
+  }
 
-
+  public Boolean memberSharesOrg(Member someMember){
+      return this.sectorList.stream().anyMatch(sector -> someMember.worksIn(sector.getOrganization()));
+  }
   public Boolean worksIn(Sector someSector) {
     return this.sectorList.contains(someSector);
   }
