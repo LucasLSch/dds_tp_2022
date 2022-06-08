@@ -1,6 +1,6 @@
 package domain.journey.transport;
 
-public class EcoFriendly implements Transport {
+public class EcoFriendly extends Transport {
 
   private EcoFriendlyType efType;
 

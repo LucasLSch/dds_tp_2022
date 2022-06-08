@@ -1,6 +1,6 @@
 package domain.journey.transport;
 
-public class HiredService implements Transport {
+public class HiredService extends Transport {
 
   private HiredServiceType hsType;
   private String serviceName;
