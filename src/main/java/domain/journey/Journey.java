@@ -1,8 +1,10 @@
 package domain.journey;
 
+import API.georef.Distance;
 import domain.exceptions.EmptyJourneyException;
 import domain.location.Location;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Journey {
@@ -31,16 +33,30 @@ public class Journey {
     this.end = lastLeg.getEnd();
   }
 
-  public Integer getJourneyDistance() {
-    return this.legList.stream().
-        mapToInt(leg -> leg.getLegDistance()).
+  public Distance getJourneyDistance() {
+    int finalDistanceValue = this.legList.stream().
+        mapToInt(leg -> {
+          try {
+            return leg.getLegDistance().getValue();
+          } catch (IOException e) {
+            throw new RuntimeException(e);
+          }
+        }).
         sum();
+    return new Distance(finalDistanceValue, "KM");
   }
 
-  public Integer getDistanceFromTo(Leg someLeg, Leg anotherLeg) {
+  public Distance getDistanceFromTo(Leg someLeg, Leg anotherLeg) {
     List<Leg> betweenLegs = this.legList.subList(someLeg.getOrderInList(), anotherLeg.getOrderInList());
-    return betweenLegs.stream().
-        mapToInt(leg -> leg.getLegDistance()).
+    int finalDistanceValue = betweenLegs.stream().
+        mapToInt(leg -> {
+          try {
+            return leg.getLegDistance().getValue();
+          } catch (IOException e) {
+            throw new RuntimeException(e);
+          }
+        }).
         sum();
+    return new Distance(finalDistanceValue, "KM");
   }
 }
