@@ -1,5 +1,10 @@
 package domain.location;
 
+import API.georef.Distance;
+import API.georef.GeoRefAdapter;
+
+import java.io.IOException;
+
 public class Location {
   private Integer district;
   private String street;
@@ -11,8 +16,20 @@ public class Location {
     this.height = someHeight;
   }
 
-  public Integer getDistanceTo(Location someLocation) {
-    DistanceCalculatorAPIAdapter adapter = new DistanceCalculatorAPIAdapter();
+  public Distance getDistanceTo(Location someLocation) throws IOException {
+    GeoRefAdapter adapter = GeoRefAdapter.getInstance();
     return adapter.getDistance(this, someLocation);
+  }
+
+  public Integer getDistrict() {
+    return district;
+  }
+
+  public String getStreet() {
+    return street;
+  }
+
+  public String getHeight() {
+    return height;
   }
 }
