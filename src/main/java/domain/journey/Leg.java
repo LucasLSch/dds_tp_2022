@@ -27,6 +27,12 @@ public class Leg {
     return this.end;
   }
 
+
+  public Boolean transportIsShareable(){
+    return transport.isShareable();
+  }
+
+
   public Integer getOrderInList() {
     return orderInList;
   }
@@ -34,4 +40,5 @@ public class Leg {
   public Distance getLegDistance() throws IOException {
     return this.transport.getDistance(this.getStart(), this.getEnd());
   }
+
 }

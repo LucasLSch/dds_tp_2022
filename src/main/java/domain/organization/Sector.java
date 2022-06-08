@@ -6,6 +6,11 @@ import java.util.List;
 public class Sector {
 
   private String sectorName;
+
+  public Organization getOrganization() {
+    return organization;
+  }
+
   private Organization organization;
   private List<Member> memberList;
 
@@ -31,6 +36,7 @@ public class Sector {
   private Boolean isNewMember(Member someMember) {
     return !this.memberList.contains(someMember);
   }
+
 
   public Boolean belongsTo(Organization organization) {
     return this.organization.equals(organization);

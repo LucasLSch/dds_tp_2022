@@ -33,6 +33,16 @@ public class Journey {
     this.end = lastLeg.getEnd();
   }
 
+
+  public void isJourneyShareable(){
+    if(legList.stream().anyMatch(leg->!leg.transportIsShareable())) {
+      throw new RuntimeException("Journey is not shareable");
+    }
+  }
+
+
+//TODO exceptions shareable
+
   public Distance getJourneyDistance() {
     int finalDistanceValue = this.legList.stream().
         mapToInt(leg -> {
@@ -59,4 +69,5 @@ public class Journey {
         sum();
     return new Distance(finalDistanceValue, "KM");
   }
+
 }

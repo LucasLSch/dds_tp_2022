@@ -10,4 +10,8 @@ public class HiredService extends Transport {
     this.serviceName = someServiceName;
   }
 
+  @Override
+  public Boolean isShareable() {
+    return true;
+  }
 }
