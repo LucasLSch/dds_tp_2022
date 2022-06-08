@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Organization {
 
-  private List<Member> memberList;
   private List<Sector> sectorList;
   private String socialObjective;
   private String location;
@@ -18,7 +17,6 @@ public class Organization {
     this.location = locat;
     this.clasification = clasific;
     this.orgType = orgType;
-    this.memberList = new ArrayList<>();
     this.sectorList = new ArrayList<>();
   }
 
@@ -34,19 +32,20 @@ public class Organization {
     }
   }
 
-  public void registerMember(Member someMember, Sector someSector) {
-    //TODO this.validate(someMember, someSector) Criterios desconocidos
-    if (this.isNewMember(someMember)) {
-      this.memberList.add(someMember);
-    }
-    someMember.addSector(someSector);
-  }
-
-  private Boolean isNewMember(Member someMember) {
-    return !this.memberList.contains(someMember);
-  }
-
   public Boolean sectorIsRegistered(Sector someSector) {
     return this.sectorList.contains(someSector);
   }
+
+  public Boolean approvesMember(Member member, Sector sector) {
+    return true; //TODO
+  }
+
+  public List<Member> getMembers() {
+    List<Member> totalMembers = new ArrayList<>();
+    for(Sector sector : this.sectorList) {
+      totalMembers.addAll(sector.getMemberList());
+    }
+    return totalMembers;
+  }
+
 }
