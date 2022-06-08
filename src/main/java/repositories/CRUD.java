@@ -14,15 +14,17 @@ public interface CRUD<T> {
 
   public Boolean exists(T someEntity);
 
-  // public Object findByCondition(Condition);
+  public T findByCondition(RepoCondition<T> someCondition);
 
   public void delete(T someEntity);
 
-  // public void deleteByCondition(Condition someCondition);
+  public void deleteByCondition(RepoCondition<T> someCondition);
 
   public void deleteAll();
 
   public void deleteAll(T ... someEntity);
+
+  public void deleteAll(List<T> someEntities)
 
   public List<T> getAll();
 
