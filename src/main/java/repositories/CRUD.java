@@ -4,28 +4,28 @@ import java.util.List;
 
 public interface CRUD<T> {
 
-  public Integer count();
+  Integer count();
 
-  public void save(T someEntity);
+  void save(T someEntity);
 
-  public void saveAll(T ... someEntity);
+  void saveAll(T ... someEntity);
 
-  public void saveAll(List<T> someEntities);
+  void saveAll(List<T> someEntities);
 
-  public Boolean exists(T someEntity);
+  Boolean exists(T someEntity);
 
-  public T findByCondition(RepoCondition<T> someCondition);
+  T findByCondition(RepoCondition<T> someCondition);
 
-  public void delete(T someEntity);
+  void delete(T someEntity);
 
-  public void deleteByCondition(RepoCondition<T> someCondition);
+  void deleteByCondition(RepoCondition<T> someCondition);
 
-  public void deleteAll();
+  void deleteAll();
 
-  public void deleteAll(T ... someEntity);
+  void deleteAll(T ... someEntity);
 
-  public void deleteAll(List<T> someEntities)
+  void deleteAll(List<T> someEntities)
 
-  public List<T> getAll();
+  List<T> getAll();
 
 }
