@@ -1,6 +1,6 @@
 package domain.journey;
 
-import API.georef.Distance;
+import services.georef.Distance;
 import domain.journey.transport.Transport;
 import domain.location.Location;
 

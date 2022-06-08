@@ -1,6 +1,6 @@
 package domain.journey;
 
-import API.georef.Distance;
+import services.georef.Distance;
 import domain.exceptions.EmptyJourneyException;
 import domain.location.Location;
 

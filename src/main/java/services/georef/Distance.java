@@ -1,4 +1,4 @@
-package API.georef;
+package services.georef;
 
 public class Distance {
 

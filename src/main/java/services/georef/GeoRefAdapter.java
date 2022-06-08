@@ -1,4 +1,4 @@
-package API.georef;
+package services.georef;
 
 import domain.location.Location;
 import retrofit2.Call;

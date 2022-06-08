@@ -1,7 +1,7 @@
 package domain.location;
 
-import API.georef.Distance;
-import API.georef.GeoRefAdapter;
+import services.georef.Distance;
+import services.georef.GeoRefAdapter;
 
 import java.io.IOException;
 

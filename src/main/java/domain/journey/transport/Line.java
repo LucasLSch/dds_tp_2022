@@ -1,6 +1,6 @@
 package domain.journey.transport;
 
-import API.georef.Distance;
+import services.georef.Distance;
 import domain.exceptions.IncompleteLineException;
 import domain.exceptions.InvalidStopForLineException;
 import java.util.List;
