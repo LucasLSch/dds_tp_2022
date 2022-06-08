@@ -1,8 +1,18 @@
 package domain.journey.transport;
 
-import java.util.List;
+import API.georef.Distance;
+import domain.location.Location;
 
-public class PublicTransport implements Transport {
+public class PublicTransport extends Transport {
 
-  private List<Stop> stopList;
+  private Line line;
+  private Stop startStop;
+  private Stop endStop;
+
+  @Override
+  public Distance getDistance(Location start, Location end) {
+    //TODO validate startStop has startLocation
+    //TODO validate endStop has endLocation
+    return line.getDistanceBetween(this.startStop, this.endStop);
+  }
 }

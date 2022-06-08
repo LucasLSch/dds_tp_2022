@@ -1,12 +1,14 @@
 package domain.journey;
 
 import domain.exceptions.EmptyJourneyException;
+import domain.location.Location;
+
 import java.util.List;
 
 public class Journey {
 
-  private String start;
-  private String end;
+  private Location start;
+  private Location end;
 
   private List<Leg> legList;
 
@@ -29,4 +31,16 @@ public class Journey {
     this.end = lastLeg.getEnd();
   }
 
+  public Integer getJourneyDistance() {
+    return this.legList.stream().
+        mapToInt(leg -> leg.getLegDistance()).
+        sum();
+  }
+
+  public Integer getDistanceFromTo(Leg someLeg, Leg anotherLeg) {
+    List<Leg> betweenLegs = this.legList.subList(someLeg.getOrderInList(), anotherLeg.getOrderInList());
+    return betweenLegs.stream().
+        mapToInt(leg -> leg.getLegDistance()).
+        sum();
+  }
 }

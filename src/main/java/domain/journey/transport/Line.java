@@ -1,5 +1,6 @@
 package domain.journey.transport;
 
+import API.georef.Distance;
 import domain.exceptions.IncompleteLineException;
 import domain.exceptions.InvalidStopForLineException;
 import java.util.List;
@@ -48,4 +49,9 @@ public class Line {
     }
   }
 
+  public Distance getDistanceBetween(Stop startStop, Stop endStop) {
+    List<Stop> stopsBetween = this.stopList.subList(startStop.getOrderInList(), endStop.getOrderInList());
+    int finalValue = stopsBetween.stream().map(Stop::getDistanceToNextStop).mapToInt(Distance::getValue).sum();
+    return new Distance(finalValue, "KM");
+  }
 }
