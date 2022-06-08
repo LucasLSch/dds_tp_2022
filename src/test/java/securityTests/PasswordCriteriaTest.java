@@ -1,4 +1,4 @@
-package passwordvalidatortest;
+package securityTests;
 
 import org.junit.jupiter.api.Test;
 import security.passwordvalidator.PasswordException;

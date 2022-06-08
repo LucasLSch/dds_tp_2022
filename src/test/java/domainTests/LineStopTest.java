@@ -1,4 +1,4 @@
-package JourneyTest.Model.Transport;
+package domainTests;
 
 import domain.journey.transport.Line;
 import domain.journey.transport.PublicTransportType;

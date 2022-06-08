@@ -1,4 +1,4 @@
-package OrganizationTest.Model;
+package domainTests;
 
 import domain.location.Location;
 import domain.organization.*;

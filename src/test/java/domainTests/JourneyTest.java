@@ -1,4 +1,4 @@
-package JourneyTest.Model;
+package domainTests;
 
 import domain.journey.Journey;
 import domain.journey.Leg;
