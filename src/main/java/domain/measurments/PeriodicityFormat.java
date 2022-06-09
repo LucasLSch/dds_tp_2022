@@ -18,5 +18,7 @@ public enum PeriodicityFormat {
           1,
           1);
     }
-  }
+  };
+
+  public abstract LocalDate getDate(String abc);
 }
