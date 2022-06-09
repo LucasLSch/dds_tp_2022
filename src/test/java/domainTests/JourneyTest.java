@@ -13,12 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class JourneyTest {
   private Journey dummyJourney;
   private List<Leg> dummyLegs = new ArrayList<>();
+  private Leg dummyLeg;
+  private Leg anotherDummyLeg;
   private Location dummyStartLocation;
   private Location dummyEndLocation;
   private Location anotherDummyStartLocation;
@@ -35,8 +38,11 @@ public class JourneyTest {
     dummyEndLocation = new Location(200, "Cool End Street", "700");
     anotherDummyStartLocation = new Location(200, "Not So Cool Start Street", "100");
     anotherDummyEndLocation = new Location(200, "Not So Cool End Street", "500");
-    dummyLegs.add(new Leg(dummyStartLocation, dummyEndLocation, mockedEcoFriendlyTransport));
-    dummyLegs.add(new Leg(anotherDummyStartLocation, anotherDummyEndLocation, mockedHiredServiceTransport));
+    dummyLeg = new Leg(dummyStartLocation, dummyEndLocation, mockedEcoFriendlyTransport, 0);
+    anotherDummyLeg = new Leg(anotherDummyStartLocation,
+        anotherDummyEndLocation, mockedHiredServiceTransport, 1);
+    dummyLegs.add(dummyLeg);
+    dummyLegs.add(anotherDummyLeg);
     dummyJourney = new Journey(dummyLegs);
   }
 
@@ -53,5 +59,26 @@ public class JourneyTest {
     assertEquals(distance.getValue(), 750);
   }
 
+  @Test
+  public void journeyDistanceFromLegToAnotherLeg() throws IOException {
+    Transport thirdLegTransport = mock(PublicTransport.class);
+    Leg thirdLeg = new Leg(new Location(3, "3rdSS", ""),
+        new Location(3, "3rdES", ""),
+        thirdLegTransport, 2);
+    Transport forthLegTransport = mock(PublicTransport.class);
+    Leg forthLeg = new Leg(new Location(4, "4thSS", ""),
+        new Location(4, "4thES", ""),
+        forthLegTransport, 3);
 
+    when(thirdLegTransport.getDistance(any(), any())).thenReturn(new Distance(100, "KM"));
+    when(forthLegTransport.getDistance(any(), any())).thenReturn(new Distance(50, "KM"));
+    when(mockedHiredServiceTransport.getDistance(any(), any())).thenReturn(new Distance(150, "KM"));
+
+    dummyJourney.addLeg(thirdLeg);
+    dummyJourney.addLeg(forthLeg);
+
+    Distance distanceFromLegToLeg = dummyJourney.getDistanceFromTo(anotherDummyLeg, forthLeg);
+
+    assertEquals(distanceFromLegToLeg.getValue(), 300);
+  }
 }
