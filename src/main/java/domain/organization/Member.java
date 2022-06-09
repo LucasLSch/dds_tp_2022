@@ -1,6 +1,8 @@
 package domain.organization;
 
 import domain.journey.Journey;
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.Set;
 public class Member {
 
   private Set<Sector> sectorList;
+  @Getter
   private List<Journey> journeyList;
 
   private String name;
