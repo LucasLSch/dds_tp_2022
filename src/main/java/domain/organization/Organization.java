@@ -2,7 +2,6 @@ package domain.organization;
 
 import domain.exceptions.InvalidSectorForOrgException;
 import domain.location.Location;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +43,7 @@ public class Organization {
 
   public List<Member> getMembers() {
     List<Member> totalMembers = new ArrayList<>();
-    for(Sector sector : this.sectorList) {
+    for (Sector sector : this.sectorList) {
       totalMembers.addAll(sector.getMemberList());
     }
     return totalMembers;

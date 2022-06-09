@@ -2,16 +2,17 @@ package repositories;
 
 import security.user.User;
 
-public class UserRepo extends CRUDImpl<User> {
+public class UserRepo extends CrudImpl<User> {
 
   // --- Singleton --- //
 
   private static UserRepo instance = null;
 
-  private UserRepo(){};
+  private UserRepo(){
+  }
 
   public static UserRepo getInstance() {
-    if(instance == null) {
+    if (instance == null) {
       instance = new UserRepo();
       instance.initSavedEntities();
     }

@@ -2,16 +2,17 @@ package repositories;
 
 import domain.organization.Sector;
 
-public class SectorRepo extends CRUDImpl<Sector> {
+public class SectorRepo extends CrudImpl<Sector> {
 
   // --- Singleton --- //
 
   private static SectorRepo instance = null;
 
-  private SectorRepo(){};
+  private SectorRepo(){
+  }
 
   public static SectorRepo getInstance() {
-    if(instance == null) {
+    if (instance == null) {
       instance = new SectorRepo();
       instance.initSavedEntities();
     }

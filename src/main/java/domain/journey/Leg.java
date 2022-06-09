@@ -1,10 +1,9 @@
 package domain.journey;
 
-import services.georef.Distance;
 import domain.journey.transport.Transport;
 import domain.location.Location;
-
 import java.io.IOException;
+import services.georef.Distance;
 
 public class Leg {
 
@@ -28,10 +27,9 @@ public class Leg {
   }
 
 
-  public Boolean transportIsShareable(){
+  public Boolean transportIsShareable() {
     return transport.isShareable();
   }
-
 
   public Integer getOrderInList() {
     return orderInList;

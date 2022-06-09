@@ -7,10 +7,11 @@ public class LocationRepo extends CRUDImpl<Location> {
 
   private static LocationRepo instance = null;
 
-  private LocationRepo(){};
+  private LocationRepo(){
+  }
 
   public static LocationRepo getInstance() {
-    if(instance == null) {
+    if (instance == null) {
       instance = new LocationRepo();
       instance.initSavedEntities();
     }

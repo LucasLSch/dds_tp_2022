@@ -2,13 +2,13 @@ package repositories;
 
 import java.util.List;
 
-public interface CRUD<T> {
+public interface CrudInterface<T> {
 
   Integer count();
 
   void save(T someEntity);
 
-  void saveAll(T ... someEntity);
+  void saveAll(T... someEntity);
 
   void saveAll(List<T> someEntities);
 
@@ -22,9 +22,9 @@ public interface CRUD<T> {
 
   void deleteAll();
 
-  void deleteAll(T ... someEntity);
+  void deleteAll(T... someEntity);
 
-  void deleteAll(List<T> someEntities)
+  void deleteAll(List<T> someEntities);
 
   List<T> getAll();
 

@@ -25,7 +25,7 @@ public class Sector {
   }
 
   public void registerMember(Member someMember) {
-    if(this.organization.approvesMember(someMember, this)) {
+    if (this.organization.approvesMember(someMember, this)) {
       if (this.isNewMember(someMember)) {
         this.memberList.add(someMember);
         someMember.addSector(this);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class CRUDImpl<T> implements CRUD<T> {
+public abstract class CrudImpl<T> implements CrudInterface<T> {
 
   private List<T> savedEntities;
 
@@ -20,14 +20,14 @@ public abstract class CRUDImpl<T> implements CRUD<T> {
 
   @Override
   public void saveAll(T... someEntity) {
-    for(T entity : someEntity) {
+    for (T entity : someEntity) {
       this.save(entity);
     }
   }
 
   @Override
   public void saveAll(List<T> someEntity) {
-    for(T entity : someEntity) {
+    for (T entity : someEntity) {
       this.save(entity);
     }
   }
@@ -38,26 +38,26 @@ public abstract class CRUDImpl<T> implements CRUD<T> {
   }
 
   @Override
-  public T findByCondition(RepoCondition<T> someCondition){
+  public T findByCondition(RepoCondition<T> someCondition) {
     return this.savedEntities
         .stream()
-        .filter( entity -> someCondition.testConditionOn(entity))
+        .filter(entity -> someCondition.testConditionOn(entity))
         .findFirst()
         .orElse(null);
   }
 
   @Override
   public void delete(T someEntity) {
-    if(this.exists(someEntity)) {
+    if (this.exists(someEntity)) {
       this.savedEntities.remove(someEntity);
     }
   }
 
   @Override
-  public void deleteByCondition(RepoCondition<T> someCondition){
+  public void deleteByCondition(RepoCondition<T> someCondition) {
     List<T> entitiesToDelete = this.savedEntities
         .stream()
-        .filter( entity -> someCondition.testConditionOn(entity))
+        .filter(entity -> someCondition.testConditionOn(entity))
         .collect(Collectors.toList());
     this.deleteAll(entitiesToDelete);
   }
@@ -69,14 +69,14 @@ public abstract class CRUDImpl<T> implements CRUD<T> {
 
   @Override
   public void deleteAll(T... someEntity) {
-    for(T entity : someEntity) {
+    for (T entity : someEntity) {
       this.delete(entity);
-    };
+    }
   }
 
   @Override
   public void deleteAll(List<T> someEntity) {
-    for(T entity : someEntity) {
+    for (T entity : someEntity) {
       this.delete(entity);
     }
   }

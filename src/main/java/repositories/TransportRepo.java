@@ -2,16 +2,17 @@ package repositories;
 
 import domain.journey.transport.Transport;
 
-public class TransportRepo extends CRUDImpl<Transport> {
+public class TransportRepo extends CrudImpl<Transport> {
 
   // --- Singleton --- //
 
   private static TransportRepo instance = null;
 
-  private TransportRepo(){};
+  private TransportRepo(){
+  }
 
   public static TransportRepo getInstance() {
-    if(instance == null) {
+    if (instance == null) {
       instance = new TransportRepo();
       instance.initSavedEntities();
     }

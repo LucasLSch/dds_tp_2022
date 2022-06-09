@@ -1,11 +1,11 @@
 package domain.location;
 
+import java.io.IOException;
 import services.georef.Distance;
 import services.georef.GeoRefAdapter;
 
-import java.io.IOException;
-
 public class Location {
+
   private Integer district;
   private String street;
   private String height;

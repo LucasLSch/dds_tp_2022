@@ -1,11 +1,10 @@
 package domain.journey;
 
-import services.georef.Distance;
 import domain.exceptions.EmptyJourneyException;
 import domain.location.Location;
-
 import java.io.IOException;
 import java.util.List;
+import services.georef.Distance;
 
 public class Journey {
 
@@ -34,39 +33,44 @@ public class Journey {
   }
 
 
-  public void isJourneyShareable(){
-    if(legList.stream().anyMatch(leg->!leg.transportIsShareable())) {
+  public void isJourneyShareable() {
+    if (legList.stream().anyMatch(leg -> !leg.transportIsShareable())) {
       throw new RuntimeException("Journey is not shareable");
     }
   }
 
 
-//TODO exceptions shareable
+  //TODO exceptions shareable
 
   public Distance getJourneyDistance() {
-    int finalDistanceValue = this.legList.stream().
-        mapToInt(leg -> {
+    int finalDistanceValue = this.legList.stream()
+        .mapToInt(leg -> {
           try {
             return leg.getLegDistance().getValue();
           } catch (IOException e) {
             throw new RuntimeException(e);
           }
-        }).
-        sum();
+        })
+        .sum();
+
     return new Distance(finalDistanceValue, "KM");
   }
 
   public Distance getDistanceFromTo(Leg someLeg, Leg anotherLeg) {
-    List<Leg> betweenLegs = this.legList.subList(someLeg.getOrderInList(), anotherLeg.getOrderInList());
-    int finalDistanceValue = betweenLegs.stream().
-        mapToInt(leg -> {
+    List<Leg> betweenLegs = this
+        .legList
+        .subList(someLeg.getOrderInList(), anotherLeg.getOrderInList());
+
+    int finalDistanceValue = betweenLegs.stream()
+        .mapToInt(leg -> {
           try {
             return leg.getLegDistance().getValue();
           } catch (IOException e) {
             throw new RuntimeException(e);
           }
-        }).
-        sum();
+        })
+        .sum();
+
     return new Distance(finalDistanceValue, "KM");
   }
 

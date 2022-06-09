@@ -1,7 +1,7 @@
 package domain.journey.transport;
 
-import services.georef.Distance;
 import domain.location.Location;
+import services.georef.Distance;
 
 public class Stop {
 
