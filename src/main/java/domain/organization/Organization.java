@@ -24,7 +24,12 @@ public class Organization {
   }
 
   public void registerSector(Sector someSector) {
-    this.validateSector(someSector);
+    try {
+      this.validateSector(someSector);
+    } catch (InvalidSectorForOrgException exception) {
+      System.out.println("WARN: Sector does not belong to this Organization");
+      return;
+    }
     this.sectorList.add(someSector);
   }
 
