@@ -1,13 +1,14 @@
 package repositories;
 
-/*
-public class LocationRepo extends CRUDImpl<Location> {
+import domain.location.Location;
+
+public class LocationRepo extends CrudImpl<Location> {
 
   // --- Singleton --- //
 
   private static LocationRepo instance = null;
 
-  private LocationRepo(){
+  private LocationRepo() {
   }
 
   public static LocationRepo getInstance() {
@@ -18,6 +19,3 @@ public class LocationRepo extends CRUDImpl<Location> {
     return instance;
   }
 }
-*/
-
-// No existe Location todavia
