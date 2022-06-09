@@ -26,7 +26,7 @@ public class Line {
 
   public void validateStops() {
     this.validateStopsAmount();
-    this.validateStopsLines();
+    this.validateAllStopsLines();
   }
 
   public void validateStopsAmount() {
@@ -35,11 +35,13 @@ public class Line {
     }
   }
 
-  public void validateStopsLines() {
-    for (Stop someStop : this.stopList) {
-      if (!someStop.belongsToLine(this)) {
-        throw new InvalidStopForLineException();
-      }
+  public void validateAllStopsLines() {
+    this.stopList.forEach(this::validateStopLine);
+  }
+
+  private void validateStopLine(Stop someStop) {
+    if (!someStop.belongsToLine(this)) {
+      throw new InvalidStopForLineException();
     }
   }
 
