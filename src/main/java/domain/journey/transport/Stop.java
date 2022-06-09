@@ -19,6 +19,12 @@ public class Stop {
     this.location = someLocation;
   }
 
+  public Stop(Location someLocation, Distance distance, Integer orderInList) {
+    this.location = someLocation;
+    this.distanceToNextStop = distance;
+    this.orderInList = orderInList;
+  }
+
   public void setDistanceToNextStop(Distance distanceToNextStop) {
     this.distanceToNextStop = distanceToNextStop;
   }
