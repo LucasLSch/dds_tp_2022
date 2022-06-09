@@ -2,26 +2,23 @@ package domain.organization;
 
 import domain.exceptions.InvalidSectorForOrgException;
 import domain.location.Location;
+import domain.measurments.ActivityData;
+import lombok.AllArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@AllArgsConstructor
 public class Organization {
 
-  private List<Sector> sectorList;
+  private List<Sector> sectorList = new ArrayList<>();
   private String socialObjective;
   private Location location;
   private String clasification;
   private OrgType orgType;
-
-  public Organization(String socObj, Location locat, String clasific, OrgType orgType) {
-    this.socialObjective = socObj;
-    this.location = locat;
-    this.clasification = clasific;
-    this.orgType = orgType;
-    this.sectorList = new ArrayList<>();
-  }
+  private List<ActivityData> activityDataList = new ArrayList<>();
 
   public void registerSector(Sector someSector) {
     this.validateSector(someSector);
@@ -49,6 +46,10 @@ public class Organization {
       totalMembers.addAll(sector.getMemberList());
     }
     return totalMembers;
+  }
+
+  public void addActivityData(ActivityData someAD) {
+    this.activityDataList.add(someAD);
   }
 
 }
