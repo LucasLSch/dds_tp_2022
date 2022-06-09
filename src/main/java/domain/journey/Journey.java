@@ -74,4 +74,8 @@ public class Journey {
     return new Distance(finalDistanceValue, "KM");
   }
 
+  public void addLeg(Leg someLeg) {
+    this.legList.add(someLeg);
+  }
+
 }
