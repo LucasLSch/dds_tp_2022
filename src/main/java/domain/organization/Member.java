@@ -2,11 +2,13 @@ package domain.organization;
 
 import domain.journey.Journey;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Member {
 
-  private List<Sector> sectorList;
+  private Set<Sector> sectorList;
   private List<Journey> journeyList;
 
   private String name;
@@ -19,7 +21,7 @@ public class Member {
     this.lastName = lastName;
     this.docType = docType;
     this.document = document;
-    this.sectorList = new ArrayList<>();
+    this.sectorList = new HashSet<>();
     this.journeyList = new ArrayList<>();
   }
 

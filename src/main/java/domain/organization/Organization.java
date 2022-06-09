@@ -3,7 +3,9 @@ package domain.organization;
 import domain.exceptions.InvalidSectorForOrgException;
 import domain.location.Location;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Organization {
 
@@ -41,8 +43,8 @@ public class Organization {
     return true; //TODO
   }
 
-  public List<Member> getMembers() {
-    List<Member> totalMembers = new ArrayList<>();
+  public Set<Member> getMembers() {
+    Set<Member> totalMembers = new HashSet<>();
     for (Sector sector : this.sectorList) {
       totalMembers.addAll(sector.getMemberList());
     }

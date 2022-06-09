@@ -1,7 +1,9 @@
 package domain.organization;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Sector {
 
@@ -12,12 +14,12 @@ public class Sector {
   }
 
   private Organization organization;
-  private List<Member> memberList;
+  private Set<Member> memberList;
 
   public Sector(String sectorName, Organization organization) {
     this.sectorName = sectorName;
     this.organization = organization;
-    this.memberList = new ArrayList<>();
+    this.memberList = new HashSet<>();
   }
 
   public String getSectorName() {
@@ -26,23 +28,16 @@ public class Sector {
 
   public void registerMember(Member someMember) {
     if (this.organization.approvesMember(someMember, this)) {
-      if (this.isNewMember(someMember)) {
-        this.memberList.add(someMember);
-        someMember.addSector(this);
-      }
+      this.memberList.add(someMember);
+      someMember.addSector(this);
     }
   }
-
-  private Boolean isNewMember(Member someMember) {
-    return !this.memberList.contains(someMember);
-  }
-
 
   public Boolean belongsTo(Organization organization) {
     return this.organization.equals(organization);
   }
 
-  public List<Member> getMemberList() {
+  public Set<Member> getMemberList() {
     return memberList;
   }
 
