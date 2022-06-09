@@ -18,6 +18,13 @@ public class Leg {
     this.transport = someTransport;
   }
 
+  public Leg(Location someStartLocation, Location someEndLocation, Transport someTransport, Integer orderInList) {
+    this.start = someStartLocation;
+    this.end = someEndLocation;
+    this.transport = someTransport;
+    this.orderInList = orderInList;
+  }
+
   public Location getStart() {
     return this.start;
   }
@@ -26,6 +33,9 @@ public class Leg {
     return this.end;
   }
 
+  public void setOrderInList(Integer orderInList) {
+    this.orderInList = orderInList;
+  }
 
   public Boolean transportIsShareable() {
     return transport.isShareable();

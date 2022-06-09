@@ -59,7 +59,7 @@ public class Journey {
   public Distance getDistanceFromTo(Leg someLeg, Leg anotherLeg) {
     List<Leg> betweenLegs = this
         .legList
-        .subList(someLeg.getOrderInList(), anotherLeg.getOrderInList());
+        .subList(someLeg.getOrderInList(), anotherLeg.getOrderInList() + 1);
 
     int finalDistanceValue = betweenLegs.stream()
         .mapToInt(leg -> {
@@ -72,6 +72,10 @@ public class Journey {
         .sum();
 
     return new Distance(finalDistanceValue, "KM");
+  }
+
+  public void addLeg(Leg someLeg) {
+    this.legList.add(someLeg);
   }
 
 }
