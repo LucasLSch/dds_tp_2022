@@ -11,4 +11,11 @@ public class ConsumptionType {
   private String scope;
   private EmissionFactor emissionFactor;
 
+  public String getUnit() {
+    return this.unit;
+  }
+
+  public void setEmissionFactor(EmissionFactor someEF) {
+    this.emissionFactor = someEF;
+  }
 }
