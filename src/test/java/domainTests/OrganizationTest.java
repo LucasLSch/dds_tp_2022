@@ -3,6 +3,7 @@ package domainTests;
 import domain.journey.Journey;
 import domain.journey.Leg;
 import domain.journey.transport.Transport;
+import domain.location.District;
 import domain.location.Location;
 import domain.organization.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +25,7 @@ public class OrganizationTest {
 
   @BeforeEach
   public void beforeTest() {
-    this.dummyLocation = new Location(100, "Cool Street", "300");
+    this.dummyLocation = new Location(new District(100), "Cool Street", "300");
     this.dummyOrganization = new Organization("Cool Org", dummyLocation, "10/10", OrgType.ONG);
     this.dummySector = new Sector("Cool Sector", dummyOrganization);
     this.dummyMember = new Member("Roberto", "Gomez", DocType.ID, "28.375.012");
@@ -49,10 +50,10 @@ public class OrganizationTest {
     Transport mockedTransport = mock(Transport.class);
 
     List<Leg> legs = new ArrayList<Leg>();
-    legs.add(new Leg(new Location(1, "", ""),
-        new Location(1, "", ""), mockedTransport));
-    legs.add(new Leg(new Location(1, "", ""),
-        new Location(1, "", ""), mockedTransport));
+    legs.add(new Leg(new Location(new District(1), "", ""),
+        new Location(new District(1), "", ""), mockedTransport));
+    legs.add(new Leg(new Location(new District(1), "", ""),
+        new Location(new District(1), "", ""), mockedTransport));
     Journey dummyJourney = new Journey(legs);
 
     when(mockedTransport.isShareable()).thenReturn(true);

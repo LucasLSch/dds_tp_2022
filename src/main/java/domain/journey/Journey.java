@@ -1,6 +1,7 @@
 package domain.journey;
 
 import domain.exceptions.EmptyJourneyException;
+import domain.location.Distance;
 import domain.location.Location;
 import java.io.IOException;
 import java.util.List;

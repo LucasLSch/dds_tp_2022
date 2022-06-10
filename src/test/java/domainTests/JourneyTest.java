@@ -1,9 +1,10 @@
 package domainTests;
 
-import domain.journey.Distance;
+import domain.location.Distance;
 import domain.journey.Journey;
 import domain.journey.Leg;
 import domain.journey.transport.*;
+import domain.location.District;
 import domain.location.Location;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,10 +35,10 @@ public class JourneyTest {
     mockedEcoFriendlyTransport = mock(EcoFriendly.class);
     mockedHiredServiceTransport = mock(HiredService.class);
 
-    dummyStartLocation = new Location(200, "Cool Start Street", "300");
-    dummyEndLocation = new Location(200, "Cool End Street", "700");
-    anotherDummyStartLocation = new Location(200, "Not So Cool Start Street", "100");
-    anotherDummyEndLocation = new Location(200, "Not So Cool End Street", "500");
+    dummyStartLocation = new Location(new District(200), "Cool Start Street", "300");
+    dummyEndLocation = new Location(new District(200), "Cool End Street", "700");
+    anotherDummyStartLocation = new Location(new District(200), "Not So Cool Start Street", "100");
+    anotherDummyEndLocation = new Location(new District(200), "Not So Cool End Street", "500");
     dummyLeg = new Leg(dummyStartLocation, dummyEndLocation, mockedEcoFriendlyTransport, 0);
     anotherDummyLeg = new Leg(anotherDummyStartLocation,
         anotherDummyEndLocation, mockedHiredServiceTransport, 1);
@@ -62,12 +63,12 @@ public class JourneyTest {
   @Test
   public void journeyDistanceFromLegToAnotherLeg() throws IOException {
     Transport thirdLegTransport = mock(PublicTransport.class);
-    Leg thirdLeg = new Leg(new Location(3, "3rdSS", ""),
-        new Location(3, "3rdES", ""),
+    Leg thirdLeg = new Leg(new Location(new District(3), "3rdSS", ""),
+        new Location(new District(3), "3rdES", ""),
         thirdLegTransport, 2);
     Transport forthLegTransport = mock(PublicTransport.class);
-    Leg forthLeg = new Leg(new Location(4, "4thSS", ""),
-        new Location(4, "4thES", ""),
+    Leg forthLeg = new Leg(new Location(new District(4), "4thSS", ""),
+        new Location(new District(4), "4thES", ""),
         forthLegTransport, 3);
 
     when(thirdLegTransport.getDistance(any(), any())).thenReturn(new Distance(100, "KM"));

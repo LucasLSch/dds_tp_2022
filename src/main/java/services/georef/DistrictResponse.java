@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class LocalityResponse {
+public class DistrictResponse {
 
   public int id;
   public String name;

@@ -1,6 +1,5 @@
 package domain.location;
 
-import domain.journey.Distance;
 import java.io.IOException;
 import lombok.AllArgsConstructor;
 import services.georef.GeoRefAdapter;
@@ -8,7 +7,7 @@ import services.georef.GeoRefAdapter;
 @AllArgsConstructor
 public class Location {
 
-  private Integer district;
+  private District district;
   private String street;
   private String height;
 
@@ -17,7 +16,7 @@ public class Location {
     return adapter.getDistance(this, someLocation);
   }
 
-  public Integer getDistrict() {
+  public District getDistrict() {
     return district;
   }
 

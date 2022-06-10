@@ -1,6 +1,6 @@
 package services.georef;
 
-import domain.journey.Distance;
+import domain.location.Distance;
 import domain.location.Location;
 import java.io.IOException;
 import retrofit2.Call;
@@ -38,10 +38,10 @@ public class GeoRefAdapter {
   public Distance getDistance(Location origin, Location destination) throws IOException {
     this.api = retrofit.create(GeoRefService.class);
     Call<DistanceResponse> distanceResponseCall = this.api.distance(
-        origin.getDistrict(),
+        origin.getDistrict().getId(),
         origin.getStreet(),
         origin.getHeight(),
-        destination.getDistrict(),
+        destination.getDistrict().getId(),
         destination.getStreet(),
         destination.getHeight());
     Response<DistanceResponse> response = distanceResponseCall.execute();

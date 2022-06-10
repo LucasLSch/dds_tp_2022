@@ -1,4 +1,4 @@
-package domain.journey;
+package domain.location;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +8,6 @@ import lombok.Getter;
 public class Distance {
 
   private Integer value;
-  public String unit;
+  private String unit;
 
 }

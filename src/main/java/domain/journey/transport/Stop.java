@@ -1,6 +1,6 @@
 package domain.journey.transport;
 
-import domain.journey.Distance;
+import domain.location.Distance;
 import domain.location.Location;
 
 public class Stop {

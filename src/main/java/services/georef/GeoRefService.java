@@ -22,7 +22,7 @@ public interface GeoRefService {
                                    @Query("paisId") int countryId);
 
   @GET("localidades")
-  Call<LocalityResponse> localities(@Query("offset") int offset,
+  Call<DistrictResponse> localities(@Query("offset") int offset,
                                     @Query("municipioId") int munipialityId);
 
   @GET("municipios")

@@ -1,6 +1,7 @@
 package domain.journey;
 
 import domain.journey.transport.Transport;
+import domain.location.Distance;
 import domain.location.Location;
 import java.io.IOException;
 import lombok.AllArgsConstructor;

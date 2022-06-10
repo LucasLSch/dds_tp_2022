@@ -1,6 +1,6 @@
 package domainTests;
 
-import domain.journey.Distance;
+import domain.location.Distance;
 import domain.journey.transport.*;
 import domain.location.Location;
 import org.junit.jupiter.api.BeforeEach;
