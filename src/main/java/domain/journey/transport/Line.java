@@ -36,11 +36,7 @@ public class Line {
   }
 
   public void validateAllStopsLines() {
-    this.stopList.forEach(this::validateStopLine);
-  }
-
-  private void validateStopLine(Stop someStop) {
-    if (!someStop.belongsToLine(this)) {
+    if (!this.stopList.stream().allMatch(stop -> stop.belongsToLine(this))) {
       throw new InvalidStopForLineException();
     }
   }
