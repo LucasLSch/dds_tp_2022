@@ -1,7 +1,7 @@
 package domain.location;
 
 import java.io.IOException;
-import services.georef.Distance;
+import services.georef.DistanceResponse;
 import services.georef.GeoRefAdapter;
 
 public class Location {
@@ -16,7 +16,7 @@ public class Location {
     this.height = someHeight;
   }
 
-  public Distance getDistanceTo(Location someLocation) throws IOException {
+  public DistanceResponse getDistanceTo(Location someLocation) throws IOException {
     GeoRefAdapter adapter = GeoRefAdapter.getInstance();
     return adapter.getDistance(this, someLocation);
   }

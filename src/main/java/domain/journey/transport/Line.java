@@ -3,7 +3,7 @@ package domain.journey.transport;
 import domain.exceptions.IncompleteLineException;
 import domain.exceptions.InvalidStopForLineException;
 import java.util.List;
-import services.georef.Distance;
+import services.georef.DistanceResponse;
 
 public class Line {
 
@@ -51,7 +51,7 @@ public class Line {
     }
   }
 
-  public Distance getDistanceBetween(Stop startStop, Stop endStop) {
+  public DistanceResponse getDistanceBetween(Stop startStop, Stop endStop) {
     List<Stop> stopsBetween = this
         .stopList
         .subList(startStop.getOrderInList(), endStop.getOrderInList());
@@ -59,9 +59,9 @@ public class Line {
     int finalValue = stopsBetween
         .stream()
         .map(Stop::getDistanceToNextStop)
-        .mapToInt(Distance::getValue)
+        .mapToInt(DistanceResponse::getValue)
         .sum();
 
-    return new Distance(finalValue, "KM");
+    return new DistanceResponse(finalValue, "KM");
   }
 }

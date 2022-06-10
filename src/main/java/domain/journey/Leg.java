@@ -3,7 +3,7 @@ package domain.journey;
 import domain.journey.transport.Transport;
 import domain.location.Location;
 import java.io.IOException;
-import services.georef.Distance;
+import services.georef.DistanceResponse;
 
 public class Leg {
 
@@ -45,7 +45,7 @@ public class Leg {
     return orderInList;
   }
 
-  public Distance getLegDistance() throws IOException {
+  public DistanceResponse getLegDistance() throws IOException {
     return this.transport.getDistance(this.getStart(), this.getEnd());
   }
 

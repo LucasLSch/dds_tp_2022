@@ -34,16 +34,16 @@ public class GeoRefAdapter {
         .build();
   }
 
-  public Distance getDistance(Location origin, Location destination) throws IOException {
+  public DistanceResponse getDistance(Location origin, Location destination) throws IOException {
     this.api = retrofit.create(GeoRefService.class);
-    Call<Distance> distanceResponseCall = this.api.distance(
+    Call<DistanceResponse> distanceResponseCall = this.api.distance(
         origin.getDistrict(),
         origin.getStreet(),
         origin.getHeight(),
         destination.getDistrict(),
         destination.getStreet(),
         destination.getHeight());
-    Response<Distance> response = distanceResponseCall.execute();
+    Response<DistanceResponse> response = distanceResponseCall.execute();
     return response.body();
   }
 
