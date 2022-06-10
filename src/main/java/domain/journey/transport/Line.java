@@ -2,8 +2,8 @@ package domain.journey.transport;
 
 import domain.exceptions.IncompleteLineException;
 import domain.exceptions.InvalidStopForLineException;
+import domain.journey.Distance;
 import java.util.List;
-import services.georef.DistanceResponse;
 
 public class Line {
 
@@ -51,17 +51,17 @@ public class Line {
     }
   }
 
-  public DistanceResponse getDistanceBetween(Stop startStop, Stop endStop) {
+  public Distance getDistanceBetween(Stop startStop, Stop endStop) {
     List<Stop> stopsBetween = this
         .stopList
         .subList(startStop.getOrderInList(), endStop.getOrderInList());
 
-    int finalValue = stopsBetween
+    Integer finalValue = stopsBetween
         .stream()
         .map(Stop::getDistanceToNextStop)
-        .mapToInt(DistanceResponse::getValue)
+        .mapToInt(Distance::getValue)
         .sum();
 
-    return new DistanceResponse(finalValue, "KM");
+    return new Distance(finalValue, "KM");
   }
 }

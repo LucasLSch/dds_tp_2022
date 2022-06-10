@@ -1,12 +1,12 @@
 package domainTests;
 
+import domain.journey.Distance;
 import domain.journey.Journey;
 import domain.journey.Leg;
 import domain.journey.transport.*;
 import domain.location.Location;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import services.georef.Distance;
 
 import java.io.IOException;
 import java.util.ArrayList;

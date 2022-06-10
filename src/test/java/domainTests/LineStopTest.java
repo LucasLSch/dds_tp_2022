@@ -1,18 +1,17 @@
 package domainTests;
 
+import domain.journey.Distance;
 import domain.journey.transport.Line;
 import domain.journey.transport.PublicTransportType;
 import domain.journey.transport.Stop;
 import domain.location.Location;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import services.georef.Distance;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class LineStopTest {
   private Line dummyLine;

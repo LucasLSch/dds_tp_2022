@@ -4,7 +4,6 @@ import domain.exceptions.EmptyJourneyException;
 import domain.location.Location;
 import java.io.IOException;
 import java.util.List;
-import services.georef.DistanceResponse;
 
 public class Journey {
 
@@ -42,7 +41,7 @@ public class Journey {
 
   //TODO exceptions shareable
 
-  public DistanceResponse getJourneyDistance() {
+  public Distance getJourneyDistance() {
     int finalDistanceValue = this.legList.stream()
         .mapToInt(leg -> {
           try {
@@ -53,10 +52,10 @@ public class Journey {
         })
         .sum();
 
-    return new DistanceResponse(finalDistanceValue, "KM");
+    return new Distance(finalDistanceValue, "KM");
   }
 
-  public DistanceResponse getDistanceFromTo(Leg someLeg, Leg anotherLeg) {
+  public Distance getDistanceFromTo(Leg someLeg, Leg anotherLeg) {
     List<Leg> betweenLegs = this
         .legList
         .subList(someLeg.getOrderInList(), anotherLeg.getOrderInList() + 1);
@@ -71,7 +70,7 @@ public class Journey {
         })
         .sum();
 
-    return new DistanceResponse(finalDistanceValue, "KM");
+    return new Distance(finalDistanceValue, "KM");
   }
 
   public void addLeg(Leg someLeg) {

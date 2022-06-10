@@ -1,12 +1,12 @@
 package domain.journey.transport;
 
+import domain.journey.Distance;
 import domain.location.Location;
 import java.io.IOException;
-import services.georef.DistanceResponse;
 
 public abstract class Transport {
 
-  public DistanceResponse getDistance(Location start, Location end) throws IOException {
+  public Distance getDistance(Location start, Location end) throws IOException {
     return start.getDistanceTo(end);
   }
   

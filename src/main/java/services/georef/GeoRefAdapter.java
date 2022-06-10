@@ -1,5 +1,6 @@
 package services.georef;
 
+import domain.journey.Distance;
 import domain.location.Location;
 import java.io.IOException;
 import retrofit2.Call;
@@ -34,7 +35,7 @@ public class GeoRefAdapter {
         .build();
   }
 
-  public DistanceResponse getDistance(Location origin, Location destination) throws IOException {
+  public Distance getDistance(Location origin, Location destination) throws IOException {
     this.api = retrofit.create(GeoRefService.class);
     Call<DistanceResponse> distanceResponseCall = this.api.distance(
         origin.getDistrict(),
@@ -44,7 +45,7 @@ public class GeoRefAdapter {
         destination.getStreet(),
         destination.getHeight());
     Response<DistanceResponse> response = distanceResponseCall.execute();
-    return response.body();
+    return new Distance(response.body().getValue(), response.body().unit);
   }
 
 }

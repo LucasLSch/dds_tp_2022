@@ -1,22 +1,18 @@
 package domain.location;
 
+import domain.journey.Distance;
 import java.io.IOException;
-import services.georef.DistanceResponse;
+import lombok.AllArgsConstructor;
 import services.georef.GeoRefAdapter;
 
+@AllArgsConstructor
 public class Location {
 
   private Integer district;
   private String street;
   private String height;
 
-  public Location(Integer someDistrict, String someStreet, String someHeight) {
-    this.district = someDistrict;
-    this.street = someStreet;
-    this.height = someHeight;
-  }
-
-  public DistanceResponse getDistanceTo(Location someLocation) throws IOException {
+  public Distance getDistanceTo(Location someLocation) throws IOException {
     GeoRefAdapter adapter = GeoRefAdapter.getInstance();
     return adapter.getDistance(this, someLocation);
   }
