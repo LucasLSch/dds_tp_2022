@@ -1,7 +1,7 @@
 package domain.organization;
 
 public class VisitorHc {
-	public Double calculateHC(Organization org){
+	public Double calculateHCOrg(Organization org){
 		Double total = 0.0;
 		total += this.calculateHCActivities(org);
 		total += org.sectorList.stream().mapToDouble(sector -> this.calculateHCSector(sector,org)).sum();
@@ -17,6 +17,7 @@ public class VisitorHc {
  }
 	public Double calculateHCActivities(Organization org){
 		//esta branch no tienen activities todavia
+		return 0.0;
 	}
 
 }

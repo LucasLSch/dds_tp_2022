@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 import lombok.Getter;
 
-public class Member {
+public class Member implements Visitado{
 
   private Set<Sector> sectorList;
   @Getter
@@ -27,6 +27,9 @@ public class Member {
     this.journeyList = new ArrayList<>();
   }
 
+  public void aceptarVisitor(VisitorHc unVisitor) {
+    unVisitor.calculateHCMember(this);
+  }
   public void linkSector(Sector someSector) {
     someSector.registerMember(this);
   }

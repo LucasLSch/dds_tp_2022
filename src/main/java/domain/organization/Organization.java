@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Organization {
+public class Organization implements Visitado{
 
   Set<Sector> sectorList;
 
@@ -21,6 +21,10 @@ public class Organization {
     this.clasification = clasific;
     this.orgType = orgType;
     this.sectorList = new HashSet<>();
+  }
+
+  public void aceptarVisitor(VisitorHc unVisitor) {
+    unVisitor.calculateHCOrg(this);
   }
 
   public void registerSector(Sector someSector) {
