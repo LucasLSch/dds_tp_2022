@@ -22,7 +22,8 @@ public class Sector implements Visitado{
   public Integer cantMember(){
     return members.size();
   }
-  public Double aceptarVisitor(VisitorHc unVisitor) {
+  @Override
+  public Double acceptVisitor(VisitorHc unVisitor) {
     return unVisitor.calculateHCSector(this,organization);
   }
 

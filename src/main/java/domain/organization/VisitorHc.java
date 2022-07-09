@@ -13,10 +13,11 @@ public class VisitorHc {
 
  public Double calculateHCMember(Member member){
 		//actual calculation of HC by members
-		return 0.0;
+	 return member.calculateHc();
  }
 	public Double calculateHCActivities(Organization org){
 		//esta branch no tienen activities todavia
+		org.getDataActivities().stream().mapToDouble(dataActivity -> dataActivity.calcularHc()).sum();
 		return 0.0;
 	}
 

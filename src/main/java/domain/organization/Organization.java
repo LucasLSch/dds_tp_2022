@@ -23,12 +23,15 @@ public class Organization implements Visitado{
     this.sectorList = new HashSet<>();
   }
 
-  public void aceptarVisitor(VisitorHc unVisitor) {
-    unVisitor.calculateHCOrg(this);
+  @Override
+  public Double acceptVisitor(VisitorHc aVisitor) {
+    return aVisitor.calculateHCOrg(this);
   }
-
+  public Set<Sector> getDataActivities(){
+    return sectorList;//just for coding
+  }
   public Double AverageHcByMember(VisitorHc unVisitor){
-    return sectorList.stream().mapToDouble(sector -> sector.aceptarVisitor(unVisitor)/sector.cantMember()).sum() ;
+    return sectorList.stream().mapToDouble(sector -> sector.acceptVisitor(unVisitor)/sector.cantMember()).sum() ;
   }
   public void registerSector(Sector someSector) {
     try {
@@ -61,6 +64,7 @@ public class Organization implements Visitado{
         .flatMap(sector -> sector.getMembers().stream())
         .collect(Collectors.toSet());
   }
+
 
 
 }

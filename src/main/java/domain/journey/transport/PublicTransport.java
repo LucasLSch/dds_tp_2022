@@ -10,7 +10,7 @@ public class PublicTransport extends Transport {
   private Line line;
   private Stop startStop;
   private Stop endStop;
-  
+  private Integer consumption;
   @Override
   public Boolean isShareable() {
     return false;
@@ -21,5 +21,10 @@ public class PublicTransport extends Transport {
     //TODO validate startStop has startLocation
     //TODO validate endStop has endLocation
     return line.getDistanceBetween(this.startStop, this.endStop);
+  }
+
+  @Override
+  public Integer getConsumptionPerKm() {
+    return consumption;
   }
 }

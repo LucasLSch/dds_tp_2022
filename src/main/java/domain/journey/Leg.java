@@ -31,7 +31,10 @@ public class Leg {
   public void setOrderInList(Integer orderInList) {
     this.orderInList = orderInList;
   }
-
+  public DataActivity createDataActivities() throws IOException {
+    transport.getConsumption(this.start,this.end);//trae todo lo relacionado a la actividad.
+    return new DataActivity();
+  }
   public Boolean transportIsShareable() {
     return transport.isShareable();
   }

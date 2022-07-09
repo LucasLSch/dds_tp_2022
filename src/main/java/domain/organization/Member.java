@@ -26,14 +26,20 @@ public class Member implements Visitado{
     this.sectorList = new HashSet<>();
     this.journeyList = new ArrayList<>();
   }
-
-  public Double aceptarVisitor(VisitorHc unVisitor) {
+@Override
+  public Double acceptVisitor(VisitorHc unVisitor) {
     return unVisitor.calculateHCMember(this);
   }
   public void linkSector(Sector someSector) {
     someSector.registerMember(this);
   }
 
+  public Double calculateHc(){
+    //create data Activity
+    getJourneyList().stream().map(journey -> journey.getDataActivities()).sum();
+    //calculate of HC
+    return 0.0;
+  }
   public void addSector(Sector someSector) {
     this.sectorList.add(someSector);
   }
