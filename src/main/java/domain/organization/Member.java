@@ -27,8 +27,8 @@ public class Member implements Visitado{
     this.journeyList = new ArrayList<>();
   }
 
-  public void aceptarVisitor(VisitorHc unVisitor) {
-    unVisitor.calculateHCMember(this);
+  public Double aceptarVisitor(VisitorHc unVisitor) {
+    return unVisitor.calculateHCMember(this);
   }
   public void linkSector(Sector someSector) {
     someSector.registerMember(this);

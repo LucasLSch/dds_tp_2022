@@ -19,9 +19,11 @@ public class Sector implements Visitado{
     this.organization = organization;
     this.members = new HashSet<>();
   }
-
-  public void aceptarVisitor(VisitorHc unVisitor) {
-    unVisitor.calculateHCSector(this,organization);
+  public Integer cantMember(){
+    return members.size();
+  }
+  public Double aceptarVisitor(VisitorHc unVisitor) {
+    return unVisitor.calculateHCSector(this,organization);
   }
 
   public String getSectorName() {

@@ -27,6 +27,9 @@ public class Organization implements Visitado{
     unVisitor.calculateHCOrg(this);
   }
 
+  public Double AverageHcByMember(VisitorHc unVisitor){
+    return sectorList.stream().mapToDouble(sector -> sector.aceptarVisitor(unVisitor)/sector.cantMember()).sum() ;
+  }
   public void registerSector(Sector someSector) {
     try {
       this.validateSector(someSector);
