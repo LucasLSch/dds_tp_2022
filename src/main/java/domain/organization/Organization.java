@@ -8,7 +8,8 @@ import java.util.stream.Collectors;
 
 public class Organization {
 
-  private Set<Sector> sectorList;
+  Set<Sector> sectorList;
+
   private String socialObjective;
   private Location location;
   private String clasification;
@@ -53,5 +54,6 @@ public class Organization {
         .flatMap(sector -> sector.getMembers().stream())
         .collect(Collectors.toSet());
   }
+
 
 }
