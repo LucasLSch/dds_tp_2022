@@ -1,8 +1,10 @@
-package domain.measurments;
+package domain.measurements;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public class ConsumptionType {
 
   private String name;
@@ -17,5 +19,9 @@ public class ConsumptionType {
 
   public void setEmissionFactor(EmissionFactor someEF) {
     this.emissionFactor = someEF;
+  }
+
+  public Double getEmissionFactorValue() {
+    return this.getEmissionFactor().getFactor();
   }
 }

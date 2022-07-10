@@ -2,16 +2,19 @@ package domain.organization;
 
 import domain.exceptions.InvalidSectorForOrgException;
 import domain.location.Location;
-import domain.measurments.ActivityData;
+import domain.measurements.ActivityData;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 
 @AllArgsConstructor
+@Getter
 public class Organization implements Visitado{
 
   private Set<Sector> sectorList;
@@ -19,7 +22,7 @@ public class Organization implements Visitado{
   private Location location;
   private String clasification;
   private OrgType orgType;
-  private List<ActivityData> activityDataList = new ArrayList<>();
+  private List<ActivityData> dataActivities = new ArrayList<>();
 
   public Organization(String socObj, Location locat, String clasific, OrgType orgType) {
     this.socialObjective = socObj;
@@ -33,9 +36,7 @@ public class Organization implements Visitado{
   public Double acceptVisitor(VisitorHc aVisitor) {
     return aVisitor.calculateHCOrg(this);
   }
-  public Set<Sector> getDataActivities(){
-    return sectorList;//just for coding
-  }
+
   public Double AverageHcByMember(VisitorHc unVisitor){
     return sectorList.stream().mapToDouble(sector -> sector.acceptVisitor(unVisitor)/sector.cantMember()).sum() ;
   }
@@ -72,7 +73,7 @@ public class Organization implements Visitado{
   }
 
   public void addActivityData(ActivityData someAD) {
-    this.activityDataList.add(someAD);
+    this.getDataActivities().add(someAD);
   }
 
 }

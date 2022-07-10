@@ -4,7 +4,10 @@ public class VisitorHc {
 	public Double calculateHCOrg(Organization org){
 		Double total = 0.0;
 		total += this.calculateHCActivities(org);
-		total += org.sectorList.stream().mapToDouble(sector -> this.calculateHCSector(sector,org)).sum();
+		total += org.getSectorList()
+						.stream()
+						.mapToDouble(sector -> this.calculateHCSector(sector,org))
+						.sum();
 		return total;
 	}
  public Double calculateHCSector(Sector sector, Organization org){

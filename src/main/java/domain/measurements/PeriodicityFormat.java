@@ -1,4 +1,4 @@
-package domain.measurments;
+package domain.measurements;
 
 import java.time.LocalDate;
 
