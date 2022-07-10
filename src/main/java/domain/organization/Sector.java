@@ -22,9 +22,10 @@ public class Sector implements Visitado{
   public Integer cantMember(){
     return members.size();
   }
+
   @Override
   public Double acceptVisitor(VisitorHc unVisitor) {
-    return unVisitor.calculateHCSector(this,organization);
+    return unVisitor.calculateHCSector(this);
   }
 
   public String getSectorName() {

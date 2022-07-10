@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import domain.measurements.ActivityData;
 import lombok.Getter;
 
 public class Member implements Visitado{
@@ -30,16 +32,11 @@ public class Member implements Visitado{
   public Double acceptVisitor(VisitorHc unVisitor) {
     return unVisitor.calculateHCMember(this);
   }
+
   public void linkSector(Sector someSector) {
     someSector.registerMember(this);
   }
 
-  public Double calculateHc(){
-    //create data Activity
-    getJourneyList().stream().map(journey -> journey.getDataActivities()).sum();
-    //calculate of HC
-    return 0.0;
-  }
   public void addSector(Sector someSector) {
     this.sectorList.add(someSector);
   }
