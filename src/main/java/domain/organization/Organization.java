@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Organization {
 
@@ -49,11 +50,9 @@ public class Organization {
   }
 
   public Set<Member> getMembers() {
-    Set<Member> totalMembers = new HashSet<>();
-    for (Sector sector : this.sectorList) {
-      totalMembers.addAll(sector.getMemberList());
-    }
-    return totalMembers;
+    return this.sectorList.stream()
+        .flatMap((sector) -> sector.getMemberList().stream())
+        .collect(Collectors.toSet());
   }
 
 }

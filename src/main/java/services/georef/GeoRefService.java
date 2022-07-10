@@ -7,10 +7,10 @@ import retrofit2.http.Query;
 public interface GeoRefService {
 
   @GET("distancia")
-  Call<Distance> distance(@Query("localidadOringenId") int originDistrct,
+  Call<Distance> distance(@Query("localidadOrigenId") int originDistrict,
                           @Query("calleOrigen") String originStreet,
                           @Query("alturaOrigen") String originHeight,
-                          @Query("localidadDestinoId") int destinyDistrct,
+                          @Query("localidadDestinoId") int destinyDistrict,
                           @Query("calleDestino") String destinyStreet,
                           @Query("alturaDestino") String destinyHeight);
 }

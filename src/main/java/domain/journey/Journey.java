@@ -32,13 +32,11 @@ public class Journey {
     this.end = lastLeg.getEnd();
   }
 
-
   public void isJourneyShareable() {
-    if (legList.stream().anyMatch(leg -> !leg.transportIsShareable())) {
+    if (!legList.stream().allMatch(Leg::transportIsShareable)) {
       throw new RuntimeException("Journey is not shareable");
     }
   }
-
 
   //TODO exceptions shareable
 
