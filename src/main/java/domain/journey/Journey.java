@@ -32,17 +32,17 @@ public class Journey {
     this.end = lastLeg.getEnd();
   }
 
-
   public void isJourneyShareable() {
-    if (legList.stream().anyMatch(leg -> !leg.transportIsShareable())) {
+    if (!legList.stream().allMatch(Leg::transportIsShareable)) {
       throw new RuntimeException("Journey is not shareable");
     }
   }
 
-  public List<DataActivity> getDataActivities(){
+  public List<ActivityData> getDataActivities(){
     legList.stream().map(leg -> leg.createActivities());
     return ;
   }
+
   //TODO exceptions shareable
 
   public Distance getJourneyDistance() {
