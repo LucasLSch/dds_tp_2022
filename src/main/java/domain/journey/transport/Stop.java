@@ -1,7 +1,7 @@
 package domain.journey.transport;
 
+import domain.location.Distance;
 import domain.location.Location;
-import services.georef.Distance;
 
 public class Stop {
 
@@ -17,6 +17,12 @@ public class Stop {
   public Stop(Line someLine, Location someLocation) {
     this.line = someLine;
     this.location = someLocation;
+  }
+
+  public Stop(Location someLocation, Distance distance, Integer orderInList) {
+    this.location = someLocation;
+    this.distanceToNextStop = distance;
+    this.orderInList = orderInList;
   }
 
   public void setDistanceToNextStop(Distance distanceToNextStop) {

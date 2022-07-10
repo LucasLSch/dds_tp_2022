@@ -1,6 +1,7 @@
 package repositories;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,17 +20,16 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
   }
 
   @Override
-  public void saveAll(T... someEntity) {
-    for (T entity : someEntity) {
-      this.save(entity);
-    }
+  public void saveAll(T... someEntities) {
+    Arrays
+        .stream(someEntities)
+        .iterator()
+        .forEachRemaining(this::save);
   }
 
   @Override
-  public void saveAll(List<T> someEntity) {
-    for (T entity : someEntity) {
-      this.save(entity);
-    }
+  public void saveAll(List<T> someEntities) {
+    someEntities.forEach(this::save);
   }
 
   @Override
@@ -41,7 +41,7 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
   public T findByCondition(RepoCondition<T> someCondition) {
     return this.savedEntities
         .stream()
-        .filter(entity -> someCondition.testConditionOn(entity))
+        .filter(someCondition::testConditionOn)
         .findFirst()
         .orElse(null);
   }
@@ -57,7 +57,7 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
   public void deleteByCondition(RepoCondition<T> someCondition) {
     List<T> entitiesToDelete = this.savedEntities
         .stream()
-        .filter(entity -> someCondition.testConditionOn(entity))
+        .filter(someCondition::testConditionOn)
         .collect(Collectors.toList());
     this.deleteAll(entitiesToDelete);
   }
@@ -68,17 +68,16 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
   }
 
   @Override
-  public void deleteAll(T... someEntity) {
-    for (T entity : someEntity) {
-      this.delete(entity);
-    }
+  public void deleteAll(T... someEntities) {
+    Arrays
+        .stream(someEntities)
+        .iterator()
+        .forEachRemaining(this::delete);
   }
 
   @Override
-  public void deleteAll(List<T> someEntity) {
-    for (T entity : someEntity) {
-      this.delete(entity);
-    }
+  public void deleteAll(List<T> someEntities) {
+    someEntities.forEach(this::delete);
   }
 
   @Override

@@ -1,8 +1,6 @@
 package domain.organization;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Sector {
@@ -14,12 +12,12 @@ public class Sector {
   }
 
   private Organization organization;
-  private Set<Member> memberList;
+  private Set<Member> members;
 
   public Sector(String sectorName, Organization organization) {
     this.sectorName = sectorName;
     this.organization = organization;
-    this.memberList = new HashSet<>();
+    this.members = new HashSet<>();
   }
 
   public String getSectorName() {
@@ -28,7 +26,7 @@ public class Sector {
 
   public void registerMember(Member someMember) {
     if (this.organization.approvesMember(someMember, this)) {
-      this.memberList.add(someMember);
+      this.members.add(someMember);
       someMember.addSector(this);
     }
   }
@@ -37,8 +35,8 @@ public class Sector {
     return this.organization.equals(organization);
   }
 
-  public Set<Member> getMemberList() {
-    return memberList;
+  public Set<Member> getMembers() {
+    return this.members;
   }
 
 }

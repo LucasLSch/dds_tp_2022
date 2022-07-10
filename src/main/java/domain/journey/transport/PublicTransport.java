@@ -1,8 +1,8 @@
 package domain.journey.transport;
 
+import domain.location.Distance;
 import domain.location.Location;
 import lombok.AllArgsConstructor;
-import services.georef.Distance;
 
 @AllArgsConstructor
 public class PublicTransport extends Transport {

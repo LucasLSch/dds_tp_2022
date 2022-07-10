@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lombok.Getter;
 
 public class Member {
 
   private Set<Sector> sectorList;
+  @Getter
   private List<Journey> journeyList;
 
   private String name;
@@ -38,8 +40,18 @@ public class Member {
   }
 
   public void addSharedJourney(Journey someJourney, Member someMember) {
-    this.memberOrgValidation(someMember);
-    someJourney.isJourneyShareable();
+    try {
+      this.memberOrgValidation(someMember);
+    } catch (RuntimeException exception) {
+      System.out.println("WARN: Members does not work for the same Organization");
+      return;
+    }
+    try {
+      someJourney.isJourneyShareable();
+    } catch (RuntimeException exception) {
+      System.out.println("WARN: Journey has Legs that are not shareable");
+      return;
+    }
     this.addJourney(someJourney);
     someMember.addJourney(someJourney);
   }

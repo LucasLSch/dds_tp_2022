@@ -1,10 +1,10 @@
 package domain.journey;
 
 import domain.exceptions.EmptyJourneyException;
+import domain.location.Distance;
 import domain.location.Location;
 import java.io.IOException;
 import java.util.List;
-import services.georef.Distance;
 
 public class Journey {
 
@@ -32,13 +32,11 @@ public class Journey {
     this.end = lastLeg.getEnd();
   }
 
-
   public void isJourneyShareable() {
-    if (legList.stream().anyMatch(leg -> !leg.transportIsShareable())) {
+    if (!legList.stream().allMatch(Leg::transportIsShareable)) {
       throw new RuntimeException("Journey is not shareable");
     }
   }
-
 
   //TODO exceptions shareable
 
@@ -59,7 +57,7 @@ public class Journey {
   public Distance getDistanceFromTo(Leg someLeg, Leg anotherLeg) {
     List<Leg> betweenLegs = this
         .legList
-        .subList(someLeg.getOrderInList(), anotherLeg.getOrderInList());
+        .subList(someLeg.getOrderInList(), anotherLeg.getOrderInList() + 1);
 
     int finalDistanceValue = betweenLegs.stream()
         .mapToInt(leg -> {
@@ -72,6 +70,10 @@ public class Journey {
         .sum();
 
     return new Distance(finalDistanceValue, "KM");
+  }
+
+  public void addLeg(Leg someLeg) {
+    this.legList.add(someLeg);
   }
 
 }
