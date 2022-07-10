@@ -1,8 +1,8 @@
 package domain.journey.transport;
 
+import domain.location.Distance;
 import domain.location.Location;
 import java.io.IOException;
-import services.georef.Distance;
 
 public abstract class Transport {
 

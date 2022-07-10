@@ -2,15 +2,13 @@ package domain.organization;
 
 import domain.exceptions.InvalidSectorForOrgException;
 import domain.location.Location;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Organization {
 
-  private List<Sector> sectorList;
+  private Set<Sector> sectorList;
   private String socialObjective;
   private Location location;
   private String clasification;
@@ -21,7 +19,7 @@ public class Organization {
     this.location = locat;
     this.clasification = clasific;
     this.orgType = orgType;
-    this.sectorList = new ArrayList<>();
+    this.sectorList = new HashSet<>();
   }
 
   public void registerSector(Sector someSector) {
@@ -50,8 +48,9 @@ public class Organization {
   }
 
   public Set<Member> getMembers() {
-    return this.sectorList.stream()
-        .flatMap((sector) -> sector.getMemberList().stream())
+    return this.sectorList
+        .stream()
+        .flatMap(sector -> sector.getMembers().stream())
         .collect(Collectors.toSet());
   }
 

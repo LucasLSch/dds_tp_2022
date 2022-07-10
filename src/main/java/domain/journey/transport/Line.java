@@ -2,10 +2,8 @@ package domain.journey.transport;
 
 import domain.exceptions.IncompleteLineException;
 import domain.exceptions.InvalidStopForLineException;
+import domain.location.Distance;
 import java.util.List;
-
-import domain.location.Location;
-import services.georef.Distance;
 
 public class Line {
 
@@ -28,7 +26,7 @@ public class Line {
 
   public void validateStops() {
     this.validateStopsAmount();
-    this.validateStopsLines();
+    this.validateAllStopsLines();
   }
 
   public void validateStopsAmount() {
@@ -37,11 +35,9 @@ public class Line {
     }
   }
 
-  public void validateStopsLines() {
-    for (Stop someStop : this.stopList) {
-      if (!someStop.belongsToLine(this)) {
-        throw new InvalidStopForLineException();
-      }
+  public void validateAllStopsLines() {
+    if (!this.stopList.stream().allMatch(stop -> stop.belongsToLine(this))) {
+      throw new InvalidStopForLineException();
     }
   }
 
@@ -56,7 +52,7 @@ public class Line {
         .stopList
         .subList(startStop.getOrderInList(), endStop.getOrderInList());
 
-    int finalValue = stopsBetween
+    Integer finalValue = stopsBetween
         .stream()
         .map(Stop::getDistanceToNextStop)
         .mapToInt(Distance::getValue)

@@ -1,28 +1,23 @@
 package domain.journey;
 
 import domain.journey.transport.Transport;
+import domain.location.Distance;
 import domain.location.Location;
 import java.io.IOException;
-import services.georef.Distance;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class Leg {
 
   private Location start;
   private Location end;
-  private Integer orderInList;
   private Transport transport;
+  private Integer orderInList;
 
   public Leg(Location someStartLocation, Location someEndLocation, Transport someTransport) {
     this.start = someStartLocation;
     this.end = someEndLocation;
     this.transport = someTransport;
-  }
-
-  public Leg(Location someStartLocation, Location someEndLocation, Transport someTransport, Integer orderInList) {
-    this.start = someStartLocation;
-    this.end = someEndLocation;
-    this.transport = someTransport;
-    this.orderInList = orderInList;
   }
 
   public Location getStart() {

@@ -1,18 +1,18 @@
 package domainTests;
 
+import domain.location.Distance;
 import domain.journey.transport.Line;
 import domain.journey.transport.PublicTransportType;
 import domain.journey.transport.Stop;
+import domain.location.District;
 import domain.location.Location;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import services.georef.Distance;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class LineStopTest {
   private Line dummyLine;
@@ -27,9 +27,9 @@ public class LineStopTest {
 
   @BeforeEach
   public void beforeTest() {
-    dummyLocation = new Location(43, "Cool Street", "800");
-    anotherDummyLocation = new Location(37, "Not So Cool Street", "1500");
-    coolestDummyLocation = new Location(73, "Coolest Street", "400");
+    dummyLocation = new Location(new District(43), "Cool Street", "800");
+    anotherDummyLocation = new Location(new District(37), "Not So Cool Street", "1500");
+    coolestDummyLocation = new Location(new District(73), "Coolest Street", "400");
     firstDummyStop = new Stop(dummyLocation, new Distance(100, "KM"), 0);
     secondDummyStop = new Stop(anotherDummyLocation, new Distance(50, "KM"), 1);
     thirdDummyStop = new Stop(coolestDummyLocation, new Distance(15, "KM"), 2);
