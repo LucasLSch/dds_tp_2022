@@ -10,9 +10,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
-public class Organization {
 
+@AllArgsConstructor
+public class Organization implements Visitado{
 
   private Set<Sector> sectorList;
   private String socialObjective;
@@ -29,6 +29,16 @@ public class Organization {
     this.sectorList = new HashSet<>();
   }
 
+  @Override
+  public Double acceptVisitor(VisitorHc aVisitor) {
+    return aVisitor.calculateHCOrg(this);
+  }
+  public Set<Sector> getDataActivities(){
+    return sectorList;//just for coding
+  }
+  public Double AverageHcByMember(VisitorHc unVisitor){
+    return sectorList.stream().mapToDouble(sector -> sector.acceptVisitor(unVisitor)/sector.cantMember()).sum() ;
+  }
   public void registerSector(Sector someSector) {
     try {
       this.validateSector(someSector);

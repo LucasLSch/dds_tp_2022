@@ -3,7 +3,7 @@ package domain.organization;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Sector {
+public class Sector implements Visitado{
 
   private String sectorName;
 
@@ -18,6 +18,13 @@ public class Sector {
     this.sectorName = sectorName;
     this.organization = organization;
     this.members = new HashSet<>();
+  }
+  public Integer cantMember(){
+    return members.size();
+  }
+  @Override
+  public Double acceptVisitor(VisitorHc unVisitor) {
+    return unVisitor.calculateHCSector(this,organization);
   }
 
   public String getSectorName() {

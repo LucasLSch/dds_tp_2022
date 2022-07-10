@@ -38,6 +38,11 @@ public class Journey {
     }
   }
 
+  public List<ActivityData> getDataActivities(){
+    legList.stream().map(leg -> leg.createActivities());
+    return ;
+  }
+
   //TODO exceptions shareable
 
   public Distance getJourneyDistance() {
