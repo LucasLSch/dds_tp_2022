@@ -2,17 +2,24 @@ package domain.organization;
 
 import domain.exceptions.InvalidSectorForOrgException;
 import domain.location.Location;
+import domain.measurments.ActivityData;
+import lombok.AllArgsConstructor;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 public class Organization {
+
 
   private Set<Sector> sectorList;
   private String socialObjective;
   private Location location;
   private String clasification;
   private OrgType orgType;
+  private List<ActivityData> activityDataList = new ArrayList<>();
 
   public Organization(String socObj, Location locat, String clasific, OrgType orgType) {
     this.socialObjective = socObj;
@@ -52,6 +59,10 @@ public class Organization {
         .stream()
         .flatMap(sector -> sector.getMembers().stream())
         .collect(Collectors.toSet());
+  }
+
+  public void addActivityData(ActivityData someAD) {
+    this.activityDataList.add(someAD);
   }
 
 }
