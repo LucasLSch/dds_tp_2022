@@ -1,15 +1,15 @@
 package domain.organization;
 
+import domain.contact.Contact;
 import domain.journey.Journey;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import domain.measurements.ActivityData;
 import lombok.Getter;
 
-public class Member implements Visitado{
+public class Member implements Visited {
 
   private Set<Sector> sectorList;
   @Getter
@@ -19,6 +19,7 @@ public class Member implements Visitado{
   private String lastName;
   private DocType docType;
   private String document;
+  private Contact contact;
 
   public Member(String name, String lastName, DocType docType, String document) {
     this.name = name;
@@ -29,8 +30,8 @@ public class Member implements Visitado{
     this.journeyList = new ArrayList<>();
   }
 @Override
-  public Double acceptVisitor(VisitorHc unVisitor) {
-    return unVisitor.calculateHCMember(this);
+  public Double acceptVisitor(VisitorCF unVisitor) {
+    return unVisitor.calculateCFMember(this);
   }
 
   public void linkSector(Sector someSector) {
@@ -81,5 +82,9 @@ public class Member implements Visitado{
 
   public Boolean worksIn(Organization someOrganization) {
     return this.sectorList.stream().anyMatch(sector -> sector.belongsTo(someOrganization));
+  }
+
+  public void notify(String someMessage) {
+    this.contact.notify(someMessage);
   }
 }

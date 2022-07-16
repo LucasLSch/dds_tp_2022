@@ -3,7 +3,7 @@ package domain.organization;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Sector implements Visitado{
+public class Sector implements Visited {
 
   private String sectorName;
 
@@ -24,8 +24,9 @@ public class Sector implements Visitado{
   }
 
   @Override
-  public Double acceptVisitor(VisitorHc unVisitor) {
-    return unVisitor.calculateHCSector(this);
+  public Double acceptVisitor(VisitorCF someVisitor) {
+    return someVisitor.calculateCFSector(this);
+
   }
 
   public String getSectorName() {

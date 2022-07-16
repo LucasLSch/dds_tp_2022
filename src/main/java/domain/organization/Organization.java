@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Getter
-public class Organization implements Visitado{
+public class Organization implements Visited {
 
   private Set<Sector> sectorList;
   private String socialObjective;
@@ -33,13 +33,14 @@ public class Organization implements Visitado{
   }
 
   @Override
-  public Double acceptVisitor(VisitorHc aVisitor) {
-    return aVisitor.calculateHCOrg(this);
+  public Double acceptVisitor(VisitorCF aVisitor) {
+    return aVisitor.calculateCFOrg(this);
   }
 
-  public Double AverageHcByMember(VisitorHc unVisitor){
-    return sectorList.stream().mapToDouble(sector -> sector.acceptVisitor(unVisitor)/sector.cantMember()).sum() ;
+  public Double AverageCFByMember(VisitorCF someVisitor){
+    return sectorList.stream().mapToDouble(sector -> sector.acceptVisitor(someVisitor)/sector.cantMember()).sum() ;
   }
+
   public void registerSector(Sector someSector) {
     try {
       this.validateSector(someSector);
@@ -76,4 +77,7 @@ public class Organization implements Visitado{
     this.getDataActivities().add(someAD);
   }
 
+  public void notifyAllMembers(String someMessage) {
+      this.getMembers().forEach(member -> member.notify(someMessage));
+  }
 }
