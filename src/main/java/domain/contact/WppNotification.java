@@ -1,4 +1,9 @@
 package domain.contact;
 
-public class NotifyWpp implements NotificationMethod {
+public class WppNotification implements NotificationMethod {
+
+  @Override
+  public void notify(Contact someContact, String someMessage) {
+    //TODO
+  }
 }

@@ -1,4 +1,10 @@
 package domain.contact;
 
-public class NotifyEmail implements NotificationMethod {
+public class EmailNotification implements NotificationMethod {
+
+  @Override
+  public void notify(Contact someContact, String someMessage) {
+    //TODO
+  }
+
 }
