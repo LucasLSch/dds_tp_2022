@@ -37,7 +37,7 @@ public class Organization implements Visited {
     return aVisitor.calculateCFOrg(this);
   }
 
-  public Double AverageCFByMember(VisitorCF someVisitor){
+  public Double averageCFByMember(VisitorCF someVisitor){
     return sectorList.stream().mapToDouble(sector -> sector.acceptVisitor(someVisitor)/sector.cantMember()).sum() ;
   }
 
