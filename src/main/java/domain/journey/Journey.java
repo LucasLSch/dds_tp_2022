@@ -5,10 +5,7 @@ import domain.location.Distance;
 import domain.location.Location;
 import domain.measurements.ActivityData;
 import domain.measurements.CarbonFootprint;
-import domain.measurements.ConsumptionType;
-import domain.measurements.EmissionFactor;
 
-import java.io.Console;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;

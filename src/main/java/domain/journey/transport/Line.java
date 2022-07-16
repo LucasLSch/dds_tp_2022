@@ -3,6 +3,7 @@ package domain.journey.transport;
 import domain.exceptions.IncompleteLineException;
 import domain.exceptions.InvalidStopForLineException;
 import domain.location.Distance;
+
 import java.util.List;
 
 public class Line {

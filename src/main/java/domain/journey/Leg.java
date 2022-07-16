@@ -3,14 +3,14 @@ package domain.journey;
 import domain.journey.transport.Transport;
 import domain.location.Distance;
 import domain.location.Location;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import domain.measurements.ActivityData;
 import domain.measurements.ConsumptionType;
 import domain.measurements.PeriodicityFormat;
 import lombok.AllArgsConstructor;
+
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @AllArgsConstructor
 public class Leg {

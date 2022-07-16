@@ -2,12 +2,12 @@ package domain.organization;
 
 import domain.contact.Contact;
 import domain.journey.Journey;
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import lombok.Getter;
 
 public class Member {
 

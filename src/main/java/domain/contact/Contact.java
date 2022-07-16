@@ -1,6 +1,7 @@
 package domain.contact;
 
 import lombok.AllArgsConstructor;
+
 import java.util.List;
 
 @AllArgsConstructor
