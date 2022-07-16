@@ -1,5 +1,6 @@
 package domain.organization;
 
+import domain.contact.Contact;
 import domain.journey.Journey;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,6 +18,7 @@ public class Member implements Visited {
   private String lastName;
   private DocType docType;
   private String document;
+  private Contact contact;
 
   public Member(String name, String lastName, DocType docType, String document) {
     this.name = name;
@@ -84,5 +86,9 @@ public class Member implements Visited {
 
   public Boolean worksIn(Organization someOrganization) {
     return this.sectorList.stream().anyMatch(sector -> sector.belongsTo(someOrganization));
+  }
+
+  public void notify(String someMessage) {
+    this.contact.notify(someMessage);
   }
 }

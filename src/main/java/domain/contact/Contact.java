@@ -10,7 +10,7 @@ public class Contact {
   private String email;
   private List<NotificationMethod> notificationMethodList;
 
-  public void notifyContacts(String someMessage) {
+  public void notify(String someMessage) {
     this.notificationMethodList.forEach(method -> method.notify(this, someMessage));
   }
 

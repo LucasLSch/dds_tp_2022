@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -33,12 +34,15 @@ public class Organization implements Visited {
   public Double acceptVisitor(VisitorCF aVisitor) {
     return aVisitor.calculateHCOrg(this);
   }
+
   public Set<Sector> getDataActivities(){
     return sectorList;//just for coding
   }
+
   public Double AverageHcByMember(VisitorCF unVisitor){
     return sectorList.stream().mapToDouble(sector -> sector.acceptVisitor(unVisitor)/sector.cantMember()).sum() ;
   }
+
   public void registerSector(Sector someSector) {
     try {
       this.validateSector(someSector);
@@ -75,4 +79,7 @@ public class Organization implements Visited {
     this.activityDataList.add(someAD);
   }
 
+  public void notifyAllMembers(String someMessage) {
+      this.getMembers().forEach(member -> member.notify(someMessage));
+  }
 }
