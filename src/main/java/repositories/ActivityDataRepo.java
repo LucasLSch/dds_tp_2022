@@ -1,6 +1,6 @@
 package repositories;
 
-import domain.measurments.ActivityData;
+import domain.measurements.ActivityData;
 
 public class ActivityDataRepo extends CrudImpl<ActivityData> {
 

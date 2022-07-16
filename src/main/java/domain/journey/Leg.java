@@ -4,6 +4,12 @@ import domain.journey.transport.Transport;
 import domain.location.Distance;
 import domain.location.Location;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import domain.measurements.ActivityData;
+import domain.measurements.ConsumptionType;
+import domain.measurements.PeriodicityFormat;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -31,9 +37,20 @@ public class Leg {
   public void setOrderInList(Integer orderInList) {
     this.orderInList = orderInList;
   }
-  public DataActivity createDataActivities() throws IOException {
-    transport.getConsumption(this.start,this.end);//trae todo lo relacionado a la actividad.
-    return new DataActivity();
+
+  public ActivityData createDataActivities() {
+    Integer consumption = null;
+    try {
+      consumption = this.transport.getConsumption(this.start, this.end);
+    } catch (IOException io) {
+      System.out.println("IO ERROR");
+      return null;
+    }
+    ConsumptionType consumptionType = this.transport.getConsumptionType();
+    return new ActivityData(consumptionType,
+        consumption,
+        PeriodicityFormat.MMAAAA,
+        LocalDate.now().format(DateTimeFormatter.ofPattern("MM/yyyy")));
   }
   public Boolean transportIsShareable() {
     return transport.isShareable();

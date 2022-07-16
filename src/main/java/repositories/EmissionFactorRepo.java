@@ -1,6 +1,6 @@
 package repositories;
 
-import domain.measurments.EmissionFactor;
+import domain.measurements.EmissionFactor;
 
 public class EmissionFactorRepo extends CrudImpl<EmissionFactor> {
 

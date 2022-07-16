@@ -22,9 +22,11 @@ public class Sector implements Visited {
   public Integer cantMember(){
     return members.size();
   }
+
   @Override
-  public Double acceptVisitor(VisitorCF unVisitor) {
-    return unVisitor.calculateHCSector(this,organization);
+  public Double acceptVisitor(VisitorCF someVisitor) {
+    return someVisitor.calculateCFSector(this);
+
   }
 
   public String getSectorName() {

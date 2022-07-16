@@ -1,6 +1,6 @@
 package repositories;
 
-import domain.measurments.ConsumptionType;
+import domain.measurements.ConsumptionType;
 
 public class ConsumptionTypeRepo extends CrudImpl<ConsumptionType> {
 

@@ -2,8 +2,9 @@ package domain.organization;
 
 import domain.exceptions.InvalidSectorForOrgException;
 import domain.location.Location;
-import domain.measurments.ActivityData;
+import domain.measurements.ActivityData;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 
 @AllArgsConstructor
+@Getter
 public class Organization implements Visited {
 
   private Set<Sector> sectorList;
@@ -20,7 +22,7 @@ public class Organization implements Visited {
   private Location location;
   private String clasification;
   private OrgType orgType;
-  private List<ActivityData> activityDataList = new ArrayList<>();
+  private List<ActivityData> dataActivities = new ArrayList<>();
 
   public Organization(String socObj, Location locat, String clasific, OrgType orgType) {
     this.socialObjective = socObj;
@@ -32,15 +34,11 @@ public class Organization implements Visited {
 
   @Override
   public Double acceptVisitor(VisitorCF aVisitor) {
-    return aVisitor.calculateHCOrg(this);
+    return aVisitor.calculateCFOrg(this);
   }
 
-  public Set<Sector> getDataActivities(){
-    return sectorList;//just for coding
-  }
-
-  public Double AverageHcByMember(VisitorCF unVisitor){
-    return sectorList.stream().mapToDouble(sector -> sector.acceptVisitor(unVisitor)/sector.cantMember()).sum() ;
+  public Double AverageCFByMember(VisitorCF someVisitor){
+    return sectorList.stream().mapToDouble(sector -> sector.acceptVisitor(someVisitor)/sector.cantMember()).sum() ;
   }
 
   public void registerSector(Sector someSector) {
@@ -76,7 +74,7 @@ public class Organization implements Visited {
   }
 
   public void addActivityData(ActivityData someAD) {
-    this.activityDataList.add(someAD);
+    this.getDataActivities().add(someAD);
   }
 
   public void notifyAllMembers(String someMessage) {
