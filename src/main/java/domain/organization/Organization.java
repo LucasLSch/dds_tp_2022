@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 
 @AllArgsConstructor
-public class Organization implements Visitado{
+public class Organization implements Visited {
 
   private Set<Sector> sectorList;
   private String socialObjective;
@@ -30,13 +30,13 @@ public class Organization implements Visitado{
   }
 
   @Override
-  public Double acceptVisitor(VisitorHc aVisitor) {
+  public Double acceptVisitor(VisitorCF aVisitor) {
     return aVisitor.calculateHCOrg(this);
   }
   public Set<Sector> getDataActivities(){
     return sectorList;//just for coding
   }
-  public Double AverageHcByMember(VisitorHc unVisitor){
+  public Double AverageHcByMember(VisitorCF unVisitor){
     return sectorList.stream().mapToDouble(sector -> sector.acceptVisitor(unVisitor)/sector.cantMember()).sum() ;
   }
   public void registerSector(Sector someSector) {

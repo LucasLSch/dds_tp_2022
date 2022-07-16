@@ -1,6 +1,7 @@
 package domain.organization;
 
-public class VisitorHc {
+public class VisitorCF {
+
 	public Double calculateHCOrg(Organization org){
 		Double total = 0.0;
 		total += this.calculateHCActivities(org);
