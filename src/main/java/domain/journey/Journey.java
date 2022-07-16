@@ -4,6 +4,7 @@ import domain.exceptions.EmptyJourneyException;
 import domain.location.Distance;
 import domain.location.Location;
 import domain.measurements.ActivityData;
+import domain.measurements.CarbonFootprint;
 import domain.measurements.ConsumptionType;
 import domain.measurements.EmissionFactor;
 
@@ -44,13 +45,6 @@ public class Journey {
     }
   }
 
-  public List<ActivityData> getDataActivities(){
-    List<ActivityData> dataActivities = this.legList.stream()
-        .map(leg -> leg.createDataActivities())
-        .collect(Collectors.toList());
-    return dataActivities;
-  }
-
   //TODO exceptions shareable
 
   public Distance getJourneyDistance() {
@@ -89,4 +83,16 @@ public class Journey {
     this.legList.add(someLeg);
   }
 
+  public CarbonFootprint getCarbonFootprint(String someUnit) {
+    return CarbonFootprint.sum(someUnit, this.getDataActivities()
+        .stream()
+        .map(da -> da.getCarbonFootprint(someUnit))
+        .toArray(CarbonFootprint[]::new));
+  }
+
+  public List<ActivityData> getDataActivities(){
+    return this.legList.stream()
+        .map(Leg::createDataActivities)
+        .collect(Collectors.toList());
+  }
 }

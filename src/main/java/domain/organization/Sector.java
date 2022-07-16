@@ -1,9 +1,14 @@
 package domain.organization;
 
+import domain.journey.Journey;
+import domain.measurements.CarbonFootprint;
+
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-public class Sector implements Visited {
+public class Sector {
 
   private String sectorName;
 
@@ -19,14 +24,8 @@ public class Sector implements Visited {
     this.organization = organization;
     this.members = new HashSet<>();
   }
-  public Integer cantMember(){
+  public Integer membersAmount(){
     return members.size();
-  }
-
-  @Override
-  public Double acceptVisitor(VisitorCF someVisitor) {
-    return someVisitor.calculateCFSector(this);
-
   }
 
   public String getSectorName() {
@@ -46,6 +45,28 @@ public class Sector implements Visited {
 
   public Set<Member> getMembers() {
     return this.members;
+  }
+
+  public CarbonFootprint getAvgCFPerMember(String someUnit) {
+    CarbonFootprint sectorCF = getSectorCF(someUnit);
+    return new CarbonFootprint(
+        sectorCF.getValue()/this.membersAmount()
+        , someUnit
+        , LocalDate.now());
+  }
+
+  public Set<Journey> getMembersJourneys() {
+    return this.getMembers()
+        .stream()
+        .flatMap(member -> member.getJourneyList().stream())
+        .collect(Collectors.toSet());
+  }
+
+  public CarbonFootprint getSectorCF(String someUnit) {
+    return CarbonFootprint.sum(someUnit, getMembersJourneys()
+        .stream()
+        .map(journey -> journey.getCarbonFootprint(someUnit))
+        .toArray(CarbonFootprint[]::new));
   }
 
 }

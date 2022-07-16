@@ -9,7 +9,7 @@ import java.util.Set;
 
 import lombok.Getter;
 
-public class Member implements Visited {
+public class Member {
 
   private Set<Sector> sectorList;
   @Getter
@@ -28,10 +28,6 @@ public class Member implements Visited {
     this.document = document;
     this.sectorList = new HashSet<>();
     this.journeyList = new ArrayList<>();
-  }
-@Override
-  public Double acceptVisitor(VisitorCF unVisitor) {
-    return unVisitor.calculateCFMember(this);
   }
 
   public void linkSector(Sector someSector) {

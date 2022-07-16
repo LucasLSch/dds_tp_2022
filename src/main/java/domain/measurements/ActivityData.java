@@ -20,7 +20,9 @@ public class ActivityData {
     return this.periodicityFormat.getDate(this.periodicity);
   }
 
-  public Double calcularHc() {
-    return this.getConsumptionValue() * this.getConsumptionType().getEmissionFactorValue();
+  public CarbonFootprint getCarbonFootprint(String someUnit) {
+    Double value = this.getConsumptionValue() * this.getConsumptionType().getEmissionFactorValue();
+    String unit = this.consumptionType.getUnit();
+    return new CarbonFootprint(value, unit, null).getOn(someUnit);
   }
 }
