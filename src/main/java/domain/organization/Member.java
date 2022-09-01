@@ -2,6 +2,8 @@ package domain.organization;
 
 import domain.contact.Contact;
 import domain.journey.Journey;
+import domain.measurements.CarbonFootprint;
+import domain.measurements.unit.UnitExpression;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -83,4 +85,11 @@ public class Member {
   public void notify(String someMessage) {
     this.contact.notify(someMessage);
   }
+
+  public CarbonFootprint getPersonalCF(UnitExpression someUnitExpression) {
+    return CarbonFootprint.sum(someUnitExpression, this.journeyList
+        .stream()
+        .map(journey -> journey.getCarbonFootprint(someUnitExpression)).toArray(CarbonFootprint[]::new));
+  }
+
 }
