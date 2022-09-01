@@ -1,5 +1,6 @@
 package domain.measurements;
 
+import domain.measurements.unit.Unit;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,15 +15,18 @@ import java.util.stream.Stream;
 public class CarbonFootprint {
 
   private Double value;
-  private String unit;
+  private Unit unit;
   private LocalDate date;
 
-  public CarbonFootprint getOn(String someUnit) {
-    //TODO
+  public CarbonFootprint getOn(Unit someUnit) {
+    if(this.unit.isConvertibleTo(someUnit)) {
+      this.value = this.value * Math.pow(10d, this.unit.getExponentForConvertionTo(someUnit));
+      this.unit = someUnit;
+    }
     return this;
   }
 
-  public static CarbonFootprint sum(String someUnit, CarbonFootprint ... carbonFootprints) {
+  public static CarbonFootprint sum(Unit someUnit, CarbonFootprint ... carbonFootprints) {
     Stream<CarbonFootprint> cfStream= Arrays.stream(carbonFootprints).sequential();
     cfStream = cfStream.map(cf -> cf.getOn(someUnit));
     Double totalValue = cfStream.mapToDouble(CarbonFootprint::getValue).sum();

@@ -1,5 +1,6 @@
 package domain.measurements;
 
+import domain.measurements.unit.Unit;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -8,12 +9,12 @@ import lombok.Getter;
 public class ConsumptionType {
 
   private String name;
-  private String unit;
+  private Unit unit;
   private String activity;
   private String scope;
   private EmissionFactor emissionFactor;
 
-  public String getUnit() {
+  public Unit getUnit() {
     return this.unit;
   }
 

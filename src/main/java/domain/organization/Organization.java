@@ -5,6 +5,7 @@ import domain.journey.Journey;
 import domain.location.Location;
 import domain.measurements.ActivityData;
 import domain.measurements.CarbonFootprint;
+import domain.measurements.unit.Unit;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -75,7 +76,7 @@ public class Organization {
   }
 
 
-  public CarbonFootprint getTotalCarbonFootprint(String someUnit) {
+  public CarbonFootprint getTotalCarbonFootprint(Unit someUnit) {
     List<CarbonFootprint> cfList= new ArrayList<CarbonFootprint>();
 
     cfList.addAll(this.getActivitiesDataCF(someUnit));
@@ -84,7 +85,7 @@ public class Organization {
     return CarbonFootprint.sum(someUnit, cfList.toArray(new CarbonFootprint[0]));
   }
 
-  private List<CarbonFootprint> getMemberCF(String someUnit) {
+  private List<CarbonFootprint> getMemberCF(Unit someUnit) {
 
     Set<Journey> journeys = this.getSectorList()
         .stream()
@@ -97,7 +98,7 @@ public class Organization {
         .collect(Collectors.toList());
   }
 
-  public List<CarbonFootprint> getActivitiesDataCF(String someUnit) {
+  public List<CarbonFootprint> getActivitiesDataCF(Unit someUnit) {
     return this.activitiesData
         .stream()
         .map(ad -> ad.getCarbonFootprint(someUnit))
