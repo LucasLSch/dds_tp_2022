@@ -6,7 +6,6 @@ import domain.location.Location;
 import domain.measurements.ActivityData;
 import domain.measurements.CarbonFootprint;
 import domain.measurements.unit.UnitExpression;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -88,7 +87,7 @@ public class Journey {
         .toArray(CarbonFootprint[]::new));
   }
 
-  public List<ActivityData> getDataActivities(){
+  public List<ActivityData> getDataActivities() {
     return this.legList.stream()
         .map(Leg::createDataActivities)
         .collect(Collectors.toList());

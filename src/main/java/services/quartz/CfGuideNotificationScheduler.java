@@ -1,13 +1,18 @@
-package services.scheduler_notif;
-
-import org.quartz.*;
-import org.quartz.impl.StdSchedulerFactory;
+package services.quartz;
 
 import static org.quartz.JobBuilder.newJob;
 
+import org.quartz.JobDetail;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.SimpleScheduleBuilder;
+import org.quartz.Trigger;
+import org.quartz.TriggerBuilder;
+import org.quartz.impl.StdSchedulerFactory;
+
 public class CfGuideNotificationScheduler {
 
-  public static void main(String[] args){
+  public static void main(String[] args) {
 
     Scheduler scheduler = null;
 

@@ -1,11 +1,10 @@
 package domain.measurements;
 
 import domain.measurements.unit.UnitExpression;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDate;
 
 @AllArgsConstructor
 @Getter

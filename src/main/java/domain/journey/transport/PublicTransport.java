@@ -11,6 +11,7 @@ public class PublicTransport extends Transport {
   private Stop startStop;
   private Stop endStop;
   private Integer consumption;
+
   @Override
   public Boolean isShareable() {
     return false;

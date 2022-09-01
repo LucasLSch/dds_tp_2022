@@ -7,6 +7,7 @@ public class EcoFriendly extends Transport {
 
   private EcoFriendlyType efType;
   private Integer consumption;
+
   @Override
   public Integer getConsumptionPerKm() {
     return consumption;

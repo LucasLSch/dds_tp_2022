@@ -3,7 +3,6 @@ package domain.journey.transport;
 import domain.exceptions.IncompleteLineException;
 import domain.exceptions.InvalidStopForLineException;
 import domain.location.Distance;
-
 import java.util.List;
 
 public class Line {
@@ -11,7 +10,6 @@ public class Line {
   private List<Stop> stopList;
   private String name;
   private PublicTransportType pptype;
-
 
   public Line(List<Stop> someStopList, String someName, PublicTransportType someType) {
     this.stopList = someStopList;

@@ -3,7 +3,6 @@ package domain.organization;
 import domain.journey.Journey;
 import domain.measurements.CarbonFootprint;
 import domain.measurements.unit.UnitExpression;
-
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,7 +24,8 @@ public class Sector {
     this.organization = organization;
     this.members = new HashSet<>();
   }
-  public Integer membersAmount(){
+
+  public Integer membersAmount() {
     return members.size();
   }
 
@@ -48,12 +48,12 @@ public class Sector {
     return this.members;
   }
 
-  public CarbonFootprint getAvgCFPerMember(UnitExpression someUnitExpression) {
+  public CarbonFootprint getAvgCfPerMember(UnitExpression someUnitExpression) {
     CarbonFootprint sectorCF = getSectorCF(someUnitExpression);
     return new CarbonFootprint(
-        sectorCF.getValue()/this.membersAmount()
-        , someUnitExpression
-        , LocalDate.now());
+        sectorCF.getValue() / this.membersAmount(),
+        someUnitExpression,
+        LocalDate.now());
   }
 
   public Set<Journey> getMembersJourneys() {

@@ -1,4 +1,4 @@
-package services.scheduler_notif;
+package services.quartz;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -7,7 +7,7 @@ import repositories.OrganizationRepo;
 
 public class CfGuideNotificationJob implements Job {
 
-  private String GuideLink = "ToBeDefined";
+  private String guideLink = "ToBeDefined";
 
   @Override
   public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
@@ -19,7 +19,7 @@ public class CfGuideNotificationJob implements Job {
 
   private String getFinalMessage() {
     return
-        "Click the link to access the carbon footprint recommendations guide!: " + this.GuideLink;
+        "Click the link to access the carbon footprint recommendations guide!: " + this.guideLink;
   }
 
 }

@@ -4,12 +4,11 @@ import domain.contact.Contact;
 import domain.journey.Journey;
 import domain.measurements.CarbonFootprint;
 import domain.measurements.unit.UnitExpression;
-import lombok.Getter;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lombok.Getter;
 
 public class Member {
 
@@ -89,7 +88,9 @@ public class Member {
   public CarbonFootprint getPersonalCF(UnitExpression someUnitExpression) {
     return CarbonFootprint.sum(someUnitExpression, this.journeyList
         .stream()
-        .map(journey -> journey.getCarbonFootprint(someUnitExpression)).toArray(CarbonFootprint[]::new));
+        .map(journey -> journey
+            .getCarbonFootprint(someUnitExpression))
+            .toArray(CarbonFootprint[]::new));
   }
 
 }

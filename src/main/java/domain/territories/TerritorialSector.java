@@ -1,7 +1,6 @@
 package domain.territories;
 
 import domain.organization.Organization;
-
 import java.util.Collections;
 import java.util.Set;
 

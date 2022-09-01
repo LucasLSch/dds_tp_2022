@@ -1,9 +1,8 @@
 package domain.location;
 
+import java.io.IOException;
 import lombok.AllArgsConstructor;
 import services.georef.GeoRefAdapter;
-
-import java.io.IOException;
 
 @AllArgsConstructor
 public class Location {

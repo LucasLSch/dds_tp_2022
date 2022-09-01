@@ -6,15 +6,13 @@ import domain.location.Location;
 import domain.measurements.ActivityData;
 import domain.measurements.CarbonFootprint;
 import domain.measurements.unit.UnitExpression;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
@@ -72,12 +70,12 @@ public class Organization {
   }
 
   public void notifyAllMembers(String someMessage) {
-      this.getMembers().forEach(member -> member.notify(someMessage));
+    this.getMembers().forEach(member -> member.notify(someMessage));
   }
 
 
   public CarbonFootprint getTotalCarbonFootprint(UnitExpression someUnitExpression) {
-    List<CarbonFootprint> cfList= new ArrayList<CarbonFootprint>();
+    List<CarbonFootprint> cfList = new ArrayList<CarbonFootprint>();
 
     cfList.addAll(this.getActivitiesDataCF(someUnitExpression));
     cfList.addAll(this.getMemberCF(someUnitExpression));

@@ -17,7 +17,9 @@ public class EmissionFactor {
     if (this.unit.equals(consumptionType.getUnitExpression())) {
       this.consumptionTypeAsociated = consumptionType;
       consumptionType.setEmissionFactor(this);
-    } else throw new InvalidUnitException();
+    } else {
+      throw new InvalidUnitException();
+    }
   }
 
 }

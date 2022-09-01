@@ -3,10 +3,9 @@ package domain.journey.transport;
 import domain.location.Distance;
 import domain.location.Location;
 import domain.measurements.ConsumptionType;
+import java.io.IOException;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.io.IOException;
 
 public abstract class Transport {
 

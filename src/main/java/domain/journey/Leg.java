@@ -6,11 +6,10 @@ import domain.location.Location;
 import domain.measurements.ActivityData;
 import domain.measurements.ConsumptionType;
 import domain.measurements.PeriodicityFormat;
-import lombok.AllArgsConstructor;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class Leg {
@@ -52,6 +51,7 @@ public class Leg {
         PeriodicityFormat.MMAAAA,
         LocalDate.now().format(DateTimeFormatter.ofPattern("MM/yyyy")));
   }
+
   public Boolean transportIsShareable() {
     return transport.isShareable();
   }
