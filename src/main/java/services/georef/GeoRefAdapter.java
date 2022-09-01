@@ -2,11 +2,12 @@ package services.georef;
 
 import domain.location.Distance;
 import domain.location.Location;
-import java.io.IOException;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import java.io.IOException;
 
 public class GeoRefAdapter {
 

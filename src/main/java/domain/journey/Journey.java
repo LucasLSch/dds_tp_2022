@@ -5,7 +5,7 @@ import domain.location.Distance;
 import domain.location.Location;
 import domain.measurements.ActivityData;
 import domain.measurements.CarbonFootprint;
-import domain.measurements.unit.Unit;
+import domain.measurements.unit.UnitExpression;
 
 import java.io.IOException;
 import java.util.List;
@@ -81,10 +81,10 @@ public class Journey {
     this.legList.add(someLeg);
   }
 
-  public CarbonFootprint getCarbonFootprint(Unit someUnit) {
-    return CarbonFootprint.sum(someUnit, this.getDataActivities()
+  public CarbonFootprint getCarbonFootprint(UnitExpression someUnitExpression) {
+    return CarbonFootprint.sum(someUnitExpression, this.getDataActivities()
         .stream()
-        .map(da -> da.getCarbonFootprint(someUnit))
+        .map(da -> da.getCarbonFootprint(someUnitExpression))
         .toArray(CarbonFootprint[]::new));
   }
 

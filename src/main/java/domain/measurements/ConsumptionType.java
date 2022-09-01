@@ -1,6 +1,6 @@
 package domain.measurements;
 
-import domain.measurements.unit.Unit;
+import domain.measurements.unit.UnitExpression;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -9,13 +9,13 @@ import lombok.Getter;
 public class ConsumptionType {
 
   private String name;
-  private Unit unit;
+  private UnitExpression unitExpression;
   private String activity;
   private String scope;
   private EmissionFactor emissionFactor;
 
-  public Unit getUnit() {
-    return this.unit;
+  public UnitExpression getUnitExpression() {
+    return this.unitExpression;
   }
 
   public void setEmissionFactor(EmissionFactor someEF) {

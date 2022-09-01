@@ -8,22 +8,22 @@ import java.util.stream.Collectors;
 
 @Getter
 @AllArgsConstructor
-public class Unit {
+public class UnitExpression {
 
     private Set<SimpleUnit> proportionalUnits;
     private Set<SimpleUnit> invProportionalUnits;
 
     // At the time, this method only allows simple unit convertions (same base units)
-    public Boolean isConvertibleTo(Unit someUnit) {
-        return getBaseUnits(this.proportionalUnits) == getBaseUnits(someUnit.getProportionalUnits())
-            && getBaseUnits(this.invProportionalUnits) == getBaseUnits(someUnit.getInvProportionalUnits());
+    public Boolean isConvertibleTo(UnitExpression someUnitExpression) {
+        return getBaseUnits(this.proportionalUnits) == getBaseUnits(someUnitExpression.getProportionalUnits())
+            && getBaseUnits(this.invProportionalUnits) == getBaseUnits(someUnitExpression.getInvProportionalUnits());
     }
 
-    public Integer getExponentForConvertionTo(Unit someUnit) {
+    public Integer getExponentForConvertionTo(UnitExpression someUnitExpression) {
         return getExponentSum(this.proportionalUnits)
-            -  getExponentSum(someUnit.getProportionalUnits())
+            -  getExponentSum(someUnitExpression.getProportionalUnits())
             -  getExponentSum(this.invProportionalUnits)
-            +  getExponentSum(someUnit.getInvProportionalUnits());
+            +  getExponentSum(someUnitExpression.getInvProportionalUnits());
     }
 
     public static Set<BaseUnit> getBaseUnits(Set<SimpleUnit> someSimpleUnits) {

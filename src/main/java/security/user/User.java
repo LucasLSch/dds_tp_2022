@@ -1,7 +1,8 @@
 package security.user;
 
-import java.io.IOException;
 import security.passwordvalidator.PasswordValidator;
+
+import java.io.IOException;
 
 public abstract class User {
 

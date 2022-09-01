@@ -1,6 +1,6 @@
 package domain.measurements;
 
-import domain.measurements.unit.Unit;
+import domain.measurements.unit.UnitExpression;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,9 +21,9 @@ public class ActivityData {
     return this.periodicityFormat.getDate(this.periodicity);
   }
 
-  public CarbonFootprint getCarbonFootprint(Unit someUnit) {
+  public CarbonFootprint getCarbonFootprint(UnitExpression someUnitExpression) {
     Double value = this.getConsumptionValue() * this.getConsumptionType().getEmissionFactorValue();
-    Unit unit = this.consumptionType.getUnit();
-    return new CarbonFootprint(value, unit, null).getOn(someUnit);
+    UnitExpression unitExpression = this.consumptionType.getUnitExpression();
+    return new CarbonFootprint(value, unitExpression, null).getOn(someUnitExpression);
   }
 }

@@ -14,7 +14,7 @@ public class EmissionFactor {
 
   // Pensar si es acorde que se auto setee en el tipo de consumo en el momento que se crea el FE.
   private void linkTo(ConsumptionType consumptionType) {
-    if (this.unit.equals(consumptionType.getUnit())) {
+    if (this.unit.equals(consumptionType.getUnitExpression())) {
       this.consumptionTypeAsociated = consumptionType;
       consumptionType.setEmissionFactor(this);
     } else throw new InvalidUnitException();
