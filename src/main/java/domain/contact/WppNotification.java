@@ -22,7 +22,7 @@ public class WppNotification implements NotificationMethod {
     Message message = Message.creator(
             new com.twilio.type.PhoneNumber(getAddressee(someContact)),
             new com.twilio.type.PhoneNumber(FROM_WPP),
-            getGuideMessage())
+            someMessage)
         .create();
 
     System.out.println(message.getSid());
@@ -30,10 +30,6 @@ public class WppNotification implements NotificationMethod {
 
   public static String getAddressee(Contact someContact) {
     return "whatsapp:" + someContact.getPhone();
-  }
-
-  public static String getGuideMessage() {
-    return "Aca va el mensaje que se le manda, con el link de la guia sobre huellas de carbono";
   }
 
 }
