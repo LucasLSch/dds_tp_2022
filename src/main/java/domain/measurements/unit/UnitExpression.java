@@ -9,20 +9,20 @@ import lombok.Getter;
 @AllArgsConstructor
 public class UnitExpression {
 
-  private Set<SimpleUnit> proportionalUnits;
-  private Set<SimpleUnit> invProportionalUnits;
+  private Set<SimpleUnit> propUnits;
+  private Set<SimpleUnit> invPropUnits;
 
   // At the time, this method only allows simple unit convertions (same base units)
   public Boolean isConvertibleTo(UnitExpression someUE) {
-    return getBaseUnits(proportionalUnits) == getBaseUnits(someUE.getProportionalUnits())
-        && getBaseUnits(invProportionalUnits) == getBaseUnits(someUE.getInvProportionalUnits());
+    return getBaseUnits(propUnits).equals(getBaseUnits(someUE.getPropUnits()))
+            && getBaseUnits(invPropUnits).equals(getBaseUnits(someUE.getInvPropUnits()));
   }
 
   public Integer getExpForConvertionTo(UnitExpression someUnitExpression) {
-    return getExponentSum(proportionalUnits)
-        -  getExponentSum(someUnitExpression.getProportionalUnits())
-        -  getExponentSum(invProportionalUnits)
-        +  getExponentSum(someUnitExpression.getInvProportionalUnits());
+    return getExponentSum(propUnits)
+        -  getExponentSum(someUnitExpression.getPropUnits())
+        -  getExponentSum(invPropUnits)
+        +  getExponentSum(someUnitExpression.getInvPropUnits());
   }
 
   public static Set<BaseUnit> getBaseUnits(Set<SimpleUnit> someSimpleUnits) {

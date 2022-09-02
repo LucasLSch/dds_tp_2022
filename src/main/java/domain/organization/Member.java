@@ -1,6 +1,8 @@
 package domain.organization;
 
 import domain.contact.Contact;
+import domain.exceptions.NotSameOrganizationException;
+import domain.exceptions.NotShareableJourneyException;
 import domain.journey.Journey;
 import domain.measurements.CarbonFootprint;
 import domain.measurements.unit.UnitExpression;
@@ -15,7 +17,6 @@ public class Member {
 
   private Set<Sector> sectorList;
   private List<Journey> journeyList;
-
   private String name;
   private String lastName;
   private DocType docType;
@@ -46,13 +47,13 @@ public class Member {
   public void addSharedJourney(Journey someJourney, Member someMember) {
     try {
       this.memberOrgValidation(someMember);
-    } catch (RuntimeException exception) {
+    } catch (NotSameOrganizationException exception) {
       System.out.println("WARN: Members does not work for the same Organization");
       return;
     }
     try {
       someJourney.isJourneyShareable();
-    } catch (RuntimeException exception) {
+    } catch (NotShareableJourneyException exception) {
       System.out.println("WARN: Journey has Legs that are not shareable");
       return;
     }
@@ -62,7 +63,7 @@ public class Member {
 
   public void memberOrgValidation(Member someMember) {
     if (!this.memberSharesOrg(someMember)) {
-      throw new RuntimeException("Members do not share org.");
+      throw new NotSameOrganizationException();
     }
   }
 

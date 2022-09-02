@@ -1,6 +1,7 @@
 package domain.journey;
 
 import domain.exceptions.EmptyJourneyException;
+import domain.exceptions.NotShareableJourneyException;
 import domain.location.Distance;
 import domain.location.Location;
 import domain.measurements.ActivityData;
@@ -40,7 +41,7 @@ public class Journey {
 
   public void isJourneyShareable() {
     if (!legList.stream().allMatch(Leg::transportIsShareable)) {
-      throw new RuntimeException("Journey is not shareable");
+      throw new NotShareableJourneyException();
     }
   }
 
