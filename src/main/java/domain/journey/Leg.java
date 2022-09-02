@@ -10,8 +10,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public class Leg {
 
   private Location start;
@@ -23,14 +25,6 @@ public class Leg {
     this.start = someStartLocation;
     this.end = someEndLocation;
     this.transport = someTransport;
-  }
-
-  public Location getStart() {
-    return this.start;
-  }
-
-  public Location getEnd() {
-    return this.end;
   }
 
   public void setOrderInList(Integer orderInList) {

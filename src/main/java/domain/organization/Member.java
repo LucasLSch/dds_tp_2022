@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Set;
 import lombok.Getter;
 
+@Getter
 public class Member {
 
   private Set<Sector> sectorList;
-  @Getter
   private List<Journey> journeyList;
 
   private String name;

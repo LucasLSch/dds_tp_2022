@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
 @Getter
 public class Organization {
 
@@ -23,7 +22,7 @@ public class Organization {
   private Location location;
   private String clasification;
   private OrgType orgType;
-  private List<ActivityData> activitiesData = new ArrayList<>();
+  private List<ActivityData> activitiesData;
 
   public Organization(String socObj, Location locat, String clasific, OrgType orgType) {
     this.socialObjective = socObj;
@@ -31,6 +30,7 @@ public class Organization {
     this.clasification = clasific;
     this.orgType = orgType;
     this.sectorList = new HashSet<>();
+    this.activitiesData = new ArrayList<>();
   }
 
   public void registerSector(Sector someSector) {

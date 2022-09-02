@@ -6,15 +6,17 @@ import domain.location.Location;
 import domain.measurements.ActivityData;
 import domain.measurements.CarbonFootprint;
 import domain.measurements.unit.UnitExpression;
+import lombok.Getter;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
 public class Journey {
 
   private Location start;
   private Location end;
-
   private List<Leg> legList;
 
   public Journey(List<Leg> someLegList) {

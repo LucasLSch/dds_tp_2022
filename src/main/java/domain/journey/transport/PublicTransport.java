@@ -3,12 +3,16 @@ package domain.journey.transport;
 import domain.location.Distance;
 import domain.location.Location;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
 public class PublicTransport extends Transport {
 
+  @Getter
   private Line line;
+  @Getter
   private Stop startStop;
+  @Getter
   private Stop endStop;
   private Integer consumption;
 

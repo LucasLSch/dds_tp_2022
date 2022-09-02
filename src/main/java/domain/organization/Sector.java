@@ -3,19 +3,17 @@ package domain.organization;
 import domain.journey.Journey;
 import domain.measurements.CarbonFootprint;
 import domain.measurements.unit.UnitExpression;
+import lombok.Getter;
+
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Getter
 public class Sector {
 
   private String sectorName;
-
-  public Organization getOrganization() {
-    return organization;
-  }
-
   private Organization organization;
   private Set<Member> members;
 
