@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class OrganizationTest {
+public class OrganizationTest extends TestDataFill {
   private Organization dummyOrganization;
   private Location dummyLocation;
   private Sector dummySector;
@@ -63,6 +63,6 @@ public class OrganizationTest {
 
     dummyMember.addSharedJourney(dummyJourney, anotherDummyMember);
 
-    assertTrue(dummyMember.getJourneyList().equals(anotherDummyMember.getJourneyList()));
+    assertTrue(dummyMember.getJourneys().equals(anotherDummyMember.getJourneys()));
   }
 }

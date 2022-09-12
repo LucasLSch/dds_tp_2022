@@ -2,19 +2,21 @@ package domain.journey.transport;
 
 import domain.location.Distance;
 import domain.location.Location;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
+@Getter
 public class PublicTransport extends Transport {
 
-  @Getter
   private Line line;
-  @Getter
-  private Stop startStop;
-  @Getter
-  private Stop endStop;
-  private Integer consumption;
+  private Stop startingStop;
+  private Stop endingStop;
+
+  public PublicTransport(Double fuelConsumptionPerKm, Line line, Stop startingStop, Stop endingStop) {
+    super(fuelConsumptionPerKm);
+    this.line = line;
+    this.startingStop = startingStop;
+    this.endingStop = endingStop;
+  }
 
   @Override
   public Boolean isShareable() {
@@ -25,11 +27,7 @@ public class PublicTransport extends Transport {
   public Distance getDistance(Location start, Location end) {
     //TODO validate startStop has startLocation
     //TODO validate endStop has endLocation
-    return line.getDistanceBetween(this.startStop, this.endStop);
+    return line.getDistanceBetween(this.startingStop, this.endingStop);
   }
 
-  @Override
-  public Integer getConsumptionPerKm() {
-    return consumption;
-  }
 }

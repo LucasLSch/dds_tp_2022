@@ -12,7 +12,7 @@ import lombok.Setter;
 public class ActivityData {
 
   private ConsumptionType consumptionType;
-  private Integer consumptionValue;
+  private Double consumptionValue;
   private PeriodicityFormat periodicityFormat;
   private String periodicity;
 

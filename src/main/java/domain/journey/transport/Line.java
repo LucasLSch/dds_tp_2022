@@ -9,14 +9,14 @@ public class Line {
 
   private List<Stop> stopList;
   private String name;
-  private PublicTransportType pptype;
+  private PublicTransportType type;
 
   public Line(List<Stop> someStopList, String someName, PublicTransportType someType) {
     this.stopList = someStopList;
     this.registerStops();
     this.validateStops();
     this.name = someName;
-    this.pptype = someType;
+    this.type = someType;
   }
 
   public void registerStops() {

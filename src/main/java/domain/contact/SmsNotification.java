@@ -3,7 +3,7 @@ package domain.contact;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 
-public class SmsNotificationMethod implements NotificationMethod {
+public class SmsNotification implements NotificationMethod {
 
   // Ejemplo con Twilio. Cada mensaje cuesta 1 dolar.
   // Asi que borro mis credenciales por temas obvios :D
@@ -17,7 +17,7 @@ public class SmsNotificationMethod implements NotificationMethod {
   public void notify(Contact someContact, String someMessage) {
     Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
     Message message = Message.creator(
-            new com.twilio.type.PhoneNumber(someContact.getPhone()),
+            new com.twilio.type.PhoneNumber(someContact.getPhoneNumber()),
             FROM_SMS,
             someMessage)
         .create();

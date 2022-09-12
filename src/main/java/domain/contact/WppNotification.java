@@ -26,7 +26,7 @@ public class WppNotification implements NotificationMethod {
   }
 
   public static String getAddressee(Contact someContact) {
-    return "whatsapp:" + someContact.getPhone();
+    return "whatsapp:" + someContact.getPhoneNumber();
   }
 
 }

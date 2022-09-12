@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 @Getter
 public class Sector {
 
-  private String sectorName;
+  private String name;
   private Organization organization;
   private Set<Member> members;
 
   public Sector(String sectorName, Organization organization) {
-    this.sectorName = sectorName;
+    this.name = sectorName;
     this.organization = organization;
     this.members = new HashSet<>();
   }
@@ -27,8 +27,8 @@ public class Sector {
     return members.size();
   }
 
-  public String getSectorName() {
-    return sectorName;
+  public String getName() {
+    return name;
   }
 
   public void registerMember(Member someMember) {
@@ -57,7 +57,7 @@ public class Sector {
   public Set<Journey> getMembersJourneys() {
     return this.getMembers()
         .stream()
-        .flatMap(member -> member.getJourneyList().stream())
+        .flatMap(member -> member.getJourneys().stream())
         .collect(Collectors.toSet());
   }
 

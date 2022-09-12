@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LineStopTest {
+public class LineStopTest extends TestDataFill {
   private Line dummyLine;
   private Stop firstDummyStop;
   private Stop secondDummyStop;

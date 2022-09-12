@@ -19,7 +19,7 @@ public class CarbonFootprint {
 
   public CarbonFootprint getOn(UnitExpression someUE) {
     if (this.unitExpression.isConvertibleTo(someUE)) {
-      this.value = value * Math.pow(10d, this.unitExpression.getExpForConvertionTo(someUE));
+      this.value = value * Math.pow(10f, this.unitExpression.getExpForConvertionTo(someUE));
       this.unitExpression = someUE;
     }
     return this;

@@ -4,12 +4,12 @@ import domain.organization.DocType;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class AgentSector {
+public class TerritorialSectorAgent {
 
   private String name;
-  private String lastName;
+  private String surname;
   private DocType docType;
-  private String document;
+  private String docNumber;
   private TerritorialSector territorialSector;
 
 }

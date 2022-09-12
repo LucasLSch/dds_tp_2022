@@ -1,20 +1,18 @@
 package domain.journey.transport;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
 public class ParticularVehicle extends Transport {
 
   @Getter
   private ParticularVehicleType type;
   @Getter
   private Fuel fuel;
-  private Integer consumption;
 
-  @Override
-  public Integer getConsumptionPerKm() {
-    return consumption;
+  public ParticularVehicle(Double fuelConsumptionPerKm, ParticularVehicleType type, Fuel fuel) {
+    super(fuelConsumptionPerKm);
+    this.type = type;
+    this.fuel = fuel;
   }
 
   @Override

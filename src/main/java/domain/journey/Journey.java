@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 @Getter
 public class Journey {
 
-  private Location start;
-  private Location end;
+  private Location startingLocation;
+  private Location endingLocation;
   private List<Leg> legList;
 
   public Journey(List<Leg> someLegList) {
@@ -31,12 +31,12 @@ public class Journey {
 
   private void updateStartLocation() {
     Leg firstLeg = this.legList.get(0);
-    this.start = firstLeg.getStart();
+    this.startingLocation = firstLeg.getStartingLocation();
   }
 
   private void updateEndLocation() {
     Leg lastLeg = this.legList.get(legList.size() - 1);
-    this.end = lastLeg.getEnd();
+    this.endingLocation = lastLeg.getEndingLocation();
   }
 
   public void isJourneyShareable() {

@@ -1,5 +1,6 @@
 package domain.organization;
 
+import domain.contact.Contact;
 import domain.exceptions.InvalidSectorForOrgException;
 import domain.journey.Journey;
 import domain.location.Location;
@@ -11,25 +12,26 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
+
 import lombok.Getter;
 
 @Getter
 public class Organization {
 
-  private Set<Sector> sectorList;
+  private Set<Sector> sectors;
   private String socialObjective;
   private Location location;
   private String clasification;
-  private OrgType orgType;
+  private OrgType type;
   private List<ActivityData> activitiesData;
+  private List<Contact> contacts;
 
-  public Organization(String socObj, Location locat, String clasific, OrgType orgType) {
+  public Organization(String socObj, Location locat, String clasific, OrgType type) {
     this.socialObjective = socObj;
     this.location = locat;
     this.clasification = clasific;
-    this.orgType = orgType;
-    this.sectorList = new HashSet<>();
+    this.type = type;
+    this.sectors = new HashSet<>();
     this.activitiesData = new ArrayList<>();
   }
 
@@ -40,18 +42,18 @@ public class Organization {
       System.out.println("WARN: Sector does not belong to this Organization");
       return;
     }
-    this.sectorList.add(someSector);
+    this.sectors.add(someSector);
   }
 
   //Posiblemente cambie cuando haya mas validaciones
   private void validateSector(Sector someSector) {
     if (!someSector.belongsTo(this)) {
-      throw new InvalidSectorForOrgException(someSector.getSectorName(), this.socialObjective);
+      throw new InvalidSectorForOrgException(someSector.getName(), this.socialObjective);
     }
   }
 
   public Boolean sectorIsRegistered(Sector someSector) {
-    return this.sectorList.contains(someSector);
+    return this.sectors.contains(someSector);
   }
 
   public Boolean approvesMember(Member member, Sector sector) {
@@ -59,7 +61,7 @@ public class Organization {
   }
 
   public Set<Member> getMembers() {
-    return this.sectorList
+    return this.sectors
         .stream()
         .flatMap(sector -> sector.getMembers().stream())
         .collect(Collectors.toSet());
@@ -85,7 +87,7 @@ public class Organization {
 
   private List<CarbonFootprint> getMemberCF(UnitExpression someUnitExpression) {
 
-    Set<Journey> journeys = this.getSectorList()
+    Set<Journey> journeys = this.getSectors()
         .stream()
         .flatMap(sector -> sector.getMembersJourneys().stream())
         .collect(Collectors.toSet());
@@ -101,6 +103,10 @@ public class Organization {
         .stream()
         .map(ad -> ad.getCarbonFootprint(someUnitExpression))
         .collect(Collectors.toList());
+  }
+
+  public void notify(String someMessage) {
+    this.contacts.forEach( contact -> contact.notify(someMessage));
   }
 
 }

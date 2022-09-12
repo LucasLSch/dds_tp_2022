@@ -16,14 +16,14 @@ import lombok.Getter;
 @Getter
 public class Leg {
 
-  private Location start;
-  private Location end;
+  private Location startingLocation;
+  private Location endingLocation;
   private Transport transport;
   private Integer orderInList;
 
   public Leg(Location someStartLocation, Location someEndLocation, Transport someTransport) {
-    this.start = someStartLocation;
-    this.end = someEndLocation;
+    this.startingLocation = someStartLocation;
+    this.endingLocation = someEndLocation;
     this.transport = someTransport;
   }
 
@@ -32,9 +32,9 @@ public class Leg {
   }
 
   public ActivityData createDataActivities() {
-    Integer consumption = null;
+    Double consumption = null;
     try {
-      consumption = this.transport.getConsumption(this.start, this.end);
+      consumption = this.transport.getConsumption(this.startingLocation, this.endingLocation);
     } catch (IOException io) {
       System.out.println("IO ERROR");
       return null;
@@ -55,7 +55,7 @@ public class Leg {
   }
 
   public Distance getLegDistance() throws IOException {
-    return this.transport.getDistance(this.getStart(), this.getEnd());
+    return this.transport.getDistance(this.getStartingLocation(), this.getEndingLocation());
   }
 
 }

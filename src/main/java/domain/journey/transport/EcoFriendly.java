@@ -1,18 +1,20 @@
 package domain.journey.transport;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
 public class EcoFriendly extends Transport {
 
   @Getter
-  private EcoFriendlyType efType;
-  private Integer consumption;
+  private EcoFriendlyType type;
+
+  public EcoFriendly(EcoFriendlyType type) {
+    super(0d);
+    this.type = type;
+  }
 
   @Override
-  public Integer getConsumptionPerKm() {
-    return consumption;
+  public Double getFuelConsumptionPerKm() {
+    return 0d;
   }
 
   @Override

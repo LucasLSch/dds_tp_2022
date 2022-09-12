@@ -8,7 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class Contact {
 
-  private String phone;
+  private String phoneNumber;
   private String email;
   private List<NotificationMethod> notificationMethodList;
 

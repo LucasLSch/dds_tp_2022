@@ -15,21 +15,21 @@ import lombok.Getter;
 @Getter
 public class Member {
 
-  private Set<Sector> sectorList;
-  private List<Journey> journeyList;
+  private Set<Sector> sectors;
+  private List<Journey> journeys;
   private String name;
-  private String lastName;
+  private String surname;
   private DocType docType;
-  private String document;
+  private String docNumber;
   private Contact contact;
 
-  public Member(String name, String lastName, DocType docType, String document) {
+  public Member(String name, String surname, DocType docType, String document) {
     this.name = name;
-    this.lastName = lastName;
+    this.surname = surname;
     this.docType = docType;
-    this.document = document;
-    this.sectorList = new HashSet<>();
-    this.journeyList = new ArrayList<>();
+    this.docNumber = document;
+    this.sectors = new HashSet<>();
+    this.journeys = new ArrayList<>();
   }
 
   public void linkSector(Sector someSector) {
@@ -37,11 +37,11 @@ public class Member {
   }
 
   public void addSector(Sector someSector) {
-    this.sectorList.add(someSector);
+    this.sectors.add(someSector);
   }
 
   public void addJourney(Journey someJourney) {
-    this.journeyList.add(someJourney);
+    this.journeys.add(someJourney);
   }
 
   public void addSharedJourney(Journey someJourney, Member someMember) {
@@ -69,17 +69,17 @@ public class Member {
 
   public Boolean memberSharesOrg(Member someMember) {
     return this
-        .sectorList
+        .sectors
         .stream()
         .anyMatch(sector -> someMember.worksIn(sector.getOrganization()));
   }
 
   public Boolean worksIn(Sector someSector) {
-    return this.sectorList.contains(someSector);
+    return this.sectors.contains(someSector);
   }
 
   public Boolean worksIn(Organization someOrganization) {
-    return this.sectorList.stream().anyMatch(sector -> sector.belongsTo(someOrganization));
+    return this.sectors.stream().anyMatch(sector -> sector.belongsTo(someOrganization));
   }
 
   public void notify(String someMessage) {
@@ -87,7 +87,7 @@ public class Member {
   }
 
   public CarbonFootprint getPersonalCF(UnitExpression someUnitExpression) {
-    return CarbonFootprint.sum(someUnitExpression, this.journeyList
+    return CarbonFootprint.sum(someUnitExpression, this.journeys
         .stream()
         .map(journey -> journey
             .getCarbonFootprint(someUnitExpression))

@@ -7,24 +7,30 @@ import java.io.IOException;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 public abstract class Transport {
 
   //Desconozco de donde y como se obtiene el FE de los transportes
   //Por el momento lo dejo como un atributo del transporte
-  @Getter
-  @Setter
-  protected ConsumptionType consumptionType;
+  protected Double fuelConsumptionPerKm;
+
+  public Transport(double fuelConsumptionPerKm) {
+    this.fuelConsumptionPerKm = fuelConsumptionPerKm;
+  }
 
   public Distance getDistance(Location start, Location end) throws IOException {
     return start.getDistanceTo(end);
   }
 
-  public Integer getConsumption(Location start, Location end) throws IOException {
-    return this.getConsumptionPerKm() * this.getDistance(start, end).getValue();
+  public Double getConsumption(Location start, Location end) throws IOException {
+    return this.getFuelConsumptionPerKm() * this.getDistance(start, end).getValue();
   }
 
-  public abstract Integer getConsumptionPerKm();
-
   public abstract Boolean isShareable();
+
+  public ConsumptionType getConsumptionType() {
+    return null;
+  }
 
 }

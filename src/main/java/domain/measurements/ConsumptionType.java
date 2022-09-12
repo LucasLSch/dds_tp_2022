@@ -23,6 +23,6 @@ public class ConsumptionType {
   }
 
   public Double getEmissionFactorValue() {
-    return this.getEmissionFactor().getFactor();
+    return this.getEmissionFactor().getValue();
   }
 }

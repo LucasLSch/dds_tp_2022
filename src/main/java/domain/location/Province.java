@@ -10,6 +10,6 @@ public class Province {
 
   private Integer id;
   private String name;
-  private CountryResponse country;
+  private Country country;
 
 }

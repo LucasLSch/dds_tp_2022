@@ -6,7 +6,8 @@ import java.util.Set;
 
 public class TerritorialSector {
 
-  private Set<AgentSector> agents = Collections.emptySet();
+  private TerritorialSectorType type;
+  private Set<TerritorialSectorAgent> agents = Collections.emptySet();
   private Set<Organization> organizations = Collections.emptySet();
 
 }

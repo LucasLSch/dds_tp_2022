@@ -1,6 +1,6 @@
 package domain.territories;
 
-public enum TerritorialTypeSector {
+public enum TerritorialSectorType {
   STATE,
   CITY
 }
