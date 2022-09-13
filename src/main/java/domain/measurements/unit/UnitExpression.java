@@ -1,7 +1,10 @@
 package domain.measurements.unit;
 
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import com.twilio.twiml.voice.Sim;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -9,27 +12,42 @@ import lombok.Getter;
 @AllArgsConstructor
 public class UnitExpression {
 
-  private Set<SimpleUnit> propUnits;
-  private Set<SimpleUnit> invPropUnits;
+  private Set<SimpleUnit> simpleUnits;
 
-  // At the time, this method only allows simple unit convertions (same base units)
   public Boolean isConvertibleTo(UnitExpression someUE) {
-    return getBaseUnits(propUnits).equals(getBaseUnits(someUE.getPropUnits()))
-            && getBaseUnits(invPropUnits).equals(getBaseUnits(someUE.getInvPropUnits()));
+    return haveSameBaseUnits(this.getProportionalUnits(), someUE.getProportionalUnits())
+        && haveSameBaseUnits(this.getInvProportionalUnits(), someUE.getInvProportionalUnits());
   }
 
-  public Integer getExpForConvertionTo(UnitExpression someUnitExpression) {
-    return getExponentSum(propUnits)
-        -  getExponentSum(someUnitExpression.getPropUnits())
-        -  getExponentSum(invPropUnits)
-        +  getExponentSum(someUnitExpression.getInvPropUnits());
+  public Set<SimpleUnit> getFilteredUnitSet(Predicate<SimpleUnit> someCondition) {
+    return this.simpleUnits
+        .stream()
+        .filter(someCondition)
+        .collect(Collectors.toSet());
+  }
+
+  public Set<SimpleUnit> getProportionalUnits() {
+    return this.getFilteredUnitSet(SimpleUnit::isDirectlyProportional);
+  }
+
+  public Set<SimpleUnit> getInvProportionalUnits() {
+    return this.getFilteredUnitSet(simpleUnit -> !simpleUnit.isDirectlyProportional());
   }
 
   public static Set<BaseUnit> getBaseUnits(Set<SimpleUnit> someSimpleUnits) {
     return someSimpleUnits.stream().map(SimpleUnit::getBaseUnit).collect(Collectors.toSet());
   }
 
-  public static Integer getExponentSum(Set<SimpleUnit> someSimpleUnits) {
-    return someSimpleUnits.stream().mapToInt(SimpleUnit::getExponent).sum();
+  public static Boolean haveSameBaseUnits(Set<SimpleUnit> someUnits, Set<SimpleUnit> otherUnits) {
+    return getBaseUnits(someUnits).equals(getBaseUnits(otherUnits));
   }
+
+  public Integer getExponentSum() {
+    return this.simpleUnits.stream().mapToInt(SimpleUnit::getSignedExponent).sum();
+  }
+
+  public Integer getExpForConvertionTo(UnitExpression someUnitExpression) {
+    return this.getExponentSum() - someUnitExpression.getExponentSum();
+  }
+
 }
