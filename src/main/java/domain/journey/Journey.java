@@ -7,6 +7,7 @@ import domain.location.Location;
 import domain.measurements.ActivityData;
 import domain.measurements.CarbonFootprint;
 import domain.measurements.unit.UnitExpression;
+import domain.organization.Organization;
 import lombok.Getter;
 
 import java.io.IOException;
@@ -94,5 +95,10 @@ public class Journey {
     return this.legList.stream()
         .map(Leg::createDataActivities)
         .collect(Collectors.toList());
+  }
+
+  public Boolean isJourneyFrom(Organization someOrganization) {
+    return this.startingLocation.equals(someOrganization.getLocation())
+        || this.endingLocation.equals(someOrganization.getLocation());
   }
 }

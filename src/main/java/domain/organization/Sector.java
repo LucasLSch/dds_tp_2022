@@ -58,6 +58,7 @@ public class Sector {
     return this.getMembers()
         .stream()
         .flatMap(member -> member.getJourneys().stream())
+        .filter(journey -> journey.isJourneyFrom(this.organization))
         .collect(Collectors.toSet());
   }
 
