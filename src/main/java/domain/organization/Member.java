@@ -21,7 +21,7 @@ public class Member {
   private String surname;
   private DocType docType;
   private String docNumber;
-  private Contact contact;
+  private List<Contact> contacts;
 
   public Member(String name, String surname, DocType docType, String document) {
     this.name = name;
@@ -83,7 +83,7 @@ public class Member {
   }
 
   public void notify(String someMessage) {
-    this.contact.notify(someMessage);
+    this.contacts.forEach(contact -> contact.notify(someMessage));
   }
 
   public CarbonFootprint getPersonalCF(UnitExpression someUnitExpression) {

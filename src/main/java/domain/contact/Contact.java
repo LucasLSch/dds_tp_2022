@@ -1,6 +1,5 @@
 package domain.contact;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -10,10 +9,10 @@ public class Contact {
 
   private String phoneNumber;
   private String email;
-  private List<NotificationMethod> notificationMethodList;
+  private NotificationMethod method;
 
   public void notify(String someMessage) {
-    this.notificationMethodList.forEach(method -> method.notify(this, someMessage));
+    this.method.notify(this, someMessage);
   }
 
 }
