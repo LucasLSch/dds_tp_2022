@@ -46,7 +46,7 @@ public class Leg {
         LocalDate.now().format(DateTimeFormatter.ofPattern("MM/yyyy")));
   }
 
-  public Boolean transportIsShareable() {
+  public Boolean isShareable() {
     return transport.isShareable();
   }
 

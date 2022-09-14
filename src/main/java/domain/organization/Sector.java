@@ -7,6 +7,7 @@ import lombok.Getter;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -27,12 +28,12 @@ public class Sector {
     return members.size();
   }
 
-  public String getName() {
-    return name;
+  public Boolean hasMember(Member someMember) {
+    return this.members.contains(someMember);
   }
 
   public void registerMember(Member someMember) {
-    if (this.organization.approvesMember(someMember, this)) {
+    if (!this.hasMember(someMember) && this.organization.approvesMember(someMember, this)) {
       this.members.add(someMember);
       someMember.addSector(this);
     }
@@ -40,10 +41,6 @@ public class Sector {
 
   public Boolean belongsTo(Organization organization) {
     return this.organization.equals(organization);
-  }
-
-  public Set<Member> getMembers() {
-    return this.members;
   }
 
   public CarbonFootprint getAvgCfPerMember(UnitExpression someUnitExpression) {
@@ -54,12 +51,12 @@ public class Sector {
         LocalDate.now());
   }
 
-  public Set<Journey> getMembersJourneys() {
+  public List<Journey> getMembersJourneys() {
     return this.getMembers()
         .stream()
         .flatMap(member -> member.getJourneys().stream())
-        .filter(journey -> journey.isJourneyFrom(this.organization))
-        .collect(Collectors.toSet());
+        .filter(journey -> journey.involvesOrganization(this.organization))
+        .collect(Collectors.toList());
   }
 
   public CarbonFootprint getSectorCF(UnitExpression someUnitExpression) {

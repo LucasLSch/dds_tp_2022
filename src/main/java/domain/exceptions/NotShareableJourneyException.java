@@ -2,7 +2,7 @@ package domain.exceptions;
 
 public class NotShareableJourneyException extends RuntimeException {
 
-    private static String errorMessage = "Journey not shareable";
+    private static String errorMessage = "Specified journey is not shareable";
 
     public NotShareableJourneyException() { super(errorMessage); }
 }

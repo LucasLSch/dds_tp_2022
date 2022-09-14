@@ -1,8 +1,7 @@
 package domain.organization;
 
 import domain.contact.Contact;
-import domain.exceptions.NotSameOrganizationException;
-import domain.exceptions.NotShareableJourneyException;
+import domain.exceptions.NotJourneyOwnerException;
 import domain.journey.Journey;
 import domain.measurements.CarbonFootprint;
 import domain.measurements.unit.UnitExpression;
@@ -10,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+
 import lombok.Getter;
 
 @Getter
@@ -32,46 +33,21 @@ public class Member {
     this.journeys = new ArrayList<>();
   }
 
-  public void linkSector(Sector someSector) {
+  public void applyToSector(Sector someSector) {
     someSector.registerMember(this);
   }
 
   public void addSector(Sector someSector) {
-    this.sectors.add(someSector);
-  }
-
-  public void addJourney(Journey someJourney) {
-    this.journeys.add(someJourney);
-  }
-
-  public void addSharedJourney(Journey someJourney, Member someMember) {
-    try {
-      this.memberOrgValidation(someMember);
-    } catch (NotSameOrganizationException exception) {
-      System.out.println("WARN: Members does not work for the same Organization");
-      return;
-    }
-    try {
-      someJourney.isJourneyShareable();
-    } catch (NotShareableJourneyException exception) {
-      System.out.println("WARN: Journey has Legs that are not shareable");
-      return;
-    }
-    this.addJourney(someJourney);
-    someMember.addJourney(someJourney);
-  }
-
-  public void memberOrgValidation(Member someMember) {
-    if (!this.memberSharesOrg(someMember)) {
-      throw new NotSameOrganizationException();
+    if(someSector.hasMember(this)) {
+      this.sectors.add(someSector);
     }
   }
 
-  public Boolean memberSharesOrg(Member someMember) {
-    return this
-        .sectors
+  public Set<Organization> getOrganizations() {
+    return this.sectors
         .stream()
-        .anyMatch(sector -> someMember.worksIn(sector.getOrganization()));
+        .map(Sector::getOrganization)
+        .collect(Collectors.toSet());
   }
 
   public Boolean worksIn(Sector someSector) {
@@ -79,11 +55,34 @@ public class Member {
   }
 
   public Boolean worksIn(Organization someOrganization) {
-    return this.sectors.stream().anyMatch(sector -> sector.belongsTo(someOrganization));
+    return this.getOrganizations().contains(someOrganization);
   }
 
-  public void notify(String someMessage) {
-    this.contacts.forEach(contact -> contact.notify(someMessage));
+  public Boolean hasJourney(Journey someJourney) {
+    return this.journeys.contains(someJourney);
+  }
+
+  public void addJourney(Journey someJourney) {
+    if (!this.hasJourney(someJourney)) {
+      this.journeys.add(someJourney);
+      someJourney.addMember(this);
+    }
+  }
+
+  public void shareJourneyWith(Journey someJourney, Member someMember) {
+    try {
+      this.validateJourneyPossession(someJourney);
+    } catch (NotJourneyOwnerException exception) {
+      System.out.println("WARN: You can not a journey you do not own!");
+      return;
+    }
+    someJourney.beSharedWith(someMember);
+  }
+
+  public void validateJourneyPossession(Journey someJourney) {
+    if (!this.hasJourney(someJourney)) {
+      throw new NotJourneyOwnerException();
+    }
   }
 
   public CarbonFootprint getPersonalCF(UnitExpression someUnitExpression) {
@@ -92,6 +91,10 @@ public class Member {
         .map(journey -> journey
             .getCarbonFootprint(someUnitExpression))
             .toArray(CarbonFootprint[]::new));
+  }
+
+  public void notify(String someMessage) {
+    this.contacts.forEach(contact -> contact.notify(someMessage));
   }
 
 }

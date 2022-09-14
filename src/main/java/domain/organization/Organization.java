@@ -2,7 +2,6 @@ package domain.organization;
 
 import domain.contact.Contact;
 import domain.exceptions.InvalidSectorForOrgException;
-import domain.journey.Journey;
 import domain.location.Location;
 import domain.measurements.ActivityData;
 import domain.measurements.CarbonFootprint;
@@ -86,14 +85,9 @@ public class Organization {
   }
 
   private List<CarbonFootprint> getMemberCF(UnitExpression someUnitExpression) {
-
-    Set<Journey> journeys = this.getSectors()
+    return this.getMembers()
         .stream()
-        .flatMap(sector -> sector.getMembersJourneys().stream())
-        .collect(Collectors.toSet());
-
-    return journeys
-        .stream()
+        .flatMap(member -> member.getJourneys().stream())
         .map(journey -> journey.getCarbonFootprint(someUnitExpression))
         .collect(Collectors.toList());
   }

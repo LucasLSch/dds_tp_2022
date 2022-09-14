@@ -40,7 +40,7 @@ public class OrganizationTest extends TestDataFill {
 
   @Test
   public void memberCorrectlyLinksToSector() {
-    dummyMember.linkSector(dummySector);
+    dummyMember.applyToSector(dummySector);
     assertTrue(dummyMember.worksIn(dummyOrganization));
     assertTrue(dummyMember.worksIn(dummySector));
   }
@@ -58,8 +58,8 @@ public class OrganizationTest extends TestDataFill {
 
     when(mockedTransport.isShareable()).thenReturn(true);
 
-    dummyMember.linkSector(dummySector);
-    anotherDummyMember.linkSector(dummySector);
+    dummyMember.applyToSector(dummySector);
+    anotherDummyMember.applyToSector(dummySector);
 
     dummyMember.addSharedJourney(dummyJourney, anotherDummyMember);
 

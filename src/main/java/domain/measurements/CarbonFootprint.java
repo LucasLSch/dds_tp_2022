@@ -17,9 +17,13 @@ public class CarbonFootprint {
   private UnitExpression unitExpression;
   private LocalDate date;
 
+  public void multiplyValue(Double someFactor) {
+    this.value *= someFactor;
+  }
+
   public CarbonFootprint getOn(UnitExpression someUE) {
     if (this.unitExpression.isConvertibleTo(someUE)) {
-      this.value = value * Math.pow(10f, this.unitExpression.getExpForConvertionTo(someUE));
+      this.multiplyValue(Math.pow(10f, this.unitExpression.getExpForConvertionTo(someUE)));
       this.unitExpression = someUE;
     }
     return this;
@@ -32,5 +36,6 @@ public class CarbonFootprint {
 
     return new CarbonFootprint(totalValue, someUE, LocalDate.now());
   }
+
 
 }
