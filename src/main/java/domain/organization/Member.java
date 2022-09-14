@@ -69,6 +69,13 @@ public class Member {
     }
   }
 
+  public void deleteJourney(Journey someJourney) {
+    if (this.hasJourney(someJourney)) {
+      this.journeys.remove(someJourney);
+      someJourney.deleteMember(this);
+    }
+  }
+
   public void shareJourneyWith(Journey someJourney, Member someMember) {
     try {
       this.validateJourneyPossession(someJourney);

@@ -26,7 +26,6 @@ public class Journey {
   private List<Leg> legList;
   private Set<Member> members;
 
-  // --- Constructor --- //
   public Journey(List<Leg> someLegList) {
     if (someLegList.isEmpty()) {
       throw new EmptyJourneyException();
@@ -51,9 +50,19 @@ public class Journey {
     this.legList.add(someLeg);
   }
 
+  private Boolean hasMember(Member someMember) {
+    return this.members.contains(someMember);
+  }
+
   public void addMember(Member someMember) {
-    if(someMember.hasJourney(this)) {
+    if(someMember.hasJourney(this) && !this.hasMember(someMember)) {
       this.members.add(someMember);
+    }
+  }
+
+  public void deleteMember(Member someMember) {
+    if (!someMember.hasJourney(this) && this.hasMember(someMember)) {
+      this.members.remove(someMember);
     }
   }
 
