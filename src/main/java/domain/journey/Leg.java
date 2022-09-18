@@ -11,24 +11,41 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
+@Entity
+@Table(name = "leg")
 public class Leg {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JoinColumn(name = "starting_location_id")
   private Location startingLocation;
+
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JoinColumn(name = "ending_location_id")
   private Location endingLocation;
+
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "transport_id")
   private Transport transport;
-  private Integer orderInList;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "journey_id")
+  private Journey journey;
 
   public Leg(Location someStartLocation, Location someEndLocation, Transport someTransport) {
     this.startingLocation = someStartLocation;
     this.endingLocation = someEndLocation;
     this.transport = someTransport;
-  }
-
-  public void setOrderInList(Integer orderInList) {
-    this.orderInList = orderInList;
   }
 
   public ActivityData createDataActivities() {
@@ -43,15 +60,12 @@ public class Leg {
     return new ActivityData(consumptionType,
         consumption,
         PeriodicityFormat.MMAAAA,
-        LocalDate.now().format(DateTimeFormatter.ofPattern("MM/yyyy")));
+        LocalDate.now().format(DateTimeFormatter.ofPattern("MM/yyyy")),
+        null);
   }
 
   public Boolean isShareable() {
     return transport.isShareable();
-  }
-
-  public Integer getOrderInList() {
-    return orderInList;
   }
 
   public Distance getLegDistance() throws IOException {

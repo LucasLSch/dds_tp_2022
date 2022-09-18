@@ -5,14 +5,26 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import com.twilio.twiml.voice.Sim;
+import domain.measurements.CarbonFootprint;
+import domain.measurements.ConsumptionType;
+import domain.measurements.EmissionFactor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Getter
+import javax.persistence.Embeddable;
+import javax.persistence.OneToMany;
+
+@NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Embeddable
 public class UnitExpression {
 
   private Set<SimpleUnit> simpleUnits;
+  private CarbonFootprint carbonFootprint;
+  private ConsumptionType consumptionType;
+  private EmissionFactor emissionFactor;
 
   public Boolean isConvertibleTo(UnitExpression someUE) {
     return haveSameBaseUnits(this.getProportionalUnits(), someUE.getProportionalUnits())

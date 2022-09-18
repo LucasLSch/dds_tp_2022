@@ -1,10 +1,17 @@
 package domain.journey.transport;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
+@NoArgsConstructor
+@Entity
+@DiscriminatorValue(value = "ECO_FRIENDLY")
 public class EcoFriendly extends Transport {
 
-  @Getter
+  @Column(name = "ef_type")
+  @Enumerated(value = EnumType.STRING)
   private EcoFriendlyType type;
 
   public EcoFriendly(EcoFriendlyType type) {

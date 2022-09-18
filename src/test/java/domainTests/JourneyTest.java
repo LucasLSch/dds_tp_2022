@@ -39,9 +39,8 @@ public class JourneyTest extends TestDataFill {
     dummyEndLocation = new Location(new District(200), "Cool End Street", "700");
     anotherDummyStartLocation = new Location(new District(200), "Not So Cool Start Street", "100");
     anotherDummyEndLocation = new Location(new District(200), "Not So Cool End Street", "500");
-    dummyLeg = new Leg(dummyStartLocation, dummyEndLocation, mockedEcoFriendlyTransport, 0);
-    anotherDummyLeg = new Leg(anotherDummyStartLocation,
-        anotherDummyEndLocation, mockedHiredServiceTransport, 1);
+    dummyLeg = new Leg(dummyStartLocation, dummyEndLocation, mockedEcoFriendlyTransport);
+    anotherDummyLeg = new Leg(anotherDummyStartLocation, anotherDummyEndLocation, mockedHiredServiceTransport);
     dummyLegs.add(dummyLeg);
     dummyLegs.add(anotherDummyLeg);
     dummyJourney = new Journey(dummyLegs);
@@ -60,26 +59,4 @@ public class JourneyTest extends TestDataFill {
     assertEquals(distance.getValue(), 750);
   }
 
-  @Test
-  public void journeyDistanceFromLegToAnotherLeg() throws IOException {
-    Transport thirdLegTransport = mock(PublicTransport.class);
-    Leg thirdLeg = new Leg(new Location(new District(3), "3rdSS", ""),
-        new Location(new District(3), "3rdES", ""),
-        thirdLegTransport, 2);
-    Transport forthLegTransport = mock(PublicTransport.class);
-    Leg forthLeg = new Leg(new Location(new District(4), "4thSS", ""),
-        new Location(new District(4), "4thES", ""),
-        forthLegTransport, 3);
-
-    when(thirdLegTransport.getDistance(any(), any())).thenReturn(new Distance(100, "KM"));
-    when(forthLegTransport.getDistance(any(), any())).thenReturn(new Distance(50, "KM"));
-    when(mockedHiredServiceTransport.getDistance(any(), any())).thenReturn(new Distance(150, "KM"));
-
-    dummyJourney.addLeg(thirdLeg);
-    dummyJourney.addLeg(forthLeg);
-
-    Distance distanceFromLegToLeg = dummyJourney.getDistanceFromTo(anotherDummyLeg, forthLeg);
-
-    assertEquals(distanceFromLegToLeg.getValue(), 300);
-  }
 }

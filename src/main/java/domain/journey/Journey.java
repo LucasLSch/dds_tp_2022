@@ -11,19 +11,38 @@ import domain.measurements.unit.UnitExpression;
 import domain.organization.Member;
 import domain.organization.Organization;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor
 @Getter
+@Entity
+@Table(name = "journey")
 public class Journey {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JoinColumn(name = "starting_location_id")
   private Location startingLocation;
+
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JoinColumn(name = "ending_location_id")
   private Location endingLocation;
+
+  @OneToMany(mappedBy = "journey", cascade = CascadeType.ALL)
+  @OrderColumn(name = "order_in_list")
   private List<Leg> legList;
+
+  @ManyToMany(mappedBy = "journeys")
   private Set<Member> members;
 
   public Journey(List<Leg> someLegList) {
@@ -108,24 +127,6 @@ public class Journey {
 
   public Distance getJourneyDistance() {
     int finalDistanceValue = this.legList.stream()
-        .mapToInt(leg -> {
-          try {
-            return leg.getLegDistance().getValue();
-          } catch (IOException e) {
-            throw new RuntimeException(e);
-          }
-        })
-        .sum();
-
-    return new Distance(finalDistanceValue, "KM");
-  }
-
-  public Distance getDistanceFromTo(Leg someLeg, Leg anotherLeg) {
-    List<Leg> betweenLegs = this
-        .legList
-        .subList(someLeg.getOrderInList(), anotherLeg.getOrderInList() + 1);
-
-    int finalDistanceValue = betweenLegs.stream()
         .mapToInt(leg -> {
           try {
             return leg.getLegDistance().getValue();

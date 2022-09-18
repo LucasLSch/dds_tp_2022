@@ -3,12 +3,28 @@ package domain.journey.transport;
 import domain.exceptions.IncompleteLineException;
 import domain.exceptions.InvalidStopForLineException;
 import domain.location.Distance;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.util.List;
 
+@NoArgsConstructor
+@Entity
+@Table(name = "line")
 public class Line {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @OneToMany(mappedBy = "line", cascade = CascadeType.ALL)
+  @OrderColumn(name = "stop_number")
   private List<Stop> stopList;
+
+  @Column(name = "name")
   private String name;
+
+  @Enumerated(value = EnumType.STRING)
   private PublicTransportType type;
 
   public Line(List<Stop> someStopList, String someName, PublicTransportType someType) {
@@ -49,7 +65,7 @@ public class Line {
   public Distance getDistanceBetween(Stop startStop, Stop endStop) {
     List<Stop> stopsBetween = this
         .stopList
-        .subList(startStop.getOrderInList(), endStop.getOrderInList());
+        .subList(this.stopList.indexOf(startStop), this.stopList.indexOf(endStop));
 
     Integer finalValue = stopsBetween
         .stream()

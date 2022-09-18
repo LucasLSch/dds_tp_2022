@@ -12,16 +12,45 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Getter
+@NoArgsConstructor
+@Entity
+@Table(name = "member")
 public class Member {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @ManyToMany(mappedBy = "members")
   private Set<Sector> sectors;
+
+  @ManyToMany
+  @JoinTable(
+          name = "member_journey",
+          joinColumns = @JoinColumn(name = "member_id"),
+          inverseJoinColumns = @JoinColumn(name = "journey_id")
+  )
   private List<Journey> journeys;
+
+  @Column(name = "name")
   private String name;
+
+  @Column(name = "surname")
   private String surname;
+
+  @Column(name = "doc_type")
+  @Enumerated(value = EnumType.STRING)
   private DocType docType;
+
+  @Column(name = "doc_number")
   private String docNumber;
+
+  @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
   private List<Contact> contacts;
 
   public Member(String name, String surname, DocType docType, String document) {

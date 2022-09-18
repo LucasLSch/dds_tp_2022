@@ -12,18 +12,49 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import domain.territories.TerritorialSector;
+import lombok.Generated;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Getter
+@NoArgsConstructor
+@Entity
+@Table(name = "organization")
 public class Organization {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
   private Set<Sector> sectors;
+
+  @Column(name = "social_objective")
   private String socialObjective;
+
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JoinColumn(name = "location_id")
   private Location location;
+
+  @Column(name = "clasification")
   private String clasification;
+
+  @Column(name = "type")
+  @Enumerated(value = EnumType.STRING)
   private OrgType type;
+
+  @OneToMany(mappedBy = "organization")
   private List<ActivityData> activitiesData;
+
+  @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
   private List<Contact> contacts;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "territorial_sector_id")
+  private TerritorialSector territorialSector;
 
   public Organization(String socObj, Location locat, String clasific, OrgType type) {
     this.socialObjective = socObj;

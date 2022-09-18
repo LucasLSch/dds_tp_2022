@@ -30,10 +30,10 @@ public class LineStopTest extends TestDataFill {
     dummyLocation = new Location(new District(43), "Cool Street", "800");
     anotherDummyLocation = new Location(new District(37), "Not So Cool Street", "1500");
     coolestDummyLocation = new Location(new District(73), "Coolest Street", "400");
-    firstDummyStop = new Stop(dummyLocation, new Distance(100, "KM"), 0);
-    secondDummyStop = new Stop(anotherDummyLocation, new Distance(50, "KM"), 1);
-    thirdDummyStop = new Stop(coolestDummyLocation, new Distance(15, "KM"), 2);
-    forthDummyStop = new Stop(coolestDummyLocation, new Distance(0, "KM"), 3);
+    firstDummyStop = new Stop(dummyLine, dummyLocation, new Distance(100, "KM"));
+    secondDummyStop = new Stop(dummyLine, anotherDummyLocation, new Distance(50, "KM"));
+    thirdDummyStop = new Stop(dummyLine, coolestDummyLocation, new Distance(15, "KM"));
+    forthDummyStop = new Stop(dummyLine,coolestDummyLocation, new Distance(0, "KM"));
     dummyStops.add(firstDummyStop);
     dummyStops.add(secondDummyStop);
     dummyStops.add(thirdDummyStop);

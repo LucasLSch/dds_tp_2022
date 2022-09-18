@@ -1,18 +1,25 @@
 package domain.journey.transport;
 
-import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
+@NoArgsConstructor
+@Entity
+@DiscriminatorValue(value = "HIRED_SERVICE")
 public class HiredService extends Transport {
 
-  @Getter
+  @Column(name = "hs_type")
+  @Enumerated(value = EnumType.STRING)
   private HiredServiceType hsType;
-  @Getter
-  private String serviceName;
+
+  @Column(name = "hs_name")
+  private String name;
 
   public HiredService(Double fuelConsumptionPerKm, HiredServiceType hsType, String serviceName) {
     super(fuelConsumptionPerKm);
     this.hsType = hsType;
-    this.serviceName = serviceName;
+    this.name = serviceName;
   }
 
   @Override

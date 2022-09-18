@@ -2,35 +2,39 @@ package domain.journey.transport;
 
 import domain.location.Distance;
 import domain.location.Location;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
+@NoArgsConstructor
+@Entity
+@Table(name = "stop")
 public class Stop {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "line_id")
   private Line line;
+
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JoinColumn(name = "location_id")
   private Location location;
+
+  @Embedded
+  @AttributeOverride(name = "value", column = @Column(name = "km_to_next_stop"))
   private Distance distanceToNextStop;
-  private Integer orderInList;
 
-  public Stop(Location someLocation) {
-    this.location = someLocation;
-  }
-
-  public Stop(Line someLine, Location someLocation) {
-    this.line = someLine;
-    this.location = someLocation;
-  }
-
-  public Stop(Location someLocation, Distance distance, Integer orderInList) {
-    this.location = someLocation;
-    this.distanceToNextStop = distance;
-    this.orderInList = orderInList;
+  public Stop(Line line, Location location, Distance distanceToNextStop) {
+    this.line = line;
+    this.location = location;
+    this.distanceToNextStop = distanceToNextStop;
   }
 
   public void setDistanceToNextStop(Distance distanceToNextStop) {
     this.distanceToNextStop = distanceToNextStop;
-  }
-
-  public Integer getOrderInList() {
-    return orderInList;
   }
 
   public Distance getDistanceToNextStop() {
