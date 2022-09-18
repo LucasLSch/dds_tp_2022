@@ -15,7 +15,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
+/*
 public class OrganizationTest extends TestDataFill {
   private Organization dummyOrganization;
   private Location dummyLocation;
@@ -66,3 +66,4 @@ public class OrganizationTest extends TestDataFill {
     assertTrue(dummyMember.getJourneys().equals(anotherDummyMember.getJourneys()));
   }
 }
+*/

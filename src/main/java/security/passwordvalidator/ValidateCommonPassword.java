@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ValidateCommonPassword implements PasswordCriteria {
 
-  private Path commonPasswordsFilePath = Paths.get("resources/commonPasswords.txt");
+  private Path commonPasswordsFilePath = Paths.get("src/main/resources/commonPasswords.txt");
   private Charset charset = Charset.forName("UTF-8");
   private List<String> lineasWorstPwd;
   private String errorDescription = "The password is not a safe password";
