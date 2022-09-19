@@ -459,6 +459,7 @@ DROP TABLE IF EXISTS `grupo7`.`transport` ;
 
 CREATE TABLE IF NOT EXISTS `grupo7`.`transport` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `transport_type` VARCHAR(31) NOT NULL,
   `fuel_consumption_per_km` DOUBLE NULL,
   `hs_type` VARCHAR(15) NULL,
   `hs_name` VARCHAR(31) NULL,
