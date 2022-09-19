@@ -5,19 +5,17 @@ import domain.exceptions.InvalidSectorForOrgException;
 import domain.location.Location;
 import domain.measurements.ActivityData;
 import domain.measurements.CarbonFootprint;
-import domain.measurements.unit.UnitExpression;
+import domain.measurements.unit.Unit;
+import domain.territories.TerritorialSector;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import domain.territories.TerritorialSector;
-import lombok.Generated;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
@@ -106,27 +104,27 @@ public class Organization {
   }
 
 
-  public CarbonFootprint getTotalCarbonFootprint(UnitExpression someUnitExpression) {
+  public CarbonFootprint getTotalCarbonFootprint(Set<Unit> units) {
     List<CarbonFootprint> cfList = new ArrayList<CarbonFootprint>();
 
-    cfList.addAll(this.getActivitiesDataCF(someUnitExpression));
-    cfList.addAll(this.getMemberCF(someUnitExpression));
+    cfList.addAll(this.getActivitiesDataCF(units));
+    cfList.addAll(this.getMemberCF(units));
 
-    return CarbonFootprint.sum(someUnitExpression, cfList.toArray(new CarbonFootprint[0]));
+    return CarbonFootprint.sum(units, cfList.toArray(new CarbonFootprint[0]));
   }
 
-  private List<CarbonFootprint> getMemberCF(UnitExpression someUnitExpression) {
+  private List<CarbonFootprint> getMemberCF(Set<Unit> units) {
     return this.getMembers()
         .stream()
         .flatMap(member -> member.getJourneys().stream())
-        .map(journey -> journey.getCarbonFootprint(someUnitExpression))
+        .map(journey -> journey.getCarbonFootprint(units))
         .collect(Collectors.toList());
   }
 
-  public List<CarbonFootprint> getActivitiesDataCF(UnitExpression someUnitExpression) {
+  public List<CarbonFootprint> getActivitiesDataCF(Set<Unit> units) {
     return this.activitiesData
         .stream()
-        .map(ad -> ad.getCarbonFootprint(someUnitExpression))
+        .map(ad -> ad.getCarbonFootprint(units))
         .collect(Collectors.toList());
   }
 

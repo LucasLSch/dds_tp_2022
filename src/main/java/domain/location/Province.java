@@ -2,7 +2,6 @@ package domain.location;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import services.georef.CountryResponse;
 
 @AllArgsConstructor
 @Getter

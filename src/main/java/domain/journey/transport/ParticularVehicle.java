@@ -1,6 +1,5 @@
 package domain.journey.transport;
 
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;

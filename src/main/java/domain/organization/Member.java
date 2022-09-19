@@ -4,17 +4,16 @@ import domain.contact.Contact;
 import domain.exceptions.NotJourneyOwnerException;
 import domain.journey.Journey;
 import domain.measurements.CarbonFootprint;
-import domain.measurements.unit.UnitExpression;
+import domain.measurements.unit.Unit;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
@@ -121,11 +120,11 @@ public class Member {
     }
   }
 
-  public CarbonFootprint getPersonalCF(UnitExpression someUnitExpression) {
-    return CarbonFootprint.sum(someUnitExpression, this.journeys
+  public CarbonFootprint getPersonalCF(Set<Unit> units) {
+    return CarbonFootprint.sum(units, this.journeys
         .stream()
         .map(journey -> journey
-            .getCarbonFootprint(someUnitExpression))
+            .getCarbonFootprint(units))
             .toArray(CarbonFootprint[]::new));
   }
 

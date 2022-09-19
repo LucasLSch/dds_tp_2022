@@ -1,6 +1,8 @@
 package domain.measurements.unit;
 
-import lombok.AllArgsConstructor;
+import domain.measurements.CarbonFootprint;
+import domain.measurements.ConsumptionType;
+import domain.measurements.EmissionFactor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,17 +11,17 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "simple_unit")
-public class SimpleUnit {
+public class Unit {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @Column(name = "base_unit")
+  @Enumerated(value = EnumType.STRING)
   private BaseUnit baseUnit;
 
   @Column(name = "exponent")
@@ -28,13 +30,27 @@ public class SimpleUnit {
   @Enumerated(value = EnumType.STRING)
   private Proportionality proportionality;
 
-  @Embedded
-  @AssociationOverrides(value = {
-          @AssociationOverride(name = "emissionFactor", joinColumns = @JoinColumn(name = "emission_factor_id")),
-          @AssociationOverride(name = "carbonFootprint", joinColumns = @JoinColumn(name = "carbon_footprint_id")),
-          @AssociationOverride(name = "consumptionType", joinColumns = @JoinColumn(name = "consumption_type_id"))
-  })
-  private UnitExpression unitExpression;
+  @ManyToOne
+  @JoinColumn(name = "carbon_footprint_id")
+  private CarbonFootprint carbonFootprint;
+
+  @ManyToOne
+  @JoinColumn(name = "consumption_type_id")
+  private ConsumptionType consumptionType;
+
+  @ManyToOne
+  @JoinColumn(name = "emission_factor_id")
+  private EmissionFactor emissionFactor;
+
+  public Unit(
+          BaseUnit baseUnit,
+          Integer exponent,
+          Proportionality proportionality
+  ) {
+    this.baseUnit = baseUnit;
+    this.exponent = exponent;
+    this.proportionality = proportionality;
+  }
 
   public Integer getProportionalityFactor() {
     return this.proportionality.getFactor();

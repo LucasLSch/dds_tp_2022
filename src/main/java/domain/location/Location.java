@@ -1,11 +1,10 @@
 package domain.location;
 
-import java.io.IOException;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import services.georef.GeoRefAdapter;
 
 import javax.persistence.*;
+import java.io.IOException;
 
 @NoArgsConstructor
 @Entity

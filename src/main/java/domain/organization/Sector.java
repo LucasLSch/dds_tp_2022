@@ -2,7 +2,7 @@ package domain.organization;
 
 import domain.journey.Journey;
 import domain.measurements.CarbonFootprint;
-import domain.measurements.unit.UnitExpression;
+import domain.measurements.unit.Unit;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -62,11 +62,11 @@ public class Sector {
     return this.organization.equals(organization);
   }
 
-  public CarbonFootprint getAvgCfPerMember(UnitExpression someUnitExpression) {
-    CarbonFootprint sectorCF = getSectorCF(someUnitExpression);
+  public CarbonFootprint getAvgCfPerMember(Set<Unit> units) {
+    CarbonFootprint sectorCF = getSectorCF(units);
     return new CarbonFootprint(
         sectorCF.getValue() / this.membersAmount(),
-        someUnitExpression,
+        units,
         LocalDate.now());
   }
 
@@ -78,10 +78,10 @@ public class Sector {
         .collect(Collectors.toList());
   }
 
-  public CarbonFootprint getSectorCF(UnitExpression someUnitExpression) {
-    return CarbonFootprint.sum(someUnitExpression, getMembersJourneys()
+  public CarbonFootprint getSectorCF(Set<Unit> units) {
+    return CarbonFootprint.sum(units, getMembersJourneys()
         .stream()
-        .map(journey -> journey.getCarbonFootprint(someUnitExpression))
+        .map(journey -> journey.getCarbonFootprint(units))
         .toArray(CarbonFootprint[]::new));
   }
 

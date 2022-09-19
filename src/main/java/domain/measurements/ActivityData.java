@@ -1,15 +1,14 @@
 package domain.measurements;
 
-import domain.measurements.unit.UnitExpression;
-import java.time.LocalDate;
-
+import domain.measurements.unit.Unit;
 import domain.organization.Organization;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Set;
 
 @NoArgsConstructor
 @Getter
@@ -39,11 +38,13 @@ public class ActivityData {
   @JoinColumn(name = "organization_id")
   private Organization organization;
 
-  public ActivityData(ConsumptionType consumptionType,
-                      Double consumptionValue,
-                      PeriodicityFormat periodicityFormat,
-                      String periodicity,
-                      Organization organization) {
+  public ActivityData(
+          ConsumptionType consumptionType,
+          Double consumptionValue,
+          PeriodicityFormat periodicityFormat,
+          String periodicity,
+          Organization organization
+  ) {
     this.consumptionType = consumptionType;
     this.consumptionValue = consumptionValue;
     this.periodicityFormat = periodicityFormat;
@@ -55,9 +56,9 @@ public class ActivityData {
     return this.periodicityFormat.getDate(this.periodicity);
   }
 
-  public CarbonFootprint getCarbonFootprint(UnitExpression someUnitExpression) {
+  public CarbonFootprint getCarbonFootprint(Set<Unit> objectiveUnits) {
     Double value = this.getConsumptionValue() * this.getConsumptionType().getEmissionFactorValue();
-    UnitExpression unitExpression = this.consumptionType.getUnitExpression();
-    return new CarbonFootprint(value, unitExpression, null).getOn(someUnitExpression);
+    Set<Unit> units = this.consumptionType.getUnits();
+    return new CarbonFootprint(value, units, LocalDate.now()).getOn(objectiveUnits);
   }
 }

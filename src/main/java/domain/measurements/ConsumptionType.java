@@ -1,15 +1,16 @@
 package domain.measurements;
 
-import domain.measurements.unit.UnitExpression;
-import lombok.AllArgsConstructor;
+import domain.measurements.unit.Unit;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 @Table(name = "consumption_type")
 public class ConsumptionType {
@@ -21,8 +22,8 @@ public class ConsumptionType {
   @Column(name = "name")
   private String name;
 
-  @Embedded
-  private UnitExpression unitExpression;
+  @OneToMany(mappedBy = "consumptionType", cascade = CascadeType.ALL)
+  private Set<Unit> units;
 
   @Column(name = "activity")
   private String activity;
@@ -34,8 +35,12 @@ public class ConsumptionType {
   @JoinColumn(name = "emission_factor_id")
   private EmissionFactor emissionFactor;
 
-  public UnitExpression getUnitExpression() {
-    return this.unitExpression;
+  public ConsumptionType(String name, Set<Unit> units, String activity, String scope, EmissionFactor emissionFactor) {
+    this.name = name;
+    this.units = units;
+    this.activity = activity;
+    this.scope = scope;
+    this.emissionFactor = emissionFactor;
   }
 
   public void setEmissionFactor(EmissionFactor someEF) {

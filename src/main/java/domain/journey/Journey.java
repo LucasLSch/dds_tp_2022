@@ -7,7 +7,7 @@ import domain.location.Distance;
 import domain.location.Location;
 import domain.measurements.ActivityData;
 import domain.measurements.CarbonFootprint;
-import domain.measurements.unit.UnitExpression;
+import domain.measurements.unit.Unit;
 import domain.organization.Member;
 import domain.organization.Organization;
 import lombok.Getter;
@@ -139,11 +139,11 @@ public class Journey {
     return new Distance(finalDistanceValue, "KM");
   }
 
-  public CarbonFootprint getCarbonFootprint(UnitExpression someUnitExpression) {
+  public CarbonFootprint getCarbonFootprint(Set<Unit> units) {
     CarbonFootprint journeyCF = CarbonFootprint
-        .sum(someUnitExpression, this.getDataActivities()
+        .sum(units, this.getDataActivities()
         .stream()
-        .map(da -> da.getCarbonFootprint(someUnitExpression))
+        .map(da -> da.getCarbonFootprint(units))
         .toArray(CarbonFootprint[]::new));
 
     journeyCF.multiplyValue(1d/this.membersAmount());
