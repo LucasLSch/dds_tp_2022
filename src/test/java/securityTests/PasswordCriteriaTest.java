@@ -1,13 +1,7 @@
 package securityTests;
 
 import org.junit.jupiter.api.Test;
-import security.passwordvalidator.PasswordException;
-import security.passwordvalidator.ValidateCapitalLetter;
-import security.passwordvalidator.ValidateCommonPassword;
-import security.passwordvalidator.ValidateMinLength;
-import security.passwordvalidator.ValidateNumber;
-import security.passwordvalidator.ValidateSpecialChar;
-
+import security.passwordvalidator.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 

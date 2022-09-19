@@ -1,6 +1,5 @@
 package security.user;
 
-import domain.organization.Member;
 import domain.territories.TerritorialSectorAgent;
 import lombok.NoArgsConstructor;
 

@@ -1,11 +1,10 @@
 package security.user;
 
-import java.io.IOException;
-
 import lombok.NoArgsConstructor;
 import security.passwordvalidator.PasswordValidator;
 
 import javax.persistence.*;
+import java.io.IOException;
 
 @NoArgsConstructor
 @Entity

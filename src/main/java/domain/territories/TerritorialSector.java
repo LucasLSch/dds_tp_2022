@@ -1,5 +1,7 @@
 package domain.territories;
 
+import domain.measurements.CarbonFootprint;
+import domain.measurements.unit.Unit;
 import domain.organization.Organization;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,5 +37,11 @@ public class TerritorialSector {
     this.type = type;
     this.agents = agents;
     this.organizations = organizations;
+  }
+
+  public CarbonFootprint getCF(Set<Unit> units) {
+    return CarbonFootprint.sum(units, this.getOrganizations()
+            .stream()
+            .map(org -> org.getTotalCarbonFootprint(units)).toArray(CarbonFootprint[]::new));
   }
 }

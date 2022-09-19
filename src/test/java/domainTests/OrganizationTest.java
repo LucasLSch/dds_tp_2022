@@ -1,20 +1,5 @@
 package domainTests;
 
-import domain.journey.Journey;
-import domain.journey.Leg;
-import domain.journey.transport.Transport;
-import domain.location.District;
-import domain.location.Location;
-import domain.organization.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 /*
 public class OrganizationTest extends TestDataFill {
   private Organization dummyOrganization;

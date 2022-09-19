@@ -1,9 +1,11 @@
 package domainTests;
 
-import domain.location.Distance;
 import domain.journey.Journey;
 import domain.journey.Leg;
-import domain.journey.transport.*;
+import domain.journey.transport.EcoFriendly;
+import domain.journey.transport.HiredService;
+import domain.journey.transport.Transport;
+import domain.location.Distance;
 import domain.location.District;
 import domain.location.Location;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
