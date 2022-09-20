@@ -1,10 +1,12 @@
 package domain.territories;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
+@Getter
 @Entity
 @Table(name = "territorial_sector_agent")
 public class TerritorialSectorAgent {

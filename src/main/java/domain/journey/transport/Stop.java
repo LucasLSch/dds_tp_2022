@@ -2,11 +2,13 @@ package domain.journey.transport;
 
 import domain.location.Distance;
 import domain.location.Location;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
+@Getter
 @Entity
 @Table(name = "stop")
 public class Stop {

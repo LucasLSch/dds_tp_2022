@@ -11,6 +11,7 @@ import repositories.CarbonFootprintRepo;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Main implements WithGlobalEntityManager, EntityManagerOps, TransactionalOps {
@@ -29,7 +30,10 @@ public class Main implements WithGlobalEntityManager, EntityManagerOps, Transact
         });*/
 
         //CarbonFootprintRepo.getInstance().save(miCf);
-        System.out.println(CarbonFootprintRepo.getInstance().count());
+        List<CarbonFootprint> listaCF = CarbonFootprintRepo.getInstance().getAll();
+
+        listaCF.forEach( cf -> System.out.format("Id: %d, value: %f%n", cf.getId(), cf.getValue()));
+
     }
 
     public static void main(String[] args) {

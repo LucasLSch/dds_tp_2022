@@ -1,5 +1,6 @@
 package domain.location;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import services.georef.GeoRefAdapter;
 
@@ -7,6 +8,7 @@ import javax.persistence.*;
 import java.io.IOException;
 
 @NoArgsConstructor
+@Getter
 @Entity
 @Table(name = "location")
 public class Location {

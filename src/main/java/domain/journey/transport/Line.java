@@ -3,12 +3,14 @@ package domain.journey.transport;
 import domain.exceptions.IncompleteLineException;
 import domain.exceptions.InvalidStopForLineException;
 import domain.location.Distance;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @NoArgsConstructor
+@Getter
 @Entity
 @Table(name = "line")
 public class Line {
