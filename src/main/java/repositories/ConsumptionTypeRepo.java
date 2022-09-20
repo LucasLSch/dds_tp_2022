@@ -8,13 +8,14 @@ public class ConsumptionTypeRepo extends CrudImpl<ConsumptionType> {
 
   private static ConsumptionTypeRepo instance = null;
 
-  private ConsumptionTypeRepo(){
+  private ConsumptionTypeRepo() {
+    this.type = new ConsumptionType();
   }
 
   public static ConsumptionTypeRepo getInstance() {
     if (instance == null) {
       instance = new ConsumptionTypeRepo();
-      instance.initSavedEntities();
+      instance.initEntityManager();
     }
     return instance;
   }

@@ -8,13 +8,19 @@ public class TransportRepo extends CrudImpl<Transport> {
 
   private static TransportRepo instance = null;
 
-  private TransportRepo(){
+  private TransportRepo() {
+    this.type = new Transport(){
+      @Override
+      public Boolean isShareable() {
+        return null;
+      }
+    };
   }
 
   public static TransportRepo getInstance() {
     if (instance == null) {
       instance = new TransportRepo();
-      instance.initSavedEntities();
+      instance.initEntityManager();
     }
     return instance;
   }

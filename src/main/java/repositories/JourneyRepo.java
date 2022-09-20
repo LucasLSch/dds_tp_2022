@@ -8,13 +8,14 @@ public class JourneyRepo extends CrudImpl<Journey> {
 
   private static JourneyRepo instance = null;
 
-  private JourneyRepo(){
+  private JourneyRepo() {
+    this.type = new Journey();
   }
 
   public static JourneyRepo getInstance() {
     if (instance == null) {
       instance = new JourneyRepo();
-      instance.initSavedEntities();
+      instance.initEntityManager();
     }
     return instance;
   }

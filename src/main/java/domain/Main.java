@@ -7,6 +7,7 @@ import domain.measurements.unit.Unit;
 import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+import repositories.CarbonFootprintRepo;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -20,11 +21,15 @@ public class Main implements WithGlobalEntityManager, EntityManagerOps, Transact
         unitSet.add(new Unit(BaseUnit.METER, 3, Proportionality.DIRECT));
         unitSet.add(new Unit(BaseUnit.SECOND, 0, Proportionality.INVERSE));
 
-        CarbonFootprint miCf = new CarbonFootprint(23.0, unitSet, LocalDate.now());
+        CarbonFootprint miCf = new CarbonFootprint(70.0, unitSet, LocalDate.now());
 
+        /*
         withTransaction(() -> {
             entityManager().persist(miCf);
-        });
+        });*/
+
+        //CarbonFootprintRepo.getInstance().save(miCf);
+        System.out.println(CarbonFootprintRepo.getInstance().count());
     }
 
     public static void main(String[] args) {

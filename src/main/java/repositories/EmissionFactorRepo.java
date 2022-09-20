@@ -8,13 +8,14 @@ public class EmissionFactorRepo extends CrudImpl<EmissionFactor> {
 
   private static EmissionFactorRepo instance = null;
 
-  private EmissionFactorRepo(){
+  private EmissionFactorRepo() {
+    this.type = new EmissionFactor();
   }
 
   public static EmissionFactorRepo getInstance() {
     if (instance == null) {
       instance = new EmissionFactorRepo();
-      instance.initSavedEntities();
+      instance.initEntityManager();
     }
     return instance;
   }

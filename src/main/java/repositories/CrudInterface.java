@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface CrudInterface<T> {
 
-  Integer count();
+  Long count();
 
   void save(T someEntity);
 

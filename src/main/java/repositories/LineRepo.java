@@ -8,13 +8,14 @@ public class LineRepo extends CrudImpl<Line> {
 
   private static LineRepo instance = null;
 
-  private LineRepo(){
+  private LineRepo() {
+    this.type = new Line();
   }
 
   public static LineRepo getInstance() {
     if (instance == null) {
       instance = new LineRepo();
-      instance.initSavedEntities();
+      instance.initEntityManager();
     }
     return instance;
   }

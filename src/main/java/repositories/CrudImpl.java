@@ -1,5 +1,9 @@
 package repositories;
 
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,29 +12,57 @@ import java.util.stream.Collectors;
 public abstract class CrudImpl<T> implements CrudInterface<T> {
 
   private List<T> savedEntities;
+  protected EntityManager em;
+  protected T type;
+
+  protected void withTransaction(Runnable block) {
+    this.em.getTransaction().begin();
+    try {
+      block.run();
+      this.em.getTransaction().commit();
+    } catch (Exception e) {
+      this.em.getTransaction().rollback();
+    }
+  }
 
   @Override
-  public Integer count() {
-    return this.savedEntities.size();
+  public Long count() {
+    Query q = this.em
+        .createQuery("select count(t) from " + this.type.getClass().getSimpleName() + " t");
+    return (Long) q.getResultList().get(0);
+  }
+
+  // --- Saving --- //
+
+  private void _save_(T someEntity) {
+    this.em.persist(someEntity);
   }
 
   @Override
   public void save(T someEntity) {
-    this.savedEntities.add(someEntity);
+    this.withTransaction( () -> {
+      this._save_(someEntity);
+    });
   }
 
   @Override
   public void saveAll(T... someEntities) {
-    Arrays
-        .stream(someEntities)
-        .iterator()
-        .forEachRemaining(this::save);
+    this.withTransaction( () -> {
+      Arrays
+          .stream(someEntities)
+          .iterator()
+          .forEachRemaining(this::_save_);
+    });
   }
 
   @Override
   public void saveAll(List<T> someEntities) {
-    someEntities.forEach(this::save);
+    this.withTransaction( () -> {
+      someEntities.forEach(this::_save_);
+    });
   }
+
+  // --- Queries --- //
 
   @Override
   public Boolean exists(T someEntity) {
@@ -85,7 +117,7 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
     return this.savedEntities;
   }
 
-  protected void initSavedEntities() {
-    this.savedEntities = new ArrayList<>();
+  protected void initEntityManager() {
+    this.em = PerThreadEntityManagers.getEntityManager();
   }
 }

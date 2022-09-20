@@ -8,13 +8,14 @@ public class ActivityDataRepo extends CrudImpl<ActivityData> {
 
   private static ActivityDataRepo instance = null;
 
-  private ActivityDataRepo(){
+  private ActivityDataRepo() {
+    this.type = new ActivityData();
   }
 
   public static ActivityDataRepo getInstance() {
     if (instance == null) {
       instance = new ActivityDataRepo();
-      instance.initSavedEntities();
+      instance.initEntityManager();
     }
     return instance;
   }

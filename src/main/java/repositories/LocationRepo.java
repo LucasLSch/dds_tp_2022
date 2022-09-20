@@ -9,12 +9,13 @@ public class LocationRepo extends CrudImpl<Location> {
   private static LocationRepo instance = null;
 
   private LocationRepo() {
+    this.type = new Location();
   }
 
   public static LocationRepo getInstance() {
     if (instance == null) {
       instance = new LocationRepo();
-      instance.initSavedEntities();
+      instance.initEntityManager();
     }
     return instance;
   }

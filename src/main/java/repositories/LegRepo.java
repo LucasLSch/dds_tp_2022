@@ -8,13 +8,14 @@ public class LegRepo extends CrudImpl<Leg> {
 
   private static LegRepo instance = null;
 
-  private LegRepo(){
+  private LegRepo() {
+    this.type = new Leg();
   }
 
   public static LegRepo getInstance() {
     if (instance == null) {
       instance = new LegRepo();
-      instance.initSavedEntities();
+      instance.initEntityManager();
     }
     return instance;
   }

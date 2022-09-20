@@ -8,13 +8,14 @@ public class MemberRepo extends CrudImpl<Member> {
 
   private static MemberRepo instance = null;
 
-  private MemberRepo(){
+  private MemberRepo() {
+    this.type = new Member();
   }
 
   public static MemberRepo getInstance() {
     if (instance == null) {
       instance = new MemberRepo();
-      instance.initSavedEntities();
+      instance.initEntityManager();
     }
     return instance;
   }

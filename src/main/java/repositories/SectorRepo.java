@@ -8,13 +8,14 @@ public class SectorRepo extends CrudImpl<Sector> {
 
   private static SectorRepo instance = null;
 
-  private SectorRepo(){
+  private SectorRepo() {
+    this.type = new Sector();
   }
 
   public static SectorRepo getInstance() {
     if (instance == null) {
       instance = new SectorRepo();
-      instance.initSavedEntities();
+      instance.initEntityManager();
     }
     return instance;
   }

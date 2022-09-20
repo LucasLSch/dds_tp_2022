@@ -15,21 +15,15 @@ public class OrganizationRepo extends CrudImpl<Organization> {
 
   private static OrganizationRepo instance = null;
 
-  private OrganizationRepo(){
+  private OrganizationRepo() {
+    this.type = new Organization();
   }
 
   public static OrganizationRepo getInstance() {
     if (instance == null) {
       instance = new OrganizationRepo();
-      instance.initSavedEntities();
+      instance.initEntityManager();
     }
     return instance;
-  }
-
-
-  public List getAllDB() {
-    this.em = PerThreadEntityManagers.getEntityManager();
-    Query q = em.createQuery("from Organization");
-    return q.getResultList();
   }
 }
