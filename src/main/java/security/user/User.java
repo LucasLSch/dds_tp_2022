@@ -1,5 +1,6 @@
 package security.user;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import security.passwordvalidator.PasswordValidator;
 
@@ -7,6 +8,7 @@ import javax.persistence.*;
 import java.io.IOException;
 
 @NoArgsConstructor
+@Getter
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "user_type", discriminatorType = DiscriminatorType.STRING)

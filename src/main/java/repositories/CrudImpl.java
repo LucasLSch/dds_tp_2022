@@ -1,5 +1,6 @@
 package repositories;
 
+import domain.measurements.CarbonFootprint;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
 import javax.persistence.EntityManager;
@@ -23,13 +24,6 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
     } catch (Exception e) {
       this.em.getTransaction().rollback();
     }
-  }
-
-  @Override
-  public Long count() {
-    Query q = this.em
-        .createQuery("select count(t) from " + this.type.getClass().getSimpleName() + " t");
-    return (Long) q.getResultList().get(0);
   }
 
   // --- Saving --- //
@@ -65,18 +59,34 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
   // --- Queries --- //
 
   @Override
-  public Boolean exists(T someEntity) {
-    return this.savedEntities.contains(someEntity);
+  public Long count() {
+    Query q = this.em
+        .createQuery("SELECT COUNT(t) FROM " + this.type.getClass().getSimpleName() + " t");
+    return (Long) q.getResultList().get(0);
   }
 
   @Override
-  public T findByCondition(RepoCondition<T> someCondition) {
+  public Boolean exists(T someEntity) {
+    return this.em.getReference(CarbonFootprint.class, this.getId(someEntity)) != null;
+  }
+
+  @Override
+  public T getByCondition(RepoCondition<T> someCondition) {
     return this.savedEntities
         .stream()
         .filter(someCondition::testConditionOn)
         .findFirst()
         .orElse(null);
   }
+
+  @Override
+  public List<T> getAll() {
+    Query q = this.em
+        .createQuery("SELECT t FROM " + this.type.getClass().getSimpleName() + " t", this.type.getClass());
+    return (List<T>) q.getResultList();
+  }
+
+  // --- Deleting --- //
 
   @Override
   public void delete(T someEntity) {
@@ -112,12 +122,9 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
     someEntities.forEach(this::delete);
   }
 
-  @Override
-  public List<T> getAll() {
-    return this.savedEntities;
-  }
-
   protected void initEntityManager() {
     this.em = PerThreadEntityManagers.getEntityManager();
   }
+
+  abstract Object getId(T someEntity);
 }

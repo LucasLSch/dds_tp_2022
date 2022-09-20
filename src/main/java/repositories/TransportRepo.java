@@ -24,4 +24,9 @@ public class TransportRepo extends CrudImpl<Transport> {
     }
     return instance;
   }
+
+  @Override
+  Object getId(Transport someEntity) {
+    return someEntity.getId();
+  }
 }

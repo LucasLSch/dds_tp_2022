@@ -19,4 +19,9 @@ public class SimpleUnitRepo extends CrudImpl<Unit> {
     }
     return instance;
   }
+
+  @Override
+  Object getId(Unit someEntity) {
+    return someEntity.getId();
+  }
 }

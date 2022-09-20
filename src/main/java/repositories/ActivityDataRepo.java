@@ -19,4 +19,9 @@ public class ActivityDataRepo extends CrudImpl<ActivityData> {
     }
     return instance;
   }
+
+  @Override
+  Object getId(ActivityData someEntity) {
+    return someEntity.getId();
+  }
 }

@@ -19,4 +19,9 @@ public class MemberRepo extends CrudImpl<Member> {
     }
     return instance;
   }
+
+  @Override
+  Object getId(Member someEntity) {
+    return someEntity.getId();
+  }
 }

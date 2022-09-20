@@ -26,4 +26,9 @@ public class OrganizationRepo extends CrudImpl<Organization> {
     }
     return instance;
   }
+
+  @Override
+  Object getId(Organization someEntity) {
+    return someEntity.getId();
+  }
 }

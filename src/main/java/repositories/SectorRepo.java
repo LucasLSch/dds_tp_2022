@@ -19,4 +19,9 @@ public class SectorRepo extends CrudImpl<Sector> {
     }
     return instance;
   }
+
+  @Override
+  Object getId(Sector someEntity) {
+    return someEntity.getId();
+  }
 }

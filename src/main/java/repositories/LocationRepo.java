@@ -19,4 +19,9 @@ public class LocationRepo extends CrudImpl<Location> {
     }
     return instance;
   }
+
+  @Override
+  Object getId(Location someEntity) {
+    return someEntity.getId();
+  }
 }

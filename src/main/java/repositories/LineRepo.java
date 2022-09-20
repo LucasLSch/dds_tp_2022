@@ -19,4 +19,9 @@ public class LineRepo extends CrudImpl<Line> {
     }
     return instance;
   }
+
+  @Override
+  Object getId(Line someEntity) {
+    return someEntity.getId();
+  }
 }

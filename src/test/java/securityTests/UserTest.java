@@ -29,7 +29,7 @@ public class UserTest {
 
     AtomicReference<StandardUser> newStandardUser = new AtomicReference<>();
 
-    assertDoesNotThrow( () -> newStandardUser.set(new StandardUser(someUsername, somePassword)));
+    assertDoesNotThrow( () -> newStandardUser.set(new StandardUser(someUsername, somePassword, null)));
     assertEquals(newStandardUser.get().getUsername(), someUsername);
   }
 

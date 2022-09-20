@@ -19,4 +19,9 @@ public class JourneyRepo extends CrudImpl<Journey> {
     }
     return instance;
   }
+
+  @Override
+  Object getId(Journey someEntity) {
+    return someEntity.getId();
+  }
 }

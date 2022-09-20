@@ -19,4 +19,9 @@ public class StopRepo extends CrudImpl<Stop> {
     }
     return instance;
   }
+
+  @Override
+  Object getId(Stop someEntity) {
+    return someEntity.getId();
+  }
 }

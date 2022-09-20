@@ -19,4 +19,9 @@ public class ContactRepo extends CrudImpl<Contact> {
     }
     return instance;
   }
+
+  @Override
+  Object getId(Contact someEntity) {
+    return someEntity.getId();
+  }
 }

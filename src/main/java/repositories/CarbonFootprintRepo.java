@@ -19,4 +19,10 @@ public class CarbonFootprintRepo extends CrudImpl<CarbonFootprint> {
     }
     return instance;
   }
+
+  @Override
+  Object getId(CarbonFootprint someEntity) {
+    System.out.println(someEntity.getId());
+    return someEntity.getId();
+  }
 }

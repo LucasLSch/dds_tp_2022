@@ -19,4 +19,9 @@ public class ConsumptionTypeRepo extends CrudImpl<ConsumptionType> {
     }
     return instance;
   }
+
+  @Override
+  Object getId(ConsumptionType someEntity) {
+    return someEntity.getId();
+  }
 }

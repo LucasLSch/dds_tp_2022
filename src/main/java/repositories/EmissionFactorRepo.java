@@ -19,4 +19,9 @@ public class EmissionFactorRepo extends CrudImpl<EmissionFactor> {
     }
     return instance;
   }
+
+  @Override
+  Object getId(EmissionFactor someEntity) {
+    return someEntity.getId();
+  }
 }

@@ -19,4 +19,9 @@ public class TerritorialSectorRepo extends CrudImpl<TerritorialSector> {
     }
     return instance;
   }
+
+  @Override
+  Object getId(TerritorialSector someEntity) {
+    return someEntity.getId();
+  }
 }

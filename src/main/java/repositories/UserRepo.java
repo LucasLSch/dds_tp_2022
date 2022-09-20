@@ -19,4 +19,9 @@ public class UserRepo extends CrudImpl<User> {
     }
     return instance;
   }
+
+  @Override
+  Object getId(User someEntity) {
+    return someEntity.getId();
+  }
 }

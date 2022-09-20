@@ -19,4 +19,9 @@ public class LegRepo extends CrudImpl<Leg> {
     }
     return instance;
   }
+
+  @Override
+  Object getId(Leg someEntity) {
+    return someEntity.getId();
+  }
 }
