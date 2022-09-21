@@ -48,6 +48,6 @@ public class Reporter {
     }
 
     public String generateTerritorialSectorHistoricalCFReport(Set<Unit> units) {
-      
+
     }
 }

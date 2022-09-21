@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "simple_unit")
+@Table(name = "unit")
 public class Unit {
 
   @Id
