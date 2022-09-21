@@ -8,6 +8,7 @@ import domain.territories.TerritorialSector;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import repositories.OrganizationRepo;
+import repositories.TerritorialSectorRepo;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Reporter {
-/*
+
     public String generateTerritorialSectorCFReport(Set<Unit> units) {
         JSONArray report = new JSONArray();
         List<TerritorialSector> territorialSectors = TerritorialSectorRepo.getInstance().getAll();
@@ -44,5 +45,9 @@ public class Reporter {
                     .put("CarbonFootprint", value));
         });
         return report.toString();
-    }*/
+    }
+
+    public String generateTerritorialSectorHistoricalCFReport(Set<Unit> units) {
+      
+    }
 }
