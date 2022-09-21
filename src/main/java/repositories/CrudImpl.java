@@ -5,7 +5,6 @@ import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -70,7 +69,7 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
     return this.em.getReference(CarbonFootprint.class, this.getId(someEntity)) != null;
   }
 
-  @Override
+  @Override //TODO adaptar a DB
   public T getByCondition(RepoCondition<T> someCondition) {
     return this.savedEntities
         .stream()
@@ -88,14 +87,20 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
 
   // --- Deleting --- //
 
-  @Override
-  public void delete(T someEntity) {
+  private void _delete_(T someEntity) {
     if (this.exists(someEntity)) {
-      this.savedEntities.remove(someEntity);
+      this.em.remove(someEntity);
     }
   }
 
   @Override
+  public void delete(T someEntity) {
+    withTransaction(() -> {
+      this._delete_(someEntity);
+    });
+  }
+
+  @Override // TODO adaptar a BD
   public void deleteByCondition(RepoCondition<T> someCondition) {
     List<T> entitiesToDelete = this.savedEntities
         .stream()
@@ -106,21 +111,31 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
 
   @Override
   public void deleteAll() {
-    this.savedEntities = new ArrayList<>();
+    withTransaction(() -> {
+      Query q = this.em
+          .createQuery("TRUNCATE " + this.type.getClass().getSimpleName());
+    });
   }
 
   @Override
   public void deleteAll(T... someEntities) {
-    Arrays
-        .stream(someEntities)
-        .iterator()
-        .forEachRemaining(this::delete);
+    withTransaction(() -> {
+      Arrays
+          .stream(someEntities)
+          .iterator()
+          .forEachRemaining(this::_delete_);
+    });
   }
 
   @Override
   public void deleteAll(List<T> someEntities) {
-    someEntities.forEach(this::delete);
+    this.withTransaction( () -> {
+      someEntities.forEach(this::_delete_);
+    });
   }
+
+
+  // --- Utils --- //
 
   protected void initEntityManager() {
     this.em = PerThreadEntityManagers.getEntityManager();
