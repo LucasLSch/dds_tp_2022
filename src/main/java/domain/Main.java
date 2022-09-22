@@ -29,10 +29,10 @@ public class Main implements WithGlobalEntityManager, EntityManagerOps, Transact
             entityManager().persist(miCf);
         });*/
 
-        //CarbonFootprintRepo.getInstance().save(miCf);
+        CarbonFootprintRepo.getInstance().save(miCf);
         //List<CarbonFootprint> listaCF = CarbonFootprintRepo.getInstance().getAll();
         //listaCF.forEach( cf -> System.out.format("Id: %d, value: %f%n", cf.getId(), cf.getValue()));
-
+        System.out.println(miCf.getId());
 
     }
 

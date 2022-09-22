@@ -5,6 +5,7 @@ import domain.measurements.unit.Unit;
 import domain.measurements.unit.UnitExpression;
 import domain.organization.Member;
 import domain.organization.Organization;
+import domain.territories.TerritorialSector;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -52,6 +53,10 @@ public class CarbonFootprint {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "activity_data_id")
   private ActivityData activityData;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "territorial_sector_id")
+  private TerritorialSector territorialSector;
 
   public CarbonFootprint(Double value, Set<Unit> units, LocalDate date) {
     this.value = value;

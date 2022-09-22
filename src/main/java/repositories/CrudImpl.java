@@ -66,7 +66,11 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
 
   @Override
   public Boolean exists(T someEntity) {
-    return this.em.getReference(CarbonFootprint.class, this.getId(someEntity)) != null;
+    return this.em.getReference(this.type.getClass(), this.getId(someEntity)) != null;
+  }
+
+  public T getById(Long id) {
+    return (T) this.em.getReference(this.type.getClass(), id);
   }
 
   @Override //TODO adaptar a DB
