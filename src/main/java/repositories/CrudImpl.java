@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public abstract class CrudImpl<T> implements CrudInterface<T> {
@@ -69,6 +70,7 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
     return this.em.getReference(this.type.getClass(), this.getId(someEntity)) != null;
   }
 
+  @Override
   public T getById(Long id) {
     return (T) this.em.getReference(this.type.getClass(), id);
   }
@@ -117,7 +119,7 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
   public void deleteAll() {
     withTransaction(() -> {
       Query q = this.em
-          .createQuery("TRUNCATE " + this.type.getClass().getSimpleName());
+          .createQuery("DELETE FROM " + this.type.getClass().getSimpleName());
     });
   }
 

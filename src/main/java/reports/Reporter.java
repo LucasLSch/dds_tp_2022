@@ -51,14 +51,14 @@ public class Reporter {
         report.put("territorial_sector_id", territorialSectorId);
         JSONArray jsonArrayCF = new JSONArray();
         TerritorialSector ts = TerritorialSectorRepo.getInstance().getById(territorialSectorId);
-        Stream<CarbonFootprint> carbonFootprints =  CarbonFootprintRepo.getInstance().getAll()
+        CarbonFootprintRepo.getInstance().getAll()
                 .stream()
                 .filter( cf -> cf.getTerritorialSector().getId().equals(territorialSectorId) )
                 .sorted(Comparator.comparing(CarbonFootprint::getDate))
                 .forEach(cf -> jsonArrayCF.put(new JSONObject()
                         .put("id", cf.getId())
                         .put("value", cf.getValue())
-                        .put("date", cf.getDate()));
+                        .put("date", cf.getDate())));
         report.put("carbon_footprints", jsonArrayCF);
         return report.toString();
     }
@@ -68,14 +68,14 @@ public class Reporter {
         report.put("organization_id", organizationSectorId);
         JSONArray jsonArrayCF = new JSONArray();
         Organization ts = OrganizationRepo.getInstance().getById(organizationSectorId);
-        Stream<CarbonFootprint> carbonFootprints =  CarbonFootprintRepo.getInstance().getAll()
+        CarbonFootprintRepo.getInstance().getAll()
                 .stream()
                 .filter( cf -> cf.getOrganization().getId().equals(organizationSectorId) )
                 .sorted(Comparator.comparing(CarbonFootprint::getDate))
                 .forEach(cf -> jsonArrayCF.put(new JSONObject()
                         .put("id", cf.getId())
                         .put("value", cf.getValue())
-                        .put("date", cf.getDate()));
+                        .put("date", cf.getDate())));
         report.put("carbon_footprints", jsonArrayCF);
         return report.toString();
     }

@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @Getter
-@Embeddable
 public abstract class UnitExpression {
 
   public static Boolean isConvertibleTo(Set<Unit> su1, Set<Unit> su2) {

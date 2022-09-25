@@ -59,6 +59,11 @@ public class Member {
     this.docNumber = document;
     this.sectors = new HashSet<>();
     this.journeys = new ArrayList<>();
+    this.contacts = new ArrayList<>();
+  }
+
+  public void addContact(Contact someContact) {
+    this.contacts.add(someContact);
   }
 
   public void applyToSector(Sector someSector) {

@@ -4,7 +4,8 @@ public class EmailNotification implements NotificationMethod {
 
   @Override
   public void notify(Contact someContact, String someMessage) {
-    //TODO
+    //TODO completar
+    System.out.println("Fingir que mande un email");
   }
 
 }

@@ -14,6 +14,8 @@ public interface CrudInterface<T> {
 
   Boolean exists(T someEntity);
 
+  T getById(Long id);
+
   T getByCondition(RepoCondition<T> someCondition);
 
   void delete(T someEntity);

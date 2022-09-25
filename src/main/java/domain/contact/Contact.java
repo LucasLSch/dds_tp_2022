@@ -5,10 +5,13 @@ import domain.organization.Organization;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -25,8 +28,8 @@ public class Contact {
   @Column(name = "email")
   private String email;
 
-  @Enumerated(value = EnumType.STRING)
-  private NotificationMethodType method;
+  @Convert(converter = NotificationMethodConverter.class)
+  private NotificationMethod method;
 
   @ManyToOne(fetch = FetchType.LAZY)
   private Organization organization;
