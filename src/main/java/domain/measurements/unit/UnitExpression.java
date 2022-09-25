@@ -3,7 +3,6 @@ package domain.measurements.unit;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Embeddable;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;

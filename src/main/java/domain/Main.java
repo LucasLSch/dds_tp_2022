@@ -6,16 +6,16 @@ import domain.measurements.CarbonFootprint;
 import domain.measurements.unit.BaseUnit;
 import domain.measurements.unit.Proportionality;
 import domain.measurements.unit.Unit;
-import domain.organization.DocType;
 import domain.organization.Member;
 import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
-import repositories.CarbonFootprintRepo;
 import repositories.MemberRepo;
 
-import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Main implements WithGlobalEntityManager, EntityManagerOps, TransactionalOps {
 
@@ -28,24 +28,23 @@ public class Main implements WithGlobalEntityManager, EntityManagerOps, Transact
     //CarbonFootprint miCf = new CarbonFootprint(70.0, unitSet, LocalDate.now());
 
     List<CarbonFootprint> listaCF = new ArrayList<>();
-    listaCF.add(new CarbonFootprint(70.0, unitSet, LocalDate.now()));
-    listaCF.add(new CarbonFootprint(80.0, unitSet, LocalDate.now()));
-    listaCF.add(new CarbonFootprint(90.0, unitSet, LocalDate.now()));
-    listaCF.add(new CarbonFootprint(10.0, unitSet, LocalDate.now()));
-    listaCF.add(new CarbonFootprint(20.0, unitSet, LocalDate.now()));
+    listaCF.add(new CarbonFootprint(70.0, unitSet));
+    listaCF.add(new CarbonFootprint(80.0, unitSet));
+    listaCF.add(new CarbonFootprint(90.0, unitSet));
+    listaCF.add(new CarbonFootprint(10.0, unitSet));
+    listaCF.add(new CarbonFootprint(20.0, unitSet));
 
 
     Member unMiembro = MemberRepo.getInstance().getById(2l);
-//    Contact unContacto = new Contact();
-//    unContacto.setEmail("otroContacto@gmail.com");
-//    unContacto.setPhoneNumber("unTelefonoEnLetrasXD");
-//    unContacto.setMethod(new EmailNotification());
-//    unContacto.setMember(unMiembro);
-//    unMiembro.addContact(unContacto);
+    Contact unContacto = new Contact();
+    unContacto.setEmail("policia@gmail.com");
+    unContacto.setPhoneNumber("911");
+    unContacto.setMethod(new EmailNotification());
+    unMiembro.addContact(unContacto);
 
-    unMiembro.notify("hola");
+    //unMiembro.notify("hola");
 
-//    MemberRepo.getInstance().save(unMiembro);
+    MemberRepo.getInstance().save(unMiembro);
 
 
 //

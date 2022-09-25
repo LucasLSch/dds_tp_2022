@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Set;
 
@@ -30,8 +31,14 @@ public class TerritorialSector {
   }, mappedBy = "territorialSector")
   private Set<TerritorialSectorAgent> agents = Collections.emptySet();
 
-  @OneToMany(mappedBy = "territorialSector")
+  @OneToMany()
+  @JoinColumn(name = "organization_id")
   private Set<Organization> organizations = Collections.emptySet();
+
+  @OneToMany(cascade = CascadeType.PERSIST)
+  @JoinColumn(name = "territorial_sector_id")
+  private Set<CarbonFootprint> carbonFootprints;
+
 
   public TerritorialSector(TerritorialSectorType type, Set<TerritorialSectorAgent> agents, Set<Organization> organizations) {
     this.type = type;
@@ -40,8 +47,16 @@ public class TerritorialSector {
   }
 
   public CarbonFootprint getCF(Set<Unit> units) {
-    return CarbonFootprint.sum(units, this.getOrganizations()
+    CarbonFootprint finalCf = CarbonFootprint.sum(units, this.getOrganizations()
             .stream()
             .map(org -> org.getTotalCarbonFootprint(units)).toArray(CarbonFootprint[]::new));
+
+    this.registerCarbonFootprint(finalCf);
+    return finalCf;
+  }
+
+  private void registerCarbonFootprint(CarbonFootprint someCarbonFootprint) {
+    someCarbonFootprint.setDate(LocalDate.now());
+    this.carbonFootprints.add(someCarbonFootprint);
   }
 }

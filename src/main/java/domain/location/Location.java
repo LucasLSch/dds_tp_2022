@@ -26,15 +26,16 @@ public class Location {
   @Column(name = "street_height")
   private String height;
 
-  public Distance getDistanceTo(Location someLocation) throws IOException {
-    GeoRefAdapter adapter = GeoRefAdapter.getInstance();
-    return adapter.getDistance(this, someLocation);
-  }
 
   public Location(District district, String street, String height) {
     this.district = district;
     this.street = street;
     this.height = height;
+  }
+
+  public Distance getDistanceTo(Location someLocation) throws IOException {
+    GeoRefAdapter adapter = GeoRefAdapter.getInstance();
+    return adapter.getDistance(this, someLocation);
   }
 
   public District getDistrict() {

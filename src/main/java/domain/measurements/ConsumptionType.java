@@ -22,7 +22,8 @@ public class ConsumptionType {
   @Column(name = "name")
   private String name;
 
-  @OneToMany(mappedBy = "consumptionType", cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "consumption_type_id")
   private Set<Unit> units;
 
   @Column(name = "activity")

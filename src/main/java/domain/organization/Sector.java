@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -66,8 +65,7 @@ public class Sector {
     CarbonFootprint sectorCF = getSectorCF(units);
     return new CarbonFootprint(
         sectorCF.getValue() / this.membersAmount(),
-        units,
-        LocalDate.now());
+        units);
   }
 
   public List<Journey> getMembersJourneys() {

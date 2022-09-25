@@ -1,11 +1,7 @@
 package domain.measurements;
 
-import domain.journey.Journey;
 import domain.measurements.unit.Unit;
 import domain.measurements.unit.UnitExpression;
-import domain.organization.Member;
-import domain.organization.Organization;
-import domain.territories.TerritorialSector;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,37 +27,18 @@ public class CarbonFootprint {
   @Column(name = "value")
   private Double value;
 
-  @OneToMany(mappedBy = "carbonFootprint", cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "carbon_footprint_id")
   private Set<Unit> units;
 
   @Column(name = "date")
   @Convert(converter = LocalDateConverter.class)
   private LocalDate date;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "organization_id")
-  private Organization organization;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "member_id")
-  private Member member;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "journey_id")
-  private Journey journey;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "activity_data_id")
-  private ActivityData activityData;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "territorial_sector_id")
-  private TerritorialSector territorialSector;
-
-  public CarbonFootprint(Double value, Set<Unit> units, LocalDate date) {
+  public CarbonFootprint(Double value, Set<Unit> units) {
     this.value = value;
     this.setUnits(units);
-    this.date = date;
   }
 
   public void multiplyValue(Double someFactor) {
@@ -78,7 +55,6 @@ public class CarbonFootprint {
 
   public void setUnits(Set<Unit> units) {
     this.units = units;
-    units.forEach(unit -> unit.setCarbonFootprint(this));
   }
 
   public static CarbonFootprint sum(Set<Unit> objectiveUnits, CarbonFootprint... carbonFootprints) {
@@ -86,7 +62,7 @@ public class CarbonFootprint {
     cfStream = cfStream.map(cf -> cf.getOn(objectiveUnits));
     Double totalValue = cfStream.mapToDouble(CarbonFootprint::getValue).sum();
 
-    return new CarbonFootprint(totalValue, objectiveUnits, LocalDate.now());
+    return new CarbonFootprint(totalValue, objectiveUnits);
   }
 
 

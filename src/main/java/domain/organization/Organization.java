@@ -6,11 +6,11 @@ import domain.location.Location;
 import domain.measurements.ActivityData;
 import domain.measurements.CarbonFootprint;
 import domain.measurements.unit.Unit;
-import domain.territories.TerritorialSector;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -44,15 +44,17 @@ public class Organization {
   @Enumerated(value = EnumType.STRING)
   private OrgType type;
 
-  @OneToMany(mappedBy = "organization")
+  @OneToMany(cascade = CascadeType.PERSIST)
+  @JoinColumn(name = "organization_id")
   private List<ActivityData> activitiesData;
 
-  @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "organization_id")
   private List<Contact> contacts;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "territorial_sector_id")
-  private TerritorialSector territorialSector;
+  @OneToMany(cascade = CascadeType.PERSIST)
+  @JoinColumn(name = "organization_id")
+  private Set<CarbonFootprint> carbonFootprints;
 
   public Organization(String socObj, Location locat, String clasific, OrgType type) {
     this.socialObjective = socObj;
@@ -110,7 +112,10 @@ public class Organization {
     cfList.addAll(this.getActivitiesDataCF(units));
     cfList.addAll(this.getMemberCF(units));
 
-    return CarbonFootprint.sum(units, cfList.toArray(new CarbonFootprint[0]));
+    CarbonFootprint finalCF = CarbonFootprint.sum(units, cfList.toArray(new CarbonFootprint[0]));
+    this.registerCarbonFootprint(finalCF);
+
+    return finalCF;
   }
 
   private List<CarbonFootprint> getMemberCF(Set<Unit> units) {
@@ -126,6 +131,11 @@ public class Organization {
         .stream()
         .map(ad -> ad.getCarbonFootprint(units))
         .collect(Collectors.toList());
+  }
+
+  private void registerCarbonFootprint(CarbonFootprint someCarbonFootprint) {
+    someCarbonFootprint.setDate(LocalDate.now());
+    this.carbonFootprints.add(someCarbonFootprint);
   }
 
   public void notify(String someMessage) {

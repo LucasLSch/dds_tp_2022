@@ -1,13 +1,11 @@
 package repositories;
 
-import domain.measurements.CarbonFootprint;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public abstract class CrudImpl<T> implements CrudInterface<T> {

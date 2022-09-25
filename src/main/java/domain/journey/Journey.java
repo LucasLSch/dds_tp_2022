@@ -38,7 +38,8 @@ public class Journey {
   @JoinColumn(name = "ending_location_id")
   private Location endingLocation;
 
-  @OneToMany(mappedBy = "journey", cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "journey_id")
   @OrderColumn(name = "order_in_list")
   private List<Leg> legList;
 

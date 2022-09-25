@@ -1,8 +1,5 @@
 package domain.measurements.unit;
 
-import domain.measurements.CarbonFootprint;
-import domain.measurements.ConsumptionType;
-import domain.measurements.EmissionFactor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,17 +27,6 @@ public class Unit {
   @Enumerated(value = EnumType.STRING)
   private Proportionality proportionality;
 
-  @ManyToOne
-  @JoinColumn(name = "carbon_footprint_id")
-  private CarbonFootprint carbonFootprint;
-
-  @ManyToOne
-  @JoinColumn(name = "consumption_type_id")
-  private ConsumptionType consumptionType;
-
-  @ManyToOne
-  @JoinColumn(name = "emission_factor_id")
-  private EmissionFactor emissionFactor;
 
   public Unit(
           BaseUnit baseUnit,

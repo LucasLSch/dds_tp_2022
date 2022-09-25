@@ -1,7 +1,6 @@
 package domain.measurements;
 
 import domain.measurements.unit.Unit;
-import domain.organization.Organization;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,22 +33,20 @@ public class ActivityData {
   @Column(name = "periodicity")
   private String periodicity;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "organization_id")
-  private Organization organization;
+  @OneToMany(cascade = CascadeType.PERSIST)
+  @JoinColumn(name = "activity_data")
+  private Set<CarbonFootprint> carbonFootprints;
 
   public ActivityData(
           ConsumptionType consumptionType,
           Double consumptionValue,
           PeriodicityFormat periodicityFormat,
-          String periodicity,
-          Organization organization
+          String periodicity
   ) {
     this.consumptionType = consumptionType;
     this.consumptionValue = consumptionValue;
     this.periodicityFormat = periodicityFormat;
     this.periodicity = periodicity;
-    this.organization = organization;
   }
 
   public LocalDate getPeriodicityDate() {
@@ -59,6 +56,14 @@ public class ActivityData {
   public CarbonFootprint getCarbonFootprint(Set<Unit> objectiveUnits) {
     Double value = this.getConsumptionValue() * this.getConsumptionType().getEmissionFactorValue();
     Set<Unit> units = this.consumptionType.getUnits();
-    return new CarbonFootprint(value, units, LocalDate.now()).getOn(objectiveUnits);
+
+    CarbonFootprint finalCF = new CarbonFootprint(value, units);
+    this.registerCarbonFootprint(finalCF);
+    return finalCF;
+  }
+
+  private void registerCarbonFootprint(CarbonFootprint someCarbonFootprint) {
+    someCarbonFootprint.setDate(LocalDate.now());
+    this.carbonFootprints.add(someCarbonFootprint);
   }
 }

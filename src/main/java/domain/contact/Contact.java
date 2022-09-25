@@ -1,12 +1,9 @@
 package domain.contact;
 
-import domain.organization.Member;
-import domain.organization.Organization;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -31,11 +28,6 @@ public class Contact {
   @Convert(converter = NotificationMethodConverter.class)
   private NotificationMethod method;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  private Organization organization;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  private Member member;
 
   public void notify(String someMessage) {
     this.method.notify(this, someMessage);

@@ -7,12 +7,13 @@ import domain.organization.Organization;
 import domain.territories.TerritorialSector;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import repositories.CarbonFootprintRepo;
 import repositories.OrganizationRepo;
 import repositories.TerritorialSectorRepo;
 
-import java.util.*;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 public class Reporter {
 
@@ -46,37 +47,38 @@ public class Reporter {
         return report.toString();
     }
 
-    public String generateTerritorialSectorHistoricalCFReport(Set<Unit> units, Long territorialSectorId) {
-        JSONObject report = new JSONObject();
-        report.put("territorial_sector_id", territorialSectorId);
-        JSONArray jsonArrayCF = new JSONArray();
-        TerritorialSector ts = TerritorialSectorRepo.getInstance().getById(territorialSectorId);
-        CarbonFootprintRepo.getInstance().getAll()
-                .stream()
-                .filter( cf -> cf.getTerritorialSector().getId().equals(territorialSectorId) )
-                .sorted(Comparator.comparing(CarbonFootprint::getDate))
-                .forEach(cf -> jsonArrayCF.put(new JSONObject()
-                        .put("id", cf.getId())
-                        .put("value", cf.getValue())
-                        .put("date", cf.getDate())));
-        report.put("carbon_footprints", jsonArrayCF);
-        return report.toString();
-    }
+    //TODO arreglar el get
+//    public String generateTerritorialSectorHistoricalCFReport(Set<Unit> units, Long territorialSectorId) {
+//        JSONObject report = new JSONObject();
+//        report.put("territorial_sector_id", territorialSectorId);
+//        JSONArray jsonArrayCF = new JSONArray();
+//        TerritorialSector ts = TerritorialSectorRepo.getInstance().getById(territorialSectorId);
+//        CarbonFootprintRepo.getInstance().getAll()
+//                .stream()
+//                .filter( cf -> cf.getTerritorialSector().getId().equals(territorialSectorId) )
+//                .sorted(Comparator.comparing(CarbonFootprint::getDate))
+//                .forEach(cf -> jsonArrayCF.put(new JSONObject()
+//                        .put("id", cf.getId())
+//                        .put("value", cf.getValue())
+//                        .put("date", cf.getDate())));
+//        report.put("carbon_footprints", jsonArrayCF);
+//        return report.toString();
+//    }
 
-    public String generateOrganizationHistoricalCFReport(Set<Unit> units, Long organizationSectorId) {
-        JSONObject report = new JSONObject();
-        report.put("organization_id", organizationSectorId);
-        JSONArray jsonArrayCF = new JSONArray();
-        Organization ts = OrganizationRepo.getInstance().getById(organizationSectorId);
-        CarbonFootprintRepo.getInstance().getAll()
-                .stream()
-                .filter( cf -> cf.getOrganization().getId().equals(organizationSectorId) )
-                .sorted(Comparator.comparing(CarbonFootprint::getDate))
-                .forEach(cf -> jsonArrayCF.put(new JSONObject()
-                        .put("id", cf.getId())
-                        .put("value", cf.getValue())
-                        .put("date", cf.getDate())));
-        report.put("carbon_footprints", jsonArrayCF);
-        return report.toString();
-    }
+//    public String generateOrganizationHistoricalCFReport(Set<Unit> units, Long organizationSectorId) {
+//        JSONObject report = new JSONObject();
+//        report.put("organization_id", organizationSectorId);
+//        JSONArray jsonArrayCF = new JSONArray();
+//        Organization ts = OrganizationRepo.getInstance().getById(organizationSectorId);
+//        CarbonFootprintRepo.getInstance().getAll()
+//                .stream()
+//                .filter( cf -> cf.getOrganization().getId().equals(organizationSectorId) )
+//                .sorted(Comparator.comparing(CarbonFootprint::getDate))
+//                .forEach(cf -> jsonArrayCF.put(new JSONObject()
+//                        .put("id", cf.getId())
+//                        .put("value", cf.getValue())
+//                        .put("date", cf.getDate())));
+//        report.put("carbon_footprints", jsonArrayCF);
+//        return report.toString();
+//    }
 }

@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -49,8 +50,13 @@ public class Member {
   @Column(name = "doc_number")
   private String docNumber;
 
-  @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "member_id")
   private List<Contact> contacts;
+
+  @OneToMany(cascade = CascadeType.PERSIST)
+  @JoinColumn(name = "member_id")
+  private Set<CarbonFootprint> carbonFootprints;
 
   public Member(String name, String surname, DocType docType, String document) {
     this.name = name;
@@ -126,11 +132,19 @@ public class Member {
   }
 
   public CarbonFootprint getPersonalCF(Set<Unit> units) {
-    return CarbonFootprint.sum(units, this.journeys
+    CarbonFootprint finalCF =  CarbonFootprint.sum(units, this.journeys
         .stream()
         .map(journey -> journey
             .getCarbonFootprint(units))
             .toArray(CarbonFootprint[]::new));
+
+    this.registerCarbonFootprint(finalCF);
+    return finalCF;
+  }
+
+  private void registerCarbonFootprint(CarbonFootprint someCarbonFootprint) {
+    someCarbonFootprint.setDate(LocalDate.now());
+    this.carbonFootprints.add(someCarbonFootprint);
   }
 
   public void notify(String someMessage) {

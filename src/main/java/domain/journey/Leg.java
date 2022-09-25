@@ -38,10 +38,6 @@ public class Leg {
   @JoinColumn(name = "transport_id")
   private Transport transport;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "journey_id")
-  private Journey journey;
-
   public Leg(Location someStartLocation, Location someEndLocation, Transport someTransport) {
     this.startingLocation = someStartLocation;
     this.endingLocation = someEndLocation;
@@ -60,8 +56,7 @@ public class Leg {
     return new ActivityData(consumptionType,
         consumption,
         PeriodicityFormat.MMAAAA,
-        LocalDate.now().format(DateTimeFormatter.ofPattern("MM/yyyy")),
-        null);
+        LocalDate.now().format(DateTimeFormatter.ofPattern("MM/yyyy")));
   }
 
   public Boolean isShareable() {
