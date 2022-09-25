@@ -20,7 +20,7 @@ public class EcoFriendly extends Transport {
 
   @Override
   public Double getFuelConsumptionPerKm() {
-    return 0d;
+    return this.fuelConsumptionPerKm;
   }
 
   @Override
