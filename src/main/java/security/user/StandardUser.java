@@ -1,12 +1,16 @@
 package security.user;
 
 import domain.organization.Member;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.IOException;
 
 @NoArgsConstructor
+@Setter
+@Getter
 @Entity
 @DiscriminatorValue(value = "STANDARD_USER")
 public class StandardUser extends User {

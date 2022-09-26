@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import repositories.ConsumptionTypeRepo;
+import security.user.StandardUser;
+import security.user.User;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -142,7 +144,8 @@ public class TestDataFill {
     Assertions.assertTrue(true);
   }
 
-  private void createUser() {
+  private User createUser() {
+    return null;
   }
 
   private void createTransport() {
