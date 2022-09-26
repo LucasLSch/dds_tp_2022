@@ -25,12 +25,6 @@ public class TerritorialSector {
   @Enumerated(value = EnumType.STRING)
   private TerritorialSectorType type;
 
-  @OneToMany(cascade = {
-          CascadeType.REFRESH,
-          CascadeType.PERSIST
-  }, mappedBy = "territorialSector")
-  private Set<TerritorialSectorAgent> agents = Collections.emptySet();
-
   @OneToMany()
   @JoinColumn(name = "organization_id")
   private Set<Organization> organizations = Collections.emptySet();
@@ -40,9 +34,8 @@ public class TerritorialSector {
   private Set<CarbonFootprint> carbonFootprints;
 
 
-  public TerritorialSector(TerritorialSectorType type, Set<TerritorialSectorAgent> agents, Set<Organization> organizations) {
+  public TerritorialSector(TerritorialSectorType type, Set<Organization> organizations) {
     this.type = type;
-    this.agents = agents;
     this.organizations = organizations;
   }
 
