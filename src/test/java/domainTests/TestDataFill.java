@@ -6,13 +6,17 @@ import domain.measurements.unit.BaseUnit;
 import domain.measurements.unit.Proportionality;
 import domain.measurements.unit.Unit;
 import domain.measurements.unit.UnitExpression;
+import domain.organization.DocType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import repositories.ConsumptionTypeRepo;
+import repositories.UserRepo;
+import security.user.Registration;
 import security.user.StandardUser;
 import security.user.User;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +26,7 @@ public class TestDataFill {
   public TestDataFill() {}
 
   @BeforeEach
-  public void fillRepos() {
+  public void fillRepos() throws IOException {
     this.createConsumptionType();
     this.createStop();
     this.createLine();
@@ -144,7 +148,22 @@ public class TestDataFill {
     Assertions.assertTrue(true);
   }
 
-  private void createUser() {
+  private void createUser() throws IOException {
+    User[] users = {
+            new Registration()
+                    .setMember("Gonzalo", "Rodriguez Pardo", DocType.ID, "42.877.601")
+                    .registerStandardUser("Pardios", "1Contra$enia"),
+            new Registration()
+                    .setMember("Lucas", "Schneider", DocType.ID, "42.396.327")
+                    .registerStandardUser("Pastita", "1Contra$enia"),
+            new Registration()
+                    .setSectorAgent()
+                    .registerAgentUser("Agent_Smith", "1Contra$enia"),
+            new Registration()
+                    .registerAdminUser("UltrAdmin", "1Contra$enia")
+    };
+
+    UserRepo.getInstance().saveAll(users);
   }
 
   private void createTransport() {
