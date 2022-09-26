@@ -144,8 +144,7 @@ public class TestDataFill {
     Assertions.assertTrue(true);
   }
 
-  private User createUser() {
-    return null;
+  private void createUser() {
   }
 
   private void createTransport() {
