@@ -1,16 +1,17 @@
 package repositories;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public abstract class CrudImpl<T> implements CrudInterface<T> {
 
-  private List<T> savedEntities;
   protected EntityManager em;
   protected T type;
 
@@ -73,13 +74,21 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
     return (T) this.em.getReference(this.type.getClass(), id);
   }
 
-  @Override //TODO adaptar a DB
-  public T getByCondition(RepoCondition<T> someCondition) {
-    return this.savedEntities
-        .stream()
-        .filter(someCondition::testConditionOn)
-        .findFirst()
-        .orElse(null);
+  @Override
+  public List<T> getByCondition(Criterion someCriterion) {
+    Session session = this.em.unwrap(Session.class);
+    Criteria criteria = session.createCriteria(this.type.getClass());
+    criteria.add(someCriterion);
+
+    List<T> results = null;
+    this.em.getTransaction().begin();
+    try {
+      results = (List<T>) criteria.list();
+      this.em.getTransaction().commit();
+    } catch (Exception e) {
+      this.em.getTransaction().rollback();
+    }
+    return results;
   }
 
   @Override
@@ -99,18 +108,15 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
 
   @Override
   public void delete(T someEntity) {
-    withTransaction(() -> {
-      this._delete_(someEntity);
-    });
+    withTransaction(() -> this._delete_(someEntity));
   }
 
-  @Override // TODO adaptar a BD
-  public void deleteByCondition(RepoCondition<T> someCondition) {
-    List<T> entitiesToDelete = this.savedEntities
-        .stream()
-        .filter(someCondition::testConditionOn)
-        .collect(Collectors.toList());
-    this.deleteAll(entitiesToDelete);
+  @Override
+  public void deleteByCondition(Criterion someCriterion) {
+    Session session = this.em.unwrap(Session.class);
+    Criteria criteria = session.createCriteria(this.type.getClass());
+    criteria.add(someCriterion);
+    withTransaction(() -> this.deleteAll((List<T>) criteria.list()));
   }
 
   @Override

@@ -1,5 +1,7 @@
 package repositories;
 
+import org.hibernate.criterion.Criterion;
+
 import java.util.List;
 
 public interface CrudInterface<T> {
@@ -16,11 +18,11 @@ public interface CrudInterface<T> {
 
   T getById(Long id);
 
-  T getByCondition(RepoCondition<T> someCondition);
+  List<T> getByCondition(Criterion someCriterion);
 
   void delete(T someEntity);
 
-  void deleteByCondition(RepoCondition<T> someCondition);
+  void deleteByCondition(Criterion someCriterion);
 
   void deleteAll();
 
