@@ -1,59 +1,207 @@
 package domainTests;
 
-import domain.journey.transport.*;
-import org.junit.jupiter.api.BeforeAll;
-import repositories.*;
+import domain.measurements.ConsumptionType;
+import domain.measurements.EmissionFactor;
+import domain.measurements.unit.BaseUnit;
+import domain.measurements.unit.Proportionality;
+import domain.measurements.unit.Unit;
+import domain.measurements.unit.UnitExpression;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import repositories.ConsumptionTypeRepo;
 
-public abstract class TestDataFill {
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
-  private ActivityDataRepo activityDataRepo = ActivityDataRepo.getInstance();
-  private ConsumptionTypeRepo consumptionTypeRepo = ConsumptionTypeRepo.getInstance();
-  private EmissionFactorRepo emissionFactorRepo = EmissionFactorRepo.getInstance();
-  private JourneyRepo journeyRepo = JourneyRepo.getInstance();
-  private LegRepo legRepo = LegRepo.getInstance();
-  private LineRepo lineRepo = LineRepo.getInstance();
-  private LocationRepo locationRepo = LocationRepo.getInstance();
-  private MemberRepo memberRepo = MemberRepo.getInstance();
-  private OrganizationRepo organizationRepo = OrganizationRepo.getInstance();
-  private SectorRepo sectorRepo = SectorRepo.getInstance();
-  private StopRepo stopRepo = StopRepo.getInstance();
-  private TransportRepo transportRepo = TransportRepo.getInstance();
+public class TestDataFill {
 
-  protected TestDataFill() {
-    /// TODO
-  }
+  public TestDataFill() {}
 
-  @BeforeAll
+  @BeforeEach
   public void fillRepos() {
-    this.createLines();
-    this.createTransports();
+    this.createConsumptionType();
+    this.createStop();
+    this.createLine();
+    this.createTransport();
+    this.createLeg();
+    this.createJourney();
+    this.createMember();
+    this.createSector();
+    this.createActivityData();
+    this.createOrganization();
+    this.createTerritorialSector();
+    this.createTerritorialSectorAgent();
+    this.createUser();
   }
 
-  private void createTransports() {
-    Transport[] transports = {
-        new ParticularVehicle(10d, ParticularVehicleType.CAR, Fuel.ELECTRIC),
-        new ParticularVehicle(15d, ParticularVehicleType.MOTORBIKE, Fuel.GASOIL),
-        new ParticularVehicle(20d, ParticularVehicleType.VAN, Fuel.GNC),
-        new HiredService(10d, HiredServiceType.TAXI, "Taxi-123"),
-        new HiredService(15d, HiredServiceType.APPLICATION, "NotUber"),
-        new EcoFriendly(EcoFriendlyType.WALKING),
-        new EcoFriendly(EcoFriendlyType.BICYCLE),
-        new EcoFriendly(EcoFriendlyType.SCOOTER)
-        // falta transporte publico
+  private void createConsumptionType() {
+
+    Set<Unit> unitsForNaturalGas = new HashSet<>(Arrays.asList(
+        kilogram(Proportionality.DIRECT),
+        cubicMeter(Proportionality.INVERSE)
+    ));
+
+    Set<Unit> unitsForOilGas = new HashSet<>(Arrays.asList(
+        kilogram(Proportionality.DIRECT),
+        liter(Proportionality.INVERSE)
+    ));
+
+    Set<Unit> unitsForCarbon = new HashSet<>(Arrays.asList(
+        kilogram(Proportionality.DIRECT),
+        kilogram(Proportionality.INVERSE)
+    ));
+
+    Set<Unit> unitsForElectricity = new HashSet<>(Arrays.asList(
+        kilogram(Proportionality.DIRECT),
+        second(Proportionality.DIRECT),
+        kilowatt(Proportionality.INVERSE)
+    ));
+
+    Set<Unit> unitsForTransport = new HashSet<>(Arrays.asList(
+        kilogram(Proportionality.DIRECT),
+        kilometer(Proportionality.INVERSE)
+    ));
+
+    EmissionFactor[] efs = {
+        new EmissionFactor(1d, unitsForNaturalGas),
+        new EmissionFactor(2d, unitsForOilGas),
+        new EmissionFactor(3d, unitsForOilGas),
+        new EmissionFactor(4d, unitsForCarbon),
+        new EmissionFactor(5d, unitsForOilGas),
+        new EmissionFactor(6d, unitsForOilGas),
+        new EmissionFactor(7d, unitsForElectricity),
+        new EmissionFactor(8d, unitsForTransport)
     };
 
-    this.transportRepo.saveAll(transports);
-  }
+    ConsumptionType[] cts = {
+        new ConsumptionType("Gas Natural",
+            new HashSet<>(Arrays.asList(cubicMeter(Proportionality.DIRECT))),
+            "Combustion fija",
+            "Emisiones directas",
+            efs[0]),
 
-  private void createLines() {
-/*
-    Stop[] stops = {
-        new Stop()
+        new ConsumptionType("Diesel/Gasoil",
+            new HashSet<>(Arrays.asList(liter(Proportionality.DIRECT))),
+            "Combustion fija",
+            "Emisiones directas",
+            efs[1]),
+
+        new ConsumptionType("Nafta",
+            new HashSet<>(Arrays.asList(liter(Proportionality.DIRECT))),
+            "Combustion fija",
+            "Emisiones directas",
+            efs[2]),
+
+        new ConsumptionType("Carbon",
+            new HashSet<>(Arrays.asList(kilogram(Proportionality.DIRECT))),
+            "Combustion fija",
+            "Emisiones directas",
+            efs[3]),
+
+        new ConsumptionType("Combustible Consumido - Gasoil",
+            new HashSet<>(Arrays.asList(liter(Proportionality.DIRECT))),
+            "Combustion movil",
+            "Emisiones directas",
+            efs[4]),
+
+        new ConsumptionType("Combustilbe Consumido - Nafta",
+            new HashSet<>(Arrays.asList(liter(Proportionality.DIRECT))),
+            "Combustion movil",
+            "Emisiones directas",
+            efs[5]),
+
+        new ConsumptionType("Electricidad",
+            new HashSet<>(Arrays.asList(kilowatt(Proportionality.DIRECT),
+                second(Proportionality.INVERSE))),
+            "Electricidad adquirida y consumida",
+            "Emisiones indirectas asociadas a la electricidad",
+            efs[6]),
+
+        new ConsumptionType("Medio de Transporte - Distancia Recorrida",
+            new HashSet<>(Arrays.asList(kilometer(Proportionality.DIRECT))),
+            "Logistica de productos y residuos",
+            "Otras emisiones indirectas que ocurren en fuentes no controladas por la organizacion",
+            efs[7]),
     };
 
-    Line nuevaLinea = new Line();
-*/
+    ConsumptionTypeRepo.getInstance().saveAll(cts);
   }
 
+  @Test
+  public void testDePruebaQueNOHaceNada() {
+    ConsumptionTypeRepo.getInstance().getAll().forEach( ct -> {
+      System.out.format("Id: %d\nNombre: %s\nUnidades: %s\nFE: %f\n\n",
+          ct.getId(),
+          ct.getName(),
+          UnitExpression.printUnits(ct.getUnits()),
+          ct.getEmissionFactor().getValue());
+        });
+
+    Assertions.assertTrue(true);
+  }
+
+  private void createUser() {
+  }
+
+  private void createTransport() {
+  }
+
+  private void createTerritorialSector() {
+  }
+
+  private void createTerritorialSectorAgent() {
+  }
+
+  private void createStop() {
+  }
+
+  private void createSector() {
+  }
+
+  private void createOrganization() {
+  }
+
+  private void createMember() {
+  }
+
+  private void createLine() {
+  }
+
+  private void createLeg() {
+  }
+
+  private void createJourney() {
+  }
+
+  private void createActivityData() {
+  }
+
+  // Utils
+
+  private static Unit kilogram(Proportionality prop) {
+    return new Unit(BaseUnit.GRAM, 3, prop);
+  }
+
+  private static Unit cubicMeter(Proportionality prop) {
+    return new Unit(BaseUnit.LITER, 3, prop);
+  }
+
+  private static Unit liter(Proportionality prop) {
+    return new Unit(BaseUnit.LITER, 0, prop);
+  }
+
+  private static Unit kilometer(Proportionality prop) {
+    return new Unit(BaseUnit.METER, 3, prop);
+  }
+
+  private static Unit second(Proportionality prop) {
+    return new Unit(BaseUnit.SECOND, 0, prop);
+  }
+
+  private static Unit kilowatt(Proportionality prop) {
+    return new Unit(BaseUnit.WATT, 3, prop);
+  }
 
 }

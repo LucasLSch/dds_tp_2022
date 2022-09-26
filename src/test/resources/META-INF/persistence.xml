@@ -8,6 +8,24 @@
     <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
+        <class>domain.measurements.ActivityData</class>
+        <class>domain.measurements.CarbonFootprint</class>
+        <class>domain.measurements.ConsumptionType</class>
+        <class>domain.contact.Contact</class>
+        <class>domain.measurements.EmissionFactor</class>
+        <class>domain.journey.Journey</class>
+        <class>domain.journey.Leg</class>
+        <class>domain.journey.transport.Line</class>
+        <class>domain.location.Location</class>
+        <class>domain.organization.Member</class>
+        <class>domain.organization.Organization</class>
+        <class>domain.organization.Sector</class>
+        <class>domain.measurements.unit.Unit</class>
+        <class>domain.journey.transport.Stop</class>
+        <class>domain.territories.TerritorialSectorAgent</class>
+        <class>domain.territories.TerritorialSector</class>
+        <class>domain.journey.transport.Transport</class>
+        <class>security.user.User</class>
 
         <properties>
             <property name="hibernate.archive.autodetection" value="class"/>

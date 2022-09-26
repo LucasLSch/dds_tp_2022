@@ -50,4 +50,7 @@ public class Unit {
     return this.proportionality.equals(Proportionality.DIRECT);
   }
 
+  public String print() {
+    return this.baseUnit.toString() + "exp" + this.exponent.toString();
+  }
 }
