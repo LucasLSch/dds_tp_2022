@@ -13,7 +13,7 @@ import java.util.List;
 public abstract class CrudImpl<T> implements CrudInterface<T> {
 
   protected EntityManager em;
-  protected T type;
+  protected Class<T> type;
 
   protected void withTransaction(Runnable block) {
     this.em.getTransaction().begin();
@@ -60,24 +60,24 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
   @Override
   public Long count() {
     Query q = this.em
-        .createQuery("SELECT COUNT(t) FROM " + this.type.getClass().getSimpleName() + " t");
+        .createQuery("SELECT COUNT(t) FROM " + this.type.getSimpleName() + " t");
     return (Long) q.getResultList().get(0);
   }
 
   @Override
   public Boolean exists(T someEntity) {
-    return this.em.getReference(this.type.getClass(), this.getId(someEntity)) != null;
+    return this.em.getReference(this.type, this.getId(someEntity)) != null;
   }
 
   @Override
   public T getById(Long id) {
-    return (T) this.em.getReference(this.type.getClass(), id);
+    return (T) this.em.getReference(this.type, id);
   }
 
   @Override
   public List<T> getByCondition(Criterion someCriterion) {
     Session session = this.em.unwrap(Session.class);
-    Criteria criteria = session.createCriteria(this.type.getClass());
+    Criteria criteria = session.createCriteria(this.type);
     criteria.add(someCriterion);
 
     List<T> results = null;
@@ -94,7 +94,7 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
   @Override
   public List<T> getAll() {
     Query q = this.em
-        .createQuery("SELECT t FROM " + this.type.getClass().getSimpleName() + " t", this.type.getClass());
+        .createQuery("SELECT t FROM " + this.type.getSimpleName() + " t", this.type);
     return (List<T>) q.getResultList();
   }
 
@@ -114,7 +114,7 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
   @Override
   public void deleteByCondition(Criterion someCriterion) {
     Session session = this.em.unwrap(Session.class);
-    Criteria criteria = session.createCriteria(this.type.getClass());
+    Criteria criteria = session.createCriteria(this.type);
     criteria.add(someCriterion);
     withTransaction(() -> this.deleteAll((List<T>) criteria.list()));
   }
@@ -123,7 +123,7 @@ public abstract class CrudImpl<T> implements CrudInterface<T> {
   public void deleteAll() {
     withTransaction(() -> {
       Query q = this.em
-          .createQuery("DELETE FROM " + this.type.getClass().getSimpleName());
+          .createQuery("DELETE FROM " + this.type.getSimpleName());
     });
   }
 

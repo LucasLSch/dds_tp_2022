@@ -1,6 +1,7 @@
 package repositories;
 
 import domain.measurements.ConsumptionType;
+import security.user.User;
 
 public class ConsumptionTypeRepo extends CrudImpl<ConsumptionType> {
 
@@ -9,7 +10,11 @@ public class ConsumptionTypeRepo extends CrudImpl<ConsumptionType> {
   private static ConsumptionTypeRepo instance = null;
 
   private ConsumptionTypeRepo() {
-    this.type = new ConsumptionType();
+    try {
+      this.type = (Class<ConsumptionType>) Class.forName("domain.measurements.ConsumptionType");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
   }
 
   public static ConsumptionTypeRepo getInstance() {

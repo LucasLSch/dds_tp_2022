@@ -9,7 +9,11 @@ public class UserRepo extends CrudImpl<User> {
   private static UserRepo instance = null;
 
   private UserRepo() {
-    this.type = new User(){};
+    try {
+      this.type = (Class<User>) Class.forName("security.user.User");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
   }
 
   public static UserRepo getInstance() {

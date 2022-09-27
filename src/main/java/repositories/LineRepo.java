@@ -1,6 +1,7 @@
 package repositories;
 
 import domain.journey.transport.Line;
+import security.user.User;
 
 public class LineRepo extends CrudImpl<Line> {
 
@@ -9,7 +10,11 @@ public class LineRepo extends CrudImpl<Line> {
   private static LineRepo instance = null;
 
   private LineRepo() {
-    this.type = new Line();
+    try {
+      this.type = (Class<Line>) Class.forName("domain.journey.transport.Line");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
   }
 
   public static LineRepo getInstance() {

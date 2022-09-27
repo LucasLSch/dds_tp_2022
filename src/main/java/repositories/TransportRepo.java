@@ -1,6 +1,7 @@
 package repositories;
 
 import domain.journey.transport.Transport;
+import security.user.User;
 
 public class TransportRepo extends CrudImpl<Transport> {
 
@@ -9,12 +10,11 @@ public class TransportRepo extends CrudImpl<Transport> {
   private static TransportRepo instance = null;
 
   private TransportRepo() {
-    this.type = new Transport(){
-      @Override
-      public Boolean isShareable() {
-        return null;
-      }
-    };
+    try {
+      this.type = (Class<Transport>) Class.forName("domain.journey.transport.Transport");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
   }
 
   public static TransportRepo getInstance() {

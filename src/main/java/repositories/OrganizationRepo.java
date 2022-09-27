@@ -1,6 +1,7 @@
 package repositories;
 
 import domain.organization.Organization;
+import security.user.User;
 
 import javax.persistence.EntityManager;
 
@@ -13,7 +14,11 @@ public class OrganizationRepo extends CrudImpl<Organization> {
   private static OrganizationRepo instance = null;
 
   private OrganizationRepo() {
-    this.type = new Organization();
+    try {
+      this.type = (Class<Organization>) Class.forName("domain.organization.Organization");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
   }
 
   public static OrganizationRepo getInstance() {

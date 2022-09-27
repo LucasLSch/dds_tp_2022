@@ -1,6 +1,7 @@
 package repositories;
 
 import domain.location.Location;
+import security.user.User;
 
 public class LocationRepo extends CrudImpl<Location> {
 
@@ -9,7 +10,11 @@ public class LocationRepo extends CrudImpl<Location> {
   private static LocationRepo instance = null;
 
   private LocationRepo() {
-    this.type = new Location();
+    try {
+      this.type = (Class<Location>) Class.forName("domain.location.Location");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
   }
 
   public static LocationRepo getInstance() {

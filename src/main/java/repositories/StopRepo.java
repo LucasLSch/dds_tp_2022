@@ -1,6 +1,7 @@
 package repositories;
 
 import domain.journey.transport.Stop;
+import security.user.User;
 
 public class StopRepo extends CrudImpl<Stop> {
 
@@ -9,7 +10,11 @@ public class StopRepo extends CrudImpl<Stop> {
   private static StopRepo instance = null;
 
   private StopRepo() {
-    this.type = new Stop();
+    try {
+      this.type = (Class<Stop>) Class.forName("domain.journey.transport.Stop");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
   }
 
   public static StopRepo getInstance() {

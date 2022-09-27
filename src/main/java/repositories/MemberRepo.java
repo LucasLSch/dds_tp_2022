@@ -1,6 +1,7 @@
 package repositories;
 
 import domain.organization.Member;
+import security.user.User;
 
 public class MemberRepo extends CrudImpl<Member> {
 
@@ -9,7 +10,11 @@ public class MemberRepo extends CrudImpl<Member> {
   private static MemberRepo instance = null;
 
   private MemberRepo() {
-    this.type = new Member();
+    try {
+      this.type = (Class<Member>) Class.forName("domain.organization.Member");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
   }
 
   public static MemberRepo getInstance() {

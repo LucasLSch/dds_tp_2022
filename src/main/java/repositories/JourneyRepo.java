@@ -1,6 +1,7 @@
 package repositories;
 
 import domain.journey.Journey;
+import security.user.User;
 
 public class JourneyRepo extends CrudImpl<Journey> {
 
@@ -9,7 +10,11 @@ public class JourneyRepo extends CrudImpl<Journey> {
   private static JourneyRepo instance = null;
 
   private JourneyRepo() {
-    this.type = new Journey();
+    try {
+      this.type = (Class<Journey>) Class.forName("domain.journey.Journey");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
   }
 
   public static JourneyRepo getInstance() {

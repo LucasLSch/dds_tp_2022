@@ -1,6 +1,7 @@
 package repositories;
 
 import domain.measurements.ActivityData;
+import security.user.User;
 
 public class ActivityDataRepo extends CrudImpl<ActivityData> {
 
@@ -9,7 +10,11 @@ public class ActivityDataRepo extends CrudImpl<ActivityData> {
   private static ActivityDataRepo instance = null;
 
   private ActivityDataRepo() {
-    this.type = new ActivityData();
+    try {
+      this.type = (Class<ActivityData>) Class.forName("domain.measurements.ActivityData");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
   }
 
   public static ActivityDataRepo getInstance() {

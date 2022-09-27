@@ -1,6 +1,7 @@
 package repositories;
 
 import domain.journey.Leg;
+import security.user.User;
 
 public class LegRepo extends CrudImpl<Leg> {
 
@@ -9,7 +10,11 @@ public class LegRepo extends CrudImpl<Leg> {
   private static LegRepo instance = null;
 
   private LegRepo() {
-    this.type = new Leg();
+    try {
+      this.type = (Class<Leg>) Class.forName("domain.journey.Leg");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
   }
 
   public static LegRepo getInstance() {

@@ -1,6 +1,7 @@
 package repositories;
 
 import domain.measurements.unit.Unit;
+import security.user.User;
 
 public class SimpleUnitRepo extends CrudImpl<Unit> {
 
@@ -9,7 +10,11 @@ public class SimpleUnitRepo extends CrudImpl<Unit> {
   private static SimpleUnitRepo instance = null;
 
   private SimpleUnitRepo() {
-    this.type = new Unit();
+    try {
+      this.type = (Class<Unit>) Class.forName("domain.measurements.unit.Unit");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
   }
 
   public static SimpleUnitRepo getInstance() {

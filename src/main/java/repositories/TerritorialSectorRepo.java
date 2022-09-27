@@ -1,6 +1,7 @@
 package repositories;
 
 import domain.territories.TerritorialSector;
+import security.user.User;
 
 public class TerritorialSectorRepo extends CrudImpl<TerritorialSector> {
 
@@ -9,7 +10,11 @@ public class TerritorialSectorRepo extends CrudImpl<TerritorialSector> {
   private static TerritorialSectorRepo instance = null;
 
   private TerritorialSectorRepo() {
-    this.type = new TerritorialSector();
+    try {
+      this.type = (Class<TerritorialSector>) Class.forName("domain.territories.TerritorialSector");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
   }
 
   public static TerritorialSectorRepo getInstance() {

@@ -1,6 +1,7 @@
 package repositories;
 
 import domain.measurements.CarbonFootprint;
+import security.user.User;
 
 public class CarbonFootprintRepo extends CrudImpl<CarbonFootprint> {
 
@@ -9,7 +10,11 @@ public class CarbonFootprintRepo extends CrudImpl<CarbonFootprint> {
   private static CarbonFootprintRepo instance = null;
 
   private CarbonFootprintRepo() {
-    this.type = new CarbonFootprint();
+    try {
+      this.type = (Class<CarbonFootprint>) Class.forName("domain.measurements.CarbonFootprint");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
   }
 
   public static CarbonFootprintRepo getInstance() {

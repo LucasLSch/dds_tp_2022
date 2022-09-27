@@ -1,6 +1,7 @@
 package repositories;
 
 import domain.organization.Sector;
+import security.user.User;
 
 public class SectorRepo extends CrudImpl<Sector> {
 
@@ -9,7 +10,11 @@ public class SectorRepo extends CrudImpl<Sector> {
   private static SectorRepo instance = null;
 
   private SectorRepo() {
-    this.type = new Sector();
+    try {
+      this.type = (Class<Sector>) Class.forName("domain.organization.Sector");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
   }
 
   public static SectorRepo getInstance() {

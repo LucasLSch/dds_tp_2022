@@ -1,6 +1,7 @@
 package repositories;
 
 import domain.measurements.EmissionFactor;
+import security.user.User;
 
 public class EmissionFactorRepo extends CrudImpl<EmissionFactor> {
 
@@ -9,7 +10,11 @@ public class EmissionFactorRepo extends CrudImpl<EmissionFactor> {
   private static EmissionFactorRepo instance = null;
 
   private EmissionFactorRepo() {
-    this.type = new EmissionFactor();
+    try {
+      this.type = (Class<EmissionFactor>) Class.forName("domain.measurements.EmissionFactor");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
   }
 
   public static EmissionFactorRepo getInstance() {

@@ -1,6 +1,7 @@
 package repositories;
 
 import domain.contact.Contact;
+import security.user.User;
 
 public class ContactRepo extends CrudImpl<Contact> {
 
@@ -9,7 +10,11 @@ public class ContactRepo extends CrudImpl<Contact> {
   private static ContactRepo instance = null;
 
   private ContactRepo() {
-    this.type = new Contact();
+    try {
+      this.type = (Class<Contact>) Class.forName("domain.contact.Contact");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
   }
 
   public static ContactRepo getInstance() {
