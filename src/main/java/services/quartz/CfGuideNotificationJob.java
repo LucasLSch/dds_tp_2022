@@ -11,17 +11,17 @@ public class CfGuideNotificationJob implements Job {
   @Override
   public void execute(JobExecutionContext jobExecutionContext) {
     OrganizationRepo
-        .getInstance()
-        .getAll()
-        .forEach(organization -> {
-          organization.notifyAllMembers(this.getFinalMessage());
-          organization.notify(this.getFinalMessage());
-        });
+            .getInstance()
+            .getAll()
+            .forEach(organization -> {
+              organization.notifyAllMembers(this.getFinalMessage());
+              organization.notify(this.getFinalMessage());
+            });
   }
 
   private String getFinalMessage() {
     return
-        "Click the link to access the carbon footprint recommendations guide!: " + this.guideLink;
+            "Click the link to access the carbon footprint recommendations guide!: " + this.guideLink;
   }
 
 }
