@@ -25,7 +25,14 @@
         <class>domain.territories.TerritorialSectorAgent</class>
         <class>domain.territories.TerritorialSector</class>
         <class>domain.journey.transport.Transport</class>
+        <class>domain.journey.transport.PublicTransport</class>
+        <class>domain.journey.transport.EcoFriendly</class>
+        <class>domain.journey.transport.HiredService</class>
+        <class>domain.journey.transport.ParticularVehicle</class>
         <class>security.user.User</class>
+        <class>security.user.StandardUser</class>
+        <class>security.user.Administrator</class>
+        <class>security.user.TerritorialAgentUser</class>
 
         <properties>
             <property name="hibernate.archive.autodetection" value="class"/>
