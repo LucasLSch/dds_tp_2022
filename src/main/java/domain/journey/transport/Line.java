@@ -22,6 +22,7 @@ public class Line {
   private Long id;
 
   @OneToMany(mappedBy = "line", cascade = CascadeType.ALL)
+  @JoinColumn(name = "line_id")
   @OrderColumn(name = "stop_number")
   private List<Stop> stopList;
 
