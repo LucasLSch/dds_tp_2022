@@ -1,5 +1,10 @@
 package domainTests;
 
+import domain.journey.transport.Line;
+import domain.journey.transport.PublicTransportType;
+import domain.journey.transport.Stop;
+import domain.location.Distance;
+import domain.location.Location;
 import domain.measurements.ConsumptionType;
 import domain.measurements.EmissionFactor;
 import domain.measurements.unit.BaseUnit;
@@ -9,9 +14,11 @@ import domain.measurements.unit.UnitExpression;
 import domain.organization.DocType;
 import org.hibernate.criterion.Restrictions;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import repositories.ConsumptionTypeRepo;
+import repositories.LineRepo;
 import repositories.UserRepo;
 import security.user.Administrator;
 import security.user.Registration;
@@ -19,21 +26,18 @@ import security.user.StandardUser;
 import security.user.User;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class TestDataFill {
 
   public TestDataFill() {
+    this.fillRepos();
   }
 
-  @BeforeEach
-  public void fillRepos() throws IOException {
+  public void fillRepos() {
     this.createConsumptionType();
-    this.createStop();
-    this.createLine();
+    this.createPublicTransport();
     this.createTransport();
     this.createLeg();
     this.createJourney();
@@ -87,37 +91,37 @@ public class TestDataFill {
 
     ConsumptionType[] cts = {
             new ConsumptionType("Gas Natural",
-                    new HashSet<>(Arrays.asList(cubicMeter(Proportionality.DIRECT))),
+                    new HashSet<>(Collections.singletonList(cubicMeter(Proportionality.DIRECT))),
                     "Combustion fija",
                     "Emisiones directas",
                     efs[0]),
 
             new ConsumptionType("Diesel/Gasoil",
-                    new HashSet<>(Arrays.asList(liter(Proportionality.DIRECT))),
+                    new HashSet<>(Collections.singletonList(liter(Proportionality.DIRECT))),
                     "Combustion fija",
                     "Emisiones directas",
                     efs[1]),
 
             new ConsumptionType("Nafta",
-                    new HashSet<>(Arrays.asList(liter(Proportionality.DIRECT))),
+                    new HashSet<>(Collections.singletonList(liter(Proportionality.DIRECT))),
                     "Combustion fija",
                     "Emisiones directas",
                     efs[2]),
 
             new ConsumptionType("Carbon",
-                    new HashSet<>(Arrays.asList(kilogram(Proportionality.DIRECT))),
+                    new HashSet<>(Collections.singletonList(kilogram(Proportionality.DIRECT))),
                     "Combustion fija",
                     "Emisiones directas",
                     efs[3]),
 
             new ConsumptionType("Combustible Consumido - Gasoil",
-                    new HashSet<>(Arrays.asList(liter(Proportionality.DIRECT))),
+                    new HashSet<>(Collections.singletonList(liter(Proportionality.DIRECT))),
                     "Combustion movil",
                     "Emisiones directas",
                     efs[4]),
 
             new ConsumptionType("Combustilbe Consumido - Nafta",
-                    new HashSet<>(Arrays.asList(liter(Proportionality.DIRECT))),
+                    new HashSet<>(Collections.singletonList(liter(Proportionality.DIRECT))),
                     "Combustion movil",
                     "Emisiones directas",
                     efs[5]),
@@ -130,7 +134,7 @@ public class TestDataFill {
                     efs[6]),
 
             new ConsumptionType("Medio de Transporte - Distancia Recorrida",
-                    new HashSet<>(Arrays.asList(kilometer(Proportionality.DIRECT))),
+                    new HashSet<>(Collections.singletonList(kilometer(Proportionality.DIRECT))),
                     "Logistica de productos y residuos",
                     "Otras emisiones indirectas que ocurren en fuentes no controladas por la organizacion",
                     efs[7]),
@@ -139,58 +143,67 @@ public class TestDataFill {
     ConsumptionTypeRepo.getInstance().saveAll(cts);
   }
 
-  @Test
-  public void testDePruebaQueNOHaceNada() {
-    ConsumptionTypeRepo.getInstance().getAll().forEach(ct -> {
-      System.out.format("Id: %d\nNombre: %s\nUnidades: %s\nFE: %f\n\n",
-              ct.getId(),
-              ct.getName(),
-              UnitExpression.printUnits(ct.getUnits()),
-              ct.getEmissionFactor().getValue());
-    });
+  private void createPublicTransport() {
 
-    Assertions.assertTrue(true);
-  }
+    Stop stop1 = new Stop(
+      new Location(null, "Calle 1", "1"),
+      new Distance(20, kilometer(Proportionality.DIRECT)));
+    Stop stop2 = new Stop(
+      new Location(null, "Calle 2", "2"),
+      new Distance(21, kilometer(Proportionality.DIRECT)));
+    Stop stop3 = new Stop(
+        new Location(null, "Calle 3", "3"),
+        new Distance(22, kilometer(Proportionality.DIRECT)));
 
-  private void createUser() throws IOException {
-    User[] users = {
-            new Registration()
-                    .setMember("Gonzalo", "Rodriguez Pardo", DocType.ID, "42.877.601")
-                    .registerStandardUser("Pardios", "1Contra$enia"),
-            new Registration()
-                    .setMember("Lucas", "Schneider", DocType.ID, "42.396.327")
-                    .registerStandardUser("Pastita", "1Contra$enia"),
-            new Registration()
-                    .setSectorAgent()
-                    .registerAgentUser("Agent_Smith", "1Contra$enia"),
-            new Registration()
-                    .registerAdminUser("UltrAdmin", "1Contra$enia")
+    Stop stop4 = new Stop(
+        new Location(null, "Street 1", "1"),
+        new Distance(10, kilometer(Proportionality.DIRECT)));
+    Stop stop5 = new Stop(
+        new Location(null, "Street 2", "2"),
+        new Distance(11, kilometer(Proportionality.DIRECT)));
+    Stop stop6 = new Stop(
+        new Location(null, "Street 3", "3"),
+        new Distance(12, kilometer(Proportionality.DIRECT)));
+
+    Stop stop7 = new Stop(
+        new Location(null, "Rue 1", "1"),
+        new Distance(1, kilometer(Proportionality.DIRECT)));
+    Stop stop8 = new Stop(
+        new Location(null, "Rue 2", "2"),
+        new Distance(2, kilometer(Proportionality.DIRECT)));
+    Stop stop9 = new Stop(
+        new Location(null, "Rue 3", "3"),
+        new Distance(3, kilometer(Proportionality.DIRECT)));
+
+    Line[] lines = {
+        new Line(Arrays.asList(stop1, stop2, stop3), "SpanishLine", PublicTransportType.BUS),
+        new Line(Arrays.asList(stop4, stop5, stop6), "EnglishLine", PublicTransportType.SUBWAY),
+        new Line(Arrays.asList(stop7, stop8, stop9), "FrenchLine", PublicTransportType.TRAIN)
     };
 
-    UserRepo.getInstance().saveAll(users);
+    LineRepo.getInstance().saveAll(lines);
   }
 
-  @Test
-  public void testGetAllUsers() {
-    List<User> users = UserRepo.getInstance().getAll();
-    Assertions.assertEquals(4, users.size());
-  }
+  private void createUser() {
+    try {
+      User[] users = {
+          new Registration()
+              .setMember("Gonzalo", "Rodriguez Pardo", DocType.ID, "42.877.601")
+              .registerStandardUser("Pardios", "1Contra$enia"),
+          new Registration()
+              .setMember("Lucas", "Schneider", DocType.ID, "42.396.327")
+              .registerStandardUser("Pastita", "1Contra$enia"),
+          new Registration()
+              .setSectorAgent()
+              .registerAgentUser("Agent_Smith", "1Contra$enia"),
+          new Registration()
+              .registerAdminUser("UltrAdmin", "1Contra$enia")
+      };
+      UserRepo.getInstance().saveAll(users);
 
-  @Test
-  public void testGetStandardUserByUsername() {
-    StandardUser lucas = (StandardUser) UserRepo.getInstance()
-            .getByCondition(Restrictions.eq("username", "Pastita"))
-            .get(0);
-    Assertions.assertEquals("Lucas", lucas.getMember().getName());
-  }
-
-  @Test
-  public void testGetAdministratorByUsername() {
-    Administrator admin = (Administrator) UserRepo.getInstance()
-            .getByCondition(Restrictions.eq("username", "UltrAdmin"))
-            .get(0);
-    Assertions.assertTrue(Arrays.stream(new int[]{1, 2, 3, 4}).anyMatch(id -> id == admin.getId()));
-  }
+    } catch (IOException e) {
+      return;
+    }}
 
   private void createTransport() {
   }
@@ -201,9 +214,6 @@ public class TestDataFill {
   private void createTerritorialSectorAgent() {
   }
 
-  private void createStop() {
-  }
-
   private void createSector() {
   }
 
@@ -211,9 +221,6 @@ public class TestDataFill {
   }
 
   private void createMember() {
-  }
-
-  private void createLine() {
   }
 
   private void createLeg() {
@@ -249,6 +256,44 @@ public class TestDataFill {
 
   private static Unit kilowatt(Proportionality prop) {
     return new Unit(BaseUnit.WATT, 3, prop);
+  }
+
+
+  // Test random - dsps se borran o pasan a otro lugar
+
+  @Test
+  public void testDePruebaQueNOHaceNada() {
+    ConsumptionTypeRepo.getInstance().getAll().forEach(ct -> {
+      System.out.format("Id: %d\nNombre: %s\nUnidades: %s\nFE: %f\n\n",
+          ct.getId(),
+          ct.getName(),
+          UnitExpression.printUnits(ct.getUnits()),
+          ct.getEmissionFactor().getValue());
+    });
+
+    Assertions.assertTrue(true);
+  }
+
+  @Test
+  public void testGetAllUsers() {
+    List<User> users = UserRepo.getInstance().getAll();
+    Assertions.assertEquals(4, users.size());
+  }
+
+  @Test
+  public void testGetStandardUserByUsername() {
+    StandardUser lucas = (StandardUser) UserRepo.getInstance()
+        .getByCondition(Restrictions.eq("username", "Pastita"))
+        .get(0);
+    Assertions.assertEquals("Lucas", lucas.getMember().getName());
+  }
+
+  @Test
+  public void testGetAdministratorByUsername() {
+    Administrator admin = (Administrator) UserRepo.getInstance()
+        .getByCondition(Restrictions.eq("username", "UltrAdmin"))
+        .get(0);
+    Assertions.assertTrue(Arrays.stream(new int[]{1, 2, 3, 4}).anyMatch(id -> id == admin.getId()));
   }
 
 }
