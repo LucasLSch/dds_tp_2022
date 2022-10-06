@@ -2,12 +2,16 @@ package services.georef;
 
 import domain.location.Distance;
 import domain.location.Location;
+import domain.measurements.unit.BaseUnit;
+import domain.measurements.unit.Proportionality;
+import domain.measurements.unit.Unit;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
+import java.util.Locale;
 
 public class GeoRefAdapter {
 
@@ -46,7 +50,42 @@ public class GeoRefAdapter {
         destination.getStreet(),
         destination.getHeight());
     Response<DistanceResponse> response = distanceResponseCall.execute();
-    return new Distance(response.body().getValue(), response.body().unit);
+
+    Unit unit = this.getUnitOfString(response.body().unit);
+    return new Distance(response.body().getValue(), unit);
+  }
+
+  private Unit getUnitOfString(String unit) {
+
+    String exponentString = unit.substring(0, unit.length()-2).toLowerCase(Locale.ROOT);
+    int exponent = 0;
+
+    switch(exponentString) {
+      case "m":
+        exponent = -3;
+        break;
+      case "c":
+        exponent = -2;
+        break;
+      case "d":
+        exponent = -1;
+        break;
+      case "":
+        exponent = 0;
+        break;
+      case "da":
+        exponent = 1;
+        break;
+      case "h":
+        exponent = 2;
+        break;
+      case "k":
+        exponent = 3;
+        break;
+    }
+
+    return new Unit(BaseUnit.METER, exponent, Proportionality.DIRECT);
+
   }
 
 }

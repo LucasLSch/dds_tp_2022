@@ -1,5 +1,6 @@
 package domain.location;
 
+import domain.measurements.unit.Unit;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,6 @@ import javax.persistence.Embeddable;
 public class Distance {
 
   private Integer value;
-  private String unit;
+  private Unit unit;
 
 }

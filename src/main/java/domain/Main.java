@@ -12,10 +12,7 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import repositories.MemberRepo;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Main implements WithGlobalEntityManager, EntityManagerOps, TransactionalOps {
 
@@ -61,6 +58,20 @@ public class Main implements WithGlobalEntityManager, EntityManagerOps, Transact
   }
 
   public static void main(String[] args) {
-    new Main().metodo();
+    //new Main().metodo();
+
+    List<Integer> arr = new ArrayList<>();
+    arr.add(1);
+    arr.add(1);
+    arr.add(1);
+    arr.add(1);
+    arr.add(1);
+    arr.add(1);
+
+    System.out.println(arr.size());
+
+    arr.removeAll(Collections.singleton(1));
+
+    System.out.println(arr.size());
   }
 }

@@ -7,6 +7,8 @@ import domain.location.Distance;
 import domain.location.Location;
 import domain.measurements.ActivityData;
 import domain.measurements.CarbonFootprint;
+import domain.measurements.unit.BaseUnit;
+import domain.measurements.unit.Proportionality;
 import domain.measurements.unit.Unit;
 import domain.organization.Member;
 import domain.organization.Organization;
@@ -137,7 +139,7 @@ public class Journey {
         })
         .sum();
 
-    return new Distance(finalDistanceValue, "KM");
+    return new Distance(finalDistanceValue, new Unit(BaseUnit.METER, 3, Proportionality.DIRECT));
   }
 
   public CarbonFootprint getCarbonFootprint(Set<Unit> units) {

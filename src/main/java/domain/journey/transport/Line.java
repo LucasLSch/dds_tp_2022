@@ -1,8 +1,10 @@
 package domain.journey.transport;
 
 import domain.exceptions.IncompleteLineException;
-import domain.exceptions.InvalidStopForLineException;
 import domain.location.Distance;
+import domain.measurements.unit.BaseUnit;
+import domain.measurements.unit.Proportionality;
+import domain.measurements.unit.Unit;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,20 +33,11 @@ public class Line {
 
   public Line(List<Stop> someStopList, String someName, PublicTransportType someType) {
     this.stopList = someStopList;
-    this.registerStops();
-    this.validateStops();
+    this.validateStopsAmount();
     this.name = someName;
     this.type = someType;
   }
 
-  public void registerStops() {
-    this.stopList.forEach(stop -> stop.linkToLine(this));
-  }
-
-  public void validateStops() {
-    this.validateStopsAmount();
-    this.validateAllStopsLines();
-  }
 
   public void validateStopsAmount() {
     if (this.stopList.size() < 2) {
@@ -52,14 +45,8 @@ public class Line {
     }
   }
 
-  public void validateAllStopsLines() {
-    if (!this.stopList.stream().allMatch(stop -> stop.belongsToLine(this))) {
-      throw new InvalidStopForLineException();
-    }
-  }
-
   public void addNewStop(Stop someStop) {
-    if (someStop.belongsToLine(this) && !this.stopList.contains(someStop)) {
+    if (!this.stopList.contains(someStop)) {
       this.stopList.add(someStop);
     }
   }
@@ -75,6 +62,6 @@ public class Line {
         .mapToInt(Distance::getValue)
         .sum();
 
-    return new Distance(finalValue, "KM");
+    return new Distance(finalValue, new Unit(BaseUnit.METER, 3, Proportionality.DIRECT));
   }
 }

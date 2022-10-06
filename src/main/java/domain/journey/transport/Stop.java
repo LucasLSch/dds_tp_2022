@@ -17,10 +17,6 @@ public class Stop {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "line_id")
-  private Line line;
-
   @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JoinColumn(name = "location_id")
   private Location location;
@@ -29,8 +25,7 @@ public class Stop {
   @AttributeOverride(name = "value", column = @Column(name = "km_to_next_stop"))
   private Distance distanceToNextStop;
 
-  public Stop(Line line, Location location, Distance distanceToNextStop) {
-    this.line = line;
+  public Stop(Location location, Distance distanceToNextStop) {
     this.location = location;
     this.distanceToNextStop = distanceToNextStop;
   }
@@ -43,11 +38,4 @@ public class Stop {
     return distanceToNextStop;
   }
 
-  public Boolean belongsToLine(Line someLine) {
-    return this.line.equals(someLine);
-  }
-
-  public void linkToLine(Line someLine) {
-    this.line = someLine;
-  }
 }
