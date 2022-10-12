@@ -21,7 +21,7 @@ public class Line {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @OneToMany(mappedBy = "line", cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL)
   @JoinColumn(name = "line_id")
   @OrderColumn(name = "stop_number")
   private List<Stop> stopList;
@@ -38,7 +38,6 @@ public class Line {
     this.name = someName;
     this.type = someType;
   }
-
 
   public void validateStopsAmount() {
     if (this.stopList.size() < 2) {

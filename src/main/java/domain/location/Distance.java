@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Transient;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,6 +15,8 @@ import javax.persistence.Embeddable;
 public class Distance {
 
   private Integer value;
+
+  @Transient
   private Unit unit;
 
 }

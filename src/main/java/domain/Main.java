@@ -6,6 +6,7 @@ import domain.measurements.CarbonFootprint;
 import domain.measurements.unit.BaseUnit;
 import domain.measurements.unit.Proportionality;
 import domain.measurements.unit.Unit;
+import domain.organization.DocType;
 import domain.organization.Member;
 import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
@@ -18,28 +19,25 @@ public class Main implements WithGlobalEntityManager, EntityManagerOps, Transact
 
   private void metodo() {
 
-    Set<Unit> unitSet = new HashSet<>();
-    unitSet.add(new Unit(BaseUnit.METER, 3, Proportionality.DIRECT));
-    unitSet.add(new Unit(BaseUnit.SECOND, 0, Proportionality.INVERSE));
+//    Set<Unit> unitSet = new HashSet<>();
+//    unitSet.add(new Unit(BaseUnit.METER, 3, Proportionality.DIRECT));
+//    unitSet.add(new Unit(BaseUnit.SECOND, 0, Proportionality.INVERSE));
 
     //CarbonFootprint miCf = new CarbonFootprint(70.0, unitSet, LocalDate.now());
 
-    List<CarbonFootprint> listaCF = new ArrayList<>();
-    listaCF.add(new CarbonFootprint(70.0, unitSet));
-    listaCF.add(new CarbonFootprint(80.0, unitSet));
-    listaCF.add(new CarbonFootprint(90.0, unitSet));
-    listaCF.add(new CarbonFootprint(10.0, unitSet));
-    listaCF.add(new CarbonFootprint(20.0, unitSet));
+//    List<CarbonFootprint> listaCF = new ArrayList<>();
+//    listaCF.add(new CarbonFootprint(70.0, unitSet));
+//    listaCF.add(new CarbonFootprint(80.0, unitSet));
+//    listaCF.add(new CarbonFootprint(90.0, unitSet));
+//    listaCF.add(new CarbonFootprint(10.0, unitSet));
+//    listaCF.add(new CarbonFootprint(20.0, unitSet));
 
-
-    Member unMiembro = MemberRepo.getInstance().getById(2l);
+    Member unMiembro = new Member("pol", "icia", DocType.ID, "73737382");
     Contact unContacto = new Contact();
     unContacto.setEmail("policia@gmail.com");
     unContacto.setPhoneNumber("911");
     unContacto.setMethod(new EmailNotification());
     unMiembro.addContact(unContacto);
-
-    //unMiembro.notify("hola");
 
     MemberRepo.getInstance().save(unMiembro);
 
@@ -58,20 +56,6 @@ public class Main implements WithGlobalEntityManager, EntityManagerOps, Transact
   }
 
   public static void main(String[] args) {
-    //new Main().metodo();
-
-    List<Integer> arr = new ArrayList<>();
-    arr.add(1);
-    arr.add(1);
-    arr.add(1);
-    arr.add(1);
-    arr.add(1);
-    arr.add(1);
-
-    System.out.println(arr.size());
-
-    arr.removeAll(Collections.singleton(1));
-
-    System.out.println(arr.size());
+    new Main().metodo();
   }
 }
