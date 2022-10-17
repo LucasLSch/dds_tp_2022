@@ -1,32 +1,29 @@
 package domainTests;
 
-import domain.journey.transport.Line;
-import domain.journey.transport.PublicTransportType;
-import domain.journey.transport.Stop;
-import domain.location.Distance;
-import domain.location.Location;
-import domain.measurements.ConsumptionType;
-import domain.measurements.EmissionFactor;
-import domain.measurements.unit.BaseUnit;
-import domain.measurements.unit.Proportionality;
-import domain.measurements.unit.Unit;
-import domain.measurements.unit.UnitExpression;
-import domain.organization.DocType;
+import ddsutn.domain.journey.transport.Line;
+import ddsutn.domain.journey.transport.PublicTransportType;
+import ddsutn.domain.journey.transport.Stop;
+import ddsutn.domain.location.Distance;
+import ddsutn.domain.location.Location;
+import ddsutn.domain.measurements.ConsumptionType;
+import ddsutn.domain.measurements.EmissionFactor;
+import ddsutn.domain.measurements.unit.BaseUnit;
+import ddsutn.domain.measurements.unit.Proportionality;
+import ddsutn.domain.measurements.unit.Unit;
+import ddsutn.domain.measurements.unit.UnitExpression;
+import ddsutn.domain.organization.DocType;
 import org.hibernate.criterion.Restrictions;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import repositories.ConsumptionTypeRepo;
-import repositories.LineRepo;
-import repositories.UserRepo;
-import security.user.Administrator;
-import security.user.Registration;
-import security.user.StandardUser;
-import security.user.User;
+import ddsutn.repositories.ConsumptionTypeRepo;
+import ddsutn.repositories.LineRepo;
+import ddsutn.repositories.UserRepo;
+import ddsutn.security.user.Administrator;
+import ddsutn.security.user.Registration;
+import ddsutn.security.user.StandardUser;
+import ddsutn.security.user.User;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class TestDataFill {

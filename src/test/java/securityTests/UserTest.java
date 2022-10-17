@@ -1,8 +1,8 @@
 package securityTests;
 
 import org.junit.jupiter.api.Test;
-import security.user.Administrator;
-import security.user.StandardUser;
+import ddsutn.security.user.Administrator;
+import ddsutn.security.user.StandardUser;
 
 import java.util.concurrent.atomic.AtomicReference;
 

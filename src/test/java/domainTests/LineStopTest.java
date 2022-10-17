@@ -1,18 +1,5 @@
 package domainTests;
 
-import domain.journey.transport.Line;
-import domain.journey.transport.PublicTransportType;
-import domain.journey.transport.Stop;
-import domain.location.Distance;
-import domain.location.District;
-import domain.location.Location;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LineStopTest extends TestDataFill {

@@ -8,31 +8,31 @@
     <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>domain.measurements.ActivityData</class>
-        <class>domain.measurements.CarbonFootprint</class>
-        <class>domain.measurements.ConsumptionType</class>
-        <class>domain.contact.Contact</class>
-        <class>domain.measurements.EmissionFactor</class>
-        <class>domain.journey.Journey</class>
-        <class>domain.journey.Leg</class>
-        <class>domain.journey.transport.Line</class>
-        <class>domain.location.Location</class>
-        <class>domain.organization.Member</class>
-        <class>domain.organization.Organization</class>
-        <class>domain.organization.Sector</class>
-        <class>domain.measurements.unit.Unit</class>
-        <class>domain.journey.transport.Stop</class>
-        <class>domain.territories.TerritorialSectorAgent</class>
-        <class>domain.territories.TerritorialSector</class>
-        <class>domain.journey.transport.Transport</class>
-        <class>domain.journey.transport.PublicTransport</class>
-        <class>domain.journey.transport.EcoFriendly</class>
-        <class>domain.journey.transport.HiredService</class>
-        <class>domain.journey.transport.ParticularVehicle</class>
-        <class>security.user.User</class>
-        <class>security.user.StandardUser</class>
-        <class>security.user.Administrator</class>
-        <class>security.user.TerritorialAgentUser</class>
+        <class>ddsutn.domain.measurements.ActivityData</class>
+        <class>ddsutn.domain.measurements.CarbonFootprint</class>
+        <class>ddsutn.domain.measurements.ConsumptionType</class>
+        <class>ddsutn.domain.contact.Contact</class>
+        <class>ddsutn.domain.measurements.EmissionFactor</class>
+        <class>ddsutn.domain.journey.Journey</class>
+        <class>ddsutn.domain.journey.Leg</class>
+        <class>ddsutn.domain.journey.transport.Line</class>
+        <class>ddsutn.domain.location.Location</class>
+        <class>ddsutn.domain.organization.Member</class>
+        <class>ddsutn.domain.organization.Organization</class>
+        <class>ddsutn.domain.organization.Sector</class>
+        <class>ddsutn.domain.measurements.unit.Unit</class>
+        <class>ddsutn.domain.journey.transport.Stop</class>
+        <class>ddsutn.domain.territories.TerritorialSectorAgent</class>
+        <class>ddsutn.domain.territories.TerritorialSector</class>
+        <class>ddsutn.domain.journey.transport.Transport</class>
+        <class>ddsutn.domain.journey.transport.PublicTransport</class>
+        <class>ddsutn.domain.journey.transport.EcoFriendly</class>
+        <class>ddsutn.domain.journey.transport.HiredService</class>
+        <class>ddsutn.domain.journey.transport.ParticularVehicle</class>
+        <class>ddsutn.security.user.User</class>
+        <class>ddsutn.security.user.StandardUser</class>
+        <class>ddsutn.security.user.Administrator</class>
+        <class>ddsutn.security.user.TerritorialAgentUser</class>
 
         <properties>
             <property name="hibernate.archive.autodetection" value="class"/>

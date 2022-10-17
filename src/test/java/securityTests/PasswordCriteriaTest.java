@@ -1,7 +1,7 @@
 package securityTests;
 
+import ddsutn.security.passwordvalidator.*;
 import org.junit.jupiter.api.Test;
-import security.passwordvalidator.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
