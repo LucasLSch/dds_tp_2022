@@ -1,10 +1,10 @@
 package ddsutn.services.georef;
 
 import ddsutn.domain.location.Distance;
-import ddsutn.domain.measurements.unit.Proportionality;
-import ddsutn.domain.measurements.unit.Unit;
 import ddsutn.domain.location.Location;
 import ddsutn.domain.measurements.unit.BaseUnit;
+import ddsutn.domain.measurements.unit.Proportionality;
+import ddsutn.domain.measurements.unit.Unit;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;

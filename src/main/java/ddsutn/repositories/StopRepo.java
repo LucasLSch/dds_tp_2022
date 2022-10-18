@@ -1,31 +1,10 @@
 package ddsutn.repositories;
 
 import ddsutn.domain.journey.transport.Stop;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public class StopRepo extends CrudImpl<Stop> {
+@Repository
+public interface StopRepo extends CrudRepository<Stop, Long> {
 
-  // --- Singleton --- //
-
-  private static StopRepo instance = null;
-
-  private StopRepo() {
-    try {
-      this.type = (Class<Stop>) Class.forName("ddsutn.domain.journey.transport.Stop");
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public static StopRepo getInstance() {
-    if (instance == null) {
-      instance = new StopRepo();
-      instance.initEntityManager();
-    }
-    return instance;
-  }
-
-  @Override
-  Object getId(Stop someEntity) {
-    return someEntity.getId();
-  }
 }

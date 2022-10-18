@@ -1,31 +1,10 @@
 package ddsutn.repositories;
 
 import ddsutn.domain.contact.Contact;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public class ContactRepo extends CrudImpl<Contact> {
+@Repository
+public interface ContactRepo extends CrudRepository<Contact, Long> {
 
-  // --- Singleton --- //
-
-  private static ContactRepo instance = null;
-
-  private ContactRepo() {
-    try {
-      this.type = (Class<Contact>) Class.forName("ddsutn.domain.contact.Contact");
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public static ContactRepo getInstance() {
-    if (instance == null) {
-      instance = new ContactRepo();
-      instance.initEntityManager();
-    }
-    return instance;
-  }
-
-  @Override
-  Object getId(Contact someEntity) {
-    return someEntity.getId();
-  }
 }

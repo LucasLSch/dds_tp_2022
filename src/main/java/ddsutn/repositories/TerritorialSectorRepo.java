@@ -1,31 +1,10 @@
 package ddsutn.repositories;
 
 import ddsutn.domain.territories.TerritorialSector;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public class TerritorialSectorRepo extends CrudImpl<TerritorialSector> {
+@Repository
+public interface TerritorialSectorRepo extends CrudRepository<TerritorialSector, Long> {
 
-  // --- Singleton --- //
-
-  private static TerritorialSectorRepo instance = null;
-
-  private TerritorialSectorRepo() {
-    try {
-      this.type = (Class<TerritorialSector>) Class.forName("ddsutn.domain.territories.TerritorialSector");
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public static TerritorialSectorRepo getInstance() {
-    if (instance == null) {
-      instance = new TerritorialSectorRepo();
-      instance.initEntityManager();
-    }
-    return instance;
-  }
-
-  @Override
-  Object getId(TerritorialSector someEntity) {
-    return someEntity.getId();
-  }
 }

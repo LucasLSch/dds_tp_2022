@@ -10,23 +10,30 @@ import ddsutn.domain.measurements.EmissionFactor;
 import ddsutn.domain.measurements.unit.BaseUnit;
 import ddsutn.domain.measurements.unit.Proportionality;
 import ddsutn.domain.measurements.unit.Unit;
-import ddsutn.domain.measurements.unit.UnitExpression;
 import ddsutn.domain.organization.DocType;
-import org.hibernate.criterion.Restrictions;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import ddsutn.repositories.ConsumptionTypeRepo;
-import ddsutn.repositories.LineRepo;
-import ddsutn.repositories.UserRepo;
-import ddsutn.security.user.Administrator;
 import ddsutn.security.user.Registration;
-import ddsutn.security.user.StandardUser;
 import ddsutn.security.user.User;
+import ddsutn.services.ConsumptionTypeSvc;
+import ddsutn.services.LineSvc;
+import ddsutn.services.UserSvc;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TestDataFill {
+
+  @Autowired
+  private UserSvc userSvc;
+
+  @Autowired
+  private LineSvc lineSvc;
+
+  @Autowired
+  private ConsumptionTypeSvc consumptionTypeSvc;
 
   public TestDataFill() {
     this.fillRepos();
@@ -137,7 +144,7 @@ public class TestDataFill {
                     efs[7]),
     };
 
-    ConsumptionTypeRepo.getInstance().saveAll(cts);
+    consumptionTypeSvc.saveAll(Arrays.asList(cts));
   }
 
   private void createPublicTransport() {
@@ -178,7 +185,7 @@ public class TestDataFill {
         new Line(Arrays.asList(stop7, stop8, stop9), "FrenchLine", PublicTransportType.TRAIN)
     };
 
-    LineRepo.getInstance().saveAll(lines);
+    lineSvc.saveAll(Arrays.asList(lines));
   }
 
   private void createUser() {
@@ -196,7 +203,7 @@ public class TestDataFill {
           new Registration()
               .registerAdminUser("UltrAdmin", "1Contra$enia")
       };
-      UserRepo.getInstance().saveAll(users);
+      userSvc.saveAll(Arrays.asList(users));
 
     } catch (IOException e) {
       return;
@@ -258,39 +265,39 @@ public class TestDataFill {
 
   // Test random - dsps se borran o pasan a otro lugar
 
-  @Test
-  public void testDePruebaQueNOHaceNada() {
-    ConsumptionTypeRepo.getInstance().getAll().forEach(ct -> {
-      System.out.format("Id: %d\nNombre: %s\nUnidades: %s\nFE: %f\n\n",
-          ct.getId(),
-          ct.getName(),
-          UnitExpression.printUnits(ct.getUnits()),
-          ct.getEmissionFactor().getValue());
-    });
-
-    Assertions.assertTrue(true);
-  }
-
-  @Test
-  public void testGetAllUsers() {
-    List<User> users = UserRepo.getInstance().getAll();
-    Assertions.assertEquals(4, users.size());
-  }
-
-  @Test
-  public void testGetStandardUserByUsername() {
-    StandardUser lucas = (StandardUser) UserRepo.getInstance()
-        .getByCondition(Restrictions.eq("username", "Pastita"))
-        .get(0);
-    Assertions.assertEquals("Lucas", lucas.getMember().getName());
-  }
-
-  @Test
-  public void testGetAdministratorByUsername() {
-    Administrator admin = (Administrator) UserRepo.getInstance()
-        .getByCondition(Restrictions.eq("username", "UltrAdmin"))
-        .get(0);
-    Assertions.assertTrue(Arrays.stream(new int[]{1, 2, 3, 4}).anyMatch(id -> id == admin.getId()));
-  }
+//  @Test
+//  public void testDePruebaQueNOHaceNada() {
+//    ConsumptionTypeRepo.getInstance().getAll().forEach(ct -> {
+//      System.out.format("Id: %d\nNombre: %s\nUnidades: %s\nFE: %f\n\n",
+//          ct.getId(),
+//          ct.getName(),
+//          UnitExpression.printUnits(ct.getUnits()),
+//          ct.getEmissionFactor().getValue());
+//    });
+//
+//    Assertions.assertTrue(true);
+//  }
+//
+//  @Test
+//  public void testGetAllUsers() {
+//    List<User> users = UserRepo.getInstance().getAll();
+//    Assertions.assertEquals(4, users.size());
+//  }
+//
+//  @Test
+//  public void testGetStandardUserByUsername() {
+//    StandardUser lucas = (StandardUser) UserRepo.getInstance()
+//        .getByCondition(Restrictions.eq("username", "Pastita"))
+//        .get(0);
+//    Assertions.assertEquals("Lucas", lucas.getMember().getName());
+//  }
+//
+//  @Test
+//  public void testGetAdministratorByUsername() {
+//    Administrator admin = (Administrator) UserRepo.getInstance()
+//        .getByCondition(Restrictions.eq("username", "UltrAdmin"))
+//        .get(0);
+//    Assertions.assertTrue(Arrays.stream(new int[]{1, 2, 3, 4}).anyMatch(id -> id == admin.getId()));
+//  }
 
 }

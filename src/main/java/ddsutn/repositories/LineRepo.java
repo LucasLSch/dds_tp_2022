@@ -1,31 +1,10 @@
 package ddsutn.repositories;
 
 import ddsutn.domain.journey.transport.Line;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public class LineRepo extends CrudImpl<Line> {
+@Repository
+public interface LineRepo extends CrudRepository<Line, Long> {
 
-  // --- Singleton --- //
-
-  private static LineRepo instance = null;
-
-  private LineRepo() {
-    try {
-      this.type = (Class<Line>) Class.forName("ddsutn.domain.journey.transport.Line");
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public static LineRepo getInstance() {
-    if (instance == null) {
-      instance = new LineRepo();
-      instance.initEntityManager();
-    }
-    return instance;
-  }
-
-  @Override
-  Object getId(Line someEntity) {
-    return someEntity.getId();
-  }
 }

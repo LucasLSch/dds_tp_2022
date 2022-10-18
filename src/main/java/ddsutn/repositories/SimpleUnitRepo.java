@@ -1,31 +1,10 @@
 package ddsutn.repositories;
 
 import ddsutn.domain.measurements.unit.Unit;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public class SimpleUnitRepo extends CrudImpl<Unit> {
+@Repository
+public interface SimpleUnitRepo extends CrudRepository<Unit, Long> {
 
-  // --- Singleton --- //
-
-  private static SimpleUnitRepo instance = null;
-
-  private SimpleUnitRepo() {
-    try {
-      this.type = (Class<Unit>) Class.forName("ddsutn.domain.measurements.unit.Unit");
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public static SimpleUnitRepo getInstance() {
-    if (instance == null) {
-      instance = new SimpleUnitRepo();
-      instance.initEntityManager();
-    }
-    return instance;
-  }
-
-  @Override
-  Object getId(Unit someEntity) {
-    return someEntity.getId();
-  }
 }

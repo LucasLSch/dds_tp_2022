@@ -3,20 +3,23 @@ package ddsutn.services.quartz;
 import ddsutn.repositories.OrganizationRepo;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class CfGuideNotificationJob implements Job {
 
   private String guideLink = "ToBeDefined";
 
+  @Autowired
+  private OrganizationRepo organizationRepo;
+
   @Override
   public void execute(JobExecutionContext jobExecutionContext) {
-    OrganizationRepo
-            .getInstance()
-            .getAll()
-            .forEach(organization -> {
-              organization.notifyAllMembers(this.getFinalMessage());
-              organization.notify(this.getFinalMessage());
-            });
+    organizationRepo
+        .findAll()
+        .forEach(organization -> {
+          organization.notifyAllMembers(this.getFinalMessage());
+          organization.notify(this.getFinalMessage());
+        });
   }
 
   private String getFinalMessage() {

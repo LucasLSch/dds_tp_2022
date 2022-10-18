@@ -1,31 +1,10 @@
 package ddsutn.repositories;
 
 import ddsutn.domain.journey.Leg;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public class LegRepo extends CrudImpl<Leg> {
+@Repository
+public interface LegRepo extends CrudRepository<Leg, Long> {
 
-  // --- Singleton --- //
-
-  private static LegRepo instance = null;
-
-  private LegRepo() {
-    try {
-      this.type = (Class<Leg>) Class.forName("ddsutn.domain.journey.Leg");
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public static LegRepo getInstance() {
-    if (instance == null) {
-      instance = new LegRepo();
-      instance.initEntityManager();
-    }
-    return instance;
-  }
-
-  @Override
-  Object getId(Leg someEntity) {
-    return someEntity.getId();
-  }
 }
