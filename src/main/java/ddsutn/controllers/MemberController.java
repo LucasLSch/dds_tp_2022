@@ -1,11 +1,17 @@
 package ddsutn.controllers;
 
 import ddsutn.domain.measurements.ActivityData;
+import ddsutn.domain.organization.Member;
+import ddsutn.services.MemberSvc;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/member")
 public class MemberController {
+
+  @Autowired
+  private MemberSvc memberSvc;
 
   @GetMapping("")
   public String showAllMembers() {
@@ -14,7 +20,8 @@ public class MemberController {
 
   @GetMapping("/{id}")
   public String showOrganizatinoById(@PathVariable Long id) {
-    return "simular que aca esta el miembro " + id;
+    Member read = memberSvc.findById(id);
+    return "Se obtuvo el miembro de nombre " + read.getName() + " " + read.getSurname();
   }
 
   @GetMapping("/{id}/trayectos")

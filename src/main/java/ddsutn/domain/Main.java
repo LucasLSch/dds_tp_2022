@@ -33,7 +33,7 @@ public class Main implements WithGlobalEntityManager, EntityManagerOps, Transact
     unContacto.setMethod(new EmailNotification());
     unMiembro.addContact(unContacto);
 
-    MemberRepo.getInstance().save(unMiembro);
+//    MemberRepo.getInstance().save(unMiembro);
 
 
 //
