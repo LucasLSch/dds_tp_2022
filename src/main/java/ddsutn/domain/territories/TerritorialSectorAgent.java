@@ -1,9 +1,8 @@
 package ddsutn.domain.territories;
 
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @NoArgsConstructor
 @Getter

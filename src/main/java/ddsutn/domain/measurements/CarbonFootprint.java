@@ -2,16 +2,15 @@ package ddsutn.domain.measurements;
 
 import ddsutn.domain.measurements.unit.Unit;
 import ddsutn.domain.measurements.unit.UnitExpression;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
-
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Stream;
+import javax.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 
 @NoArgsConstructor
 @Getter
@@ -47,7 +46,11 @@ public class CarbonFootprint {
 
   public CarbonFootprint getOn(Set<Unit> objectiveUnits) {
     if (UnitExpression.isConvertibleTo(this.units, objectiveUnits)) {
-      this.multiplyValue(Math.pow(10f, UnitExpression.getExpForConvertionTo(this.units, objectiveUnits)));
+      this.multiplyValue(Math.pow(10f,
+              UnitExpression.getExpForConvertionTo(this.units,
+                      objectiveUnits)
+              )
+      );
       this.units = objectiveUnits;
     }
     return this;

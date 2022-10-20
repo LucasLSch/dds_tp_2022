@@ -1,9 +1,9 @@
 package ddsutn.services.quartz;
 
+import static org.quartz.JobBuilder.newJob;
+
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
-
-import static org.quartz.JobBuilder.newJob;
 
 public class CfGuideNotificationScheduler {
 
@@ -17,17 +17,17 @@ public class CfGuideNotificationScheduler {
       scheduler.start();
 
       JobDetail jobDetail = newJob(CfGuideNotificationJob.class)
-          .withIdentity("CfGuideNotificationJob")
-          .build();
+              .withIdentity("CfGuideNotificationJob")
+              .build();
 
       Trigger trigger = TriggerBuilder.newTrigger()
-          .withIdentity("WeeklyTrigger")
-          .startNow()
-          .withSchedule(SimpleScheduleBuilder
-              .simpleSchedule()
-              .withIntervalInHours(168)
-              .repeatForever())
-          .build();
+              .withIdentity("WeeklyTrigger")
+              .startNow()
+              .withSchedule(SimpleScheduleBuilder
+                      .simpleSchedule()
+                      .withIntervalInHours(168)
+                      .repeatForever())
+              .build();
 
       scheduler.scheduleJob(jobDetail, trigger);
 

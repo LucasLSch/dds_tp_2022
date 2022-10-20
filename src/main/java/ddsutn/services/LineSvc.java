@@ -2,10 +2,9 @@ package ddsutn.services;
 
 import ddsutn.domain.journey.transport.Line;
 import ddsutn.repositories.LineRepo;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class LineSvc {

@@ -14,7 +14,7 @@ public class ValidateMinLength implements PasswordCriteria {
   }
 
   private Boolean passwordHasMinChar(String somePassword) {
-    return somePassword.length() >=  this.minChar;
+    return somePassword.length() >= this.minChar;
   }
 
 

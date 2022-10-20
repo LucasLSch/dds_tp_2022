@@ -1,8 +1,7 @@
 package ddsutn.domain.journey.transport;
 
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
+import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Entity

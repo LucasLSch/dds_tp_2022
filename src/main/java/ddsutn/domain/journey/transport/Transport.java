@@ -1,14 +1,13 @@
 package ddsutn.domain.journey.transport;
 
 import ddsutn.domain.location.Distance;
-import ddsutn.domain.measurements.ConsumptionType;
 import ddsutn.domain.location.Location;
+import ddsutn.domain.measurements.ConsumptionType;
+import java.io.IOException;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
-import java.io.IOException;
 
 @NoArgsConstructor
 @Getter

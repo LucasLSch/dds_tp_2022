@@ -2,10 +2,9 @@ package ddsutn.domain.journey.transport;
 
 import ddsutn.domain.location.Distance;
 import ddsutn.domain.location.Location;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @NoArgsConstructor
 @Getter
@@ -25,7 +24,10 @@ public class PublicTransport extends Transport {
   @JoinColumn(name = "pt_ending_stop_id")
   private Stop endingStop;
 
-  public PublicTransport(Double fuelConsumptionPerKm, Line line, Stop startingStop, Stop endingStop) {
+  public PublicTransport(Double fuelConsumptionPerKm,
+                         Line line,
+                         Stop startingStop,
+                         Stop endingStop) {
     super(fuelConsumptionPerKm);
     this.line = line;
     this.startingStop = startingStop;
@@ -36,7 +38,7 @@ public class PublicTransport extends Transport {
   public Boolean isShareable() {
     return false;
   }
-  
+
   @Override
   public Distance getDistance(Location start, Location end) {
     //TODO validate startStop has startLocation

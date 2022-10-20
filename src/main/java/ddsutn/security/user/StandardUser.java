@@ -1,12 +1,11 @@
 package ddsutn.security.user;
 
 import ddsutn.domain.organization.Member;
+import java.io.IOException;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
-import java.io.IOException;
 
 @NoArgsConstructor
 @Setter

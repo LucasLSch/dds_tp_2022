@@ -1,11 +1,10 @@
 package ddsutn.domain.location;
 
 import ddsutn.services.georef.GeoRefAdapter;
+import java.io.IOException;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.io.IOException;
 
 @NoArgsConstructor
 @Getter

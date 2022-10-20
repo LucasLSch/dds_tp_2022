@@ -17,10 +17,10 @@ public class SmsNotification implements NotificationMethod {
   public void notify(Contact someContact, String someMessage) {
     Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
     Message message = Message.creator(
-            new com.twilio.type.PhoneNumber(someContact.getPhoneNumber()),
-            FROM_SMS,
-            someMessage)
-        .create();
+                    new com.twilio.type.PhoneNumber(someContact.getPhoneNumber()),
+                    FROM_SMS,
+                    someMessage)
+            .create();
 
     System.out.println(message.getSid());
   }

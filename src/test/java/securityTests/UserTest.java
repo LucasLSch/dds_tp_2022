@@ -1,8 +1,8 @@
 package securityTests;
 
-import org.junit.jupiter.api.Test;
 import ddsutn.security.user.Administrator;
 import ddsutn.security.user.StandardUser;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -18,7 +18,7 @@ public class UserTest {
 
     AtomicReference<Administrator> newAdmin = new AtomicReference<>();
 
-    assertDoesNotThrow( () -> newAdmin.set(new Administrator(someUsername, somePassword)));
+    assertDoesNotThrow(() -> newAdmin.set(new Administrator(someUsername, somePassword)));
     assertEquals(newAdmin.get().getUsername(), someUsername);
   }
 
@@ -29,7 +29,7 @@ public class UserTest {
 
     AtomicReference<StandardUser> newStandardUser = new AtomicReference<>();
 
-    assertDoesNotThrow( () -> newStandardUser.set(new StandardUser(someUsername, somePassword, null)));
+    assertDoesNotThrow(() -> newStandardUser.set(new StandardUser(someUsername, somePassword, null)));
     assertEquals(newStandardUser.get().getUsername(), someUsername);
   }
 

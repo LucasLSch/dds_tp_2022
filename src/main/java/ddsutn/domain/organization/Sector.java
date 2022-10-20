@@ -1,16 +1,15 @@
 package ddsutn.domain.organization;
 
+import ddsutn.domain.journey.Journey;
 import ddsutn.domain.measurements.CarbonFootprint;
 import ddsutn.domain.measurements.unit.Unit;
-import ddsutn.domain.journey.Journey;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
@@ -64,23 +63,23 @@ public class Sector {
   public CarbonFootprint getAvgCfPerMember(Set<Unit> units) {
     CarbonFootprint sectorCF = getSectorCF(units);
     return new CarbonFootprint(
-        sectorCF.getValue() / this.membersAmount(),
-        units);
+            sectorCF.getValue() / this.membersAmount(),
+            units);
   }
 
   public List<Journey> getMembersJourneys() {
     return this.getMembers()
-        .stream()
-        .flatMap(member -> member.getJourneys().stream())
-        .filter(journey -> journey.involvesOrganization(this.organization))
-        .collect(Collectors.toList());
+            .stream()
+            .flatMap(member -> member.getJourneys().stream())
+            .filter(journey -> journey.involvesOrganization(this.organization))
+            .collect(Collectors.toList());
   }
 
   public CarbonFootprint getSectorCF(Set<Unit> units) {
     return CarbonFootprint.sum(units, getMembersJourneys()
-        .stream()
-        .map(journey -> journey.getCarbonFootprint(units))
-        .toArray(CarbonFootprint[]::new));
+            .stream()
+            .map(journey -> journey.getCarbonFootprint(units))
+            .toArray(CarbonFootprint[]::new));
   }
 
 }

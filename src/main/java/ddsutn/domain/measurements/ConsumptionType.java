@@ -1,12 +1,11 @@
 package ddsutn.domain.measurements;
 
 import ddsutn.domain.measurements.unit.Unit;
+import java.util.Set;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
-import java.util.Set;
 
 @NoArgsConstructor
 @Getter
@@ -36,7 +35,11 @@ public class ConsumptionType {
   @JoinColumn(name = "emission_factor_id")
   private EmissionFactor emissionFactor;
 
-  public ConsumptionType(String name, Set<Unit> units, String activity, String scope, EmissionFactor emissionFactor) {
+  public ConsumptionType(String name,
+                         Set<Unit> units,
+                         String activity,
+                         String scope,
+                         EmissionFactor emissionFactor) {
     this.name = name;
     this.units = units;
     this.activity = activity;

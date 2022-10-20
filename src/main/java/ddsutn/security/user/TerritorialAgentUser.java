@@ -1,12 +1,11 @@
 package ddsutn.security.user;
 
 import ddsutn.domain.territories.TerritorialSectorAgent;
+import java.io.IOException;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
-import java.io.IOException;
 
 @NoArgsConstructor
 @Setter
@@ -19,7 +18,9 @@ public class TerritorialAgentUser extends User {
   @JoinColumn(name = "territorial_sector_agent_id", referencedColumnName = "id")
   private TerritorialSectorAgent territorialSectorAgent;
 
-  public TerritorialAgentUser(String username, String password, TerritorialSectorAgent agent) throws IOException {
+  public TerritorialAgentUser(String username,
+                              String password,
+                              TerritorialSectorAgent agent) throws IOException {
     super(username, password);
     this.territorialSectorAgent = agent;
   }

@@ -2,14 +2,13 @@ package ddsutn.domain.journey.transport;
 
 import ddsutn.domain.exceptions.IncompleteLineException;
 import ddsutn.domain.location.Distance;
+import ddsutn.domain.measurements.unit.BaseUnit;
 import ddsutn.domain.measurements.unit.Proportionality;
 import ddsutn.domain.measurements.unit.Unit;
-import ddsutn.domain.measurements.unit.BaseUnit;
+import java.util.List;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -53,14 +52,14 @@ public class Line {
 
   public Distance getDistanceBetween(Stop startStop, Stop endStop) {
     List<Stop> stopsBetween = this
-        .stopList
-        .subList(this.stopList.indexOf(startStop), this.stopList.indexOf(endStop));
+            .stopList
+            .subList(this.stopList.indexOf(startStop), this.stopList.indexOf(endStop));
 
     Integer finalValue = stopsBetween
-        .stream()
-        .map(Stop::getDistanceToNextStop)
-        .mapToInt(Distance::getValue)
-        .sum();
+            .stream()
+            .map(Stop::getDistanceToNextStop)
+            .mapToInt(Distance::getValue)
+            .sum();
 
     return new Distance(finalValue, new Unit(BaseUnit.METER, 3, Proportionality.DIRECT));
   }

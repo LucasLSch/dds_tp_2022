@@ -5,13 +5,12 @@ import ddsutn.domain.location.Location;
 import ddsutn.domain.measurements.unit.BaseUnit;
 import ddsutn.domain.measurements.unit.Proportionality;
 import ddsutn.domain.measurements.unit.Unit;
+import java.io.IOException;
+import java.util.Locale;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import java.io.IOException;
-import java.util.Locale;
 
 public class GeoRefAdapter {
 
@@ -35,20 +34,20 @@ public class GeoRefAdapter {
 
   private GeoRefAdapter() {
     this.retrofit = new Retrofit.Builder()
-        .baseUrl(urlAPI)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build();
+            .baseUrl(urlAPI)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
   }
 
   public Distance getDistance(Location origin, Location destination) throws IOException {
     this.api = retrofit.create(GeoRefService.class);
     Call<DistanceResponse> distanceResponseCall = this.api.distance(
-        origin.getDistrict().getId(),
-        origin.getStreet(),
-        origin.getHeight(),
-        destination.getDistrict().getId(),
-        destination.getStreet(),
-        destination.getHeight());
+            origin.getDistrict().getId(),
+            origin.getStreet(),
+            origin.getHeight(),
+            destination.getDistrict().getId(),
+            destination.getStreet(),
+            destination.getHeight());
     Response<DistanceResponse> response = distanceResponseCall.execute();
 
     Unit unit = this.getUnitOfString(response.body().unit);
@@ -57,10 +56,10 @@ public class GeoRefAdapter {
 
   private Unit getUnitOfString(String unit) {
 
-    String exponentString = unit.substring(0, unit.length()-2).toLowerCase(Locale.ROOT);
+    String exponentString = unit.substring(0, unit.length() - 2).toLowerCase(Locale.ROOT);
     int exponent = 0;
 
-    switch(exponentString) {
+    switch (exponentString) {
       case "m":
         exponent = -3;
         break;
@@ -70,9 +69,6 @@ public class GeoRefAdapter {
       case "d":
         exponent = -1;
         break;
-      case "":
-        exponent = 0;
-        break;
       case "da":
         exponent = 1;
         break;
@@ -81,6 +77,9 @@ public class GeoRefAdapter {
         break;
       case "k":
         exponent = 3;
+        break;
+      default:
+        exponent = 0;
         break;
     }
 

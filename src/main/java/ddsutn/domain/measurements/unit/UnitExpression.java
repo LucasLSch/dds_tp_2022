@@ -1,11 +1,10 @@
 package ddsutn.domain.measurements.unit;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Getter
@@ -13,14 +12,14 @@ public abstract class UnitExpression {
 
   public static Boolean isConvertibleTo(Set<Unit> su1, Set<Unit> su2) {
     return haveSameBaseUnits(getProportionalUnits(su1), getProportionalUnits(su2))
-        && haveSameBaseUnits(getInvProportionalUnits(su1), getInvProportionalUnits(su2));
+            && haveSameBaseUnits(getInvProportionalUnits(su1), getInvProportionalUnits(su2));
   }
 
   public static Set<Unit> getFilteredUnitSet(Set<Unit> simpleUnits, Predicate<Unit> someCondition) {
     return simpleUnits
-        .stream()
-        .filter(someCondition)
-        .collect(Collectors.toSet());
+            .stream()
+            .filter(someCondition)
+            .collect(Collectors.toSet());
   }
 
   public static Set<Unit> getProportionalUnits(Set<Unit> simpleUnits) {
@@ -49,14 +48,14 @@ public abstract class UnitExpression {
 
   public static String printUnits(Set<Unit> someUnits) {
     Set<Unit> directUnits = someUnits
-        .stream()
-        .filter(Unit::isDirectlyProportional)
-        .collect(Collectors.toSet());
+            .stream()
+            .filter(Unit::isDirectlyProportional)
+            .collect(Collectors.toSet());
 
     Set<Unit> inverseUnits = someUnits
-        .stream()
-        .filter(unit -> !unit.isDirectlyProportional())
-        .collect(Collectors.toSet());
+            .stream()
+            .filter(unit -> !unit.isDirectlyProportional())
+            .collect(Collectors.toSet());
 
     return printSamePropUnits(directUnits) + " / " + printSamePropUnits(inverseUnits);
   }
@@ -64,13 +63,13 @@ public abstract class UnitExpression {
   private static String printSamePropUnits(Set<Unit> someUnits) {
     String finalString = "(1)";
 
-    if(!someUnits.isEmpty()) {
+    if (!someUnits.isEmpty()) {
       finalString = someUnits
-          .stream()
-          .map(unit -> " * " + unit.print())
-          .reduce((s1, s2) -> s1+s2)
-          .orElse("")
-          .substring(3);
+              .stream()
+              .map(unit -> " * " + unit.print())
+              .reduce((s1, s2) -> s1 + s2)
+              .orElse("")
+              .substring(3);
     }
 
     return finalString;

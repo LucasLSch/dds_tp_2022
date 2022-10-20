@@ -1,10 +1,9 @@
 package ddsutn.security.user;
 
-import lombok.NoArgsConstructor;
-
+import java.io.IOException;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import java.io.IOException;
+import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Entity

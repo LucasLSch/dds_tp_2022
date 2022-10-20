@@ -1,7 +1,6 @@
 package ddsutn.controllers;
 
 import ddsutn.domain.measurements.ActivityData;
-import ddsutn.domain.measurements.CarbonFootprint;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

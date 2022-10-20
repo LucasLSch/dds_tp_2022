@@ -15,7 +15,6 @@ import ddsutn.domain.organization.DocType;
 import ddsutn.security.user.Registration;
 import ddsutn.security.user.User;
 import ddsutn.services.ConsumptionTypeSvc;
-import ddsutn.services.LineSvc;
 import ddsutn.services.TransportSvc;
 import ddsutn.services.UserSvc;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,34 +151,34 @@ public class TestDataFill {
   private void createPublicTransport() {
 
     Stop stop1 = new Stop(
-      new Location(null, "Calle 1", "1"),
-      new Distance(20, kilometer(Proportionality.DIRECT)));
+            new Location(null, "Calle 1", "1"),
+            new Distance(20, kilometer(Proportionality.DIRECT)));
     Stop stop2 = new Stop(
-      new Location(null, "Calle 2", "2"),
-      new Distance(21, kilometer(Proportionality.DIRECT)));
+            new Location(null, "Calle 2", "2"),
+            new Distance(21, kilometer(Proportionality.DIRECT)));
     Stop stop3 = new Stop(
-        new Location(null, "Calle 3", "3"),
-        new Distance(22, kilometer(Proportionality.DIRECT)));
+            new Location(null, "Calle 3", "3"),
+            new Distance(22, kilometer(Proportionality.DIRECT)));
 
     Stop stop4 = new Stop(
-        new Location(null, "Street 1", "1"),
-        new Distance(10, kilometer(Proportionality.DIRECT)));
+            new Location(null, "Street 1", "1"),
+            new Distance(10, kilometer(Proportionality.DIRECT)));
     Stop stop5 = new Stop(
-        new Location(null, "Street 2", "2"),
-        new Distance(11, kilometer(Proportionality.DIRECT)));
+            new Location(null, "Street 2", "2"),
+            new Distance(11, kilometer(Proportionality.DIRECT)));
     Stop stop6 = new Stop(
-        new Location(null, "Street 3", "3"),
-        new Distance(12, kilometer(Proportionality.DIRECT)));
+            new Location(null, "Street 3", "3"),
+            new Distance(12, kilometer(Proportionality.DIRECT)));
 
     Stop stop7 = new Stop(
-        new Location(null, "Rue 1", "1"),
-        new Distance(1, kilometer(Proportionality.DIRECT)));
+            new Location(null, "Rue 1", "1"),
+            new Distance(1, kilometer(Proportionality.DIRECT)));
     Stop stop8 = new Stop(
-        new Location(null, "Rue 2", "2"),
-        new Distance(2, kilometer(Proportionality.DIRECT)));
+            new Location(null, "Rue 2", "2"),
+            new Distance(2, kilometer(Proportionality.DIRECT)));
     Stop stop9 = new Stop(
-        new Location(null, "Rue 3", "3"),
-        new Distance(3, kilometer(Proportionality.DIRECT)));
+            new Location(null, "Rue 3", "3"),
+            new Distance(3, kilometer(Proportionality.DIRECT)));
 
     Line line1 = new Line(Arrays.asList(stop1, stop2, stop3), "SpanishLine", PublicTransportType.BUS);
     Line line2 = new Line(Arrays.asList(stop4, stop5, stop6), "EnglishLine", PublicTransportType.SUBWAY);
@@ -198,23 +197,24 @@ public class TestDataFill {
   private void createUser() {
     try {
       User[] users = {
-          new Registration()
-              .setMember("Gonzalo", "Rodriguez Pardo", DocType.ID, "42.877.601")
-              .registerStandardUser("Pardios", "1Contra$enia"),
-          new Registration()
-              .setMember("Lucas", "Schneider", DocType.ID, "42.396.327")
-              .registerStandardUser("Pastita", "1Contra$enia"),
-          new Registration()
-              .setSectorAgent()
-              .registerAgentUser("Agent_Smith", "1Contra$enia"),
-          new Registration()
-              .registerAdminUser("UltrAdmin", "1Contra$enia")
+              new Registration()
+                      .setMember("Gonzalo", "Rodriguez Pardo", DocType.ID, "42.877.601")
+                      .registerStandardUser("Pardios", "1Contra$enia"),
+              new Registration()
+                      .setMember("Lucas", "Schneider", DocType.ID, "42.396.327")
+                      .registerStandardUser("Pastita", "1Contra$enia"),
+              new Registration()
+                      .setSectorAgent()
+                      .registerAgentUser("Agent_Smith", "1Contra$enia"),
+              new Registration()
+                      .registerAdminUser("UltrAdmin", "1Contra$enia")
       };
       userSvc.saveAll(Arrays.asList(users));
 
     } catch (IOException e) {
       return;
-    }}
+    }
+  }
 
   private void createTransport() {
   }

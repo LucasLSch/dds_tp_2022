@@ -4,23 +4,23 @@ import ddsutn.domain.exceptions.EmptyJourneyException;
 import ddsutn.domain.exceptions.NotShareableJourneyException;
 import ddsutn.domain.exceptions.NotSharedOrganizationException;
 import ddsutn.domain.location.Distance;
+import ddsutn.domain.location.Location;
 import ddsutn.domain.measurements.ActivityData;
 import ddsutn.domain.measurements.CarbonFootprint;
+import ddsutn.domain.measurements.unit.BaseUnit;
 import ddsutn.domain.measurements.unit.Proportionality;
 import ddsutn.domain.measurements.unit.Unit;
 import ddsutn.domain.organization.Member;
 import ddsutn.domain.organization.Organization;
-import ddsutn.domain.location.Location;
-import ddsutn.domain.measurements.unit.BaseUnit;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 
 @NoArgsConstructor
 @Getter
@@ -77,7 +77,7 @@ public class Journey {
   }
 
   public void addMember(Member someMember) {
-    if(someMember.hasJourney(this) && !this.hasMember(someMember)) {
+    if (someMember.hasJourney(this) && !this.hasMember(someMember)) {
       this.members.add(someMember);
     }
   }
@@ -94,7 +94,7 @@ public class Journey {
 
   public Boolean involvesOrganization(Organization someOrganization) {
     return this.startingLocation.equals(someOrganization.getLocation())
-        || this.endingLocation.equals(someOrganization.getLocation());
+            || this.endingLocation.equals(someOrganization.getLocation());
   }
 
   public Boolean isShareable() {
@@ -105,8 +105,7 @@ public class Journey {
     try {
       this.validateOrganizationForSharing(someMember);
       this.validateSharableJourney();
-    }
-    catch (NotSharedOrganizationException exception) {
+    } catch (NotSharedOrganizationException exception) {
       System.out.println("WARN: Members does not work for the same Organization");
       return;
     } catch (NotShareableJourneyException exception) {
@@ -130,33 +129,33 @@ public class Journey {
 
   public Distance getJourneyDistance() {
     int finalDistanceValue = this.legList.stream()
-        .mapToInt(leg -> {
-          try {
-            return leg.getLegDistance().getValue();
-          } catch (IOException e) {
-            throw new RuntimeException(e);
-          }
-        })
-        .sum();
+            .mapToInt(leg -> {
+              try {
+                return leg.getLegDistance().getValue();
+              } catch (IOException e) {
+                throw new RuntimeException(e);
+              }
+            })
+            .sum();
 
     return new Distance(finalDistanceValue, new Unit(BaseUnit.METER, 3, Proportionality.DIRECT));
   }
 
   public CarbonFootprint getCarbonFootprint(Set<Unit> units) {
     CarbonFootprint journeyCF = CarbonFootprint
-        .sum(units, this.getDataActivities()
-        .stream()
-        .map(da -> da.getCarbonFootprint(units))
-        .toArray(CarbonFootprint[]::new));
+            .sum(units, this.getDataActivities()
+                    .stream()
+                    .map(da -> da.getCarbonFootprint(units))
+                    .toArray(CarbonFootprint[]::new));
 
-    journeyCF.multiplyValue(1d/this.membersAmount());
+    journeyCF.multiplyValue(1d / this.membersAmount());
     return journeyCF;
   }
 
   public List<ActivityData> getDataActivities() {
     return this.legList.stream()
-        .map(Leg::createDataActivities)
-        .collect(Collectors.toList());
+            .map(Leg::createDataActivities)
+            .collect(Collectors.toList());
   }
 
 }

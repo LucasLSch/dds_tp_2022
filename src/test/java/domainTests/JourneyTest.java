@@ -1,8 +1,5 @@
 package domainTests;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-
 public class JourneyTest extends TestDataFill {
 //  private Journey dummyJourney;
 //  private List<Leg> dummyLegs = new ArrayList<>();

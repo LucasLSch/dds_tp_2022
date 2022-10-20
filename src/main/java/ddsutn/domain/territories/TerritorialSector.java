@@ -3,13 +3,12 @@ package ddsutn.domain.territories;
 import ddsutn.domain.measurements.CarbonFootprint;
 import ddsutn.domain.measurements.unit.Unit;
 import ddsutn.domain.organization.Organization;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Set;
+import javax.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Getter

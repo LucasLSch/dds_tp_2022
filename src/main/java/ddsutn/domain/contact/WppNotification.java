@@ -17,10 +17,10 @@ public class WppNotification implements NotificationMethod {
   public void notify(Contact someContact, String someMessage) {
     Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
     Message message = Message.creator(
-            new com.twilio.type.PhoneNumber(getAddressee(someContact)),
-            new com.twilio.type.PhoneNumber(FROM_WPP),
-            someMessage)
-        .create();
+                    new com.twilio.type.PhoneNumber(getAddressee(someContact)),
+                    new com.twilio.type.PhoneNumber(FROM_WPP),
+                    someMessage)
+            .create();
 
     System.out.println(message.getSid());
   }

@@ -1,12 +1,11 @@
 package ddsutn.domain.location;
 
 import ddsutn.domain.measurements.unit.Unit;
+import javax.persistence.Embeddable;
+import javax.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Embeddable;
-import javax.persistence.Transient;
 
 @NoArgsConstructor
 @AllArgsConstructor

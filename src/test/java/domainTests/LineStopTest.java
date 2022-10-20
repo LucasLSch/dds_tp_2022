@@ -1,7 +1,5 @@
 package domainTests;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class LineStopTest extends TestDataFill {
 
 //  private Line dummyLine;

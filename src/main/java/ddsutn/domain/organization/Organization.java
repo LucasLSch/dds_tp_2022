@@ -1,21 +1,20 @@
 package ddsutn.domain.organization;
 
 import ddsutn.domain.contact.Contact;
+import ddsutn.domain.exceptions.InvalidSectorForOrgException;
+import ddsutn.domain.location.Location;
 import ddsutn.domain.measurements.ActivityData;
 import ddsutn.domain.measurements.CarbonFootprint;
 import ddsutn.domain.measurements.unit.Unit;
-import ddsutn.domain.exceptions.InvalidSectorForOrgException;
-import ddsutn.domain.location.Location;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
@@ -92,9 +91,9 @@ public class Organization {
 
   public Set<Member> getMembers() {
     return this.sectors
-        .stream()
-        .flatMap(sector -> sector.getMembers().stream())
-        .collect(Collectors.toSet());
+            .stream()
+            .flatMap(sector -> sector.getMembers().stream())
+            .collect(Collectors.toSet());
   }
 
   public void addActivityData(ActivityData someAD) {
@@ -120,17 +119,17 @@ public class Organization {
 
   private List<CarbonFootprint> getMemberCF(Set<Unit> units) {
     return this.getMembers()
-        .stream()
-        .flatMap(member -> member.getJourneys().stream())
-        .map(journey -> journey.getCarbonFootprint(units))
-        .collect(Collectors.toList());
+            .stream()
+            .flatMap(member -> member.getJourneys().stream())
+            .map(journey -> journey.getCarbonFootprint(units))
+            .collect(Collectors.toList());
   }
 
   public List<CarbonFootprint> getActivitiesDataCF(Set<Unit> units) {
     return this.activitiesData
-        .stream()
-        .map(ad -> ad.getCarbonFootprint(units))
-        .collect(Collectors.toList());
+            .stream()
+            .map(ad -> ad.getCarbonFootprint(units))
+            .collect(Collectors.toList());
   }
 
   private void registerCarbonFootprint(CarbonFootprint someCarbonFootprint) {
@@ -139,7 +138,7 @@ public class Organization {
   }
 
   public void notify(String someMessage) {
-    this.contacts.forEach( contact -> contact.notify(someMessage));
+    this.contacts.forEach(contact -> contact.notify(someMessage));
   }
 
 }
