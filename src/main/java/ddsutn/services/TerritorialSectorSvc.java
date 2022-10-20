@@ -1,6 +1,7 @@
 package ddsutn.services;
 
 import ddsutn.domain.journey.transport.Transport;
+import ddsutn.domain.organization.Member;
 import ddsutn.domain.territories.TerritorialSector;
 import ddsutn.repositories.TerritorialSectorRepo;
 import ddsutn.repositories.TransportRepo;
@@ -15,6 +16,12 @@ public class TerritorialSectorSvc {
 
   public void saveAll(List<TerritorialSector> territorialSectors) {
     this.territorialSectorRepo.saveAll(territorialSectors);
+  }
+
+  public TerritorialSector findById(Long id) {
+    return this.territorialSectorRepo
+            .findById(id)
+            .orElse(null);
   }
 
 }

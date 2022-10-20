@@ -10,13 +10,11 @@ import ddsutn.domain.measurements.unit.Proportionality;
 import ddsutn.domain.measurements.unit.Unit;
 import ddsutn.domain.organization.DocType;
 import ddsutn.domain.territories.TerritorialSector;
+import ddsutn.domain.territories.TerritorialSectorAgent;
 import ddsutn.domain.territories.TerritorialSectorType;
 import ddsutn.security.user.Registration;
 import ddsutn.security.user.User;
-import ddsutn.services.ConsumptionTypeSvc;
-import ddsutn.services.TerritorialSectorSvc;
-import ddsutn.services.TransportSvc;
-import ddsutn.services.UserSvc;
+import ddsutn.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -38,6 +36,9 @@ public class TestDataFill {
 
   @Autowired
   private TerritorialSectorSvc territorialSectorSvc;
+
+  @Autowired
+  private TerrirotialSectorAgentSvc terrirotialSectorAgentSvc;
 
   public TestDataFill() {
     this.fillRepos();
@@ -250,6 +251,14 @@ public class TestDataFill {
   }
 
   private void createTerritorialSectorAgent() {
+    TerritorialSectorAgent[] territorialSectorAgents = {
+            new TerritorialSectorAgent(territorialSectorSvc.findById(1L)),
+            new TerritorialSectorAgent(territorialSectorSvc.findById(2L)),
+            new TerritorialSectorAgent(territorialSectorSvc.findById(3L)),
+            new TerritorialSectorAgent(territorialSectorSvc.findById(4L))
+    };
+
+    terrirotialSectorAgentSvc.saveAll(Arrays.asList(territorialSectorAgents));
   }
 
   private void createSector() {
