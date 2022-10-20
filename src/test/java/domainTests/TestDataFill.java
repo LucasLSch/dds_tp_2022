@@ -1,6 +1,7 @@
 package domainTests;
 
 import ddsutn.domain.journey.transport.Line;
+import ddsutn.domain.journey.transport.PublicTransport;
 import ddsutn.domain.journey.transport.PublicTransportType;
 import ddsutn.domain.journey.transport.Stop;
 import ddsutn.domain.location.Distance;
@@ -15,6 +16,7 @@ import ddsutn.security.user.Registration;
 import ddsutn.security.user.User;
 import ddsutn.services.ConsumptionTypeSvc;
 import ddsutn.services.LineSvc;
+import ddsutn.services.TransportSvc;
 import ddsutn.services.UserSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,7 +32,7 @@ public class TestDataFill {
   private UserSvc userSvc;
 
   @Autowired
-  private LineSvc lineSvc;
+  private TransportSvc transportSvc;
 
   @Autowired
   private ConsumptionTypeSvc consumptionTypeSvc;
@@ -179,13 +181,18 @@ public class TestDataFill {
         new Location(null, "Rue 3", "3"),
         new Distance(3, kilometer(Proportionality.DIRECT)));
 
-    Line[] lines = {
-        new Line(Arrays.asList(stop1, stop2, stop3), "SpanishLine", PublicTransportType.BUS),
-        new Line(Arrays.asList(stop4, stop5, stop6), "EnglishLine", PublicTransportType.SUBWAY),
-        new Line(Arrays.asList(stop7, stop8, stop9), "FrenchLine", PublicTransportType.TRAIN)
+    Line line1 = new Line(Arrays.asList(stop1, stop2, stop3), "SpanishLine", PublicTransportType.BUS);
+    Line line2 = new Line(Arrays.asList(stop4, stop5, stop6), "EnglishLine", PublicTransportType.SUBWAY);
+    Line line3 = new Line(Arrays.asList(stop7, stop8, stop9), "FrenchLine", PublicTransportType.TRAIN);
+
+    PublicTransport[] publicTransports = {
+            new PublicTransport(0.5, line1, stop2, stop3),
+            new PublicTransport(0.3, line1, stop1, stop2),
+            new PublicTransport(0.8, line2, stop4, stop6),
+            new PublicTransport(1.1, line3, stop7, stop9)
     };
 
-    lineSvc.saveAll(Arrays.asList(lines));
+    transportSvc.saveAll(Arrays.asList(publicTransports));
   }
 
   private void createUser() {
