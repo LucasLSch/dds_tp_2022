@@ -9,9 +9,12 @@ import ddsutn.domain.measurements.unit.BaseUnit;
 import ddsutn.domain.measurements.unit.Proportionality;
 import ddsutn.domain.measurements.unit.Unit;
 import ddsutn.domain.organization.DocType;
+import ddsutn.domain.territories.TerritorialSector;
+import ddsutn.domain.territories.TerritorialSectorType;
 import ddsutn.security.user.Registration;
 import ddsutn.security.user.User;
 import ddsutn.services.ConsumptionTypeSvc;
+import ddsutn.services.TerritorialSectorSvc;
 import ddsutn.services.TransportSvc;
 import ddsutn.services.UserSvc;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,9 @@ public class TestDataFill {
 
   @Autowired
   private ConsumptionTypeSvc consumptionTypeSvc;
+
+  @Autowired
+  private TerritorialSectorSvc territorialSectorSvc;
 
   public TestDataFill() {
     this.fillRepos();
@@ -233,6 +239,14 @@ public class TestDataFill {
   }
 
   private void createTerritorialSector() {
+    TerritorialSector[] territorialSectors = {
+            new TerritorialSector(TerritorialSectorType.CITY, new HashSet<>()),
+            new TerritorialSector(TerritorialSectorType.STATE, new HashSet<>()),
+            new TerritorialSector(TerritorialSectorType.CITY, new HashSet<>()),
+            new TerritorialSector(TerritorialSectorType.STATE, new HashSet<>())
+    };
+
+    territorialSectorSvc.saveAll(Arrays.asList(territorialSectors));
   }
 
   private void createTerritorialSectorAgent() {
