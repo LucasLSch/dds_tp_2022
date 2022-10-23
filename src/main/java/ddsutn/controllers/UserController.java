@@ -6,18 +6,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
 @RestController
-public class CfCalculatorController {
+public class UserController {
+	@GetMapping("/iniciarSesion")
+	public ModelAndView logIn() {
+		return new ModelAndView("IniciarSesion.html");
+	}
 
-  @GetMapping("/calculadoraHC")
-  public ModelAndView useCalculator() {
-    return new ModelAndView("CalculadoraHc.html");
-  }
-
-  @PostMapping("/calculadoraHC")
-  public String useCalculator(@RequestBody ActivityData ad) {
-    return "Calculaste la huella de carbono";
-  }
-
+	@GetMapping("/Registrarse")
+	public ModelAndView signUp() {
+		return new ModelAndView("Registrarse.html");
+	}
 }

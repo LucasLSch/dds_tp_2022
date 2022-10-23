@@ -5,13 +5,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class MeasurmentsController {
 
   @GetMapping("/registrarMediciones")
-  public String registerMeasurements() {
-    return "Estas por registrar mediciones";
+  public ModelAndView registerMeasurements() {
+    return new ModelAndView("RegistrarMedicion.html");
   }
 
   @PostMapping("/registrarMediciones")
