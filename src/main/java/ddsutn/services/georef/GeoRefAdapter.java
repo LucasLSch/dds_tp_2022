@@ -5,12 +5,13 @@ import ddsutn.domain.location.Location;
 import ddsutn.domain.measurements.unit.BaseUnit;
 import ddsutn.domain.measurements.unit.Proportionality;
 import ddsutn.domain.measurements.unit.Unit;
-import java.io.IOException;
-import java.util.Locale;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import java.io.IOException;
+import java.util.Locale;
 
 public class GeoRefAdapter {
 

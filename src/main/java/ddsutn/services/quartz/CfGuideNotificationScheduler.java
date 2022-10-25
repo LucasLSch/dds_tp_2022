@@ -1,9 +1,9 @@
 package ddsutn.services.quartz;
 
-import static org.quartz.JobBuilder.newJob;
-
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
+
+import static org.quartz.JobBuilder.newJob;
 
 public class CfGuideNotificationScheduler {
 

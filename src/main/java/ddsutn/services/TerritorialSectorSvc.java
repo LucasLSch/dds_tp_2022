@@ -1,27 +1,18 @@
 package ddsutn.services;
 
-import ddsutn.domain.journey.transport.Transport;
-import ddsutn.domain.organization.Member;
 import ddsutn.domain.territories.TerritorialSector;
 import ddsutn.repositories.TerritorialSectorRepo;
-import ddsutn.repositories.TransportRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-
-public class TerritorialSectorSvc {
+public class TerritorialSectorSvc extends GenericSvcImpl<TerritorialSector, Long> {
 
   @Autowired
   private TerritorialSectorRepo territorialSectorRepo;
 
-  public void saveAll(List<TerritorialSector> territorialSectors) {
-    this.territorialSectorRepo.saveAll(territorialSectors);
-  }
-
-  public TerritorialSector findById(Long id) {
-    return this.territorialSectorRepo
-            .findById(id)
-            .orElse(null);
+  @Override
+  public CrudRepository<TerritorialSector, Long> getRepo() {
+    return this.territorialSectorRepo;
   }
 
 }

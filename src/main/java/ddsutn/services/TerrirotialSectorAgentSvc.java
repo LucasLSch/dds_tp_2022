@@ -1,25 +1,18 @@
 package ddsutn.services;
 
-import ddsutn.domain.territories.TerritorialSector;
 import ddsutn.domain.territories.TerritorialSectorAgent;
 import ddsutn.repositories.TerritorialSectorAgentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-
-public class TerrirotialSectorAgentSvc {
+public class TerrirotialSectorAgentSvc extends GenericSvcImpl<TerritorialSectorAgent, Long> {
 
   @Autowired
   private TerritorialSectorAgentRepo territorialSectorAgentRepo;
 
-  public void saveAll(List<TerritorialSectorAgent> territorialSectorAgents) {
-    this.territorialSectorAgentRepo.saveAll(territorialSectorAgents);
-  }
-
-  public TerritorialSectorAgent findById(Long id) {
-    return this.territorialSectorAgentRepo
-            .findById(id)
-            .orElse(null);
+  @Override
+  public CrudRepository<TerritorialSectorAgent, Long> getRepo() {
+    return this.territorialSectorAgentRepo;
   }
 
 }

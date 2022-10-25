@@ -2,17 +2,19 @@ package ddsutn.services;
 
 import ddsutn.repositories.UserRepo;
 import ddsutn.security.user.User;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserSvc {
+public class UserSvc extends GenericSvcImpl<User, Long> {
 
   @Autowired
   private UserRepo userRepo;
 
-  public void saveAll(List<User> users) {
-    this.userRepo.saveAll(users);
+  @Override
+  public CrudRepository<User, Long> getRepo() {
+    return this.userRepo;
   }
+
 }
