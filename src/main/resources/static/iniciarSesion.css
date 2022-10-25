@@ -54,7 +54,7 @@
 	position:absolute;
 	left:30px;
 	top:0px;
-	background-image:url(../images/v101_16.png);
+	background-image:url(../../static/footer/img/twitter_logo.png);
 	background-repeat:no-repeat;
 	background-size:cover;
 }
@@ -83,7 +83,7 @@
 	position:absolute;
 	left:30px;
 	top:0px;
-	background-image:url(../images/v101_19.png);
+	background-image:url(../../static/footer/img/facebook_logo.png);
 	background-repeat:no-repeat;
 	background-size:cover;
 }
@@ -112,7 +112,7 @@
 	position:absolute;
 	left:30px;
 	top:0px;
-	background-image:url(../images/v101_22.png);
+	background-image:url(../../static/footer/img/gmail_logo.png);
 	background-repeat:no-repeat;
 	background-size:cover;
 }

@@ -1,38 +1,39 @@
 package ddsutn.controllers;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+@Controller
 @RequestMapping(value = "/organizaciones")
 public class OrganizationController {
 
   @GetMapping("")
-  public ModelAndView showOrganizations() {
-    return new ModelAndView("BuscarOrganizacion.html");
+  public String showOrganizations(Model model) {
+    return "buscarOrganizacion";
   }
+
   @GetMapping("/{param}/{key}")//refrescarme como hacer un search
-  public ModelAndView searchOrganizacion(@PathVariable String param,@PathVariable String key ) {
-    return new ModelAndView("BuscarOrganizacion.html");
+  public String searchOrganizacion(@PathVariable String param,@PathVariable String key, Model model) {
+    return "buscarOrganizacion";
   }
+
   @GetMapping("/{id}")
-  public ModelAndView showOrganizatinoById(@PathVariable Long id) {
-    return new ModelAndView("DetalleOrganizacion.html");
+  public String showOrganizatinoById(@PathVariable Long id, Model model) {
+    return "detalleOrganizacion";
     //add atribute objeto org, buscarlo con id
   }
 
   @GetMapping("/{id}/solicitar")
-  public String apply(@PathVariable Long id) {
+  public String apply(@PathVariable Long id, Model model) {
     return "simular que solicita para org " + id;
   }
 
   @GetMapping("/{id}/aceptar")
-  public ModelAndView accept(@PathVariable Long id) {//cirtcular view path, que esta pasando
-    return new ModelAndView("aceptarMiembro.html");
+  public String accept(@PathVariable Long id, Model model) {//cirtcular view path, que esta pasando
+    return "aceptarMiembro";
   }
-
 
 }

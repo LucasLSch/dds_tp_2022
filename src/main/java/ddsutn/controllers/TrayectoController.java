@@ -1,13 +1,17 @@
 package ddsutn.controllers;
-import ddsutn.domain.measurements.ActivityData;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
 @RequestMapping(value = "/Trayecto")
 public class TrayectoController {
+
 	@GetMapping("")
-	public ModelAndView agregarTrayecto() {
-		return new ModelAndView("agregarTrayecto.html");
+	public String agregarTrayecto(Model model) {
+		return "agregarTrayecto";
 	}
+
 }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+
+<section th:fragment="menu">
+  <div class="menu-bar">
+    <div class="base-container">
+
+      <!-- TODO
+        Chequear session eventualmente para mostrar lo correspondiente
+        Sitio de Informacion?
+      -->
+
+      <nav class="menu">
+        <a th:href="'http://localhost:36999/'">Inicio</a>
+        <a th:href="'http://localhost:36999/'">Información</a>
+        <a th:href="'http://localhost:36999/guiaRecomendaciones'">Guía de Recomendaciones</a>
+        <a th:href="'http://localhost:36999/iniciarSesion'">Iniciar Sesión</a>
+      </nav>
+
+      <a th:href="'http://localhost:36999/'">
+        <div class="logo-menu">
+          <img th:src="@{/menu/img/logo.png}" alt="Logo">
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+</section>
+</body>
+
+</html>
