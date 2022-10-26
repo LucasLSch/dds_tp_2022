@@ -83,19 +83,12 @@ public class Member {
     }
   }
 
-  public Set<Organization> getOrganizations() {
-    return this.sectors
-            .stream()
-            .map(Sector::getOrganization)
-            .collect(Collectors.toSet());
-  }
-
   public Boolean worksIn(Sector someSector) {
     return this.sectors.contains(someSector);
   }
 
   public Boolean worksIn(Organization someOrganization) {
-    return this.getOrganizations().contains(someOrganization);
+    return someOrganization.getMembers().contains(this);
   }
 
   public Boolean hasJourney(Journey someJourney) {
