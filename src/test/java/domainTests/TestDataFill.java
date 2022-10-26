@@ -94,7 +94,7 @@ public class TestDataFill {
 
     Set<Unit> unitsForElectricity = new HashSet<>(Arrays.asList(
             kilogram(Proportionality.DIRECT),
-            second(Proportionality.DIRECT),
+            hour(Proportionality.DIRECT),
             kilowatt(Proportionality.INVERSE)
     ));
 
@@ -153,7 +153,7 @@ public class TestDataFill {
 
             new ConsumptionType("Electricidad",
                     new HashSet<>(Arrays.asList(kilowatt(Proportionality.DIRECT),
-                            second(Proportionality.INVERSE))),
+                            hour(Proportionality.INVERSE))),
                     "Electricidad adquirida y consumida",
                     "Emisiones indirectas asociadas a la electricidad",
                     efs[6]),
@@ -432,8 +432,8 @@ public class TestDataFill {
     return new Unit(BaseUnit.METER, 3, prop);
   }
 
-  private static Unit second(Proportionality prop) {
-    return new Unit(BaseUnit.SECOND, 0, prop);
+  private static Unit hour(Proportionality prop) {
+    return new Unit(BaseUnit.HOUR, 0, prop);
   }
 
   private static Unit kilowatt(Proportionality prop) {

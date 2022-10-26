@@ -5,5 +5,6 @@ public enum BaseUnit {
   LITER,
   GRAM,
   SECOND,
+  HOUR,
   WATT
 }

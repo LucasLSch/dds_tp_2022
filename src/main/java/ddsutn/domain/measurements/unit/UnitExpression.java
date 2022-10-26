@@ -57,6 +57,10 @@ public abstract class UnitExpression {
             .filter(unit -> !unit.isDirectlyProportional())
             .collect(Collectors.toSet());
 
+    if(inverseUnits.isEmpty()) {
+      return printSamePropUnits(directUnits);
+    }
+
     return printSamePropUnits(directUnits) + " / " + printSamePropUnits(inverseUnits);
   }
 
