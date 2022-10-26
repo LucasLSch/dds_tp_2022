@@ -32,15 +32,20 @@
           <div class=ei110_626_2_150>
             <span class="ei110_626_2_150_2_137">􀊫</span>
           </div>
-          <span class="ei110_626_2_151">Search</span>
+          <form th:action="@{/organizaciones/search/${nombre}" method="get">
+          <input type="nombre" class="ei110_626_2_151" th:placeholder="Search"></input>
+            <div class="e161_58110">
+              <button type="submit">Enviar</button>
+            </div>
+          </form>
         </div>
       </div>
 
       <nav class="menu-nav">
-        <a class="nav-home" th:href="'http://localhost:36999/'">Inicio</a>
-        <a class="nav-information" th:href="'http://localhost:36999/'">Información</a>
-        <a class="nav-guide" th:href="'http://localhost:36999/guiaRecomendaciones'">Guía de Recomendaciones</a>
-        <a class="nav-login" th:href="'http://localhost:36999/iniciarSesion'">Iniciar Sesión</a>
+        <a class="nav-home" th:href="@{/}">Inicio</a>
+        <a class="nav-information" th:href="@{/}">Información</a>
+        <a class="nav-guide" th:href="@{/guiaRecomendaciones}">Guía de Recomendaciones</a>
+        <a class="nav-login" th:href="@{/iniciarSesion}">Iniciar Sesión</a>
       </nav>
 
       <div class="e110_630"></div>

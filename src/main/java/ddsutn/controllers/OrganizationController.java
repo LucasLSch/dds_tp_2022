@@ -1,5 +1,6 @@
 package ddsutn.controllers;
 
+import ddsutn.services.OrganizationSvc;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +16,10 @@ public class OrganizationController {
     return "buscarOrganizacion";
   }
 
-  @GetMapping("/{param}/{key}")//refrescarme como hacer un search
-  public String searchOrganizacion(@PathVariable String param,@PathVariable String key, Model model) {
+  @GetMapping("/search/{param}")//refrescarme como hacer un search
+  public String searchOrganizacion(@PathVariable String param, Model model) {
+    OrganizationSvc svc = new OrganizationSvc();
+    model.addAttribute("organizations", svc.findAllByCondition((organization)->organization.getSocialObjective().equals(param)));
     return "buscarOrganizacion";
   }
 
