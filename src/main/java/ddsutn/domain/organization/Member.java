@@ -152,10 +152,4 @@ public class Member {
     this.contacts.forEach(contact -> contact.notify(someMessage));
   }
 
-  public Set<Organization> getOrganizations() {
-    return this.sectors
-        .stream()
-        .map(Sector::getOrganization)
-        .collect(Collectors.toSet());
-  }
 }

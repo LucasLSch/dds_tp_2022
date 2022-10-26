@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Patrick+Hand SC&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" th:href="@{/menu.css}">
+  <link rel="stylesheet" th:href="@{/menu/menu.css}">
 </head>
 
 <body>
@@ -18,34 +18,42 @@
 <section th:fragment="menu">
 
 
-      <!-- TODO
-        Chequear session eventualmente para mostrar lo correspondiente
-        Sitio de Informacion?
-      -->
+  <!-- TODO
+    Chequear session eventualmente para mostrar lo correspondiente
+    Sitio de Informacion?
+  -->
 
-      <div class=e110_623>
-        <div class=e110_624>
-          <div  class="e110_625"></div>
-          <div class=e110_626>
-            <div class=ei110_626_2_149>
-              <div class=ei110_626_2_150>
-                <span  class="ei110_626_2_150_2_137">􀊫</span>
-              </div>
-              <span  class="ei110_626_2_151">Search</span>
-            </div>
+  <div class=e110_623>
+    <div class=e110_624>
+      <div class="e110_625"></div>
+
+      <div class=search-box>
+        <div class=ei110_626_2_149>
+          <div class=ei110_626_2_150>
+            <span class="ei110_626_2_150_2_137">􀊫</span>
           </div>
-          <span  class="e110_627">Información</span>
-          <span  class="e110_628">Guía de Recomendaciones</span>
-          <span  class="e110_638">Iniciar sesion</span>
-          <span  class="e110_639">Registrarse</span>
-          <span  class="e110_629">Inicio</span>
-          <div  class="e110_630"></div>
-          <div  class="e110_631"></div>
-          <span  class="e110_632">Mi Impacto Ambiental</span>
-        </div>
-        <div  class="e110_640">
+          <span class="ei110_626_2_151">Search</span>
         </div>
       </div>
+
+      <nav class="menu-nav">
+        <a class="nav-home" th:href="'http://localhost:36999/'">Inicio</a>
+        <a class="nav-information" th:href="'http://localhost:36999/'">Información</a>
+        <a class="nav-guide" th:href="'http://localhost:36999/guiaRecomendaciones'">Guía de Recomendaciones</a>
+        <a class="nav-login" th:href="'http://localhost:36999/iniciarSesion'">Iniciar Sesión</a>
+      </nav>
+
+      <div class="e110_630"></div>
+
+      <div class="web-name">
+        <img class="web-logo" th:src="@{/menu/img/webLogo.png}" alt="Logo">
+        <span class="web-title">Mi Impacto Ambiental</span>
+      </div>
+
+    </div>
+    <div class="e110_640">
+    </div>
+  </div>
 
 
 </section>
