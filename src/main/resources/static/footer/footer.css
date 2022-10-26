@@ -1,11 +1,11 @@
-.e110_762 {
+.footer {
 	width:1920px;
 	height:200px;
 	position:absolute;
 	left:0px;
 	top:880px;
 }
-.e110_763 {
+.footer-background {
 	background-color:rgba(40.00000141561031, 40.00000141561031, 40.00000141561031, 1);
 	width:1920px;
 	height:200px;
@@ -13,97 +13,72 @@
 	left:0px;
 	top:0px;
 }
-.e110_764 {
+.footer-nav {
 	width:372px;
 	height:40px;
 	position:absolute;
 	left:774px;
 	top:80px;
 }
-.e110_765 {
+
+.footer-twitter {
 	width:100px;
 	height:40px;
 	position:absolute;
 	left:0px;
 	top:0px;
-}
-.e110_766 {
 	background-color:rgba(29.000000171363354, 161.0000056028366, 242.00000077486038, 1);
-	width:100px;
-	height:40px;
-	position:absolute;
-	left:0px;
-	top:0px;
 	border-top-left-radius:5px;
 	border-top-right-radius:5px;
 	border-bottom-left-radius:5px;
 	border-bottom-right-radius:5px;
 }
-.e110_767 {
+
+.footer-twitter-logo {
 	width:40px;
 	height:40px;
 	position:absolute;
 	left:30px;
 	top:0px;
-	background-image:url(/img/twitter_logo.png);
-	background-repeat:no-repeat;
-	background-size:cover;
 }
-.e110_768 {
+
+.footer-facebook {
 	width:100px;
 	height:40px;
 	position:absolute;
 	left:136px;
 	top:0px;
-}
-.e110_769 {
 	background-color:rgba(74.0000031888485, 110.00000104308128, 169.00000512599945, 1);
-	width:100px;
-	height:40px;
-	position:absolute;
-	left:0px;
-	top:0px;
 	border-top-left-radius:5px;
 	border-top-right-radius:5px;
 	border-bottom-left-radius:5px;
 	border-bottom-right-radius:5px;
 }
-.e110_770 {
+
+.footer-facebook-logo {
 	width:40px;
 	height:40px;
 	position:absolute;
 	left:30px;
 	top:0px;
-	background-image:url(img/facebook_logo.png);
-	background-repeat:no-repeat;
-	background-size:cover;
 }
-.e110_771 {
+.footer-gmail {
 	width:100px;
 	height:40px;
 	position:absolute;
 	left:272px;
 	top:0px;
-}
-.e110_772 {
 	background-color:rgba(255, 255, 255, 1);
-	width:100px;
-	height:40px;
-	position:absolute;
-	left:0px;
-	top:0px;
 	border-top-left-radius:5px;
 	border-top-right-radius:5px;
 	border-bottom-left-radius:5px;
 	border-bottom-right-radius:5px;
 }
-.e110_773 {
+
+.footer-gmail-logo {
 	width:40px;
-	height:40px;
+	height:30px;
 	position:absolute;
 	left:30px;
-	top:0px;
-	background-image:url(img/gmail_logo.png);
-	background-repeat:no-repeat;
-	background-size:cover;
+	top:5px;
 }

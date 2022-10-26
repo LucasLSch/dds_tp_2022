@@ -9,28 +9,30 @@
 </head>
 
 <body>
-  <div class="e110_762" th:fragment="footer">
-    <div class="e110_763"></div>
-    <div class=e110_764>
-      <div class=e110_765>
-        <a href="https://twitter.com">
-        <div class="e110_766"></div>
-        <div class="e110_767"></div>
-        </a>
-      </div>
-      <div class=e110_768>
-        <a href="https://www.facebook.com/">
-        <div class="e110_769"></div>
-        <div class="e110_770"></div>
-        </a>
-      </div>
-      <div class=e110_771>
-        <a href="https://mail.google.com/">
-        <div class="e110_772"></div>
-        <div class="e110_773"></div>
-        </a>
-      </div>
+<div class="footer" th:fragment="footer">
+  <div class="footer-background"></div>
+
+  <div class=footer-nav>
+
+    <div class=footer-twitter>
+      <a href="https://twitter.com">
+        <img class="footer-twitter-logo" th:src="@{/footer/img/twitter_logo.png}" alt="Twitter @MiHuellaDeCarbono">
+      </a>
     </div>
+
+    <div class=footer-facebook>
+      <a href="https://www.facebook.com/">
+        <img class="footer-facebook-logo" th:src="@{/footer/img/facebook_logo.png}" alt="Facebook @MiHuellaDeCarbono">
+      </a>
+    </div>
+
+    <div class=footer-gmail>
+      <a href="https://mail.google.com/">
+        <img class="footer-gmail-logo" th:src="@{/footer/img/gmail_logo.png}" alt="Gmail MiHuellaDeCarbono@gmail.com">
+      </a>
+    </div>
+
   </div>
+</div>
 </body>
 </html>
