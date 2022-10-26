@@ -10,7 +10,8 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Patrick+Hand SC&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" th:href="@{/menu.css}">
+  <link rel="stylesheet" th:href="@{/footer/footer.css}">
   <link rel="stylesheet" th:href="@{/buscarOrganizacion.css}">
 
   <style>
@@ -26,24 +27,8 @@
 </head>
 
 <body>
-<div class=e110_3>
-  <div class=e110_224>
-    <div class="e110_225"></div>
-    <div class=e110_226>
-      <div class=e110_227>
-        <div class="e110_228"></div>
-        <div class="e110_229"></div>
-      </div>
-      <div class=e110_230>
-        <div class="e110_231"></div>
-        <div class="e110_232"></div>
-      </div>
-      <div class=e110_233>
-        <div class="e110_234"></div>
-        <div class="e110_235"></div>
-      </div>
-    </div>
-  </div>
+<div th:replace="fragments/menu :: menu" ></div>
+<div th:replace="fragments/footer :: footer"></div>
   <div class=e110_245>
     <div class="e110_236"></div>
     <div class="e110_246"></div>

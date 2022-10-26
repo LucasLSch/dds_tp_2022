@@ -10,7 +10,8 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Patrick+Hand SC&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Armata&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" th:href="@{/menu.css}">
+  <link rel="stylesheet" th:href="@{/footer/footer.css}">
   <link rel="stylesheet" th:href="@{/calculadoraHC.css}">
 
   <style>
@@ -26,20 +27,8 @@
 </head>
 
 <body>
-<div class=e111_50392>
-  <div class=e111_50394>
-    <div class="e111_50395"></div>
-    <div class=e111_50396>
-      <div class=ei111_50396_2_149>
-        <div class=ei111_50396_2_150><span class="ei111_50396_2_150_2_137">􀊫</span></div>
-        <span class="ei111_50396_2_151">Search</span></div>
-    </div>
-    <span class="e111_50397">Información</span><span class="e111_50398">Guía de Recomendaciones</span><span
-      class="e111_50399">Iniciar sesion</span><span class="e111_50400">Registrarse</span><span
-      class="e111_50401">Inicio</span>
-    <div class="e111_50402"></div>
-    <div class="e111_50403"></div>
-    <span class="e111_50404">Mi Impacto Ambiental</span></div>
+<div th:replace="fragments/menu :: menu" ></div>
+<div th:replace="fragments/footer :: footer"></div>
   <span class="e111_50410">Calculadora hc</span>
   <div class=e111_50411>
     <div class="e111_50412"></div>

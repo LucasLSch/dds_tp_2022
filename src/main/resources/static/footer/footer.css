@@ -1,26 +1,109 @@
-.footer {
-    background-color: #57565B;
-    padding: 80px 0;
+.e110_762 {
+	width:1920px;
+	height:200px;
+	position:absolute;
+	left:0px;
+	top:880px;
 }
-
-.imagenes-footer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 0 30%;
+.e110_763 {
+	background-color:rgba(40.00000141561031, 40.00000141561031, 40.00000141561031, 1);
+	width:1920px;
+	height:200px;
+	position:absolute;
+	left:0px;
+	top:0px;
 }
-
-.img-footer {
-    text-align: center;
-    border-radius: 5px;
-    border: 2px solid transparent;
-    padding: 8px 30px;
-    margin: 0 10px;
+.e110_764 {
+	width:372px;
+	height:40px;
+	position:absolute;
+	left:774px;
+	top:80px;
 }
-
-.twitter:hover,
-.gmail:hover,
-.facebook:hover {
-    border: 2px solid white;
+.e110_765 {
+	width:100px;
+	height:40px;
+	position:absolute;
+	left:0px;
+	top:0px;
+}
+.e110_766 {
+	background-color:rgba(29.000000171363354, 161.0000056028366, 242.00000077486038, 1);
+	width:100px;
+	height:40px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+}
+.e110_767 {
+	width:40px;
+	height:40px;
+	position:absolute;
+	left:30px;
+	top:0px;
+	background-image:url(/img/twitter_logo.png);
+	background-repeat:no-repeat;
+	background-size:cover;
+}
+.e110_768 {
+	width:100px;
+	height:40px;
+	position:absolute;
+	left:136px;
+	top:0px;
+}
+.e110_769 {
+	background-color:rgba(74.0000031888485, 110.00000104308128, 169.00000512599945, 1);
+	width:100px;
+	height:40px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+}
+.e110_770 {
+	width:40px;
+	height:40px;
+	position:absolute;
+	left:30px;
+	top:0px;
+	background-image:url(img/facebook_logo.png);
+	background-repeat:no-repeat;
+	background-size:cover;
+}
+.e110_771 {
+	width:100px;
+	height:40px;
+	position:absolute;
+	left:272px;
+	top:0px;
+}
+.e110_772 {
+	background-color:rgba(255, 255, 255, 1);
+	width:100px;
+	height:40px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+}
+.e110_773 {
+	width:40px;
+	height:40px;
+	position:absolute;
+	left:30px;
+	top:0px;
+	background-image:url(img/gmail_logo.png);
+	background-repeat:no-repeat;
+	background-size:cover;
 }

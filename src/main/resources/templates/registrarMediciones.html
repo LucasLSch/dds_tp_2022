@@ -8,7 +8,8 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Patrick+Hand SC&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" th:href="@{/menu.css}">
+  <link rel="stylesheet" th:href="@{/footer/footer.css}">
   <link rel="stylesheet" th:href="@{/registrarMediciones.css}">
 
   <style>
@@ -25,23 +26,8 @@
 
 <body>
 <div class=e8_2>
-  <div class=e101_11>
-    <div class="e101_12"></div>
-    <div class=e101_13>
-      <div class=e101_14>
-        <div class="e101_15"></div>
-        <div class="e101_16"></div>
-      </div>
-      <div class=e101_17>
-        <div class="e101_18"></div>
-        <div class="e101_19"></div>
-      </div>
-      <div class=e101_20>
-        <div class="e101_21"></div>
-        <div class="e101_22"></div>
-      </div>
-    </div>
-  </div>
+  <div th:replace="fragments/menu :: menu" ></div>
+  <div th:replace="fragments/footer :: footer"></div>
   <div class=e101_30>
     <div class="e101_25"></div>
     <span class="e107_2">Registrar Mediciones</span>
@@ -62,28 +48,6 @@
     <div class=e107_27>
       <span class="e107_28">Click to browse or  drag and drop your files</span>
     </div>
-  </div>
-  <div class=e110_690>
-    <div class=e110_691>
-      <div class="e110_692"></div>
-      <div class=e110_693>
-        <div class=ei110_693_2_149>
-          <div class=ei110_693_2_150>
-            <span class="ei110_693_2_150_2_137">􀊫</span>
-          </div>
-          <span class="ei110_693_2_151">Search</span>
-        </div>
-      </div>
-      <span class="e110_694">Información</span>
-      <span class="e110_695">Guía de Recomendaciones</span>
-      <span class="e110_696">Iniciar sesion</span>
-      <span class="e110_697">Registrarse</span>
-      <span class="e110_698">Inicio</span>
-      <div class="e110_699"></div>
-      <div class="e110_700"></div>
-      <span class="e110_701">Mi Impacto Ambiental</span>
-    </div>
-    <div class="e110_702"></div>
   </div>
 </div>
 </body>
