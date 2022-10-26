@@ -20,6 +20,7 @@
         <class>ddsutn.domain.organization.Member</class>
         <class>ddsutn.domain.organization.Organization</class>
         <class>ddsutn.domain.organization.Sector</class>
+        <class>ddsutn.domain.organization.workApplication.WorkApplication</class>
         <class>ddsutn.domain.measurements.unit.Unit</class>
         <class>ddsutn.domain.journey.transport.Stop</class>
         <class>ddsutn.domain.territories.TerritorialSectorAgent</class>

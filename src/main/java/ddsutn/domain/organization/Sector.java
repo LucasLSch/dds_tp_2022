@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.persistence.*;
+
+import ddsutn.domain.organization.workApplication.WorkApplication;
+import ddsutn.domain.organization.workApplication.WorkApplicationState;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -35,6 +38,9 @@ public class Sector {
   )
   private Set<Member> members;
 
+  @OneToMany(mappedBy = "sector")
+  private Set<WorkApplication> workApplications;
+
   public Sector(String sectorName, Organization organization) {
     this.name = sectorName;
     this.organization = organization;
@@ -49,11 +55,15 @@ public class Sector {
     return this.members.contains(someMember);
   }
 
-  public void registerMember(Member someMember) {
-    if (!this.hasMember(someMember) && this.organization.approvesMember(someMember, this)) {
+  public void addMember(Member someMember) {
+    if (!this.hasMember(someMember)) {
       this.members.add(someMember);
-      someMember.addSector(this);
     }
+  }
+
+  public void createWorkApplication(Member someMember) {
+    WorkApplication wa = new WorkApplication(this, someMember, WorkApplicationState.PENDING);
+    this.workApplications.add(wa);
   }
 
   public Boolean belongsTo(Organization organization) {

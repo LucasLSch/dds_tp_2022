@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Service
 public abstract class GenericSvcImpl<T, ID> {
@@ -27,6 +29,11 @@ public abstract class GenericSvcImpl<T, ID> {
     List<T> returnList = new ArrayList<>();
     this.getRepo().findAll().forEach(returnList::add);
     return returnList;
+  }
+
+  public List<T> findAllByCondition(Predicate<T> predicate) {
+    List<T> returnList = this.findAll();
+    return returnList.stream().filter(predicate).collect(Collectors.toList());
   }
 
 }

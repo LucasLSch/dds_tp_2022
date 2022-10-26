@@ -74,7 +74,7 @@ public class Member {
   }
 
   public void applyToSector(Sector someSector) {
-    someSector.registerMember(this);
+    someSector.createWorkApplication(this);
   }
 
   public void addSector(Sector someSector) {

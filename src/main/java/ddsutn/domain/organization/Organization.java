@@ -85,10 +85,6 @@ public class Organization {
     return this.sectors.contains(someSector);
   }
 
-  public Boolean approvesMember(Member member, Sector sector) {
-    return true; //TODO
-  }
-
   public Set<Member> getMembers() {
     return this.sectors
             .stream()
