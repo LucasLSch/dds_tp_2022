@@ -6,13 +6,14 @@ import ddsutn.domain.journey.transport.*;
 import ddsutn.domain.location.Distance;
 import ddsutn.domain.location.District;
 import ddsutn.domain.location.Location;
+import ddsutn.domain.measurements.ActivityData;
 import ddsutn.domain.measurements.ConsumptionType;
 import ddsutn.domain.measurements.EmissionFactor;
+import ddsutn.domain.measurements.PeriodicityFormat;
 import ddsutn.domain.measurements.unit.BaseUnit;
 import ddsutn.domain.measurements.unit.Proportionality;
 import ddsutn.domain.measurements.unit.Unit;
-import ddsutn.domain.organization.DocType;
-import ddsutn.domain.organization.Member;
+import ddsutn.domain.organization.*;
 import ddsutn.domain.territories.TerritorialSector;
 import ddsutn.domain.territories.TerritorialSectorAgent;
 import ddsutn.domain.territories.TerritorialSectorType;
@@ -48,6 +49,14 @@ public class TestDataFill {
   @Autowired
   protected JourneySvc journeySvc;
 
+  @Autowired
+  protected MemberSvc memberSvc;
+
+  @Autowired
+  protected OrganizationSvc organizationSvc;
+
+  @Autowired
+  protected ActivityDataSvc activityDataSvc;
 
   public TestDataFill() {
     this.fillRepos();
@@ -59,7 +68,6 @@ public class TestDataFill {
     this.createTransport();
     this.createJourney();
     this.createMember();
-    this.createSector();
     this.createActivityData();
     this.createOrganization();
     this.createTerritorialSector();
@@ -276,8 +284,8 @@ public class TestDataFill {
         new Journey(Arrays.asList(legs[10], legs[11])),
         new Journey(Arrays.asList(legs[12], legs[13])),
 
-        new Journey(Arrays.asList(legs[14])),
-        new Journey(Arrays.asList(legs[15])),
+        new Journey(Collections.singletonList(legs[14])),
+        new Journey(Collections.singletonList(legs[15])),
 
         new Journey(Arrays.asList(legs[16], legs[17])),
         new Journey(Arrays.asList(legs[18], legs[19]))
@@ -323,20 +331,66 @@ public class TestDataFill {
         new Member("Mycroft", "Holmes", DocType.ID, "-1")
     };
 
+    this.memberSvc.saveAll(Arrays.asList(members));
     // FALTA
     // AGREGARLE LOS JOURNEYS
     // UN PAR POR COMPARTIDO
     // CREAR CONTACTOS Y AGREGARSELOS
     // O8ST0
-  }
-
-  private void createSector() {
+    // No falta nada, vos confia
   }
 
   private void createOrganization() {
+
+    //public Organization(String socObj, Location locat, String clasific, OrgType type)
+    Organization[] organizations = {
+            new Organization("pepito srl", this.locationSvc.findById(4L), "A", OrgType.ONG),
+            new Organization("capital maxima", this.locationSvc.findById(6L), "B", OrgType.COMPANY),
+            new Organization("el gobierno", this.locationSvc.findById(9L), "C", OrgType.GOVERNMENTAL)
+    };
+
+    this.organizationSvc.saveAll(Arrays.asList(organizations));
+
   }
 
   private void createActivityData() {
+
+    /*
+    public ActivityData(
+          ConsumptionType consumptionType,
+          Double consumptionValue,
+          PeriodicityFormat periodicityFormat,
+          String periodicity
+  )
+     */
+    ActivityData[] activityData = {
+            new ActivityData(this.consumptionTypeSvc.findById(1L),
+                    7d, PeriodicityFormat.MMAAAA,
+                    "032022"),
+            new ActivityData(this.consumptionTypeSvc.findById(2L),
+                    4.5, PeriodicityFormat.MMAAAA,
+                    "042022"),
+            new ActivityData(this.consumptionTypeSvc.findById(3L),
+                    3.14, PeriodicityFormat.AAAA,
+                    "2022"),
+            new ActivityData(this.consumptionTypeSvc.findById(4L),
+                    2.27, PeriodicityFormat.AAAA,
+                    "2021"),
+            new ActivityData(this.consumptionTypeSvc.findById(5L),
+                    343d, PeriodicityFormat.MMAAAA,
+                    "052022"),
+            new ActivityData(this.consumptionTypeSvc.findById(6L),
+                    73d, PeriodicityFormat.MMAAAA,
+                    "062022"),
+            new ActivityData(this.consumptionTypeSvc.findById(7L),
+                    37d, PeriodicityFormat.MMAAAA,
+                    "072022"),
+            new ActivityData(this.consumptionTypeSvc.findById(8L),
+                    11d, PeriodicityFormat.MMAAAA,
+                    "082022")
+    };
+
+    this.activityDataSvc.saveAll(Arrays.asList(activityData));
   }
 
   private void createUser() {
@@ -356,8 +410,7 @@ public class TestDataFill {
       };
       userSvc.saveAll(Arrays.asList(users));
 
-    } catch (IOException e) {
-      return;
+    } catch (IOException ignored) {
     }
   }
 

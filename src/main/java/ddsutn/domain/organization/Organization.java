@@ -64,21 +64,9 @@ public class Organization {
     this.activitiesData = new ArrayList<>();
   }
 
-  public void registerSector(Sector someSector) {
-    try {
-      this.validateSector(someSector);
-    } catch (InvalidSectorForOrgException exception) {
-      System.out.println("WARN: Sector does not belong to this Organization");
-      return;
-    }
-    this.sectors.add(someSector);
-  }
-
-  //Posiblemente cambie cuando haya mas validaciones
-  private void validateSector(Sector someSector) {
-    if (!someSector.belongsTo(this)) {
-      throw new InvalidSectorForOrgException(someSector.getName(), this.socialObjective);
-    }
+  public void createSector(String name) {
+    if(this.sectors.stream().anyMatch(sector -> sector.getName().equals(name)))
+    this.sectors.add(new Sector(name, this));
   }
 
   public Boolean sectorIsRegistered(Sector someSector) {
