@@ -13,6 +13,8 @@
   <link rel="stylesheet" th:href="@{/menu.css}">
   <link rel="stylesheet" th:href="@{/footer/footer.css}">
   <link rel="stylesheet" th:href="@{/registrarse.css}">
+  <link rel="stylesheet" th:href="@{/utils/buttons.css}">
+
   <style>
       /*
         Figma Background for illustrative/preview purposes only.
@@ -33,21 +35,29 @@
     <div class="e1_115"></div>
     <div class="e1_116"></div>
     <div class=e1_117>
-      <div class="e1_118"></div>
-      <div class=e1_119>
-        <div class="e1_120"></div>
-        <span class="e1_121">Registrarse</span>
-      </div>
-      <div class=e1_122>
-        <div class="e1_123"></div>
-        <span class="e1_124">Mostrar contraseña</span>
-        <span class="e1_125">Contraseña</span>
-      </div>
-      <div class=e1_126>
-        <div class="e1_127"></div>
-        <span class="e1_128">Nombre de usuario</span>
-      </div>
-      <span class="e1_129">Registrarse</span>
+
+      <form class="e1_118" th:action="@{/registrarse}" th:object="${newStandardUser}" method="post">
+
+        <span class="e1_129">Registrarse</span>
+
+        <div class=e1_126>
+          <label class="e1_128">Nombre de usuario</label>
+          <input class="e1_127" type="text" th:field="*{username}"/>
+        </div>
+
+        <div class=e1_122>
+          <label class="e1_128">Contraseña</label>
+          <input class="e1_123" type="text" th:field="*{password}"/>
+
+          <span class="e1_124">Mostrar contraseña</span>
+        </div>
+
+        <button class="blue-button e1_119" type="submit">
+          <div class="e1_120"></div>
+          <span class="e1_121">Registrarse</span>
+        </button>
+
+      </form>
     </div>
   </div>
 </div>

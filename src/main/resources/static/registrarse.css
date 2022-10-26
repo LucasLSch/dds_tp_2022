@@ -242,7 +242,7 @@
 	left:23px;
 	top:111px;
 }
-.e1_127 { 
+.e1_127 {
 	background-color:rgba(75.00000312924385, 75.00000312924385, 75.00000312924385, 0.699999988079071);
 	width:320px;
 	height:60px;
@@ -254,9 +254,14 @@
 	border-bottom-left-radius:5px;
 	border-bottom-right-radius:5px;
 }
+
+form input {
+	color:white;
+}
+
 .e1_128 { 
 	color:rgba(255, 255, 255, 0.800000011920929);
-	width:134px;
+	width:max-content;
 	height:21px;
 	position:absolute;
 	left:0px;
