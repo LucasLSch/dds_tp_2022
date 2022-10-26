@@ -1,7 +1,10 @@
 package domainTests;
 
+import ddsutn.domain.journey.Journey;
+import ddsutn.domain.journey.Leg;
 import ddsutn.domain.journey.transport.*;
 import ddsutn.domain.location.Distance;
+import ddsutn.domain.location.District;
 import ddsutn.domain.location.Location;
 import ddsutn.domain.measurements.ConsumptionType;
 import ddsutn.domain.measurements.EmissionFactor;
@@ -9,6 +12,7 @@ import ddsutn.domain.measurements.unit.BaseUnit;
 import ddsutn.domain.measurements.unit.Proportionality;
 import ddsutn.domain.measurements.unit.Unit;
 import ddsutn.domain.organization.DocType;
+import ddsutn.domain.organization.Member;
 import ddsutn.domain.territories.TerritorialSector;
 import ddsutn.domain.territories.TerritorialSectorAgent;
 import ddsutn.domain.territories.TerritorialSectorType;
@@ -17,28 +21,33 @@ import ddsutn.security.user.User;
 import ddsutn.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.Id;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class TestDataFill {
 
   @Autowired
-  private UserSvc userSvc;
+  protected UserSvc userSvc;
 
   @Autowired
-  private TransportSvc transportSvc;
+  protected TransportSvc transportSvc;
 
   @Autowired
-  private ConsumptionTypeSvc consumptionTypeSvc;
+  protected ConsumptionTypeSvc consumptionTypeSvc;
 
   @Autowired
-  private TerritorialSectorSvc territorialSectorSvc;
+  protected TerritorialSectorSvc territorialSectorSvc;
 
   @Autowired
-  private TerrirotialSectorAgentSvc terrirotialSectorAgentSvc;
+  protected TerrirotialSectorAgentSvc terrirotialSectorAgentSvc;
+
+  @Autowired
+  protected LocationSvc locationSvc;
+
+  @Autowired
+  protected JourneySvc journeySvc;
+
 
   public TestDataFill() {
     this.fillRepos();
@@ -48,7 +57,6 @@ public class TestDataFill {
     this.createConsumptionType();
     this.createPublicTransport();
     this.createTransport();
-    this.createLeg();
     this.createJourney();
     this.createMember();
     this.createSector();
@@ -189,6 +197,7 @@ public class TestDataFill {
     Line line3 = new Line(Arrays.asList(stop7, stop8, stop9), "FrenchLine", PublicTransportType.TRAIN);
 
     PublicTransport[] publicTransports = {
+            new PublicTransport(0.5, line1, stop1, stop2),
             new PublicTransport(0.5, line1, stop2, stop3),
             new PublicTransport(0.3, line1, stop1, stop2),
             new PublicTransport(0.8, line2, stop4, stop6),
@@ -198,45 +207,83 @@ public class TestDataFill {
     transportSvc.saveAll(Arrays.asList(publicTransports));
   }
 
-  private void createUser() {
-    try {
-      User[] users = {
-              new Registration()
-                      .setMember("Gonzalo", "Rodriguez Pardo", DocType.ID, "42.877.601")
-                      .registerStandardUser("Pardios", "1Contra$enia"),
-              new Registration()
-                      .setMember("Lucas", "Schneider", DocType.ID, "42.396.327")
-                      .registerStandardUser("Pastita", "1Contra$enia"),
-              new Registration()
-                      .setSectorAgent()
-                      .registerAgentUser("Agent_Smith", "1Contra$enia"),
-              new Registration()
-                      .registerAdminUser("UltrAdmin", "1Contra$enia")
-      };
-      userSvc.saveAll(Arrays.asList(users));
-
-    } catch (IOException e) {
-      return;
-    }
-  }
-
   private void createTransport() {
     Transport[] transports = {
-            new EcoFriendly(EcoFriendlyType.BICYCLE),
-            new EcoFriendly(EcoFriendlyType.SCOOTER),
-            new EcoFriendly(EcoFriendlyType.WALKING),
-            new ParticularVehicle(0.6, ParticularVehicleType.CAR, Fuel.OIL),
-            new ParticularVehicle(1.2, ParticularVehicleType.VAN, Fuel.GASOIL),
-            new ParticularVehicle(0.4, ParticularVehicleType.CAR, Fuel.GNC),
-            new ParticularVehicle(0.01, ParticularVehicleType.CAR, Fuel.ELECTRIC),
-            new ParticularVehicle(0.3, ParticularVehicleType.MOTORBIKE, Fuel.OIL),
-            new HiredService(0.5, HiredServiceType.TAXI, "Taxi-Driver"),
-            new HiredService(0.3, HiredServiceType.APPLICATION, "SUBER"),
-            new HiredService(0.01, HiredServiceType.APPLICATION, "ECOFY"),
-            new HiredService(0.6, HiredServiceType.CAB, "Taxin't")
+        new EcoFriendly(EcoFriendlyType.BICYCLE),
+        new EcoFriendly(EcoFriendlyType.SCOOTER),
+        new EcoFriendly(EcoFriendlyType.WALKING),
+        new ParticularVehicle(0.6, ParticularVehicleType.CAR, Fuel.OIL),
+        new ParticularVehicle(1.2, ParticularVehicleType.VAN, Fuel.GASOIL),
+        new ParticularVehicle(0.4, ParticularVehicleType.CAR, Fuel.GNC),
+        new ParticularVehicle(0.01, ParticularVehicleType.CAR, Fuel.ELECTRIC),
+        new ParticularVehicle(0.3, ParticularVehicleType.MOTORBIKE, Fuel.OIL),
+        new HiredService(0.5, HiredServiceType.TAXI, "Taxi-Driver"),
+        new HiredService(0.3, HiredServiceType.APPLICATION, "SUBER"),
+        new HiredService(0.01, HiredServiceType.APPLICATION, "ECOFY"),
+        new HiredService(0.6, HiredServiceType.CAB, "Taxin't")
     };
 
     transportSvc.saveAll(Arrays.asList(transports));
+  }
+
+  private void createJourney() {
+
+    // Orgs en locations 4L, 6L
+
+    Leg[] legs = {
+        new Leg(this.locationSvc.findById(1L), this.locationSvc.findById(2L), this.transportSvc.findById(1L)),
+        new Leg(this.locationSvc.findById(2L), this.locationSvc.findById(3L), this.transportSvc.findById(2L)),
+        new Leg(this.locationSvc.findById(3L), this.locationSvc.findById(4L), this.transportSvc.findById(6L)),
+
+        new Leg(this.locationSvc.findById(4L), this.locationSvc.findById(3L), this.transportSvc.findById(6L)),
+        new Leg(this.locationSvc.findById(3L), this.locationSvc.findById(2L), this.transportSvc.findById(2L)),
+        new Leg(this.locationSvc.findById(2L), this.locationSvc.findById(1L), this.transportSvc.findById(1L)),
+
+
+        new Leg(this.locationSvc.findById(4L), this.locationSvc.findById(5L), this.transportSvc.findById(7L)),
+        new Leg(this.locationSvc.findById(5L), this.locationSvc.findById(6L), this.transportSvc.findById(8L)),
+
+        new Leg(this.locationSvc.findById(6L), this.locationSvc.findById(5L), this.transportSvc.findById(8L)),
+        new Leg(this.locationSvc.findById(5L), this.locationSvc.findById(4L), this.transportSvc.findById(7L)),
+
+
+        new Leg(this.locationSvc.findById(7L), this.locationSvc.findById(8L), this.transportSvc.findById(9L)),
+        new Leg(this.locationSvc.findById(8L), this.locationSvc.findById(9L), this.transportSvc.findById(10L)),
+
+        new Leg(this.locationSvc.findById(9L), this.locationSvc.findById(8L), this.transportSvc.findById(10L)),
+        new Leg(this.locationSvc.findById(8L), this.locationSvc.findById(7L), this.transportSvc.findById(9L)),
+
+
+        new Leg(this.locationSvc.findById(5L), this.locationSvc.findById(4L), this.transportSvc.findById(11L)),
+
+        new Leg(this.locationSvc.findById(4L), this.locationSvc.findById(5L), this.transportSvc.findById(11L)),
+
+
+        new Leg(this.locationSvc.findById(3L), this.locationSvc.findById(7L), this.transportSvc.findById(12L)),
+        new Leg(this.locationSvc.findById(7L), this.locationSvc.findById(6L), this.transportSvc.findById(13L)),
+
+        new Leg(this.locationSvc.findById(6L), this.locationSvc.findById(7L), this.transportSvc.findById(13L)),
+        new Leg(this.locationSvc.findById(7L), this.locationSvc.findById(3L), this.transportSvc.findById(12L))
+    };
+
+    Journey[] journeys = {
+        new Journey(Arrays.asList(legs[0], legs[1], legs[2])),
+        new Journey(Arrays.asList(legs[3], legs[4], legs[5])),
+
+        new Journey(Arrays.asList(legs[6], legs[7])),
+        new Journey(Arrays.asList(legs[8], legs[9])),
+
+        new Journey(Arrays.asList(legs[10], legs[11])),
+        new Journey(Arrays.asList(legs[12], legs[13])),
+
+        new Journey(Arrays.asList(legs[14])),
+        new Journey(Arrays.asList(legs[15])),
+
+        new Journey(Arrays.asList(legs[16], legs[17])),
+        new Journey(Arrays.asList(legs[18], legs[19]))
+    };
+
+    this.journeySvc.saveAll(Arrays.asList(journeys));
   }
 
   private void createTerritorialSector() {
@@ -261,22 +308,57 @@ public class TestDataFill {
     terrirotialSectorAgentSvc.saveAll(Arrays.asList(territorialSectorAgents));
   }
 
+  private void createMember() {
+
+    //String name, String surname, DocType docType, String document
+    Member[] members = {
+        new Member("Marco", "Morana", DocType.ID, "42078542"),
+        new Member("Lucas", "Schneider", DocType.ID, "42785274"),
+        new Member("Agustin", "Bazzi", DocType.PASSPORT, "317246387"),
+        new Member("Julian", "Jose", DocType.ID, "267213"),
+        new Member("Julio", "Caesar", DocType.ID, "37362231"),
+        new Member("Bond", "James Bond", DocType.ID, "82673932"),
+        new Member("Sherlock", "Holmes", DocType.ID, "1"),
+        new Member("Watson", "Watson", DocType.ID, "2"),
+        new Member("Mycroft", "Holmes", DocType.ID, "-1")
+    };
+
+    // FALTA
+    // AGREGARLE LOS JOURNEYS
+    // UN PAR POR COMPARTIDO
+    // CREAR CONTACTOS Y AGREGARSELOS
+    // O8ST0
+  }
+
   private void createSector() {
   }
 
   private void createOrganization() {
   }
 
-  private void createMember() {
-  }
-
-  private void createLeg() {
-  }
-
-  private void createJourney() {
-  }
-
   private void createActivityData() {
+  }
+
+  private void createUser() {
+    try {
+      User[] users = {
+          new Registration()
+              .setMember("Gonzalo", "Rodriguez Pardo", DocType.ID, "42.877.601")
+              .registerStandardUser("Pardios", "1Contra$enia"),
+          new Registration()
+              .setMember("Lucas", "Schneider", DocType.ID, "42.396.327")
+              .registerStandardUser("Pastita", "1Contra$enia"),
+          new Registration()
+              .setSectorAgent()
+              .registerAgentUser("Agent_Smith", "1Contra$enia"),
+          new Registration()
+              .registerAdminUser("UltrAdmin", "1Contra$enia")
+      };
+      userSvc.saveAll(Arrays.asList(users));
+
+    } catch (IOException e) {
+      return;
+    }
   }
 
   // Utils

@@ -13,7 +13,7 @@ public class MemberSvc extends GenericSvcImpl<Member, Long> {
   private MemberRepo memberRepo;
 
   @Override
-  public CrudRepository getRepo() {
+  public CrudRepository<Member, Long> getRepo() {
     return this.memberRepo;
   }
 

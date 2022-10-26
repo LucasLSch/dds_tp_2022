@@ -38,7 +38,7 @@ public class Sector {
   )
   private Set<Member> members;
 
-  @OneToMany(mappedBy = "sector")
+  @OneToMany(mappedBy = "sector", cascade = CascadeType.ALL)
   private Set<WorkApplication> workApplications;
 
   public Sector(String sectorName, Organization organization) {
