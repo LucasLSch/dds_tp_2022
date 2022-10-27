@@ -35,7 +35,7 @@ public class ReporterSvc {
     List<TerritorialSector> territorialSectors =
             (List<TerritorialSector>) territorialSectorRepo.findAll();
     territorialSectors.forEach(ts -> {
-      CarbonFootprint cf = ts.getCF(units);
+      CarbonFootprint cf = ts.getCarbonFootprint(units);
       report.put(new JSONObject()
               .put("id", ts.getId())
               .put("CarbonFootprint", cf.getValue()));
