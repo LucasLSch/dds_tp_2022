@@ -152,6 +152,10 @@ public class Journey {
     return journeyCF;
   }
 
+  public CarbonFootprint getCarbonFootprint() {
+    return this.getCarbonFootprint(CarbonFootprint.getDefaultUnit());
+  }
+
   public List<ActivityData> getDataActivities() {
     return this.legList.stream()
             .map(Leg::createDataActivities)

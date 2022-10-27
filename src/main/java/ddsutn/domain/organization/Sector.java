@@ -72,10 +72,11 @@ public class Sector {
   }
 
   public CarbonFootprint getAvgCfPerMember(Set<Unit> units) {
-    CarbonFootprint sectorCF = getSectorCF(units);
-    return new CarbonFootprint(
-            sectorCF.getValue() / this.membersAmount(),
-            units);
+    return this.getCarbonFootprint(units).multiplyValue(1d/this.membersAmount());
+  }
+
+  public CarbonFootprint getAvgCfPerMember() {
+    return this.getAvgCfPerMember(CarbonFootprint.getDefaultUnit());
   }
 
   public List<Journey> getMembersJourneys() {
@@ -86,11 +87,15 @@ public class Sector {
             .collect(Collectors.toList());
   }
 
-  public CarbonFootprint getSectorCF(Set<Unit> units) {
+  public CarbonFootprint getCarbonFootprint(Set<Unit> units) {
     return CarbonFootprint.sum(units, getMembersJourneys()
             .stream()
             .map(journey -> journey.getCarbonFootprint(units))
             .toArray(CarbonFootprint[]::new));
+  }
+
+  public CarbonFootprint getSectorCarbonFootprint() {
+    return getCarbonFootprint(CarbonFootprint.getDefaultUnit());
   }
 
 }

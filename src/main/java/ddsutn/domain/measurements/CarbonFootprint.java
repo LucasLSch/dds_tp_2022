@@ -1,9 +1,13 @@
 package ddsutn.domain.measurements;
 
+import ddsutn.domain.measurements.unit.BaseUnit;
+import ddsutn.domain.measurements.unit.Proportionality;
 import ddsutn.domain.measurements.unit.Unit;
 import ddsutn.domain.measurements.unit.UnitExpression;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 import javax.persistence.*;
@@ -40,15 +44,15 @@ public class CarbonFootprint {
     this.setUnits(units);
   }
 
-  public void multiplyValue(Double someFactor) {
+  public CarbonFootprint multiplyValue(Double someFactor) {
     this.value *= someFactor;
+    return this;
   }
 
   public CarbonFootprint getOn(Set<Unit> objectiveUnits) {
     if (UnitExpression.isConvertibleTo(this.units, objectiveUnits)) {
       this.multiplyValue(Math.pow(10f,
-              UnitExpression.getExpForConvertionTo(this.units,
-                      objectiveUnits)
+              UnitExpression.getExpForConvertionTo(this.units, objectiveUnits)
               )
       );
       this.units = objectiveUnits;
@@ -68,5 +72,12 @@ public class CarbonFootprint {
     return new CarbonFootprint(totalValue, objectiveUnits);
   }
 
+  public static CarbonFootprint sum(CarbonFootprint... carbonFootprints) {
+    return sum(getDefaultUnit(), carbonFootprints);
+  }
+
+  public static Set<Unit> getDefaultUnit() {
+    return new HashSet<>(Collections.singletonList(new Unit(BaseUnit.GRAM, 3, Proportionality.DIRECT)));
+  }
 
 }

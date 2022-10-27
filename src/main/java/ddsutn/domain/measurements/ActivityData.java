@@ -55,12 +55,16 @@ public class ActivityData {
   }
 
   public CarbonFootprint getCarbonFootprint(Set<Unit> objectiveUnits) {
-    Double value = this.getConsumptionValue() * this.getConsumptionType().getEmissionFactorValue();
-    Set<Unit> units = this.consumptionType.getUnits();
-
+    Double value = this.consumptionType.calculateFor(this.consumptionValue);
+    Set<Unit> units = CarbonFootprint.getDefaultUnit();
     CarbonFootprint finalCF = new CarbonFootprint(value, units);
+
     this.registerCarbonFootprint(finalCF);
-    return finalCF;
+    return finalCF.getOn(objectiveUnits);
+  }
+
+  public CarbonFootprint getCarbonFootprint() {
+    return this.getCarbonFootprint(CarbonFootprint.getDefaultUnit());
   }
 
   private void registerCarbonFootprint(CarbonFootprint someCarbonFootprint) {

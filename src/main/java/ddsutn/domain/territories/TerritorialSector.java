@@ -38,13 +38,17 @@ public class TerritorialSector {
     this.organizations = organizations;
   }
 
-  public CarbonFootprint getCF(Set<Unit> units) {
+  public CarbonFootprint getCarbonFootprint(Set<Unit> units) {
     CarbonFootprint finalCf = CarbonFootprint.sum(units, this.getOrganizations()
             .stream()
             .map(org -> org.getTotalCarbonFootprint(units)).toArray(CarbonFootprint[]::new));
 
     this.registerCarbonFootprint(finalCf);
     return finalCf;
+  }
+
+  public CarbonFootprint getCarbonFootprint() {
+    return getCarbonFootprint(CarbonFootprint.getDefaultUnit());
   }
 
   private void registerCarbonFootprint(CarbonFootprint someCarbonFootprint) {
