@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Set;
 
@@ -22,8 +23,9 @@ public class OrganizationController {
     return "buscarOrganizacion";
   }
 
-  @GetMapping("/search/{param}")//refrescarme como hacer un search
-  public String searchOrganizacion(@PathVariable String param, Model model) {
+  @RequestMapping("/search/")//refrescarme como hacer un search
+  public String searchOrganizacion(@RequestParam(value = "nombre",required = true) String param,
+                                   Model model) {
     OrganizationSvc svc = new OrganizationSvc();
     model.addAttribute("organizations", svc.findAllByCondition((organization)->organization.getSocialObjective().equals(param)));
     return "buscarOrganizacion";
