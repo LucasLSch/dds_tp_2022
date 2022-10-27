@@ -206,7 +206,7 @@
 }
 .e1_78 { 
 	color:rgba(0, 0, 0, 1);
-	width:122px;
+	width:max-content;
 	height:27px;
 	position:absolute;
 	left:18px;
@@ -280,7 +280,7 @@
 }
 .e1_85 { 
 	color:rgba(255, 255, 255, 0.800000011920929);
-	width:134px;
+	width:max-content;
 	height:21px;
 	position:absolute;
 	left:0px;
