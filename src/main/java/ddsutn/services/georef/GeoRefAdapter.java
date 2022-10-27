@@ -15,29 +15,28 @@ import java.util.Locale;
 
 public class GeoRefAdapter {
 
-  private GeoRefService api;
-  private Retrofit retrofit;
   private static final String urlAPI = "https://ddstpa.com.ar/api/";
+  private static GeoRefAdapter instance = null;
+  private GeoRefService api;
 
 
   // --- Singleton --- //
-
-  private static GeoRefAdapter instance = null;
-
-  public static GeoRefAdapter getInstance() {
-    if (instance == null) {
-      instance = new GeoRefAdapter();
-    }
-    return instance;
-  }
-
-  // ----------------- //
+  private Retrofit retrofit;
 
   private GeoRefAdapter() {
     this.retrofit = new Retrofit.Builder()
             .baseUrl(urlAPI)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
+  }
+
+  // ----------------- //
+
+  public static GeoRefAdapter getInstance() {
+    if (instance == null) {
+      instance = new GeoRefAdapter();
+    }
+    return instance;
   }
 
   public Distance getDistance(Location origin, Location destination) throws IOException {

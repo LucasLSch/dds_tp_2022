@@ -6,13 +6,14 @@ import ddsutn.domain.location.Location;
 import ddsutn.domain.measurements.ActivityData;
 import ddsutn.domain.measurements.ConsumptionType;
 import ddsutn.domain.measurements.PeriodicityFormat;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -52,10 +53,12 @@ public class Leg {
       return null;
     }
     ConsumptionType consumptionType = this.transport.getConsumptionType();
-    return new ActivityData(consumptionType,
+    return new ActivityData(
+            consumptionType,
             consumption,
             PeriodicityFormat.MMAAAA,
-            LocalDate.now().format(DateTimeFormatter.ofPattern("MM/yyyy")));
+            LocalDate.now().format(DateTimeFormatter.ofPattern("MM/yyyy"))
+    );
   }
 
   public Boolean isShareable() {

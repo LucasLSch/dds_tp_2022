@@ -2,9 +2,10 @@ package ddsutn.domain.journey.transport;
 
 import ddsutn.domain.location.Distance;
 import ddsutn.domain.location.Location;
-import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @NoArgsConstructor
 @Getter

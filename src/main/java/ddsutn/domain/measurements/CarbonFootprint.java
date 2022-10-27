@@ -4,17 +4,18 @@ import ddsutn.domain.measurements.unit.BaseUnit;
 import ddsutn.domain.measurements.unit.Proportionality;
 import ddsutn.domain.measurements.unit.Unit;
 import ddsutn.domain.measurements.unit.UnitExpression;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
-import javax.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 
 @NoArgsConstructor
 @Getter
@@ -44,26 +45,6 @@ public class CarbonFootprint {
     this.setUnits(units);
   }
 
-  public CarbonFootprint multiplyValue(Double someFactor) {
-    this.value *= someFactor;
-    return this;
-  }
-
-  public CarbonFootprint getOn(Set<Unit> objectiveUnits) {
-    if (UnitExpression.isConvertibleTo(this.units, objectiveUnits)) {
-      this.multiplyValue(Math.pow(10f,
-              UnitExpression.getExpForConvertionTo(this.units, objectiveUnits)
-              )
-      );
-      this.units = objectiveUnits;
-    }
-    return this;
-  }
-
-  public void setUnits(Set<Unit> units) {
-    this.units = units;
-  }
-
   public static CarbonFootprint sum(Set<Unit> objectiveUnits, CarbonFootprint... carbonFootprints) {
     Stream<CarbonFootprint> cfStream = Arrays.stream(carbonFootprints).sequential();
     cfStream = cfStream.map(cf -> cf.getOn(objectiveUnits));
@@ -78,6 +59,26 @@ public class CarbonFootprint {
 
   public static Set<Unit> getDefaultUnit() {
     return new HashSet<>(Collections.singletonList(new Unit(BaseUnit.GRAM, 3, Proportionality.DIRECT)));
+  }
+
+  public CarbonFootprint multiplyValue(Double someFactor) {
+    this.value *= someFactor;
+    return this;
+  }
+
+  public CarbonFootprint getOn(Set<Unit> objectiveUnits) {
+    if (UnitExpression.isConvertibleTo(this.units, objectiveUnits)) {
+      this.multiplyValue(Math.pow(10f,
+                      UnitExpression.getExpForConvertionTo(this.units, objectiveUnits)
+              )
+      );
+      this.units = objectiveUnits;
+    }
+    return this;
+  }
+
+  public void setUnits(Set<Unit> units) {
+    this.units = units;
   }
 
 }

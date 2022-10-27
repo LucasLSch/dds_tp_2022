@@ -24,10 +24,12 @@ public class OrganizationController {
   }
 
   @RequestMapping("/search/")//refrescarme como hacer un search
-  public String searchOrganizacion(@RequestParam(value = "nombre",required = true) String param,
+  public String searchOrganizacion(@RequestParam(value = "nombre", required = true) String param,
                                    Model model) {
     OrganizationSvc svc = new OrganizationSvc();
-    model.addAttribute("organizations", svc.findAllByCondition((organization)->organization.getSocialObjective().equals(param)));
+    model.addAttribute("organizations",
+            svc.findAllByCondition((organization) -> organization.getSocialObjective().equals(param))
+    );
     return "buscarOrganizacion";
   }
 
@@ -37,7 +39,7 @@ public class OrganizationController {
     Organization org = svc.findById(id);
     model.addAttribute("organization", org);
     Set<Sector> sectors = org.getSectors();
-    model.addAttribute("sectors",sectors);
+    model.addAttribute("sectors", sectors);
     return "detalleOrganizacion";
     //add atribute objeto org, buscarlo con id
   }

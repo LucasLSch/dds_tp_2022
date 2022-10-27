@@ -5,10 +5,11 @@ import ddsutn.domain.location.Distance;
 import ddsutn.domain.measurements.unit.BaseUnit;
 import ddsutn.domain.measurements.unit.Proportionality;
 import ddsutn.domain.measurements.unit.Unit;
-import java.util.List;
-import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter

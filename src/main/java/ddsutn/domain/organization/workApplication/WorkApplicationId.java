@@ -2,6 +2,7 @@ package ddsutn.domain.organization.workApplication;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -13,7 +14,7 @@ public class WorkApplicationId implements Serializable {
   private Long member;
 
   @Override
-  public boolean equals(Object obj){
+  public boolean equals(Object obj) {
     if (this == obj) {
       return true;
     }

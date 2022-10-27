@@ -12,14 +12,15 @@ import ddsutn.domain.measurements.unit.Proportionality;
 import ddsutn.domain.measurements.unit.Unit;
 import ddsutn.domain.organization.Member;
 import ddsutn.domain.organization.Organization;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 
 @NoArgsConstructor
@@ -83,8 +84,9 @@ public class Journey {
   }
 
   public void deleteMember(Member someMember) {
-    if (!someMember.hasJourney(this) && this.hasMember(someMember)) {
+    if (someMember.hasJourney(this) && this.hasMember(someMember)) {
       this.members.remove(someMember);
+      someMember.deleteJourney(this);
     }
   }
 

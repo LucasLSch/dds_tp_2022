@@ -13,6 +13,10 @@ public class WppNotification implements NotificationMethod {
   public static final String AUTH_TOKEN = "";
   public static final String FROM_WPP = "whatsapp:+14155238886";
 
+  public static String getAddressee(Contact someContact) {
+    return "whatsapp:" + someContact.getPhoneNumber();
+  }
+
   @Override
   public void notify(Contact someContact, String someMessage) {
     Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
@@ -23,10 +27,6 @@ public class WppNotification implements NotificationMethod {
             .create();
 
     System.out.println(message.getSid());
-  }
-
-  public static String getAddressee(Contact someContact) {
-    return "whatsapp:" + someContact.getPhoneNumber();
   }
 
 }

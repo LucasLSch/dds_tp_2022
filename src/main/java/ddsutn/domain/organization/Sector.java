@@ -3,16 +3,16 @@ package ddsutn.domain.organization;
 import ddsutn.domain.journey.Journey;
 import ddsutn.domain.measurements.CarbonFootprint;
 import ddsutn.domain.measurements.unit.Unit;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import javax.persistence.*;
-
 import ddsutn.domain.organization.workApplication.WorkApplication;
 import ddsutn.domain.organization.workApplication.WorkApplicationState;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
@@ -72,7 +72,7 @@ public class Sector {
   }
 
   public CarbonFootprint getAvgCfPerMember(Set<Unit> units) {
-    return this.getCarbonFootprint(units).multiplyValue(1d/this.membersAmount());
+    return this.getCarbonFootprint(units).multiplyValue(1d / this.membersAmount());
   }
 
   public CarbonFootprint getAvgCfPerMember() {

@@ -5,16 +5,17 @@ import ddsutn.domain.exceptions.NotJourneyOwnerException;
 import ddsutn.domain.journey.Journey;
 import ddsutn.domain.measurements.CarbonFootprint;
 import ddsutn.domain.measurements.unit.Unit;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @Setter

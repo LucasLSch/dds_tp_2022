@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/Trayecto")
 public class TrayectoController {
 
-	@GetMapping("")
-	public String agregarTrayecto(Model model) {
-		return "agregarTrayecto";
-	}
+  @GetMapping("")
+  public String agregarTrayecto(Model model) {
+    return "agregarTrayecto";
+  }
 
 }

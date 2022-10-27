@@ -7,7 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class OrganizationSvc extends GenericSvcImpl<Organization, Long> {
 
@@ -38,7 +37,6 @@ public class OrganizationSvc extends GenericSvcImpl<Organization, Long> {
   public Organization save(Organization entity) {
     return super.save(entity);
   }
-
 
 
   @Override

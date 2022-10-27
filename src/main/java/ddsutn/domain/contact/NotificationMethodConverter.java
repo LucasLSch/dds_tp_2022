@@ -1,7 +1,7 @@
 package ddsutn.domain.contact;
 
-import java.util.Arrays;
 import javax.persistence.AttributeConverter;
+import java.util.Arrays;
 
 public class NotificationMethodConverter implements AttributeConverter<NotificationMethod, String> {
 

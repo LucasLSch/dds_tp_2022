@@ -1,10 +1,11 @@
 package ddsutn.domain.measurements.unit;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Getter
@@ -57,7 +58,7 @@ public abstract class UnitExpression {
             .filter(unit -> !unit.isDirectlyProportional())
             .collect(Collectors.toSet());
 
-    if(inverseUnits.isEmpty()) {
+    if (inverseUnits.isEmpty()) {
       return printSamePropUnits(directUnits);
     }
 

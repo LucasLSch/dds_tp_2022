@@ -16,6 +16,11 @@ public class ValidateCommonPassword implements PasswordCriteria {
   private List<String> lineasWorstPwd;
   private String errorDescription = "The password is not a safe password";
 
+  public ValidateCommonPassword() throws IOException {
+    this.lineasWorstPwd = new ArrayList<>();
+    this.separateLines();
+  }
+
   @Override
   public void validatePassword(String somePassword) {
     if (passwordIsCommon(somePassword)) {
@@ -25,11 +30,6 @@ public class ValidateCommonPassword implements PasswordCriteria {
 
   private Boolean passwordIsCommon(String somePassword) {
     return this.lineasWorstPwd.contains(somePassword);
-  }
-
-  public ValidateCommonPassword() throws IOException {
-    this.lineasWorstPwd = new ArrayList<>();
-    this.separateLines();
   }
 
   private void separateLines() throws IOException {

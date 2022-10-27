@@ -5,15 +5,16 @@ import ddsutn.domain.location.Location;
 import ddsutn.domain.measurements.ActivityData;
 import ddsutn.domain.measurements.CarbonFootprint;
 import ddsutn.domain.measurements.unit.Unit;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
@@ -66,8 +67,8 @@ public class Organization {
   }
 
   public void createSector(String name) {
-    if(this.sectors.stream().noneMatch(sector -> sector.getName().equals(name)))
-    this.sectors.add(new Sector(name, this));
+    if (this.sectors.stream().noneMatch(sector -> sector.getName().equals(name)))
+      this.sectors.add(new Sector(name, this));
   }
 
   public Boolean sectorIsRegistered(Sector someSector) {
