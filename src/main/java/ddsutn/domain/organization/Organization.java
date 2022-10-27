@@ -102,6 +102,10 @@ public class Organization {
     return finalCF;
   }
 
+  public CarbonFootprint getTotalCarbonFootprint() {
+    return this.getTotalCarbonFootprint(CarbonFootprint.getDefaultUnit());
+  }
+
   private List<CarbonFootprint> getMemberCF(Set<Unit> units) {
     return this.getMembers()
             .stream()

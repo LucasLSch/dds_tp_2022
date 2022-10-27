@@ -145,6 +145,10 @@ public class Member {
     return finalCF;
   }
 
+  public CarbonFootprint getPersonalCF() {
+    return getPersonalCF(CarbonFootprint.getDefaultUnit());
+  }
+
   private void registerCarbonFootprint(CarbonFootprint someCarbonFootprint) {
     someCarbonFootprint.setDate(LocalDate.now());
     this.carbonFootprints.add(someCarbonFootprint);
