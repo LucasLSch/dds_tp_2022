@@ -29,13 +29,13 @@ import java.util.*;
 public class TestDataFill {
 
   @Autowired
-  protected UserSvc userSvc;
+  protected UserSvc userSvc = new UserSvc();
 
   @Autowired
-  protected TransportSvc transportSvc;
+  protected TransportSvc transportSvc = new TransportSvc();
 
   @Autowired
-  protected ConsumptionTypeSvc consumptionTypeSvc;
+  protected ConsumptionTypeSvc consumptionTypeSvc = new ConsumptionTypeSvc();
 
   @Autowired
   protected TerritorialSectorSvc territorialSectorSvc;
@@ -59,7 +59,7 @@ public class TestDataFill {
   protected ActivityDataSvc activityDataSvc;
 
   public TestDataFill() {
-    this.fillRepos();
+    //this.fillRepos();
   }
 
   public void fillRepos() {
@@ -165,7 +165,7 @@ public class TestDataFill {
                     efs[7]),
     };
 
-    consumptionTypeSvc.saveAll(Arrays.asList(cts));
+    this.consumptionTypeSvc.saveAll(Arrays.asList(cts));
   }
 
   private void createPublicTransport() {
@@ -416,27 +416,27 @@ public class TestDataFill {
 
   // Utils
 
-  private static Unit kilogram(Proportionality prop) {
+  public static Unit kilogram(Proportionality prop) {
     return new Unit(BaseUnit.GRAM, 3, prop);
   }
 
-  private static Unit cubicMeter(Proportionality prop) {
+  public static Unit cubicMeter(Proportionality prop) {
     return new Unit(BaseUnit.LITER, 3, prop);
   }
 
-  private static Unit liter(Proportionality prop) {
+  public static Unit liter(Proportionality prop) {
     return new Unit(BaseUnit.LITER, 0, prop);
   }
 
-  private static Unit kilometer(Proportionality prop) {
+  public static Unit kilometer(Proportionality prop) {
     return new Unit(BaseUnit.METER, 3, prop);
   }
 
-  private static Unit second(Proportionality prop) {
+  public static Unit second(Proportionality prop) {
     return new Unit(BaseUnit.SECOND, 0, prop);
   }
 
-  private static Unit kilowatt(Proportionality prop) {
+  public static Unit kilowatt(Proportionality prop) {
     return new Unit(BaseUnit.WATT, 3, prop);
   }
 

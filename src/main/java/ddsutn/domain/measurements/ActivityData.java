@@ -2,6 +2,7 @@ package ddsutn.domain.measurements;
 
 import ddsutn.domain.measurements.unit.Unit;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import lombok.Getter;
@@ -46,6 +47,7 @@ public class ActivityData {
     this.consumptionValue = consumptionValue;
     this.periodicityFormat = periodicityFormat;
     this.periodicity = periodicity;
+    this.carbonFootprints = new HashSet<>();
   }
 
   public LocalDate getPeriodicityDate() {

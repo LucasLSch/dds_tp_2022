@@ -67,6 +67,7 @@ public class Member {
     this.sectors = new HashSet<>();
     this.journeys = new ArrayList<>();
     this.contacts = new ArrayList<>();
+    this.carbonFootprints = new HashSet<>();
   }
 
   public void addContact(Contact someContact) {
@@ -82,6 +83,14 @@ public class Member {
       this.sectors.add(someSector);
     }
   }
+
+  public Set<Organization> getOrganizations() {
+    return this.sectors
+            .stream()
+            .map(Sector::getOrganization)
+            .collect(Collectors.toSet());
+  }
+
 
   public Boolean worksIn(Sector someSector) {
     return this.sectors.contains(someSector);

@@ -1,7 +1,6 @@
 package ddsutn.domain.organization;
 
 import ddsutn.domain.contact.Contact;
-import ddsutn.domain.exceptions.InvalidSectorForOrgException;
 import ddsutn.domain.location.Location;
 import ddsutn.domain.measurements.ActivityData;
 import ddsutn.domain.measurements.CarbonFootprint;
@@ -62,10 +61,12 @@ public class Organization {
     this.type = type;
     this.sectors = new HashSet<>();
     this.activitiesData = new ArrayList<>();
+    this.carbonFootprints = new HashSet<>();
+    this.contacts = new ArrayList<>();
   }
 
   public void createSector(String name) {
-    if(this.sectors.stream().anyMatch(sector -> sector.getName().equals(name)))
+    if(this.sectors.stream().noneMatch(sector -> sector.getName().equals(name)))
     this.sectors.add(new Sector(name, this));
   }
 
@@ -90,7 +91,7 @@ public class Organization {
 
 
   public CarbonFootprint getTotalCarbonFootprint(Set<Unit> units) {
-    List<CarbonFootprint> cfList = new ArrayList<CarbonFootprint>();
+    List<CarbonFootprint> cfList = new ArrayList<>();
 
     cfList.addAll(this.getActivitiesDataCF(units));
     cfList.addAll(this.getMemberCF(units));

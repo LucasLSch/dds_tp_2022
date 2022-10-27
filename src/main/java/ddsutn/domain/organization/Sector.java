@@ -45,6 +45,7 @@ public class Sector {
     this.name = sectorName;
     this.organization = organization;
     this.members = new HashSet<>();
+    this.workApplications = new HashSet<>();
   }
 
   public Integer membersAmount() {

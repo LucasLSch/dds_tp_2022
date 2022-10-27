@@ -9,7 +9,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "contact")
@@ -28,6 +27,11 @@ public class Contact {
   @Convert(converter = NotificationMethodConverter.class)
   private NotificationMethod method;
 
+  public Contact(String phoneNumber, String email, NotificationMethod method) {
+    this.phoneNumber = phoneNumber;
+    this.email = email;
+    this.method = method;
+  }
 
   public void notify(String someMessage) {
     this.method.notify(this, someMessage);
