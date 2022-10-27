@@ -1,7 +1,6 @@
 package domainTests;
 
 import ddsutn.domain.contact.Contact;
-import ddsutn.domain.contact.EmailNotification;
 import ddsutn.domain.exceptions.NotJourneyOwnerException;
 import ddsutn.domain.journey.Journey;
 import ddsutn.domain.journey.Leg;
