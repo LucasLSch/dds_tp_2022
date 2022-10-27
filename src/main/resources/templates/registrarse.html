@@ -10,8 +10,11 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Patrick+Hand SC&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" th:href="@{/menu/menu.css}">
+  <link rel="stylesheet" th:href="@{/footer/footer.css}">
   <link rel="stylesheet" th:href="@{/registrarse.css}">
+  <link rel="stylesheet" th:href="@{/utils/buttons.css}">
+
   <style>
       /*
         Figma Background for illustrative/preview purposes only.
@@ -25,67 +28,37 @@
 </head>
 
 <body>
+<div th:replace="fragments/menu :: menu" ></div>
+<div th:replace="fragments/footer :: footer"></div>
 <div class=e1_101>
-  <div class=e1_102>
-    <div class="e1_103"></div>
-    <div class=e1_104>
-      <div class=e1_105>
-        <div class="e1_106"></div>
-        <div class="e1_107"></div>
-      </div>
-      <div class=e1_108>
-        <div class="e1_109"></div>
-        <div class="e1_110"></div>
-      </div>
-      <div class=e1_111>
-        <div class="e1_112"></div>
-        <div class="e1_113"></div>
-      </div>
-    </div>
-  </div>
   <div class=e1_114>
     <div class="e1_115"></div>
     <div class="e1_116"></div>
     <div class=e1_117>
-      <div class="e1_118"></div>
-      <div class=e1_119>
-        <div class="e1_120"></div>
-        <span class="e1_121">Registrarse</span>
-      </div>
-      <div class=e1_122>
-        <div class="e1_123"></div>
-        <span class="e1_124">Mostrar contraseña</span>
-        <span class="e1_125">Contraseña</span>
-      </div>
-      <div class=e1_126>
-        <div class="e1_127"></div>
-        <span class="e1_128">Nombre de usuario</span>
-      </div>
-      <span class="e1_129">Registrarse</span>
-    </div>
-  </div>
-  <div class=e110_673>
-    <div class=e110_674>
-      <div class="e110_675">
-      </div>
-      <div class=e110_676>
-        <div class=ei110_676_2_149>
-          <div class=ei110_676_2_150>
-            <span class="ei110_676_2_150_2_137">􀊫</span>
-          </div>
-          <span class="ei110_676_2_151">Search</span>
+
+      <form class="e1_118" th:action="@{/registrarse}" th:object="${newStandardUser}" method="post">
+
+        <span class="e1_129">Registrarse</span>
+
+        <div class=e1_126>
+          <label class="e1_128">Nombre de usuario</label>
+          <input class="e1_127" type="text" th:field="*{username}"/>
         </div>
-      </div>
-      <span class="e110_677">Información</span>
-      <span class="e110_678">Guía de Recomendaciones</span>
-      <span class="e110_679">Iniciar sesion</span>
-      <span class="e110_680">Registrarse</span>
-      <span class="e110_681">Inicio</span>
-      <div class="e110_682"></div>
-      <div class="e110_683"></div>
-      <span class="e110_684">Mi Impacto Ambiental</span>
+
+        <div class=e1_122>
+          <label class="e1_128">Contraseña</label>
+          <input class="e1_123" type="text" th:field="*{password}"/>
+
+          <span class="e1_124">Mostrar contraseña</span>
+        </div>
+
+        <button class="blue-button e1_119" type="submit">
+          <div class="e1_120"></div>
+          <span class="e1_121">Registrarse</span>
+        </button>
+
+      </form>
     </div>
-    <div class="e110_685"></div>
   </div>
 </div>
 </body>

@@ -10,7 +10,8 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Patrick+Hand SC&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" th:href="@{/menu/menu.css}">
+  <link rel="stylesheet" th:href="@{/footer/footer.css}">
   <link rel="stylesheet" th:href="@{/iniciarSesion.css}">
 
   <style>
@@ -27,23 +28,8 @@
 
 <body>
 <div class=e1_57>
-  <div class=e1_58>
-    <div class="e1_59"></div>
-    <div class=e1_60>
-      <div class=e1_61>
-        <div class="e1_62"></div>
-        <div class="e1_63"></div>
-      </div>
-      <div class=e1_64>
-        <div class="e1_65"></div>
-        <div class="e1_66"></div>
-      </div>
-      <div class=e1_67>
-        <div class="e1_68"></div>
-        <div class="e1_69"></div>
-      </div>
-    </div>
-  </div>
+  <div th:replace="fragments/menu :: menu" ></div>
+  <div th:replace="fragments/footer :: footer"></div>
   <div class=e1_70>
     <div class="e1_71"></div>
     <div class="e1_72"></div>
@@ -66,28 +52,6 @@
       </div>
       <span class="e1_86">Iniciar Sesión</span>
     </div>
-  </div>
-  <div class=e110_656>
-    <div class=e110_657>
-      <div class="e110_658"></div>
-      <div class=e110_659>
-        <div class=ei110_659_2_149>
-          <div class=ei110_659_2_150>
-            <span class="ei110_659_2_150_2_137">􀊫</span>
-          </div>
-          <span class="ei110_659_2_151">Search</span>
-        </div>
-      </div>
-      <span class="e110_660">Información</span>
-      <span class="e110_661">Guía de Recomendaciones</span>
-      <span class="e110_662">Iniciar sesion</span>
-      <span class="e110_663">Registrarse</span>
-      <span class="e110_664">Inicio</span>
-      <div class="e110_665"></div>
-      <div class="e110_666"></div>
-      <span class="e110_667">Mi Impacto Ambiental</span>
-    </div>
-    <div class="e110_668"></div>
   </div>
 </div>
 </body>

@@ -50,6 +50,57 @@ public class Unit {
   }
 
   public String print() {
-    return this.baseUnit.toString() + "exp" + this.exponent.toString();
+    return this.getExpName() + this.baseUnit.toString().toLowerCase();
   }
+
+  private String getExpName() {
+
+    String expName = "";
+
+    switch (this.exponent) {
+      case -9:
+        expName = "nano";
+        break;
+      case -6:
+        expName = "micro";
+        break;
+      case -3:
+        expName = "mili";
+        break;
+      case -2:
+        expName = "centi";
+        break;
+      case -1:
+        expName = "deci";
+        break;
+      case 0:
+        expName = "";
+        break;
+      case 1:
+        expName = "deca";
+        break;
+      case 2:
+        expName = "hecto";
+        break;
+      case 3:
+        expName = "kilo";
+        break;
+      case 6:
+        expName = "mega";
+        break;
+      case 9:
+        expName = "giga";
+        break;
+      case 12:
+        expName = "tera";
+        break;
+      default:
+        expName = this.exponent + " exp of ";
+        break;
+    }
+
+    return expName;
+  }
+
+
 }

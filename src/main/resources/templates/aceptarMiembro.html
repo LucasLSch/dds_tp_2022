@@ -11,9 +11,9 @@
   <link href="https://fonts.googleapis.com/css?family=Patrick+Hand SC&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Actor&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" th:href="@{/menu/menu.css}">
+  <link rel="stylesheet" th:href="@{/footer/footer.css}">
   <link rel="stylesheet" th:href="@{/aceptarMiembro.css}">
-
   <style>
       /*
         Figma Background for illustrative/preview purposes only.
@@ -28,39 +28,8 @@
 
 <body>
 <div class=e110_742>
-  <div class=e110_744>
-    <div class=e110_745>
-      <div class="e110_746"></div>
-      <div class=e110_747>
-        <div class=ei110_747_2_149>
-          <div class=ei110_747_2_150><span class="ei110_747_2_150_2_137">􀊫</span></div>
-          <span class="ei110_747_2_151">Search</span></div>
-      </div>
-      <span class="e110_748">Información</span><span class="e110_749">Guía de Recomendaciones</span><span
-        class="e110_750">Iniciar sesion</span><span class="e110_751">Registrarse</span><span
-        class="e110_752">Inicio</span>
-      <div class="e110_753"></div>
-      <div class="e110_754"></div>
-      <span class="e110_755">Mi Impacto Ambiental</span></div>
-    <div class="e110_756"></div>
-  </div>
-  <div class=e110_762>
-    <div class="e110_763"></div>
-    <div class=e110_764>
-      <div class=e110_765>
-        <div class="e110_766"></div>
-        <div class="e110_767"></div>
-      </div>
-      <div class=e110_768>
-        <div class="e110_769"></div>
-        <div class="e110_770"></div>
-      </div>
-      <div class=e110_771>
-        <div class="e110_772"></div>
-        <div class="e110_773"></div>
-      </div>
-    </div>
-  </div>
+  <div th:replace="fragments/menu :: menu" ></div>
+  <div th:replace="fragments/footer :: footer"></div>
   <div class="e110_774"></div>
   <span class="e110_775">Nombre Org</span>
   <div class=e110_783>

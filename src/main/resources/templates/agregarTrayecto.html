@@ -12,7 +12,8 @@
   <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Armata&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Almendra&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" th:href="@{/menu/menu.css}">
+  <link rel="stylesheet" th:href="@{/footer/footer.css}">
   <link rel="stylesheet" th:href="@{/agregarTrayecto.css}">
 
   <style>
@@ -28,37 +29,8 @@
 </head>
 
 <body><!-- hay que hacer los botones dropdown !-->
-<div class=e111_11481>
-  <div class=e111_11484>
-    <div class="e111_11485"></div>
-    <div class=e111_11486>
-      <div class=ei111_11486_2_149>
-        <div class=ei111_11486_2_150><span class="ei111_11486_2_150_2_137">􀊫</span></div>
-        <span class="ei111_11486_2_151">Search</span></div>
-    </div>
-    <span class="e111_11487">Información</span><span class="e111_11488">Guía de Recomendaciones</span><span
-      class="e111_11489">Iniciar sesion</span><span class="e111_11490">Registrarse</span><span
-      class="e111_11491">Inicio</span>
-    <div class="e111_11492"></div>
-    <div class="e111_11493"></div>
-    <span class="e111_11494">Mi Impacto Ambiental</span></div>
-  <div class=e111_11499>
-    <div class="e111_11500"></div>
-    <div class=e111_11501>
-      <div class=e111_11502>
-        <div class="e111_11503"></div>
-        <div class="e111_11504"></div>
-      </div>
-      <div class=e111_11505>
-        <div class="e111_11506"></div>
-        <div class="e111_11507"></div>
-      </div>
-      <div class=e111_11508>
-        <div class="e111_11509"></div>
-        <div class="e111_11510"></div>
-      </div>
-    </div>
-  </div>
+  <div th:replace="fragments/menu :: menu" ></div>
+  <div th:replace="fragments/footer :: footer"></div>
   <span class="e111_11511">Agregar trayecto</span>
   <div class=e111_50320>
     <div class="e111_11512"></div>

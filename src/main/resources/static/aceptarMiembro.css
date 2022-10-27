@@ -186,115 +186,7 @@
 	background-repeat:no-repeat;
 	background-size:cover;
 }
-.e110_762 { 
-	width:1920px;
-	height:200px;
-	position:absolute;
-	left:0px;
-	top:880px;
-}
-.e110_763 { 
-	background-color:rgba(40.00000141561031, 40.00000141561031, 40.00000141561031, 1);
-	width:1920px;
-	height:200px;
-	position:absolute;
-	left:0px;
-	top:0px;
-}
-.e110_764 { 
-	width:372px;
-	height:40px;
-	position:absolute;
-	left:774px;
-	top:80px;
-}
-.e110_765 { 
-	width:100px;
-	height:40px;
-	position:absolute;
-	left:0px;
-	top:0px;
-}
-.e110_766 { 
-	background-color:rgba(29.000000171363354, 161.0000056028366, 242.00000077486038, 1);
-	width:100px;
-	height:40px;
-	position:absolute;
-	left:0px;
-	top:0px;
-	border-top-left-radius:5px;
-	border-top-right-radius:5px;
-	border-bottom-left-radius:5px;
-	border-bottom-right-radius:5px;
-}
-.e110_767 { 
-	width:40px;
-	height:40px;
-	position:absolute;
-	left:30px;
-	top:0px;
-	background-image:url(../../static/footer/img/twitter_logo.png);
-	background-repeat:no-repeat;
-	background-size:cover;
-}
-.e110_768 { 
-	width:100px;
-	height:40px;
-	position:absolute;
-	left:136px;
-	top:0px;
-}
-.e110_769 { 
-	background-color:rgba(74.0000031888485, 110.00000104308128, 169.00000512599945, 1);
-	width:100px;
-	height:40px;
-	position:absolute;
-	left:0px;
-	top:0px;
-	border-top-left-radius:5px;
-	border-top-right-radius:5px;
-	border-bottom-left-radius:5px;
-	border-bottom-right-radius:5px;
-}
-.e110_770 { 
-	width:40px;
-	height:40px;
-	position:absolute;
-	left:30px;
-	top:0px;
-	background-image:url(../../static/footer/img/facebook_logo.png);
-	background-repeat:no-repeat;
-	background-size:cover;
-}
-.e110_771 { 
-	width:100px;
-	height:40px;
-	position:absolute;
-	left:272px;
-	top:0px;
-}
-.e110_772 { 
-	background-color:rgba(255, 255, 255, 1);
-	width:100px;
-	height:40px;
-	position:absolute;
-	left:0px;
-	top:0px;
-	border-top-left-radius:5px;
-	border-top-right-radius:5px;
-	border-bottom-left-radius:5px;
-	border-bottom-right-radius:5px;
-}
-.e110_773 { 
-	width:40px;
-	height:40px;
-	position:absolute;
-	left:30px;
-	top:0px;
-	background-image:url(../../static/footer/img/gmail_logo.png);
-	background-repeat:no-repeat;
-	background-size:cover;
-}
+
 .e110_774 { 
 	background-color:rgba(217.0000022649765, 217.0000022649765, 217.0000022649765, 1);
 	width:1486px;
@@ -456,7 +348,7 @@
 	position:absolute;
 	left:40px;
 	top:14px;
-	background-image:url(../images/20715029_1.png);
+	background-image:url(/static/menu/img/defaultProfile.png);
 	background-repeat:no-repeat;
 	background-size:cover;
 }
@@ -563,7 +455,7 @@
 	position:absolute;
 	left:40px;
 	top:14px;
-	background-image:url(../images/20715029_1.png);
+	background-image:url(/static/menu/img/defaultProfile.png);
 	background-repeat:no-repeat;
 	background-size:cover;
 }
@@ -670,7 +562,7 @@
 	position:absolute;
 	left:40px;
 	top:14px;
-	background-image:url(../images/20715029_1.png);
+	background-image:url(/static/menu/img/defaultProfile.png);
 	background-repeat:no-repeat;
 	background-size:cover;
 }
@@ -777,7 +669,7 @@
 	position:absolute;
 	left:40px;
 	top:14px;
-	background-image:url(../images/20715029_1.png);
+	background-image:url(/static/menu/img/defaultProfile.png);
 	background-repeat:no-repeat;
 	background-size:cover;
 }

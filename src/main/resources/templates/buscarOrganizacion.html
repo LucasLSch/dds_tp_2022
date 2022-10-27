@@ -10,7 +10,8 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Patrick+Hand SC&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" th:href="@{/menu/menu.css}">
+  <link rel="stylesheet" th:href="@{/footer/footer.css}">
   <link rel="stylesheet" th:href="@{/buscarOrganizacion.css}">
 
   <style>
@@ -26,87 +27,14 @@
 </head>
 
 <body>
-<div class=e110_3>
-  <div class=e110_224>
-    <div class="e110_225"></div>
-    <div class=e110_226>
-      <div class=e110_227>
-        <div class="e110_228"></div>
-        <div class="e110_229"></div>
-      </div>
-      <div class=e110_230>
-        <div class="e110_231"></div>
-        <div class="e110_232"></div>
-      </div>
-      <div class=e110_233>
-        <div class="e110_234"></div>
-        <div class="e110_235"></div>
-      </div>
-    </div>
-  </div>
-  <div class=e110_245>
+<div th:replace="fragments/menu :: menu" ></div>
+<div th:replace="fragments/footer :: footer"></div>
+  <div class=e110_245 th:each="organization: ${organizations}">
     <div class="e110_236"></div>
     <div class="e110_246"></div>
-    <span class="e110_247">Nombre org</span>
+    <form th:action="@{/organizaciones/${organization.id}" method="get"></form><button type="submit"><span class="e110_247" th:text="${organization.socialObjective}"></span></button>
     <div class="e110_248"></div>
-    <span class="e110_255">Telefono :</span><span class="e110_256">Direccion : </span></div>
-  <div class=e110_278>
-    <div class="ei110_278_110_236"></div>
-    <div class="ei110_278_110_246"></div>
-    <span class="ei110_278_110_247">Nombre org</span>
-    <div class="ei110_278_110_248"></div>
-    <span class="ei110_278_110_255">Telefono :</span><span class="ei110_278_110_256">Direccion : </span></div>
-  <div class=e110_299>
-    <div class="ei110_299_110_236"></div>
-    <div class="ei110_299_110_246"></div>
-    <span class="ei110_299_110_247">Nombre org</span>
-    <div class="ei110_299_110_248"></div>
-    <span class="ei110_299_110_255">Telefono :</span><span class="ei110_299_110_256">Direccion : </span></div>
-  <div class=e110_292>
-    <div class="ei110_292_110_236"></div>
-    <div class="ei110_292_110_246"></div>
-    <span class="ei110_292_110_247">Nombre org</span>
-    <div class="ei110_292_110_248"></div>
-    <span class="ei110_292_110_255">Telefono :</span><span class="ei110_292_110_256">Direccion : </span></div>
-  <div class=e110_285>
-    <div class="ei110_285_110_236"></div>
-    <div class="ei110_285_110_246"></div>
-    <span class="ei110_285_110_247">Nombre org</span>
-    <div class="ei110_285_110_248"></div>
-    <span class="ei110_285_110_255">Telefono :</span><span class="ei110_285_110_256">Direccion : </span></div>
-  <div class=e110_271>
-    <div class="ei110_271_110_236"></div>
-    <div class="ei110_271_110_246"></div>
-    <span class="ei110_271_110_247">Nombre org</span>
-    <div class="ei110_271_110_248"></div>
-    <span class="ei110_271_110_255">Telefono :</span><span class="ei110_271_110_256">Direccion : </span></div>
-  <div class=e110_264>
-    <div class="ei110_264_110_236"></div>
-    <div class="ei110_264_110_246"></div>
-    <span class="ei110_264_110_247">Nombre org</span>
-    <div class="ei110_264_110_248"></div>
-    <span class="ei110_264_110_255">Telefono :</span><span class="ei110_264_110_256">Direccion : </span></div>
-  <div class=e110_257>
-    <div class="ei110_257_110_236"></div>
-    <div class="ei110_257_110_246"></div>
-    <span class="ei110_257_110_247">Nombre org</span>
-    <div class="ei110_257_110_248"></div>
-    <span class="ei110_257_110_255">Telefono :</span><span class="ei110_257_110_256">Direccion : </span></div>
-  <div class=e110_707>
-    <div class=e110_708>
-      <div class="e110_709"></div>
-      <div class=e110_710>
-        <div class=ei110_710_2_149>
-          <div class=ei110_710_2_150><span class="ei110_710_2_150_2_137">􀊫</span></div>
-          <span class="ei110_710_2_151">Search</span></div>
-      </div>
-      <span class="e110_711">Información</span><span class="e110_712">Guía de Recomendaciones</span><span
-        class="e110_713">Iniciar sesion</span><span class="e110_714">Registrarse</span><span
-        class="e110_715">Inicio</span>
-      <div class="e110_716"></div>
-      <div class="e110_717"></div>
-      <span class="e110_718">Mi Impacto Ambiental</span></div>
-    <div class="e110_719"></div>
+    <span class="e110_255" th:text ="Telefono: ${organization.contact.phoneNumber}"></span><span class="e110_256" th:text="Email: ${organization.contact.email}"></span></div>
   </div>
 </div>
 </body>

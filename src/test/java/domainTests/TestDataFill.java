@@ -29,13 +29,13 @@ import java.util.*;
 public class TestDataFill {
 
   @Autowired
-  protected UserSvc userSvc = new UserSvc();
+  protected UserSvc userSvc;
 
   @Autowired
-  protected TransportSvc transportSvc = new TransportSvc();
+  protected TransportSvc transportSvc;
 
   @Autowired
-  protected ConsumptionTypeSvc consumptionTypeSvc = new ConsumptionTypeSvc();
+  protected ConsumptionTypeSvc consumptionTypeSvc;
 
   @Autowired
   protected TerritorialSectorSvc territorialSectorSvc;
@@ -434,6 +434,10 @@ public class TestDataFill {
 
   public static Unit second(Proportionality prop) {
     return new Unit(BaseUnit.SECOND, 0, prop);
+  }
+
+  private static Unit hour(Proportionality prop) {
+    return new Unit(BaseUnit.HOUR, 0, prop);
   }
 
   public static Unit kilowatt(Proportionality prop) {
