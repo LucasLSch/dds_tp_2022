@@ -9,9 +9,11 @@
   <link href="https://fonts.googleapis.com/css?family=SF+Pro Display&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/utils/normalize.css}">
   <link rel="stylesheet" th:href="@{/menu/menu.css}">
   <link rel="stylesheet" th:href="@{/footer/footer.css}">
   <link rel="stylesheet" th:href="@{/calculadoraHC/calculadoraHC.css}">
+  <link rel="stylesheet" th:href="@{/utils/buttons.css}">
 </head>
 
 <body>
@@ -30,11 +32,11 @@
   </div>
 
 
-  <form class="v34_27258" th:action="@{/calculadoraHC}" method="get">
+  <form class="calculator-form" th:action="@{/calculadoraHC}" method="get">
 
     <div class="form-consumption-type">
-      <span class="form-consumption-type-label">Tipo de Consumo</span>
-      <select class="form-dropdown" th:field="*{consumptionType}">
+      <span class="form-label">Tipo de Consumo</span>
+      <select class="form-dropdown" th:name="ct">
         <option class="form-dropdown-text" th:each="consumptionType : ${allConsumptionTypes}"
                 th:value="${consumptionType}"
                 th:text="${consumptionType}">
@@ -43,28 +45,27 @@
       </select>
     </div>
 
-<!--        <div class="form-consumption-type">-->
-<!--          <span class="form-consumption-type-label">Tipo de Consumo</span>-->
-<!--          <div class="v34_27364">-->
-<!--            <div class="form-dropdown"></div>-->
-<!--            <span class="v34_27366">Seleccione una opción</span>-->
-<!--            <div class="form-dropdown-arrow"></div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-    <div class="v34_27301"><span class="v34_27312">Periodo</span>
-      <span class="v34_27379">MMAAAA o AAAA</span>
-      <div class="v34_27378"></div>
+    <div class="form-periodicity">
+      <span class="form-label">Periodo</span>
+      <input placeholder="MMAAA o AAAA" class="v34_27378" type="text" th:name="p"/>
     </div>
 
-    <div class="v34_27289"><span class="v34_27300">Valor del Consumo</span>
-      <div class="v34_27361"></div>
+    <div class="form-consumption-type-value">
+      <span class="form-label">Valor del Consumo</span>
+      <input class="v34_27361" type="double" th:name="cv"/>
     </div>
 
-    <div class="v34_27255">
-      <div class="v34_27346"></div>
-      <div class="v34_27256"></div>
-      <span class="v34_27257">Calcular</span>
+    <div class="form-send">
+      <div class="form-result-box">
+        <div class="form-result-text">
+          [[${result}]]
+        </div>
+      </div>
+
+      <button class="blue-button v34_27256" type="submit">
+        <span class="v34_27257">Calcular</span>
+      </button>
+
     </div>
 
   </form>

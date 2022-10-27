@@ -3,6 +3,8 @@ package ddsutn.domain.measurements;
 import ddsutn.domain.measurements.unit.Unit;
 import java.util.Set;
 import javax.persistence.*;
+
+import ddsutn.domain.measurements.unit.UnitExpression;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -54,4 +56,13 @@ public class ConsumptionType {
   public Double getEmissionFactorValue() {
     return this.getEmissionFactor().getValue();
   }
+
+  public String print() {
+    return this.getName() + " (" + UnitExpression.printUnits(this.getUnits()) + ")";
+  }
+
+  public Double calculateFor(Double someValue) {
+    return this.getEmissionFactorValue() * someValue;
+  }
+
 }
