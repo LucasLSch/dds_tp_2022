@@ -30,19 +30,21 @@
 <div th:replace="fragments/menu :: menu" ></div>
 <div th:replace="fragments/footer :: footer"></div>
   <div class="e110_358"></div>
-  <span class="e110_424">Nombre Org</span>
+  <span class="e110_424" th:text="organization.socialObjective"></span>
   <div class=e110_430>
     <div class="e110_425"></div>
-    <span class="e110_427">Info:</span><span class="e110_429">Info:</span><span class="e110_432">Info:</span><span
+    <span class="e110_427" th:text="Ubicacion:${organization.location}"></span><span class="e110_429" th:text="tipo: ${organization.type}"></span>
+    <span class="e110_432" th:text="clasificacion:${organization.clasification}"></span>
+    <!--<span
       class="e110_428">Info:</span><span class="e110_426">Info:</span></div>
-  <div class=e110_448>
+  <div class=e110_448> -->
     <div class="e110_442"></div>
     <span class="e110_440">Sectores</span>
-    <div class=e110_816>
+    <div class=e110_816 th:each="sector:${sectors}">
       <div class="ei110_816_110_801"></div>
-      <div class=ei110_816_110_802><span class="ei110_816_110_802_1_4002">Aplicar</span></div>
-      <span class="ei110_816_110_800">S1: info............</span></div>
-    <div class=e110_827>
+      <form th:action="@{/organizaciones/${organization.id}/solicitar" method="get"></form><div class=ei110_816_110_802><button type="submit"><span class="ei110_816_110_802_1_4002">Aplicar</span></button></div>
+      <span class="ei110_816_110_800" th:text="${sector.name}"></span></div>
+<!--    <div class=e110_827>
       <div class="ei110_827_110_801"></div>
       <div class=ei110_827_110_802><span class="ei110_827_110_802_1_4002">Aplicar</span></div>
       <span class="ei110_827_110_800">S1: info............</span></div>
@@ -53,7 +55,7 @@
     <div class=e110_849>
       <div class="ei110_849_110_801"></div>
       <div class=ei110_849_110_802><span class="ei110_849_110_802_1_4002">Aplicar</span></div>
-      <span class="ei110_849_110_800">S1: info............</span></div>
+      <span class="ei110_849_110_800">S1: info............</span></div>-->
   </div>
 </div>
 </body>

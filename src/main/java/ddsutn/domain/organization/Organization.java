@@ -48,7 +48,7 @@ public class Organization {
   private List<ActivityData> activitiesData;
 
   @OneToMany(cascade = CascadeType.ALL)
-  @JoinColumn(name = "organization_id")
+  @JoinColumn(name = "organization_id")//esto no es una lista es un solo contacto
   private List<Contact> contacts;
 
   @OneToMany(cascade = CascadeType.PERSIST)

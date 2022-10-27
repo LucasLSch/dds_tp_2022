@@ -32,7 +32,7 @@
   <div class=e110_245 th:each="organization: ${organizations}">
     <div class="e110_236"></div>
     <div class="e110_246"></div>
-    <span class="e110_247" th:text="${organization.socialObjective}"></span>
+    <form th:action="@{/organizaciones/${organization.id}" method="get"></form><button type="submit"><span class="e110_247" th:text="${organization.socialObjective}"></span></button>
     <div class="e110_248"></div>
     <span class="e110_255" th:text ="Telefono: ${organization.contact.phoneNumber}"></span><span class="e110_256" th:text="Email: ${organization.contact.email}"></span></div>
   </div>
