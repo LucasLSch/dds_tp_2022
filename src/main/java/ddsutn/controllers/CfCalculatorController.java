@@ -33,14 +33,26 @@ public class CfCalculatorController {
 
     Double result = 0d;
 
+    System.out.println(ct);
+    System.out.println(p);
+    System.out.println(cv);
 
 
     if(ct != null && !ct.equals(notOptionSelectedOption()) && p != null && cv != null) {
-      //TODO calcular el valor correcto
       //TODO ver de manejar mejor los params no enviados con Optional o algo
-    }
 
-    System.out.println(this.consumptionTypeList());
+      ConsumptionType ctObj = this.consumptionTypeSvc
+          .findAllByCondition(consumptionType -> consumptionType.print().equals(ct))
+          .stream()
+          .findFirst()
+          .orElse(null);
+
+      if(ctObj == null) { //TODO same arriba
+        return "calculadoraHC";
+      }
+
+      result = ctObj.calculateFor(cv);
+    }
 
     model.addAttribute("consumptionType", new ConsumptionType());
     model.addAttribute("result", result);
@@ -63,7 +75,7 @@ public class CfCalculatorController {
     finalList.addAll(this.consumptionTypeSvc
         .findAll()
         .stream()
-        .map(ct -> ct.getName() + " (" + UnitExpression.printUnits(ct.getUnits()) + ")")
+        .map(ConsumptionType::print)
         .collect(Collectors.toList()));
 
     return finalList;
