@@ -4,10 +4,12 @@ import ddsutn.domain.organization.Organization;
 import ddsutn.repositories.OrganizationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.function.Predicate;
 
+@Service
 public class OrganizationSvc extends GenericSvcImpl<Organization, Long> {
 
   @Autowired

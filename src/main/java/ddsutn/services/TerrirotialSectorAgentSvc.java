@@ -4,7 +4,9 @@ import ddsutn.domain.territories.TerritorialSectorAgent;
 import ddsutn.repositories.TerritorialSectorAgentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TerrirotialSectorAgentSvc extends GenericSvcImpl<TerritorialSectorAgent, Long> {
 
   @Autowired
