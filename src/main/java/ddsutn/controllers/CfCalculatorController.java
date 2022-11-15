@@ -34,11 +34,6 @@ public class CfCalculatorController {
 
     Double result = 0d;
 
-    System.out.println(ct);
-    System.out.println(p);
-    System.out.println(cv);
-
-
     if (ct != null && !ct.equals(notOptionSelectedOption()) && p != null && cv != null) {
       //TODO ver de manejar mejor los params no enviados con Optional o algo
 

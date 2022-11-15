@@ -209,3 +209,13 @@ _630 {
     left: 1710px;
     top: 36px;
 }
+
+.menu-white-line {
+    width: 530px;
+    height: 1px;
+    background-color: white;
+    opacity: 1;
+    position: relative;
+    top: 99px;
+    left: 695px;
+}

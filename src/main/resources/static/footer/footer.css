@@ -15,6 +15,16 @@
     top: 0px;
 }
 
+.footer-white-line {
+    width: 530px;
+    height: 1px;
+    background-color: white;
+    opacity: 1;
+    position: relative;
+    top: 1px;
+    left: 695px;
+}
+
 .footer-nav {
     width: 372px;
     height: 40px;
