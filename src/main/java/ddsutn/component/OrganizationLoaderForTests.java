@@ -27,10 +27,17 @@ public class OrganizationLoaderForTests implements ApplicationRunner {
 
     District dt = new District(1);
 
+    Organization org1 = new Organization("Doodle", new Location(dt, "calle", "123"), "algo", OrgType.COMPANY);
+    Organization org2 = new Organization("HeadBook", new Location(dt, "street", "456"), "otroAlgo", OrgType.COMPANY);
+    Organization org3 = new Organization("MeTube", new Location(dt, "rue", "789"), "nuse", OrgType.COMPANY);
+
+    org1.createSector("banana");
+    org1.createSector("manzana");
+
     Organization[] orgs = {
-        new Organization("Doodle", new Location(dt, "calle", "123"), "algo", OrgType.COMPANY),
-        new Organization("HeadBook", new Location(dt, "street", "456"), "otroAlgo", OrgType.COMPANY),
-        new Organization("MeTube", new Location(dt, "rue", "789"), "nuse", OrgType.COMPANY)
+        org1,
+        org2,
+        org3
     };
 
     this.organizationSvc.saveAll(Arrays.asList(orgs));
