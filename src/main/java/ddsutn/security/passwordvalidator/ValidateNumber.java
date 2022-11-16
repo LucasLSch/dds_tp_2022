@@ -2,7 +2,7 @@ package ddsutn.security.passwordvalidator;
 
 public class ValidateNumber implements PasswordCriteria {
 
-  private String errorDescription = "The password must have a number";
+  private String errorDescription = "Debe tener algún número";
 
   @Override
   public void validatePassword(String somePassword) {

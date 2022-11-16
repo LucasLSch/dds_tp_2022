@@ -3,7 +3,7 @@ package ddsutn.security.passwordvalidator;
 public class ValidateMinLength implements PasswordCriteria {
 
   private Integer minChar = 8;
-  private String errorDescription = "The password must have " + minChar + " characters";
+  private String errorDescription = "Debe tener al menos " + minChar + " caracteres";
 
 
   @Override

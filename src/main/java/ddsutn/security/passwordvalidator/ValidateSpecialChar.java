@@ -2,7 +2,7 @@ package ddsutn.security.passwordvalidator;
 
 public class ValidateSpecialChar implements PasswordCriteria {
 
-  private String errorDescription = "The password must have a special character";
+  private String errorDescription = "Debe tener al menos un caracter especial";
 
   @Override
   public void validatePassword(String somePassword) {
