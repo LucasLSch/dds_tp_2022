@@ -26,7 +26,13 @@ public class UserController {
 
   @GetMapping("/iniciarSesion")
   public String logIn(Model model) {
+    model.addAttribute("user", new UserInit());
     return "iniciarSesion";
+  }
+
+  @PostMapping("/iniciarSesion")
+  public String logIn(@ModelAttribute("user") UserInit user, Model model) {
+    return "/home";
   }
 
   @GetMapping("/registrarse")

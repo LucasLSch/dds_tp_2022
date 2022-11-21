@@ -252,7 +252,7 @@ _72 {
 }
 
 .e1_80 {
-    background-color: rgba(75.00000312924385, 75.00000312924385, 75.00000312924385, 0.699999988079071);
+    background-color: rgba(75, 75, 75, 0.699999988079071);
     width: 320px;
     height: 60px;
     position: absolute;
@@ -262,6 +262,25 @@ _72 {
     border-top-right-radius: 5px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+}
+
+form input {
+    color: white;
+    padding-left: 10px;
+    font-family: Poppins;
+}
+
+.form-label {
+    width: 170px;
+    opacity: 1;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.800000011920929);
+    position: relative;
+    top: 0px;
+    left: 0px;
+    font-family: Poppins;
+    font-weight: Light;
+    font-size: 14px;
 }
 
 .e1_81 {
@@ -299,9 +318,10 @@ _72 {
 }
 
 .e1_84 {
-    background-color: rgba(75.00000312924385, 75.00000312924385, 75.00000312924385, 0.699999988079071);
+    background-color: rgba(75, 75, 75, 0.699999988079071);
     width: 320px;
     height: 60px;
+    opacity: 1;
     position: absolute;
     left: 0px;
     top: 21px;
@@ -309,6 +329,7 @@ _72 {
     border-top-right-radius: 5px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    overflow: hidden;
 }
 
 .e1_85 {
