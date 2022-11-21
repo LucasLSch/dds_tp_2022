@@ -8,6 +8,7 @@ import ddsutn.services.UserSvc;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,9 @@ public class UserController {
 
   @Autowired
   private UserSvc userSvc;
+
+  @Autowired
+  private BCryptPasswordEncoder bCryptPasswordEncoder;
 
   @GetMapping("/iniciarSesion")
   public String logIn(Model model) {

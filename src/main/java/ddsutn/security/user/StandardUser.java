@@ -4,9 +4,14 @@ import ddsutn.domain.organization.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 @NoArgsConstructor
 @Setter
@@ -24,4 +29,9 @@ public class StandardUser extends User {
     this.member = member;
   }
 
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("STANDARD_USER");
+    return new ArrayList<>(Collections.singleton(simpleGrantedAuthority));
+  }
 }
