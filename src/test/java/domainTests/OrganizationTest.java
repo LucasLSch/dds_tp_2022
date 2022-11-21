@@ -36,8 +36,8 @@ public class OrganizationTest extends TestDataFill {
     this.dummyLocation = new Location(new District(100), "Cool Street", "300");
     this.dummyOrganization = new Organization("Cool Org", dummyLocation, "10/10", OrgType.ONG);
     this.dummySector = new Sector("Cool Sector", dummyOrganization);
-    this.dummyMember = new Member("Roberto", "Gomez", DocType.ID, "28.375.012");
-    this.anotherDummyMember = new Member("Juan Carlos", "Rodriguez", DocType.ID, "30.103.094");
+    this.dummyMember = new Member("Roberto", "Gomez", DocType.DNI, "28.375.012");
+    this.anotherDummyMember = new Member("Juan Carlos", "Rodriguez", DocType.DNI, "30.103.094");
   }
 
   /*

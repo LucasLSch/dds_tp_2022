@@ -4,7 +4,6 @@ import ddsutn.domain.journey.Journey;
 import ddsutn.domain.journey.Leg;
 import ddsutn.domain.journey.transport.*;
 import ddsutn.domain.location.Distance;
-import ddsutn.domain.location.District;
 import ddsutn.domain.location.Location;
 import ddsutn.domain.measurements.ActivityData;
 import ddsutn.domain.measurements.ConsumptionType;
@@ -22,7 +21,6 @@ import ddsutn.security.user.User;
 import ddsutn.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.Id;
 import java.io.IOException;
 import java.util.*;
 
@@ -320,15 +318,15 @@ public class TestDataFill {
 
     //String name, String surname, DocType docType, String document
     Member[] members = {
-        new Member("Marco", "Morana", DocType.ID, "42078542"),
-        new Member("Lucas", "Schneider", DocType.ID, "42785274"),
-        new Member("Agustin", "Bazzi", DocType.PASSPORT, "317246387"),
-        new Member("Julian", "Jose", DocType.ID, "267213"),
-        new Member("Julio", "Caesar", DocType.ID, "37362231"),
-        new Member("Bond", "James Bond", DocType.ID, "82673932"),
-        new Member("Sherlock", "Holmes", DocType.ID, "1"),
-        new Member("Watson", "Watson", DocType.ID, "2"),
-        new Member("Mycroft", "Holmes", DocType.ID, "-1")
+        new Member("Marco", "Morana", DocType.DNI, "42078542"),
+        new Member("Lucas", "Schneider", DocType.DNI, "42785274"),
+        new Member("Agustin", "Bazzi", DocType.PASAPORTE, "317246387"),
+        new Member("Julian", "Jose", DocType.DNI, "267213"),
+        new Member("Julio", "Caesar", DocType.DNI, "37362231"),
+        new Member("Bond", "James Bond", DocType.DNI, "82673932"),
+        new Member("Sherlock", "Holmes", DocType.DNI, "1"),
+        new Member("Watson", "Watson", DocType.DNI, "2"),
+        new Member("Mycroft", "Holmes", DocType.DNI, "-1")
     };
 
     this.memberSvc.saveAll(Arrays.asList(members));
@@ -397,10 +395,10 @@ public class TestDataFill {
     try {
       User[] users = {
           new Registration()
-              .setMember("Gonzalo", "Rodriguez Pardo", DocType.ID, "42.877.601")
+              .setMember("Gonzalo", "Rodriguez Pardo", DocType.DNI, "42.877.601")
               .registerStandardUser("Pardios", "1Contra$enia"),
           new Registration()
-              .setMember("Lucas", "Schneider", DocType.ID, "42.396.327")
+              .setMember("Lucas", "Schneider", DocType.DNI, "42.396.327")
               .registerStandardUser("Pastita", "1Contra$enia"),
           new Registration()
               .setSectorAgent()
