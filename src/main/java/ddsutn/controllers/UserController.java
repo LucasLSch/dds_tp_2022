@@ -9,11 +9,11 @@ import ddsutn.services.UserSvc;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
@@ -25,6 +25,9 @@ public class UserController {
 
   @Autowired
   private UserSvc userSvc;
+
+  @Autowired
+  private BCryptPasswordEncoder bCryptPasswordEncoder;
 
   @GetMapping("/iniciarSesion")
   public String logIn(Model model) {
@@ -56,21 +59,20 @@ public class UserController {
   }
 
   @PostMapping("/registrarse")
-  public String signUp(@ModelAttribute("newUser") UserInit user, Model model) {
+  public ModelAndView signUp(@ModelAttribute("newUser") UserInit user, Model model) {
 
     if(this.validateNewUser(user, model)) {
       model.addAttribute("allUserTypes", this.userTypes());
-      return "registrarse/registrarse";
+      return new ModelAndView("registrarse/registrarse", "newUser", user);
     }
 
-//    switch (user.userType) {
-//      case "Agente Territorial":
-//        return this.saveAgentUser(user);
-//      case "Miembro":
-//
-//    }
+    switch (user.getUserType()) {
+      case "Miembro":
+        return new ModelAndView("registrarse/registrarseMiembro", "newUser", user);
+      default:
+        return new ModelAndView("registrarse/registrarse");
+    }
 
-    return "iniciarSesion";
   }
 
   private Boolean validateNewUser(UserInit newUser, Model model) {
