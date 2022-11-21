@@ -4,6 +4,7 @@ import ddsutn.domain.territories.TerritorialSectorAgent;
 import ddsutn.security.passwordvalidator.PasswordException;
 import ddsutn.security.passwordvalidator.PasswordValidator;
 import ddsutn.security.user.TerritorialAgentUser;
+import ddsutn.security.user.User;
 import ddsutn.services.UserSvc;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.security.auth.login.LoginException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +34,15 @@ public class UserController {
 
   @PostMapping("/iniciarSesion")
   public String logIn(@ModelAttribute("user") UserInit user, Model model) {
+    try {
+      User succesfulUser =
+              userSvc.findAllByCondition((someUser) -> someUser.successfulLogin(user.getUsername(), user.getPassword()))
+                      .stream()
+                      .findFirst()
+                      .get();
+    } catch (Exception e) {
+      return "/iniciarSesion";
+    }
     return "/home";
   }
 
