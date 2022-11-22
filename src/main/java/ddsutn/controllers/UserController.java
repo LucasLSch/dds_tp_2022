@@ -1,10 +1,15 @@
 package ddsutn.controllers;
 
+import ddsutn.domain.organization.DocType;
+import ddsutn.domain.organization.Member;
 import ddsutn.domain.territories.TerritorialSectorAgent;
 import ddsutn.security.passwordvalidator.PasswordException;
 import ddsutn.security.passwordvalidator.PasswordValidator;
+import ddsutn.security.user.Administrator;
+import ddsutn.security.user.StandardUser;
 import ddsutn.security.user.TerritorialAgentUser;
 import ddsutn.security.user.User;
+import ddsutn.services.MemberSvc;
 import ddsutn.services.UserSvc;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,8 +43,9 @@ public class UserController {
   @PostMapping("/iniciarSesion")
   public String logIn(@ModelAttribute("user") UserInit user, Model model) {
     try {
-      User succesfulUser =
-              userSvc.findAllByCondition((someUser) -> someUser.successfulLogin(user.getUsername(), user.getPassword()))
+      User successfulUser =
+              userSvc.findAllByCondition((someUser) -> someUser.successfulLogin(user.getUsername(),
+                              bCryptPasswordEncoder.encode(user.getPassword())))
                       .stream()
                       .findFirst()
                       .get();
@@ -73,6 +79,18 @@ public class UserController {
         return new ModelAndView("registrarse/registrarse");
     }
 
+  }
+
+  @PostMapping("/registrarseMiembro")
+  public ModelAndView getMemberInfo(
+          @ModelAttribute("newMember") StandardUserDTO member,
+          @ModelAttribute("newUser") UserInit user,
+          Model model
+  ) throws IOException {
+    Member m = member.getMember();
+    StandardUser su = user.getUser(m, bCryptPasswordEncoder);
+    userSvc.save(su);
+    return new ModelAndView(String.format("/member/%d", m.getId()), "member", m);
   }
 
   private Boolean validateNewUser(UserInit newUser, Model model) {
@@ -118,10 +136,27 @@ public class UserController {
 
   @Setter
   @Getter
-  public class UserInit {
+  public static class UserInit {
     public String username;
     public String password;
     public String userType;
+
+    public StandardUser getUser(Member member, BCryptPasswordEncoder encoder) throws IOException {
+      return new StandardUser(username, encoder.encode(password), member);
+    }
+  }
+
+  @Setter
+  @Getter
+  public static class StandardUserDTO {
+    public String name;
+    public String surname;
+    public String docType;
+    public String document;
+
+    public Member getMember() {
+      return new Member(name, surname, DocType.valueOf(docType), document);
+    }
   }
 
 }

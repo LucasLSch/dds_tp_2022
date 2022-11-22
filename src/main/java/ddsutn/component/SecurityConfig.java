@@ -1,6 +1,7 @@
 package ddsutn.component;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -12,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Component;
 
-@Component
+@Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig {
@@ -33,9 +34,11 @@ public class SecurityConfig {
     http.csrf()
             .disable()
             .authorizeRequests()
-            .antMatchers("/iniciarSesion/**", "/registrarse/**", "/css/**")
+            .antMatchers("/calculadoraHC", "/home")
+            .hasAuthority("ADMINISTRATOR_USER")
+            .antMatchers("/iniciarSesion", "/registrarse/**")
             .anonymous()
-            .antMatchers("/iniciarSesion/**", "/registrarse/**", "/css/**")
+            .antMatchers("/iniciarSesion", "/utils/**", "/footer/**", "/registrarse/**", "/menu/**", "/iniciarSesion.css")
             .permitAll()
             .anyRequest()
             .authenticated()
@@ -43,8 +46,7 @@ public class SecurityConfig {
             .formLogin()
             .loginPage("/iniciarSesion")
             .loginProcessingUrl("/iniciarSesion")
-            .defaultSuccessUrl("/home", true)
-            .failureUrl("/iniciarSesion.html");
+            .failureUrl("/iniciarSesion?authError=true");
 
     return http.build();
   }
