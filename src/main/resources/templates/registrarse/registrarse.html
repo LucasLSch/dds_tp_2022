@@ -30,14 +30,14 @@
       <div class="v1_126">
         <label class=" v1_128">Nombre de usuario</label>
         <input class="v1_127" type="text" th:field="*{username}"/>
-        <span class="user-error" th:text="${userError}"></span>
+        <span class="user-error" th:text="${userError} ?: ''"></span>
       </div>
 
       <div class="v1_122">
         <label class="v1_125">Contraseña</label>
         <input class="v1_123" type="text" th:field="*{password}"/>
         <span class="v1_124">Mostrar contraseña</span>
-        <span class="pwd-error" th:text="${pwdError}"></span>
+        <span class="pwd-error" th:text="${pwdError} ?: ''"></span>
       </div>
 
       <div class="form-user-type">

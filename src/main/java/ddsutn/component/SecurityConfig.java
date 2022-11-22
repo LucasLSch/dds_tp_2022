@@ -36,7 +36,7 @@ public class SecurityConfig {
             .authorizeRequests()
             .antMatchers("/calculadoraHC", "/home")
             .hasAuthority("ADMINISTRATOR_USER")
-            .antMatchers("/iniciarSesion", "/registrarse/**")
+            .antMatchers("/iniciarSesion", "/registrarse", "/registrarseMiembro")
             .anonymous()
             .antMatchers("/iniciarSesion", "/utils/**", "/footer/**", "/registrarse/**", "/menu/**", "/iniciarSesion.css")
             .permitAll()

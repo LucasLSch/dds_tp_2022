@@ -1,5 +1,6 @@
 package ddsutn.controllers;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import ddsutn.domain.organization.DocType;
 import ddsutn.domain.organization.Member;
 import ddsutn.domain.territories.TerritorialSectorAgent;
@@ -39,9 +40,10 @@ public class UserController {
   private BCryptPasswordEncoder bCryptPasswordEncoder;
 
   @GetMapping("/iniciarSesion")
-  public String logIn(Model model) {
-    model.addAttribute("user", new UserInit());
-    return loginHtml;
+  public ModelAndView logIn() {
+    ModelAndView mav = new ModelAndView(loginHtml);
+    mav.addObject("user", new UserInit());
+    return mav;
   }
 
   @PostMapping("/iniciarSesion")
@@ -56,29 +58,32 @@ public class UserController {
     } catch (Exception e) {
       return loginHtml;
     }
-    return "/home";
+    return "home";
   }
 
   @GetMapping("/registrarse")
-  public String signUp(Model model) {
-    model.addAttribute("newUser", new UserInit());
-    model.addAttribute("allUserTypes", this.userTypes());
-    model.addAttribute("pwdError", "");
-    model.addAttribute("userError", "");
-    return registerHtml;
+  public ModelAndView signUp() {
+    ModelAndView modelAndView = new ModelAndView(registerHtml);
+    modelAndView.addObject("newUser", new UserInit());
+    modelAndView.addObject("allUserTypes", this.userTypes());
+    return modelAndView;
   }
 
   @PostMapping("/registrarse")
-  public ModelAndView signUp(@ModelAttribute("newUser") UserInit user, Model model) {
+  public ModelAndView signUp(@ModelAttribute("newUser") UserInit user) {
+    ModelAndView mav = new ModelAndView();
 
-    if (this.validateNewUser(user, model)) {
-      model.addAttribute("allUserTypes", this.userTypes());
-      return new ModelAndView("registrarse/registrarse", "newUser", user);
+    if (this.validateNewUser(user, mav)) {
+      mav.addObject("allUserTypes", this.userTypes());
+      mav.setViewName(registerHtml);
+      return mav;
     }
 
     switch (user.getUserType()) {
+      case "-- Seleccione Una Opción --":
+        return this.signUp();
       case "Miembro":
-        return new ModelAndView("registrarse/registrarseMiembro", "newUser", user);
+        return this.registerMember(user, mav);
       default:
         return new ModelAndView("registrarse/registrarse");
     }
@@ -87,45 +92,43 @@ public class UserController {
 
   @PostMapping("/registrarseMiembro")
   public ModelAndView getMemberInfo(
-          @ModelAttribute("newMember") StandardUserDTO member,
-          @ModelAttribute("newUser") UserInit user,
-          Model model
+          @ModelAttribute("newMember") StandardUserDTO member
   ) throws IOException {
-    Member m = member.getMember();
-    StandardUser su = user.getUser(m, bCryptPasswordEncoder);
+    StandardUser su = member.getUser(bCryptPasswordEncoder);
     userSvc.save(su);
-    return new ModelAndView(String.format("/member/%d", m.getId()), "member", m);
+    return this.logIn();
   }
 
-  private Boolean validateNewUser(UserInit newUser, Model model) {
+  private Boolean validateNewUser(UserInit newUser, ModelAndView mav) {
 
     Boolean hasError = false;
 
     if (!this.userSvc.findAllByCondition(u -> u.getUsername().equals(newUser.username)).isEmpty()) {
-      model.addAttribute("userError", "Usuario ya ocupado!");
+      mav.addObject("userError", "Usuario ya ocupado!");
       hasError = true;
     }
 
     try {
       new PasswordValidator().validatePassowrd(newUser.password);
     } catch (IOException ioe) {
-      model.addAttribute("pwdError", "Ups! Prueba de nuevo");
+      mav.addObject("pwdError", "Ups! Prueba de nuevo");
       hasError = true;
     } catch (PasswordException pe) {
-      model.addAttribute("pwdError", pe.getMessage());
+      mav.addObject("pwdError", pe.getMessage());
       hasError = true;
     }
 
     return hasError;
   }
 
-  private String registerMember(UserInit userInit, Model model) {
-    MemberForView newMember = new MemberForView();
-    newMember.setUsername(userInit.username);
-    newMember.setPassword(userInit.password);
-    model.addAttribute("newMember", newMember);
-    model.addAttribute("allDocTypes", this.docTypes());
-    return registerMemberHtml;
+  private ModelAndView registerMember(UserInit userInit, ModelAndView mav) {
+    StandardUserDTO userDTO = new StandardUserDTO();
+    userDTO.setUsername(userInit.getUsername());
+    userDTO.setPassword(userInit.getPassword());
+    mav.addObject("newMember", userDTO);
+    mav.addObject("allDocTypes", this.docTypes());
+    mav.setViewName(registerMemberHtml);
+    return mav;
   }
 
   private String registerOrgAdmin(UserInit userInit, Model model) {
@@ -169,25 +172,20 @@ public class UserController {
   @Setter
   @Getter
   public static class StandardUserDTO {
-    public String name;
-    public String surname;
-    public String docType;
-    public String document;
-
-    public Member getMember() {
-      return new Member(name, surname, DocType.valueOf(docType), document);
-    }
-  }
-
-  @Setter
-  @Getter
-  public class MemberForView {
     public String username;
     public String password;
     public String name;
     public String surname;
     public String docType;
     public String docNumber;
+
+    public StandardUser getUser(BCryptPasswordEncoder encoder) throws IOException {
+      return new StandardUser(username, encoder.encode(password), this.getMember());
+    }
+
+    public Member getMember() {
+      return new Member(name, surname, DocType.valueOf(docType), docNumber);
+    }
   }
 
 }

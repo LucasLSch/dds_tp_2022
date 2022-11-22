@@ -51,6 +51,9 @@
         <input class="v118_198" type="text" th:field="*{docNumber}"/>
       </div>
 
+      <input type="hidden" th:field="*{username}" value="${newMember.username}">
+      <input type="hidden" th:field="*{password}" value="${newMember.password}">
+
       <button class="blue-button member-form-button" type="submit">
         <div class="v118_194"></div>
         <span class="v118_195">Finalizar</span>

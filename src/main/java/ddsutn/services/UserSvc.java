@@ -21,7 +21,7 @@ public class UserSvc extends GenericSvcImpl<User, Long> implements UserDetailsSe
   }
 
   @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+  public User loadUserByUsername(String username) throws UsernameNotFoundException {
     User user = userRepo.findByUsername(username);
     if (user == null) {
       throw new UsernameNotFoundException(username);
