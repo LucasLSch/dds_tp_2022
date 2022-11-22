@@ -8,39 +8,57 @@
   <link rel="stylesheet" th:href="@{/menu/menu.css}">
   <link rel="stylesheet" th:href="@{/footer/footer.css}">
   <link rel="stylesheet" th:href="@{/registrarse/registrarseMiembro.css}">
+  <link rel="stylesheet" th:href="@{/utils/buttons.css}">
 </head>
 <body>
 <div class="site-size">
   <div th:replace="fragments/menu :: menu"></div>
   <div th:replace="fragments/footer :: footer"></div>
 
-  <div class="v118_189">
-    <div class="v118_190"></div>
-    <div class="v118_191">
-      <div class="v118_192">
-        <div class="v118_194"></div>
-        <span class="v118_195">Finalizar</span></div>
-      <div class="v118_196"><span class="v118_197">Nro. Documento</span>
-        <div class="v118_198"></div>
-      </div>
-      <div class="v118_202"><span class="v118_203">Tipo Documento</span>
-        <div class="v118_204">
-          <div class="v118_205"></div>
-          <span class="v118_206">Seleccione una opción</span>
-          <div class="v118_207"></div>
-        </div>
-      </div>
-      <div class="v118_199"><span class="v118_200">Apellido/s</span>
-        <div class="v118_201"></div>
-      </div>
-      <div class="v118_220"><span class="v118_221">Nombre/s</span>
-        <div class="v118_222"></div>
-      </div>
-    </div>
+  <div class="site-body">
+
+    <span class="v118_211">Nuevo Miembro</span>
+
     <div class="v118_208">
       <div class="v118_209"></div>
-      <span class="v118_210">Complete los datos siguientes para finalizar la creación de su cuenta</span></div>
-    <span class="v118_211">Nuevo Miembro</span></div>
+      <span class="v118_210">Complete los datos siguientes para finalizar la creación de su cuenta</span>
+    </div>
+
+    <form class="member-form" th:action="@{/registrarseMiembro}" th:object="${newMember}" method="POST">
+
+      <div class="v118_220">
+        <label class="v118_221">Nombre/s</label>
+        <input class="v118_222" type="text" th:field="*{name}"/>
+      </div>
+
+      <div class="v118_199">
+        <label class="v118_200">Apellido/s</label>
+        <input class="v118_201" type="text" th:field="*{surname}"/>
+      </div>
+
+      <div class="form-doc-type">
+        <span class="form-label">Tipo Documento</span>
+        <select class="v118_204" th:field="*{docType}">
+          <option class="v118_205" th:each="dt : ${allDocTypes}"
+                  th:value="${dt}"
+                  th:text="${dt}">
+          </option>
+        </select>
+      </div>
+
+      <div class="v118_196">
+        <label class="v118_197">Nro. Documento</label>
+        <input class="v118_198" type="text" th:field="*{docNumber}"/>
+      </div>
+
+      <button class="blue-button member-form-button" type="submit">
+        <div class="v118_194"></div>
+        <span class="v118_195">Finalizar</span>
+      </button>
+
+    </form>
+
+  </div>
 
 </div>
 </body>

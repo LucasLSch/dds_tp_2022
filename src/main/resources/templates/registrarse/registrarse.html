@@ -43,7 +43,6 @@
       <div class="form-user-type">
         <span class="form-label">Tipo de Cuenta</span>
         <select class="form-dropdown" th:field="*{userType}">
-          <span class="form-label">Tipo de Consumo</span>
           <option class="form-dropdown-text" th:each="ut : ${allUserTypes}"
                   th:value="${ut}"
                   th:text="${ut}">

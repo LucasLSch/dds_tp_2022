@@ -180,13 +180,10 @@ body {
     overflow: hidden;
 }
 
-.v118_189 {
+.site-body {
     width: 100%;
     height: 780px;
-    background: url("../images/v118_189.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+    background: rgba(51, 51, 51, 1);
     opacity: 1;
     position: absolute;
     top: 100px;
@@ -194,17 +191,7 @@ body {
     overflow: hidden;
 }
 
-.v118_190 {
-    width: 100%;
-    height: 780px;
-    background: rgba(51, 51, 51, 1);
-    opacity: 1;
-    position: relative;
-    top: 0px;
-    left: 0px;
-}
-
-.v118_191 {
+.member-form {
     width: 450px;
     height: 326px;
     background: url("../images/v118_191.png");
@@ -218,7 +205,7 @@ body {
     overflow: hidden;
 }
 
-.v118_192 {
+.member-form-button {
     width: 123px;
     height: 50px;
     background: url("../images/v118_192.png");
@@ -302,7 +289,7 @@ body {
     overflow: hidden;
 }
 
-.v118_202 {
+.form-doc-type {
     width: 450px;
     height: 32px;
     background: url("../images/v118_202.png");
@@ -316,7 +303,7 @@ body {
     overflow: hidden;
 }
 
-.v118_203 {
+.form-label {
     width: 170px;
     color: rgba(255, 255, 255, 1);
     position: absolute;

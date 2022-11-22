@@ -5,11 +5,9 @@ import ddsutn.domain.organization.Member;
 import ddsutn.domain.territories.TerritorialSectorAgent;
 import ddsutn.security.passwordvalidator.PasswordException;
 import ddsutn.security.passwordvalidator.PasswordValidator;
-import ddsutn.security.user.Administrator;
 import ddsutn.security.user.StandardUser;
 import ddsutn.security.user.TerritorialAgentUser;
 import ddsutn.security.user.User;
-import ddsutn.services.MemberSvc;
 import ddsutn.services.UserSvc;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,16 +15,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.security.auth.login.LoginException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 @Controller
 public class UserController {
+
+  private final String loginHtml = "iniciarSesion";
+  private final String registerHtml = "registrarse/registrarse";
+  private final String registerMemberHtml = "registrarse/registrarseMiembro";
+  private final String registerOrgHtml = "registrarse/registrarseOrg";
 
   @Autowired
   private UserSvc userSvc;
@@ -37,7 +41,7 @@ public class UserController {
   @GetMapping("/iniciarSesion")
   public String logIn(Model model) {
     model.addAttribute("user", new UserInit());
-    return "iniciarSesion";
+    return loginHtml;
   }
 
   @PostMapping("/iniciarSesion")
@@ -50,7 +54,7 @@ public class UserController {
                       .findFirst()
                       .get();
     } catch (Exception e) {
-      return "/iniciarSesion";
+      return loginHtml;
     }
     return "/home";
   }
@@ -61,13 +65,13 @@ public class UserController {
     model.addAttribute("allUserTypes", this.userTypes());
     model.addAttribute("pwdError", "");
     model.addAttribute("userError", "");
-    return "registrarse/registrarse";
+    return registerHtml;
   }
 
   @PostMapping("/registrarse")
   public ModelAndView signUp(@ModelAttribute("newUser") UserInit user, Model model) {
 
-    if(this.validateNewUser(user, model)) {
+    if (this.validateNewUser(user, model)) {
       model.addAttribute("allUserTypes", this.userTypes());
       return new ModelAndView("registrarse/registrarse", "newUser", user);
     }
@@ -97,7 +101,7 @@ public class UserController {
 
     Boolean hasError = false;
 
-    if(!this.userSvc.findAllByCondition(u -> u.getUsername().equals(newUser.username)).isEmpty()) {
+    if (!this.userSvc.findAllByCondition(u -> u.getUsername().equals(newUser.username)).isEmpty()) {
       model.addAttribute("userError", "Usuario ya ocupado!");
       hasError = true;
     }
@@ -115,23 +119,39 @@ public class UserController {
     return hasError;
   }
 
-  private String saveAgentUser(UserInit user) {
+  private String registerMember(UserInit userInit, Model model) {
+    MemberForView newMember = new MemberForView();
+    newMember.setUsername(userInit.username);
+    newMember.setPassword(userInit.password);
+    model.addAttribute("newMember", newMember);
+    model.addAttribute("allDocTypes", this.docTypes());
+    return registerMemberHtml;
+  }
+
+  private String registerOrgAdmin(UserInit userInit, Model model) {
+    //TODO
+    return registerHtml;
+  }
+
+  private String registerAgentUser(UserInit user) {
     try {
       TerritorialAgentUser newUser = new TerritorialAgentUser(
-          user.username,
-          user.password,
-          new TerritorialSectorAgent());
-
+              user.username,
+              user.password,
+              new TerritorialSectorAgent());
       this.userSvc.save(newUser);
-      return "iniciarSesion";
-
+      return loginHtml;
     } catch (IOException e) {
-      return "registrarse/registrarse";
+      return registerHtml;
     }
   }
 
+  private List<String> docTypes() {
+    return Arrays.asList("-- Seleccione Una Opción --", "DNI", "PASAPORTE", "CUIL/CUIT");
+  }
+
   private List<String> userTypes() {
-    return Arrays.asList("-- Seleccione Una Opción --", "Miembro", "Organización", "Agente Territorial");
+    return Arrays.asList("-- Seleccione Una Opción --", "Miembro", "Administrador de Organización", "Agente Territorial");
   }
 
   @Setter
@@ -157,6 +177,17 @@ public class UserController {
     public Member getMember() {
       return new Member(name, surname, DocType.valueOf(docType), document);
     }
+  }
+
+  @Setter
+  @Getter
+  public class MemberForView {
+    public String username;
+    public String password;
+    public String name;
+    public String surname;
+    public String docType;
+    public String docNumber;
   }
 
 }
