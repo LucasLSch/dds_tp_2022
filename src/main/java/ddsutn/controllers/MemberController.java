@@ -15,11 +15,6 @@ public class MemberController {
   @Autowired
   private MemberSvc memberSvc;
 
-  @GetMapping("")
-  public String showAllMembers(Model model) {
-    return "simlar que te muestro los miembros xdxd";
-  }
-
   @GetMapping("/{id}")
   public String showOrganizatinoById(@PathVariable Long id, Model model) {
     Member read = memberSvc.findById(id);

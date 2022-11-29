@@ -1,14 +1,16 @@
 package ddsutn.controllers;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import ddsutn.domain.organization.DocType;
 import ddsutn.domain.organization.Member;
+import ddsutn.domain.organization.Organization;
+import ddsutn.domain.organization.Sector;
 import ddsutn.domain.territories.TerritorialSectorAgent;
 import ddsutn.security.passwordvalidator.PasswordException;
 import ddsutn.security.passwordvalidator.PasswordValidator;
 import ddsutn.security.user.StandardUser;
 import ddsutn.security.user.TerritorialAgentUser;
 import ddsutn.security.user.User;
+import ddsutn.services.OrganizationSvc;
 import ddsutn.services.UserSvc;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
@@ -32,10 +35,13 @@ public class UserController {
   private final String loginHtml = "iniciarSesion";
   private final String registerHtml = "registrarse/registrarse";
   private final String registerMemberHtml = "registrarse/registrarseMiembro";
-  private final String registerOrgHtml = "registrarse/registrarseOrg";
+  private final String registerOrgAdminHtml = "registrarse/registrarseOrgAdmin";
 
   @Autowired
   private UserSvc userSvc;
+
+  @Autowired
+  private OrganizationSvc organizationSvc;
 
   @Autowired
   private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -145,12 +151,19 @@ public class UserController {
     mav.setViewName(registerMemberHtml);
     return mav;
   }
-
-  private String registerOrgAdmin(UserInit userInit, Model model) {
-    //TODO
-    return registerHtml;
+/*
+  private ModelAndView registerOrgAdmin(UserInit userInit, ModelAndView mav) {
+    OrgAdminDTO userDTO = new OrgAdminDTO();
+    String username = userInit.getUsername();
+    String password = bCryptPasswordEncoder.encode(userInit.getPassword());
+    String htmlParams = "?" + "username=" + username + "&" + "password=" + password;
+    mav.addObject("path", "registrarseMiembro" + htmlParams);
+    mav.addObject("newOrgAdmin", userDTO);
+    mav.addObject("allOrganizations", this.organizationsList());
+    mav.setViewName(registerOrgAdminHtml);
+    return mav;
   }
-
+*/
   private String registerAgentUser(UserInit user) {
     try {
       TerritorialAgentUser newUser = new TerritorialAgentUser(
@@ -171,7 +184,25 @@ public class UserController {
   private List<String> userTypes() {
     return Arrays.asList("-- Seleccione Una Opción --", "Miembro", "Administrador de Organización", "Agente Territorial");
   }
+/*
+  private OrganizationForView transformOrgForView(Organization org) {
+    //TODO: extraer logica repetida
+    OrganizationForView ofv = new OrganizationForView();
+    ofv.setId(org.getId());
+    ofv.setSocialObj(org.getSocialObjective());
+    ofv.setLocation(org.getLocation().getStreet() + " " + org.getLocation().getHeight());
+    ofv.setMembersAmount(org.getMembers().size());
+    ofv.setSectors(org.getSectors().stream().map(Sector::getName).collect(Collectors.toList()));
+//    ofv.setPhoneNumber(org.getContacts().get(0).getPhoneNumber());
+//    ofv.setPhoneNumber(org.getContacts().get(0).getEmail());
+    return ofv;
+  }
 
+  private List<OrganizationForView> organizationsList() {
+    List<Organization> allSavedOrgs = this.organizationSvc.findAll();
+    return allSavedOrgs.stream().map(this::transformOrgForView).collect(Collectors.toList());
+  }
+*/
   @Setter
   @Getter
   public static class UserInit {
@@ -198,5 +229,24 @@ public class UserController {
       return new Member(name, surname, DocType.valueOf(docType), docNumber);
     }
   }
+/*
+  @Setter
+  @Getter
+  public static class OrgAdminDTO {
+    public String username;
+    public String password;
+    public String organizationId;
+  }
 
+  @Setter
+  public class OrganizationForView {
+    public Long id;
+    public String socialObj;
+    public String location;
+    public Integer membersAmount;
+    public List<String> sectors;
+    public String phoneNumber;
+    public String email;
+  }
+*/
 }
