@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
@@ -92,9 +93,15 @@ public class UserController {
 
   @PostMapping("/registrarseMiembro")
   public ModelAndView getMemberInfo(
-          @ModelAttribute("newMember") StandardUserDTO member
+          @ModelAttribute("newMember") StandardUserDTO member,
+          @RequestParam String username,
+          @RequestParam String password
   ) throws IOException {
-    StandardUser su = member.getUser(bCryptPasswordEncoder);
+    username = username.substring(0, username.length() - 1);
+    password = password.substring(0, password.length() - 1);
+    member.setUsername(username);
+    member.setPassword(password);
+    StandardUser su = member.getUser();
     userSvc.save(su);
     return this.logIn();
   }
@@ -123,8 +130,10 @@ public class UserController {
 
   private ModelAndView registerMember(UserInit userInit, ModelAndView mav) {
     StandardUserDTO userDTO = new StandardUserDTO();
-    userDTO.setUsername(userInit.getUsername());
-    userDTO.setPassword(userInit.getPassword());
+    String username = userInit.getUsername();
+    String password = bCryptPasswordEncoder.encode(userInit.getPassword());
+    String htmlParams = "?" + "username=" + username + "&" + "password=" + password;
+    mav.addObject("path", "registrarseMiembro" + htmlParams);
     mav.addObject("newMember", userDTO);
     mav.addObject("allDocTypes", this.docTypes());
     mav.setViewName(registerMemberHtml);
@@ -163,10 +172,6 @@ public class UserController {
     public String username;
     public String password;
     public String userType;
-
-    public StandardUser getUser(Member member, BCryptPasswordEncoder encoder) throws IOException {
-      return new StandardUser(username, encoder.encode(password), member);
-    }
   }
 
   @Setter
@@ -179,8 +184,8 @@ public class UserController {
     public String docType;
     public String docNumber;
 
-    public StandardUser getUser(BCryptPasswordEncoder encoder) throws IOException {
-      return new StandardUser(username, encoder.encode(password), this.getMember());
+    public StandardUser getUser() throws IOException {
+      return new StandardUser(username, password, this.getMember());
     }
 
     public Member getMember() {

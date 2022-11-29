@@ -24,7 +24,7 @@
       <span class="v118_210">Complete los datos siguientes para finalizar la creación de su cuenta</span>
     </div>
 
-    <form class="member-form" th:action="@{/registrarseMiembro}" th:object="${newMember}" method="POST">
+    <form class="member-form" th:action="${path}" th:object="${newMember}" method="POST">
 
       <div class="v118_220">
         <label class="v118_221">Nombre/s</label>
@@ -50,9 +50,6 @@
         <label class="v118_197">Nro. Documento</label>
         <input class="v118_198" type="text" th:field="*{docNumber}"/>
       </div>
-
-      <input type="hidden" th:field="*{username}" value="${newMember.username}">
-      <input type="hidden" th:field="*{password}" value="${newMember.password}">
 
       <button class="blue-button member-form-button" type="submit">
         <div class="v118_194"></div>
