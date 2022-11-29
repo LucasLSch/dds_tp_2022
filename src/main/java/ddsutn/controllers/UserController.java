@@ -48,7 +48,8 @@ public class UserController {
   }
 
   @PostMapping("/iniciarSesion")
-  public String logIn(@ModelAttribute("user") UserInit user, Model model) {
+  public ModelAndView logIn(@ModelAttribute("user") UserInit user) {
+    ModelAndView mav = new ModelAndView();
     try {
       User successfulUser =
               userSvc.findAllByCondition((someUser) -> someUser.successfulLogin(user.getUsername(),
@@ -57,9 +58,11 @@ public class UserController {
                       .findFirst()
                       .get();
     } catch (Exception e) {
-      return loginHtml;
+      mav.setViewName(loginHtml);
+      return mav;
     }
-    return "home";
+    mav.setViewName("redirect:/");
+    return mav;
   }
 
   @GetMapping("/registrarse")
@@ -97,8 +100,6 @@ public class UserController {
           @RequestParam String username,
           @RequestParam String password
   ) throws IOException {
-    username = username.substring(0, username.length() - 1);
-    password = password.substring(0, password.length() - 1);
     member.setUsername(username);
     member.setPassword(password);
     StandardUser su = member.getUser();
