@@ -38,8 +38,8 @@
 
       <div class="form-doc-type">
         <span class="form-label">Tipo Documento</span>
-        <select class="v118_204" th:field="*{docType}">
-          <option class="v118_205" th:each="dt : ${allDocTypes}"
+        <select class="form-dropdown" th:field="*{docType}">
+          <option class="form-dropdown-text" th:each="dt : ${allDocTypes}"
                   th:value="${dt}"
                   th:text="${dt}">
           </option>

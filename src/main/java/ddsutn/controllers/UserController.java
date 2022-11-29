@@ -115,6 +115,11 @@ public class UserController {
       hasError = true;
     }
 
+    if (newUser.username.isEmpty()) {
+      mav.addObject("userError", "Ingrese un usuario!");
+      hasError = true;
+    }
+
     try {
       new PasswordValidator().validatePassowrd(newUser.password);
     } catch (IOException ioe) {
