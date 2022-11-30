@@ -49,15 +49,15 @@ public abstract class Transport {
 
   public ConsumptionType getConsumptionType() {
     Set<Unit> unitSet = new HashSet<>(Arrays.asList(
-            new Unit(BaseUnit.LITER, 1, Proportionality.DIRECT),
-            new Unit(BaseUnit.METER, 3, Proportionality.INVERSE)
+        new Unit(BaseUnit.LITER, 1, Proportionality.DIRECT),
+        new Unit(BaseUnit.METER, 3, Proportionality.INVERSE)
     ));
     return new ConsumptionType(
-            "Transporte",
-            unitSet,
-            "Transporte",
-            "Personal",
-            new EmissionFactor(1d, CarbonFootprint.getDefaultUnit())
+        "Transporte",
+        unitSet,
+        "Transporte",
+        "Personal",
+        new EmissionFactor(1d, CarbonFootprint.getDefaultUnit())
     );
   }
 

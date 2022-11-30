@@ -39,10 +39,10 @@ public class ActivityData {
   private Set<CarbonFootprint> carbonFootprints;
 
   public ActivityData(
-          ConsumptionType consumptionType,
-          Double consumptionValue,
-          PeriodicityFormat periodicityFormat,
-          String periodicity
+      ConsumptionType consumptionType,
+      Double consumptionValue,
+      PeriodicityFormat periodicityFormat,
+      String periodicity
   ) {
     this.consumptionType = consumptionType;
     this.consumptionValue = consumptionValue;

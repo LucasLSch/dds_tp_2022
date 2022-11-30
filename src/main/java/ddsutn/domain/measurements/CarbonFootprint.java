@@ -69,8 +69,8 @@ public class CarbonFootprint {
   public CarbonFootprint getOn(Set<Unit> objectiveUnits) {
     if (UnitExpression.isConvertibleTo(this.units, objectiveUnits)) {
       this.multiplyValue(Math.pow(10f,
-                      UnitExpression.getExpForConvertionTo(this.units, objectiveUnits)
-              )
+              UnitExpression.getExpForConvertionTo(this.units, objectiveUnits)
+          )
       );
       this.units = objectiveUnits;
     }

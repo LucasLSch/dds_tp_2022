@@ -96,7 +96,7 @@ public class Journey {
 
   public Boolean involvesOrganization(Organization someOrganization) {
     return this.startingLocation.equals(someOrganization.getLocation())
-            || this.endingLocation.equals(someOrganization.getLocation());
+        || this.endingLocation.equals(someOrganization.getLocation());
   }
 
   public Boolean isShareable() {
@@ -131,24 +131,24 @@ public class Journey {
 
   public Distance getJourneyDistance() {
     int finalDistanceValue = this.legList.stream()
-            .mapToInt(leg -> {
-              try {
-                return leg.getLegDistance().getValue();
-              } catch (IOException e) {
-                throw new RuntimeException(e);
-              }
-            })
-            .sum();
+        .mapToInt(leg -> {
+          try {
+            return leg.getLegDistance().getValue();
+          } catch (IOException e) {
+            throw new RuntimeException(e);
+          }
+        })
+        .sum();
 
     return new Distance(finalDistanceValue, new Unit(BaseUnit.METER, 3, Proportionality.DIRECT));
   }
 
   public CarbonFootprint getCarbonFootprint(Set<Unit> units) {
     CarbonFootprint journeyCF = CarbonFootprint
-            .sum(units, this.getDataActivities()
-                    .stream()
-                    .map(da -> da.getCarbonFootprint(units))
-                    .toArray(CarbonFootprint[]::new));
+        .sum(units, this.getDataActivities()
+            .stream()
+            .map(da -> da.getCarbonFootprint(units))
+            .toArray(CarbonFootprint[]::new));
 
     journeyCF.multiplyValue(1d / this.membersAmount());
     return journeyCF;
@@ -160,8 +160,8 @@ public class Journey {
 
   public List<ActivityData> getDataActivities() {
     return this.legList.stream()
-            .map(Leg::createDataActivities)
-            .collect(Collectors.toList());
+        .map(Leg::createDataActivities)
+        .collect(Collectors.toList());
   }
 
 }

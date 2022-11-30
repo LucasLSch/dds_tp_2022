@@ -53,14 +53,14 @@ public class Line {
 
   public Distance getDistanceBetween(Stop startStop, Stop endStop) {
     List<Stop> stopsBetween = this
-            .stopList
-            .subList(this.stopList.indexOf(startStop), this.stopList.indexOf(endStop));
+        .stopList
+        .subList(this.stopList.indexOf(startStop), this.stopList.indexOf(endStop));
 
     Integer finalValue = stopsBetween
-            .stream()
-            .map(Stop::getDistanceToNextStop)
-            .mapToInt(Distance::getValue)
-            .sum();
+        .stream()
+        .map(Stop::getDistanceToNextStop)
+        .mapToInt(Distance::getValue)
+        .sum();
 
     return new Distance(finalValue, new Unit(BaseUnit.METER, 3, Proportionality.DIRECT));
   }

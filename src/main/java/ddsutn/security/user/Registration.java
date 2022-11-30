@@ -52,10 +52,10 @@ public class Registration {
   }
 
   public Registration setMember(
-          @NonNull String name,
-          @NonNull String surname,
-          @NonNull DocType docType,
-          @NonNull String idNumber
+      @NonNull String name,
+      @NonNull String surname,
+      @NonNull DocType docType,
+      @NonNull String idNumber
   ) {
     setMember(new Member(name, surname, docType, idNumber));
     return this;

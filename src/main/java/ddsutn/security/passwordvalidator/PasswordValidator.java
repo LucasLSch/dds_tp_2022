@@ -6,7 +6,7 @@ import java.util.List;
 
 public class PasswordValidator {
 
-  private List<PasswordCriteria> criteriaList;
+  private final List<PasswordCriteria> criteriaList;
 
   public PasswordValidator() throws IOException {
     this.criteriaList = new ArrayList<>();

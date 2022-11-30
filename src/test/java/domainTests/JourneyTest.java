@@ -22,13 +22,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class JourneyTest extends TestDataFill {
   private Journey dummyJourney;
-  private List<Leg> dummyLegs = new ArrayList<>();
+  private final List<Leg> dummyLegs = new ArrayList<>();
   private Leg dummyLeg;
   private Leg anotherDummyLeg;
   private Location dummyStartLocation;
@@ -70,9 +69,9 @@ public class JourneyTest extends TestDataFill {
   @Test
   public void journeysCanDeleteMembers() {
     Member dummyMember = new Member(null,
-            null,
-            null,
-            null
+        null,
+        null,
+        null
     );
     dummyMember.addJourney(dummyJourney);
     dummyJourney.addMember(dummyMember);
@@ -83,33 +82,33 @@ public class JourneyTest extends TestDataFill {
   @Test
   public void journeysCanCalculateItsCf() throws IOException {
     when(mockedEcoFriendlyTransport.getConsumption(
-            dummyStartLocation,
-            dummyEndLocation)
+        dummyStartLocation,
+        dummyEndLocation)
     ).thenReturn(0d);
     when(mockedEcoFriendlyTransport.getConsumptionType()
     ).thenReturn(new ConsumptionType(
-            "",
-            CarbonFootprint.getDefaultUnit(),
-            "",
-            "",
-            new EmissionFactor(0d, CarbonFootprint.getDefaultUnit())));
+        "",
+        CarbonFootprint.getDefaultUnit(),
+        "",
+        "",
+        new EmissionFactor(0d, CarbonFootprint.getDefaultUnit())));
     when(mockedHiredServiceTransport.getConsumption(
-            anotherDummyStartLocation,
-            anotherDummyEndLocation)
+        anotherDummyStartLocation,
+        anotherDummyEndLocation)
     ).thenReturn(80d);
     when(mockedHiredServiceTransport.getConsumptionType()
     ).thenReturn(new ConsumptionType(
-            "",
-            CarbonFootprint.getDefaultUnit(),
-            "",
-            "",
-            new EmissionFactor(20d, CarbonFootprint.getDefaultUnit())));
+        "",
+        CarbonFootprint.getDefaultUnit(),
+        "",
+        "",
+        new EmissionFactor(20d, CarbonFootprint.getDefaultUnit())));
 
     Member dummyMember = new Member(
-            null,
-            null,
-            null,
-            null
+        null,
+        null,
+        null,
+        null
     );
     dummyMember.addJourney(dummyJourney);
     dummyJourney.addMember(dummyMember);

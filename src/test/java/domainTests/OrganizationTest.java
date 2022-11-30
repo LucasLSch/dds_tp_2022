@@ -86,16 +86,16 @@ public class OrganizationTest extends TestDataFill {
 
     EmissionFactor dummyEmissionFactor = new EmissionFactor(4.5, emUnits);
     ConsumptionType dummyConsumptionType = new ConsumptionType("",
-            ctUnits,
-            "",
-            "",
-            dummyEmissionFactor
+        ctUnits,
+        "",
+        "",
+        dummyEmissionFactor
     );
 
     ActivityData activityData = new ActivityData(dummyConsumptionType,
-            7.3,
-            PeriodicityFormat.AAAA,
-            "2022"
+        7.3,
+        PeriodicityFormat.AAAA,
+        "2022"
     );
 
     Journey dummyJourney = mock(Journey.class);
@@ -187,13 +187,13 @@ public class OrganizationTest extends TestDataFill {
     anotherDummyMember.applyToSector(dummySector);
 
     dummySector.getWorkApplications()
-            .stream()
-            .filter(wa -> wa.getMember().equals(dummyMember))
-            .forEach(WorkApplication::accept);
+        .stream()
+        .filter(wa -> wa.getMember().equals(dummyMember))
+        .forEach(WorkApplication::accept);
     dummySector.getWorkApplications()
-            .stream()
-            .filter(wa -> wa.getMember().equals(anotherDummyMember))
-            .forEach(WorkApplication::reject);
+        .stream()
+        .filter(wa -> wa.getMember().equals(anotherDummyMember))
+        .forEach(WorkApplication::reject);
 
     assertTrue(dummyMember.worksIn(dummySector));
     assertTrue(dummyMember.worksIn(dummyOrganization));
@@ -273,7 +273,7 @@ public class OrganizationTest extends TestDataFill {
   public void workApplicationCanCheckItsState() {
     dummyMember.applyToSector(dummySector);
     assertTrue(dummySector.getWorkApplications()
-            .stream()
-            .allMatch(wa -> wa.stateIs(WorkApplicationState.PENDING)));
+        .stream()
+        .allMatch(wa -> wa.stateIs(WorkApplicationState.PENDING)));
   }
 }

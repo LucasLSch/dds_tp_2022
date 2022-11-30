@@ -33,9 +33,9 @@ public class Member {
 
   @ManyToMany
   @JoinTable(
-          name = "member_journey",
-          joinColumns = @JoinColumn(name = "member_id"),
-          inverseJoinColumns = @JoinColumn(name = "journey_id")
+      name = "member_journey",
+      joinColumns = @JoinColumn(name = "member_id"),
+      inverseJoinColumns = @JoinColumn(name = "journey_id")
   )
   private List<Journey> journeys;
 
@@ -87,9 +87,9 @@ public class Member {
 
   public Set<Organization> getOrganizations() {
     return this.sectors
-            .stream()
-            .map(Sector::getOrganization)
-            .collect(Collectors.toSet());
+        .stream()
+        .map(Sector::getOrganization)
+        .collect(Collectors.toSet());
   }
 
 
@@ -137,10 +137,10 @@ public class Member {
 
   public CarbonFootprint getPersonalCF(Set<Unit> units) {
     CarbonFootprint finalCF = CarbonFootprint.sum(units, this.journeys
-            .stream()
-            .map(journey -> journey
-                    .getCarbonFootprint(units))
-            .toArray(CarbonFootprint[]::new));
+        .stream()
+        .map(journey -> journey
+            .getCarbonFootprint(units))
+        .toArray(CarbonFootprint[]::new));
 
     this.registerCarbonFootprint(finalCF);
     return finalCF;

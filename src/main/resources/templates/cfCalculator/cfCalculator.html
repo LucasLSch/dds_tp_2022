@@ -9,11 +9,11 @@
   <link href="https://fonts.googleapis.com/css?family=SF+Pro Display&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-  <link rel="stylesheet" th:href="@{/utils/normalize.css}">
-  <link rel="stylesheet" th:href="@{/menu/menu.css}">
-  <link rel="stylesheet" th:href="@{/footer/footer.css}">
-  <link rel="stylesheet" th:href="@{/calculadoraHC/calculadoraHC.css}">
-  <link rel="stylesheet" th:href="@{/utils/buttons.css}">
+  <link rel="stylesheet" th:href="@{/css/utils/normalize.css}">
+  <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
+  <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
+  <link rel="stylesheet" th:href="@{/css/cfCalculator/cfCalculator.css}">
+  <link rel="stylesheet" th:href="@{/css/utils/buttons.css}">
 </head>
 
 <body>
@@ -27,19 +27,19 @@
   <span class="site-title">Calculadora de Huella de Carbono</span>
 
   <div class="description">
-    <img class="description-icon" th:src="@{/calculadoraHC/img/description_icon.jpg}" alt="PencilIcon">
+    <img alt="PencilIcon" class="description-icon" th:src="@{CfCalculator}">
     <span class="description-text">Complete los datos siguientes con la actividad que desea evaluar</span>
   </div>
 
 
-  <form class="calculator-form" th:action="@{/calculadoraHC}" method="get">
+  <form class="calculator-form" method="get" th:action="@{/calculadoraHC}">
 
     <div class="form-consumption-type">
       <span class="form-label">Tipo de Consumo</span>
       <select class="form-dropdown" th:name="ct">
         <option class="form-dropdown-text" th:each="consumptionType : ${allConsumptionTypes}"
-                th:value="${consumptionType}"
-                th:text="${consumptionType}">
+                th:text="${consumptionType}"
+                th:value="${consumptionType}">
           Tipo de Consumo
         </option>
       </select>
@@ -47,12 +47,12 @@
 
     <div class="form-periodicity">
       <span class="form-label">Periodo</span>
-      <input placeholder="MMAAA o AAAA" class="v34_27378" type="text" th:name="p"/>
+      <input class="v34_27378" placeholder="MMAAA o AAAA" th:name="p" type="text"/>
     </div>
 
     <div class="form-consumption-type-value">
       <span class="form-label">Valor del Consumo</span>
-      <input class="v34_27361" type="double" th:name="cv"/>
+      <input class="v34_27361" th:name="cv" type="double"/>
     </div>
 
     <div class="form-send">

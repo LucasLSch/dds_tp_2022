@@ -22,7 +22,7 @@ public class LineStopTest extends TestDataFill {
   private Stop secondDummyStop;
   private Stop thirdDummyStop;
   private Stop forthDummyStop;
-  private List<Stop> dummyStops = new ArrayList<>();
+  private final List<Stop> dummyStops = new ArrayList<>();
   private Location coolestDummyLocation;
   private Location dummyLocation;
   private Location anotherDummyLocation;

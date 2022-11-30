@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class CfGuideNotificationJob implements Job {
 
-  private String guideLink = "ToBeDefined";
+  private final String guideLink = "ToBeDefined";
 
   @Autowired
   private OrganizationRepo organizationRepo;
@@ -15,17 +15,17 @@ public class CfGuideNotificationJob implements Job {
   @Override
   public void execute(JobExecutionContext jobExecutionContext) {
     organizationRepo
-            .findAll()
-            .forEach(organization -> {
-              organization.notifyAllMembers(this.getFinalMessage());
-              organization.notify(this.getFinalMessage());
-            });
+        .findAll()
+        .forEach(organization -> {
+          organization.notifyAllMembers(this.getFinalMessage());
+          organization.notify(this.getFinalMessage());
+        });
   }
 
   private String getFinalMessage() {
     return "Click the link to access the carbon "
-            + "footprint recommendations guide!: "
-            + this.guideLink;
+        + "footprint recommendations guide!: "
+        + this.guideLink;
   }
 
 }

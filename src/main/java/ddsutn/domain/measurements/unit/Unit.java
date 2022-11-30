@@ -29,9 +29,9 @@ public class Unit {
 
 
   public Unit(
-          BaseUnit baseUnit,
-          Integer exponent,
-          Proportionality proportionality
+      BaseUnit baseUnit,
+      Integer exponent,
+      Proportionality proportionality
   ) {
     this.baseUnit = baseUnit;
     this.exponent = exponent;

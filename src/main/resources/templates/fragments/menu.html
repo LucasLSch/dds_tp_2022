@@ -9,8 +9,8 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Patrick+Hand SC&display=swap" rel="stylesheet">
-  <link rel="stylesheet" th:href="@{/utils/normalize.css}">
-  <link rel="stylesheet" th:href="@{/menu/menu.css}">
+  <link rel="stylesheet" th:href="@{/css/utils/normalize.css}">
+  <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
 </head>
 
 <body>
@@ -32,8 +32,8 @@
           <div class=ei110_626_2_150>
             <span class="ei110_626_2_150_2_137">􀊫</span>
           </div>
-          <form th:action="@{/organizaciones/search}" method="get">
-            <input type="nombre" class="ei110_626_2_151" th:name="nombre" th:placeholder="Search"/>
+          <form method="get" th:action="@{/organizaciones/search}">
+            <input class="ei110_626_2_151" th:name="nombre" th:placeholder="Search" type="nombre"/>
             <div class="e161_58110">
               <button type="submit">Enviar</button>
             </div>
@@ -51,7 +51,7 @@
       <div class="e110_630"></div>
 
       <div class="web-name">
-        <img class="web-logo" th:src="@{/menu/img/webLogo.png}" alt="Logo">
+        <img alt="Logo" class="web-logo" th:src="@{/css/menu/img/webLogo.png}">
         <span class="web-title">Mi Impacto Ambiental</span>
       </div>
 

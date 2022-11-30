@@ -32,6 +32,6 @@ public class Application implements WebApplicationInitializer {
     sc.addListener(new ContextLoaderListener(root));
 
     sc.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain"))
-            .addMappingForUrlPatterns(null, false, "/*");
+        .addMappingForUrlPatterns(null, false, "/*");
   }
 }

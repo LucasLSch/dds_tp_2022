@@ -1,7 +1,6 @@
 package ddsutn.dtos.member;
 
 import ddsutn.domain.journey.Leg;
-import ddsutn.domain.location.Location;
 import lombok.Getter;
 import lombok.Setter;
 

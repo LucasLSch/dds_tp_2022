@@ -1,5 +1,4 @@
-.1
-_57 {
+.1_57 {
     overflow: hidden;
 }
 
@@ -62,7 +61,7 @@ _57 {
     position: absolute;
     left: 30px;
     top: 0px;
-    background-image: url(../../static/footer/img/twitter_logo.png);
+    background-image: url(../footer/img/twitter_logo.png);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -94,7 +93,7 @@ _57 {
     position: absolute;
     left: 30px;
     top: 0px;
-    background-image: url(../../static/footer/img/facebook_logo.png);
+    background-image: url(../footer/img/facebook_logo.png);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -126,7 +125,7 @@ _57 {
     position: absolute;
     left: 30px;
     top: 0px;
-    background-image: url(../../static/footer/img/gmail_logo.png);
+    background-image: url(../footer/img/gmail_logo.png);
     background-repeat: no-repeat;
     background-size: cover;
 }

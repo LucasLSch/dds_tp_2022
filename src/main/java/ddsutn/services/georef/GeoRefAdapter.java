@@ -21,13 +21,13 @@ public class GeoRefAdapter {
 
 
   // --- Singleton --- //
-  private Retrofit retrofit;
+  private final Retrofit retrofit;
 
   private GeoRefAdapter() {
     this.retrofit = new Retrofit.Builder()
-            .baseUrl(urlAPI)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+        .baseUrl(urlAPI)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build();
   }
 
   // ----------------- //
@@ -42,12 +42,12 @@ public class GeoRefAdapter {
   public Distance getDistance(Location origin, Location destination) throws IOException {
     this.api = retrofit.create(GeoRefService.class);
     Call<DistanceResponse> distanceResponseCall = this.api.distance(
-            origin.getDistrict().getId(),
-            origin.getStreet(),
-            origin.getHeight(),
-            destination.getDistrict().getId(),
-            destination.getStreet(),
-            destination.getHeight());
+        origin.getDistrict().getId(),
+        origin.getStreet(),
+        origin.getHeight(),
+        destination.getDistrict().getId(),
+        destination.getStreet(),
+        destination.getHeight());
     Response<DistanceResponse> response = distanceResponseCall.execute();
 
     Unit unit = this.getUnitOfString(response.body().unit);

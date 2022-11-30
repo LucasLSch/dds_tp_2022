@@ -33,12 +33,12 @@ public class ReporterSvc {
   public String generateTerritorialSectorCfReport(Set<Unit> units) {
     JSONArray report = new JSONArray();
     List<TerritorialSector> territorialSectors =
-            (List<TerritorialSector>) territorialSectorRepo.findAll();
+        (List<TerritorialSector>) territorialSectorRepo.findAll();
     territorialSectors.forEach(ts -> {
       CarbonFootprint cf = ts.getCarbonFootprint(units);
       report.put(new JSONObject()
-              .put("id", ts.getId())
-              .put("CarbonFootprint", cf.getValue()));
+          .put("id", ts.getId())
+          .put("CarbonFootprint", cf.getValue()));
     });
     return new JSONObject().toString();
   }
@@ -50,13 +50,13 @@ public class ReporterSvc {
     List<Organization> organizations = (List<Organization>) organizationRepo.findAll();
     orgTypes.forEach(ot -> {
       Double value = organizations
-              .stream()
-              .filter(org -> org.getType().equals(ot))
-              .mapToDouble(org -> org.getTotalCarbonFootprint(units).getValue())
-              .sum();
+          .stream()
+          .filter(org -> org.getType().equals(ot))
+          .mapToDouble(org -> org.getTotalCarbonFootprint(units).getValue())
+          .sum();
       report.put(new JSONObject()
-              .put("OrgType", ot.name())
-              .put("CarbonFootprint", value));
+          .put("OrgType", ot.name())
+          .put("CarbonFootprint", value));
     });
     return report.toString();
   }

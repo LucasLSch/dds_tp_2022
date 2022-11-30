@@ -4,11 +4,11 @@
   <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" th:href="@{/utils/normalize.css}">
-  <link rel="stylesheet" th:href="@{/menu/menu.css}">
-  <link rel="stylesheet" th:href="@{/footer/footer.css}">
-  <link rel="stylesheet" th:href="@{/registrarse/registrarseMiembro.css}">
-  <link rel="stylesheet" th:href="@{/utils/buttons.css}">
+  <link rel="stylesheet" th:href="@{/css/utils/normalize.css}">
+  <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
+  <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
+  <link rel="stylesheet" th:href="@{/css/register/registerMember.css}">
+  <link rel="stylesheet" th:href="@{/css/utils/buttons.css}">
 </head>
 <body>
 <div class="site-size">
@@ -24,31 +24,31 @@
       <span class="v118_210">Complete los datos siguientes para finalizar la creación de su cuenta</span>
     </div>
 
-    <form class="member-form" th:action="${path}" th:object="${newMember}" method="POST">
+    <form class="member-form" method="POST" th:action="${path}" th:object="${newMember}">
 
       <div class="v118_220">
         <label class="v118_221">Nombre/s</label>
-        <input class="v118_222" type="text" th:field="*{name}"/>
+        <input class="v118_222" th:field="*{name}" type="text"/>
       </div>
 
       <div class="v118_199">
         <label class="v118_200">Apellido/s</label>
-        <input class="v118_201" type="text" th:field="*{surname}"/>
+        <input class="v118_201" th:field="*{surname}" type="text"/>
       </div>
 
       <div class="form-doc-type">
         <span class="form-label">Tipo Documento</span>
         <select class="form-dropdown" th:field="*{docType}">
           <option class="form-dropdown-text" th:each="dt : ${allDocTypes}"
-                  th:value="${dt}"
-                  th:text="${dt}">
+                  th:text="${dt}"
+                  th:value="${dt}">
           </option>
         </select>
       </div>
 
       <div class="v118_196">
         <label class="v118_197">Nro. Documento</label>
-        <input class="v118_198" type="text" th:field="*{docNumber}"/>
+        <input class="v118_198" th:field="*{docNumber}" type="text"/>
       </div>
 
       <button class="blue-button member-form-button" type="submit">

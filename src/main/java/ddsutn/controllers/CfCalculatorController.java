@@ -1,15 +1,12 @@
 package ddsutn.controllers;
 
-import ddsutn.domain.measurements.ActivityData;
 import ddsutn.domain.measurements.ConsumptionType;
 import ddsutn.services.ConsumptionTypeSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +14,9 @@ import java.util.stream.Collectors;
 
 @Controller
 public class CfCalculatorController {
+
+  private final String calculatorHtml = "/cfCalculator/cfCalculator";
+
 
   @Autowired
   private ConsumptionTypeSvc consumptionTypeSvc;
@@ -26,11 +26,12 @@ public class CfCalculatorController {
   }
 
   @GetMapping("/calculadoraHC")
-  public String useCalculator(
-          @RequestParam(value = "ct", required = false) String ct,
-          @RequestParam(value = "p", required = false) String p,
-          @RequestParam(value = "cv", required = false) Double cv,
-          Model model) {
+  public ModelAndView useCalculator(
+      @RequestParam(value = "ct", required = false) String ct,
+      @RequestParam(value = "p", required = false) String p,
+      @RequestParam(value = "cv", required = false) Double cv) {
+
+    ModelAndView mav = new ModelAndView(calculatorHtml);
 
     Double result = 0d;
 
@@ -38,28 +39,22 @@ public class CfCalculatorController {
       //TODO ver de manejar mejor los params no enviados con Optional o algo
 
       ConsumptionType ctObj = this.consumptionTypeSvc
-              .findAllByCondition(consumptionType -> consumptionType.print().equals(ct))
-              .stream()
-              .findFirst()
-              .orElse(null);
+          .findAllByCondition(consumptionType -> consumptionType.print().equals(ct))
+          .stream()
+          .findFirst()
+          .orElse(null);
 
       if (ctObj == null) { //TODO same arriba
-        return "calculadoraHC";
+        return mav;
       }
 
       result = ctObj.calculateFor(cv);
     }
 
-    model.addAttribute("consumptionType", new ConsumptionType());
-    model.addAttribute("result", result);
-    model.addAttribute("allConsumptionTypes", this.consumptionTypeList());
-    return "calculadoraHC";
-
-  }
-
-  @PostMapping("/calculadoraHC")
-  public String useCalculator(@RequestBody ActivityData ad, Model model) {
-    return "Calculaste la huella de carbono";
+    mav.addObject("consumptionType", new ConsumptionType());
+    mav.addObject("result", result);
+    mav.addObject("allConsumptionTypes", this.consumptionTypeList());
+    return mav;
   }
 
   private List<String> consumptionTypeList() {
@@ -68,10 +63,10 @@ public class CfCalculatorController {
     finalList.add(notOptionSelectedOption());
 
     finalList.addAll(this.consumptionTypeSvc
-            .findAll()
-            .stream()
-            .map(ConsumptionType::print)
-            .collect(Collectors.toList()));
+        .findAll()
+        .stream()
+        .map(ConsumptionType::print)
+        .collect(Collectors.toList()));
 
     return finalList;
   }

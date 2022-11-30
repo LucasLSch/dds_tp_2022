@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="http://java.sun.com/xml/ns/persistence"
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
     http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
 
-    <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+  <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>ddsutn.domain.measurements.ActivityData</class>
-        <class>ddsutn.domain.measurements.CarbonFootprint</class>
-        <class>ddsutn.domain.measurements.ConsumptionType</class>
-        <class>ddsutn.domain.contact.Contact</class>
-        <class>ddsutn.domain.measurements.EmissionFactor</class>
-        <class>ddsutn.domain.journey.Journey</class>
-        <class>ddsutn.domain.journey.Leg</class>
-        <class>ddsutn.domain.journey.transport.Line</class>
-        <class>ddsutn.domain.location.Location</class>
-        <class>ddsutn.domain.organization.Member</class>
-        <class>ddsutn.domain.organization.Organization</class>
-        <class>ddsutn.domain.organization.Sector</class>
-        <class>ddsutn.domain.organization.workApplication.WorkApplication</class>
-        <class>ddsutn.domain.measurements.unit.Unit</class>
-        <class>ddsutn.domain.journey.transport.Stop</class>
-        <class>ddsutn.domain.territories.TerritorialSectorAgent</class>
-        <class>ddsutn.domain.territories.TerritorialSector</class>
-        <class>ddsutn.domain.journey.transport.Transport</class>
-        <class>ddsutn.domain.journey.transport.PublicTransport</class>
-        <class>ddsutn.domain.journey.transport.EcoFriendly</class>
-        <class>ddsutn.domain.journey.transport.HiredService</class>
-        <class>ddsutn.domain.journey.transport.ParticularVehicle</class>
-        <class>ddsutn.security.user.User</class>
-        <class>ddsutn.security.user.StandardUser</class>
-        <class>ddsutn.security.user.Administrator</class>
-        <class>ddsutn.security.user.TerritorialAgentUser</class>
+    <class>ddsutn.domain.measurements.ActivityData</class>
+    <class>ddsutn.domain.measurements.CarbonFootprint</class>
+    <class>ddsutn.domain.measurements.ConsumptionType</class>
+    <class>ddsutn.domain.contact.Contact</class>
+    <class>ddsutn.domain.measurements.EmissionFactor</class>
+    <class>ddsutn.domain.journey.Journey</class>
+    <class>ddsutn.domain.journey.Leg</class>
+    <class>ddsutn.domain.journey.transport.Line</class>
+    <class>ddsutn.domain.location.Location</class>
+    <class>ddsutn.domain.organization.Member</class>
+    <class>ddsutn.domain.organization.Organization</class>
+    <class>ddsutn.domain.organization.Sector</class>
+    <class>ddsutn.domain.organization.workApplication.WorkApplication</class>
+    <class>ddsutn.domain.measurements.unit.Unit</class>
+    <class>ddsutn.domain.journey.transport.Stop</class>
+    <class>ddsutn.domain.territories.TerritorialSectorAgent</class>
+    <class>ddsutn.domain.territories.TerritorialSector</class>
+    <class>ddsutn.domain.journey.transport.Transport</class>
+    <class>ddsutn.domain.journey.transport.PublicTransport</class>
+    <class>ddsutn.domain.journey.transport.EcoFriendly</class>
+    <class>ddsutn.domain.journey.transport.HiredService</class>
+    <class>ddsutn.domain.journey.transport.ParticularVehicle</class>
+    <class>ddsutn.security.user.User</class>
+    <class>ddsutn.security.user.StandardUser</class>
+    <class>ddsutn.security.user.Administrator</class>
+    <class>ddsutn.security.user.TerritorialAgentUser</class>
 
-        <properties>
-            <property name="hibernate.archive.autodetection" value="class"/>
+    <properties>
+      <property name="hibernate.archive.autodetection" value="class"/>
 
-            <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
-            <property name="hibernate.connection.url" value="jdbc:hsqldb:mem:app-db"/>
-            <property name="hibernate.connection.username" value="sa"/>
-            <property name="hibernate.connection.password" value=""/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+      <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
+      <property name="hibernate.connection.url" value="jdbc:hsqldb:mem:app-db"/>
+      <property name="hibernate.connection.username" value="sa"/>
+      <property name="hibernate.connection.password" value=""/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
 
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
-            <property name="use_sql_comments" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
-        </properties>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+      <property name="use_sql_comments" value="true"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+    </properties>
 
-    </persistence-unit>
+  </persistence-unit>
 
 </persistence>

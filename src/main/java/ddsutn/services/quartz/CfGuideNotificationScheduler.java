@@ -17,17 +17,17 @@ public class CfGuideNotificationScheduler {
       scheduler.start();
 
       JobDetail jobDetail = newJob(CfGuideNotificationJob.class)
-              .withIdentity("CfGuideNotificationJob")
-              .build();
+          .withIdentity("CfGuideNotificationJob")
+          .build();
 
       Trigger trigger = TriggerBuilder.newTrigger()
-              .withIdentity("WeeklyTrigger")
-              .startNow()
-              .withSchedule(SimpleScheduleBuilder
-                      .simpleSchedule()
-                      .withIntervalInHours(168)
-                      .repeatForever())
-              .build();
+          .withIdentity("WeeklyTrigger")
+          .startNow()
+          .withSchedule(SimpleScheduleBuilder
+              .simpleSchedule()
+              .withIntervalInHours(168)
+              .repeatForever())
+          .build();
 
       scheduler.scheduleJob(jobDetail, trigger);
 

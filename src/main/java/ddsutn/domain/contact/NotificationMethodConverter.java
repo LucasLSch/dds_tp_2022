@@ -8,9 +8,9 @@ public class NotificationMethodConverter implements AttributeConverter<Notificat
   @Override
   public String convertToDatabaseColumn(NotificationMethod method) {
     return Arrays.stream(method.getClass().getSimpleName().split("Notification", 2))
-            .findFirst()
-            .orElse("undefined!")
-            .toUpperCase();
+        .findFirst()
+        .orElse("undefined!")
+        .toUpperCase();
   }
 
   @Override

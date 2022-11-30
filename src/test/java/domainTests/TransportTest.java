@@ -23,7 +23,7 @@ public class TransportTest extends TestDataFill {
   private Transport dummyParticularVehicle;
   private Transport dummyEco;
   private Line dummyLine;
-  private List<Stop> dummyStops = new ArrayList<>();
+  private final List<Stop> dummyStops = new ArrayList<>();
   private Stop dummyStartStop;
   private Stop dummyEndStop;
   private Location mockedLocation;
@@ -53,7 +53,7 @@ public class TransportTest extends TestDataFill {
   @Test
   public void hiredServiceTransportDistance() throws IOException {
     when(mockedLocation.getDistanceTo(anotherMockedLocation))
-            .thenReturn(new Distance(20, kilometer(Proportionality.DIRECT)));
+        .thenReturn(new Distance(20, kilometer(Proportionality.DIRECT)));
 
     Distance distance = dummyHiredService.getDistance(mockedLocation, anotherMockedLocation);
     assertEquals(distance.getValue(), 20);
@@ -70,7 +70,7 @@ public class TransportTest extends TestDataFill {
   @Test
   public void transportsCanGetItsConsumption() throws IOException {
     when(mockedLocation.getDistanceTo(anotherMockedLocation))
-            .thenReturn(new Distance(10, kilometer(Proportionality.DIRECT)));
+        .thenReturn(new Distance(10, kilometer(Proportionality.DIRECT)));
 
     Double ptConsumption = dummyPublic.getConsumption(mockedLocation, anotherMockedLocation);
     Double hsConsumption = dummyHiredService.getConsumption(mockedLocation, anotherMockedLocation);

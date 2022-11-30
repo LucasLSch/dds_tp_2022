@@ -54,10 +54,10 @@ public class Leg {
     }
     ConsumptionType consumptionType = this.transport.getConsumptionType();
     return new ActivityData(
-            consumptionType,
-            consumption,
-            PeriodicityFormat.MMAAAA,
-            LocalDate.now().format(DateTimeFormatter.ofPattern("MM/yyyy"))
+        consumptionType,
+        consumption,
+        PeriodicityFormat.MMAAAA,
+        LocalDate.now().format(DateTimeFormatter.ofPattern("MM/yyyy"))
     );
   }
 

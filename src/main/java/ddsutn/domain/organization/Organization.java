@@ -77,9 +77,9 @@ public class Organization {
 
   public Set<Member> getMembers() {
     return this.sectors
-            .stream()
-            .flatMap(sector -> sector.getMembers().stream())
-            .collect(Collectors.toSet());
+        .stream()
+        .flatMap(sector -> sector.getMembers().stream())
+        .collect(Collectors.toSet());
   }
 
   public void addActivityData(ActivityData someAD) {
@@ -109,17 +109,17 @@ public class Organization {
 
   private List<CarbonFootprint> getMemberCF(Set<Unit> units) {
     return this.getMembers()
-            .stream()
-            .flatMap(member -> member.getJourneys().stream())
-            .map(journey -> journey.getCarbonFootprint(units))
-            .collect(Collectors.toList());
+        .stream()
+        .flatMap(member -> member.getJourneys().stream())
+        .map(journey -> journey.getCarbonFootprint(units))
+        .collect(Collectors.toList());
   }
 
   public List<CarbonFootprint> getActivitiesDataCF(Set<Unit> units) {
     return this.activitiesData
-            .stream()
-            .map(ad -> ad.getCarbonFootprint(units))
-            .collect(Collectors.toList());
+        .stream()
+        .map(ad -> ad.getCarbonFootprint(units))
+        .collect(Collectors.toList());
   }
 
   private void registerCarbonFootprint(CarbonFootprint someCarbonFootprint) {

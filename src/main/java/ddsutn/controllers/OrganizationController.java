@@ -1,61 +1,71 @@
 package ddsutn.controllers;
 
 import ddsutn.domain.organization.Organization;
-import ddsutn.domain.organization.Sector;
+import ddsutn.dtos.organization.OrganizationForView;
+import ddsutn.dtos.organization.SectorForView;
 import ddsutn.services.OrganizationSvc;
-import lombok.Setter;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/organizaciones")
 public class OrganizationController {
 
+  private final String organizationsHtml = "/organizations/organizations";
+  private final String organizationDetailsHtml = "/organizations/organizationDetails";
+
+
   @Autowired
   private OrganizationSvc organizationSvc;
 
   @GetMapping("")
-  public String showOrganizations(Model model) {
-    model.addAttribute("allOrganizations", this.organizationsList());
-    return "organizaciones";
+  public ModelAndView showOrganizations() {
+    ModelAndView mav = new ModelAndView();
+    mav.addObject("allOrganizations", this.organizationsList());
+    mav.setViewName(organizationsHtml);
+    return mav;
   }
 
-  @GetMapping("/search")
-  public String searchOrganizations(Model model) {
-    OrganizationSvc svc = new OrganizationSvc();
-    model.addAttribute("organizations", svc.findAll());
-    return "buscarOrganizacion";
-  }
-
-  @RequestMapping("/search/")//refrescarme como hacer un search
-  public String searchOrganizacion(@RequestParam(value = "nombre", required = true) String param,
-                                   Model model) {
-    OrganizationSvc svc = new OrganizationSvc();
-    model.addAttribute("organizations",
-        svc.findAllByCondition((organization) -> organization.getSocialObjective().equals(param))
-    );
-    return "buscarOrganizacion";
-  }
+  // TODO ver que hacer con esto
+//  @GetMapping("/search")
+//  public String searchOrganizations(Model model) {
+//    OrganizationSvc svc = new OrganizationSvc();
+//    model.addAttribute("organizations", svc.findAll());
+//    return "buscarOrganizacion";
+//  }
+//
+//  @RequestMapping("/search/")//refrescarme como hacer un search
+//  public String searchOrganizacion(@RequestParam(value = "nombre", required = true) String param,
+//                                   Model model) {
+//    OrganizationSvc svc = new OrganizationSvc();
+//    model.addAttribute("organizations",
+//        svc.findAllByCondition((organization) -> organization.getSocialObjective().equals(param))
+//    );
+//    return "buscarOrganizacion";
+//  }
 
   @GetMapping("/{id}")
-  public String showOrganizatinoById(@PathVariable Long id, Model model) {
+  public ModelAndView showOrganizatinoById(@PathVariable Long id) {
+    ModelAndView mav = new ModelAndView(organizationDetailsHtml);
     Organization org = this.organizationSvc.findById(id);
-    //TODO ver como devolver mensajes de error con codigo 404
-    OrganizationForView ofv = this.transformOrgForView(org);
-    model.addAttribute("org", ofv);
-    model.addAttribute("allOrgSectors", this.getSectorsForOrg(org));
-    return "detalleOrganizacion";
+
+    if (org == null) {
+      mav.setStatus(HttpStatus.NOT_FOUND);
+      return mav;
+    }
+
+    OrganizationForView ofv = new OrganizationForView(org);
+    mav.addObject("org", ofv);
+    mav.addObject("allOrgSectors", this.getSectorsForOrg(org));
+    return mav;
   }
 
 //  @GetMapping("/{id}/solicitar")
@@ -73,49 +83,11 @@ public class OrganizationController {
 
   private List<OrganizationForView> organizationsList() {
     List<Organization> allSavedOrgs = this.organizationSvc.findAll();
-    return allSavedOrgs.stream().map(this::transformOrgForView).collect(Collectors.toList());
+    return allSavedOrgs.stream().map(OrganizationForView::new).collect(Collectors.toList());
   }
 
   private List<SectorForView> getSectorsForOrg(Organization org) {
-    return org.getSectors().stream().map(this::transformSectorForView).collect(Collectors.toList());
-  }
-
-  private OrganizationForView transformOrgForView(Organization org) {
-    OrganizationForView ofv = new OrganizationForView();
-    ofv.setId(org.getId());
-    ofv.setSocialObj(org.getSocialObjective());
-    ofv.setLocation(org.getLocation().getStreet() + " " + org.getLocation().getHeight());
-    ofv.setMembersAmount(org.getMembers().size());
-    ofv.setSectors(org.getSectors().stream().map(Sector::getName).collect(Collectors.toList()));
-//    ofv.setPhoneNumber(org.getContacts().get(0).getPhoneNumber());
-//    ofv.setPhoneNumber(org.getContacts().get(0).getEmail());
-    return ofv;
-  }
-
-  private SectorForView transformSectorForView(Sector sector) {
-    SectorForView sfv = new SectorForView();
-    sfv.setId(sector.getId());
-    sfv.setName(sector.getName());
-    sfv.setMembersAmount(sector.membersAmount());
-    return sfv;
-  }
-
-  @Setter
-  public class OrganizationForView {
-    public Long id;
-    public String socialObj;
-    public String location;
-    public Integer membersAmount;
-    public List<String> sectors;
-    public String phoneNumber;
-    public String email;
-  }
-
-  @Setter
-  public class SectorForView {
-    public Long id;
-    public String name;
-    public Integer membersAmount;
+    return org.getSectors().stream().map(SectorForView::new).collect(Collectors.toList());
   }
 
 }

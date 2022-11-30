@@ -7,7 +7,7 @@ public enum Proportionality {
 
   private final Integer factor;
 
-  private Proportionality(Integer factor) {
+  Proportionality(Integer factor) {
     this.factor = factor;
   }
 

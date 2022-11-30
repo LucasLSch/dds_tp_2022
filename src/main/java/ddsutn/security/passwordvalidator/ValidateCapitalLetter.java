@@ -2,7 +2,7 @@ package ddsutn.security.passwordvalidator;
 
 public class ValidateCapitalLetter implements PasswordCriteria {
 
-  private String errorDescription = "Debe tener por lo menos una mayúscula";
+  private final String errorDescription = "Debe tener por lo menos una mayúscula";
 
   @Override
   public void validatePassword(String somePassword) {

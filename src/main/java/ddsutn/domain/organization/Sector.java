@@ -32,9 +32,9 @@ public class Sector {
 
   @ManyToMany
   @JoinTable(
-          name = "sector_member",
-          joinColumns = @JoinColumn(name = "sector_id"),
-          inverseJoinColumns = @JoinColumn(name = "member_id")
+      name = "sector_member",
+      joinColumns = @JoinColumn(name = "sector_id"),
+      inverseJoinColumns = @JoinColumn(name = "member_id")
   )
   private Set<Member> members;
 
@@ -81,17 +81,17 @@ public class Sector {
 
   public List<Journey> getMembersJourneys() {
     return this.getMembers()
-            .stream()
-            .flatMap(member -> member.getJourneys().stream())
-            .filter(journey -> journey.involvesOrganization(this.organization))
-            .collect(Collectors.toList());
+        .stream()
+        .flatMap(member -> member.getJourneys().stream())
+        .filter(journey -> journey.involvesOrganization(this.organization))
+        .collect(Collectors.toList());
   }
 
   public CarbonFootprint getCarbonFootprint(Set<Unit> units) {
     return CarbonFootprint.sum(units, getMembersJourneys()
-            .stream()
-            .map(journey -> journey.getCarbonFootprint(units))
-            .toArray(CarbonFootprint[]::new));
+        .stream()
+        .map(journey -> journey.getCarbonFootprint(units))
+        .toArray(CarbonFootprint[]::new));
   }
 
   public CarbonFootprint getSectorCarbonFootprint() {

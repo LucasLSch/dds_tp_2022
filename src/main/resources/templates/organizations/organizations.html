@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" th:href="@{/css/utils/normalize.css}">
+  <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
+  <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
+  <link rel="stylesheet" th:href="@{/css/organizations/organizations.css}">
+</head>
+
+<body>
+
+<div class="site-size">
+  <div th:replace="fragments/menu :: menu"></div>
+  <div th:replace="fragments/footer :: footer"></div>
+
+  <div class="site-body">
+
+    <span class="site-title">Organizaciones</span>
+    <div class="site-info">
+      <div class="site-info-icon"></div>
+      <span class="site-info-text">Seleccione una Organización para más detalles</span>
+    </div>
+    <tr th:each="org: ${allOrganizations}">
+      <div class="org-box">
+        <div class="org-info"></div>
+        <span class="v81_128" th:text="'Ubicación: '+${org.location}"></span>
+        <span class="v82_240" th:text="'Sectores: '+${org.sectors}"></span>
+        <span class="v82_239" th:text="'Cantidad de Miembros: '+${org.membersAmount}"></span>
+        <span class="v82_238" th:text="${org.socialObj}"></span>
+        <span class="v82_242">UnLogo</span>
+
+        <a class="org-more-info-button" th:href="@{/organizaciones/{id}(id=${org.id})}" type="submit">
+          <div class="v81_119"></div>
+          <span class="v81_120">Más Información</span>
+        </a>
+
+      </div>
+    </tr>
+  </div>
+
+
+</body>
+</html>

@@ -3,6 +3,7 @@ package ddsutn.security.passwordvalidator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,10 +12,10 @@ import java.util.List;
 
 public class ValidateCommonPassword implements PasswordCriteria {
 
-  private Path commonPasswordsFilePath = Paths.get("src/main/resources/commonPasswords.txt");
-  private Charset charset = Charset.forName("UTF-8");
-  private List<String> lineasWorstPwd;
-  private String errorDescription = "La contraseña es muy común";
+  private final Path commonPasswordsFilePath = Paths.get("src/main/resources/commonPasswords.txt");
+  private final Charset charset = StandardCharsets.UTF_8;
+  private final List<String> lineasWorstPwd;
+  private final String errorDescription = "La contraseña es muy común";
 
   public ValidateCommonPassword() throws IOException {
     this.lineasWorstPwd = new ArrayList<>();
