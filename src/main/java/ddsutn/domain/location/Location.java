@@ -49,4 +49,9 @@ public class Location {
   public String getHeight() {
     return height;
   }
+
+  public String print() {
+    return this.getStreet() + " " + this.getHeight();
+  }
+
 }

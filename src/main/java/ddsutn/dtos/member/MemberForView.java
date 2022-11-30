@@ -1,4 +1,4 @@
-package ddsutn.dtos;
+package ddsutn.dtos.member;
 
 import ddsutn.domain.organization.Member;
 import lombok.Getter;
@@ -29,3 +29,5 @@ public class MemberForView {
   }
 
 }
+
+
