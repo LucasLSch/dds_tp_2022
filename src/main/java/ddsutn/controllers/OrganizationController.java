@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -27,9 +28,9 @@ public class OrganizationController {
   private OrganizationSvc organizationSvc;
 
   @GetMapping("")
-  public ModelAndView showOrganizations() {
+  public ModelAndView showOrganizations(@RequestParam String like) {
     ModelAndView mav = new ModelAndView();
-    mav.addObject("allOrganizations", this.organizationsList());
+    mav.addObject("allOrganizations", this.organizationsList(like));
     mav.setViewName(organizationsHtml);
     return mav;
   }
@@ -81,8 +82,9 @@ public class OrganizationController {
 
   // --- Utils --- //
 
-  private List<OrganizationForView> organizationsList() {
-    List<Organization> allSavedOrgs = this.organizationSvc.findAll();
+  private List<OrganizationForView> organizationsList(String like) {
+    List<Organization> allSavedOrgs = this.organizationSvc
+            .findAllByCondition(org -> org.getSocialObjective().toUpperCase().contains(like.toUpperCase()));
     return allSavedOrgs.stream().map(OrganizationForView::new).collect(Collectors.toList());
   }
 

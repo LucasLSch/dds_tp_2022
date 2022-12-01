@@ -21,33 +21,36 @@ public class SecurityConfig {
                                            BCryptPasswordEncoder bCryptPasswordEncoder,
                                            UserDetailsService userDetailsService) throws Exception {
     return http.getSharedObject(AuthenticationManagerBuilder.class)
-        .userDetailsService(userDetailsService)
-        .passwordEncoder(bCryptPasswordEncoder)
-        .and()
-        .build();
+            .userDetailsService(userDetailsService)
+            .passwordEncoder(bCryptPasswordEncoder)
+            .and()
+            .build();
   }
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.csrf()
-        .disable()
-        .authorizeRequests()
-        .antMatchers("/calculadoraHC")
-        .hasAnyAuthority("ADMINISTRATOR_USER", "STANDARD_USER")
+            .disable()
+            .authorizeRequests()
+            .antMatchers("/calculadoraHC", "/organizaciones/**")
+            .hasAnyAuthority("ADMINISTRATOR_USER", "STANDARD_USER")
 
-        .antMatchers("/iniciarSesion", "/registrarse", "/registrarseMiembro")
-        .anonymous()
+            .antMatchers("/miembros/**")
+            .hasAuthority("STANDARD_USER")
 
-        .antMatchers("/css/**")
-        .permitAll()
+            .antMatchers("/iniciarSesion", "/registrarse", "/registrarseMiembro")
+            .anonymous()
 
-        .anyRequest()
-        .authenticated()
-        .and()
-        .formLogin()
-        .loginPage("/iniciarSesion")
-        .loginProcessingUrl("/iniciarSesion")
-        .failureUrl("/iniciarSesion?authError=true");
+            .antMatchers("/css/**", "/")
+            .permitAll()
+
+            .anyRequest()
+            .authenticated()
+            .and()
+            .formLogin()
+            .loginPage("/iniciarSesion")
+            .loginProcessingUrl("/iniciarSesion")
+            .failureUrl("/iniciarSesion?authError=true");
 
     return http.build();
   }

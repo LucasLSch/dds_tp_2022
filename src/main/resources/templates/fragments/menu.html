@@ -32,8 +32,8 @@
           <div class=ei110_626_2_150>
             <span class="ei110_626_2_150_2_137">􀊫</span>
           </div>
-          <form method="get" th:action="@{/organizaciones/search}">
-            <input class="ei110_626_2_151" th:name="nombre" th:placeholder="Search" type="nombre"/>
+          <form method="GET" th:action="@{/organizaciones}">
+            <input class="ei110_626_2_151" th:name="like" th:placeholder="Search" type="text"/>
             <div class="e161_58110">
               <button type="submit">Enviar</button>
             </div>
