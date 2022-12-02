@@ -28,7 +28,7 @@ public class OrganizationController {
   private OrganizationSvc organizationSvc;
 
   @GetMapping("")
-  public ModelAndView showOrganizations(@RequestParam String like) {
+  public ModelAndView showOrganizations(@RequestParam(defaultValue = "") String like) {
     ModelAndView mav = new ModelAndView();
     mav.addObject("allOrganizations", this.organizationsList(like));
     mav.setViewName(organizationsHtml);
