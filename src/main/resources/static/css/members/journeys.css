@@ -1,186 +1,10 @@
-* {
-    box-sizing: border-box;
-}
-
-body {
-    font-size: 14px;
-}
-
 .site-size {
     width: 1920px;
     height: 1562px;
     position: relative;
 }
 
-.v149_162 {
-    width: 100%;
-    height: 200px;
-    background: url("../images/v149_162.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 1362px;
-    left: 0px;
-    overflow: hidden;
-}
-
-.v149_163 {
-    width: 100%;
-    height: 200px;
-    background: var(--darkGrey01);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    overflow: hidden;
-}
-
-.v149_164 {
-    width: 372px;
-    height: 40px;
-    background: url("../images/v149_164.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 80px;
-    left: 774px;
-    overflow: hidden;
-}
-
-.v149_165 {
-    width: 100px;
-    height: 40px;
-    background: url("../images/v149_165.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    overflow: hidden;
-}
-
-.v149_166 {
-    width: 100px;
-    height: 40px;
-    background: rgba(29, 161, 242, 1);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    overflow: hidden;
-}
-
-.v149_167 {
-    width: 40px;
-    height: 40px;
-    background: url("../images/v149_167.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 30px;
-    overflow: hidden;
-}
-
-.v149_168 {
-    width: 100px;
-    height: 40px;
-    background: url("../images/v149_168.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 136px;
-    overflow: hidden;
-}
-
-.v149_169 {
-    width: 100px;
-    height: 40px;
-    background: rgba(74, 110, 169, 1);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    overflow: hidden;
-}
-
-.v149_170 {
-    width: 40px;
-    height: 40px;
-    background: url("../images/v149_170.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 30px;
-    overflow: hidden;
-}
-
-.v149_171 {
-    width: 100px;
-    height: 40px;
-    background: url("../images/v149_171.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 272px;
-    overflow: hidden;
-}
-
-.v149_172 {
-    width: 100px;
-    height: 40px;
-    background: rgba(255, 255, 255, 1);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    overflow: hidden;
-}
-
-.v149_173 {
-    width: 40px;
-    height: 40px;
-    background: url("../images/v149_173.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 30px;
-    overflow: hidden;
-}
-
-.v149_174 {
+.site-body {
     width: 100%;
     height: 1262px;
     background: url("../images/v149_174.png");
@@ -189,7 +13,7 @@ body {
     background-size: cover;
     opacity: 1;
     position: absolute;
-    top: 101px;
+    top: 100px;
     left: 0px;
     overflow: hidden;
 }
@@ -216,7 +40,7 @@ body {
     border: 2px solid rgba(255, 255, 255, 0.75);
 }
 
-.v149_177 {
+.journey-info {
     width: 830px;
     height: 277px;
     background: url("../images/v149_177.png");
@@ -440,106 +264,4 @@ body {
     font-size: 36px;
     opacity: 1;
     text-align: left;
-}
-
-.v149_192 {
-    width: 100%;
-    height: 101px;
-    background: url("../images/v149_192.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    overflow: hidden;
-}
-
-.v149_193 {
-    width: 100%;
-    height: 100px;
-    background: rgba(40, 40, 40, 1);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    overflow: hidden;
-}
-
-.v149_194 {
-    width: 91px;
-    color: rgba(255, 255, 255, 1);
-    position: absolute;
-    top: 39px;
-    left: 630px;
-    font-family: Open Sans;
-    font-weight: Regular;
-    font-size: 16px;
-    opacity: 1;
-    text-align: center;
-}
-
-.v149_195 {
-    width: 198px;
-    color: rgba(255, 255, 255, 1);
-    position: absolute;
-    top: 39px;
-    left: 766px;
-    font-family: Open Sans;
-    font-weight: Regular;
-    font-size: 16px;
-    opacity: 1;
-    text-align: center;
-}
-
-.v149_196 {
-    width: 40px;
-    color: rgba(255, 255, 255, 1);
-    position: absolute;
-    top: 39px;
-    left: 545px;
-    font-family: Open Sans;
-    font-weight: Regular;
-    font-size: 16px;
-    opacity: 1;
-    text-align: center;
-}
-
-.v149_197 {
-    width: 530px;
-    height: 1px;
-    background: url("../images/v149_197.png");
-    opacity: 1;
-    position: absolute;
-    top: 100px;
-    left: 695px;
-    border: 2px solid rgba(255, 255, 255, 0.75);
-}
-
-.v149_198 {
-    width: 65px;
-    height: 67px;
-    background: url("../images/v149_198.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 10px;
-    left: 1395px;
-    overflow: hidden;
-}
-
-.v149_199 {
-    width: 273px;
-    color: rgba(255, 255, 255, 1);
-    position: absolute;
-    top: 28px;
-    left: 1116px;
-    font-family: Patrick Hand SC;
-    font-weight: Regular;
-    font-size: 36px;
-    opacity: 1;
-    text-align: center;
 }
