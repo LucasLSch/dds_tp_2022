@@ -18,7 +18,7 @@
 }
 
 .e1_59 {
-    background-color: rgba(40.00000141561031, 40.00000141561031, 40.00000141561031, 1);
+    background-color: var(--darkGrey01);
     width: 1920px;
     height: 200px;
     position: absolute;
@@ -139,7 +139,7 @@
 }
 
 .e1_71 {
-    background-color: rgba(51.00000075995922, 51.00000075995922, 51.00000075995922, 1);
+    background-color: var(--darkGrey02);
     width: 1920px;
     height: 780px;
     position: absolute;
@@ -170,7 +170,7 @@ _72 {
 }
 
 .e1_74 {
-    background-color: rgba(59.00000028312206, 59.00000028312206, 59.00000028312206, 1);
+    background-color: var(--darkGrey03);
     width: 490px;
     height: 522px;
     position: absolute;

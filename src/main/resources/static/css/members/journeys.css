@@ -29,7 +29,7 @@ body {
 .v149_163 {
     width: 100%;
     height: 200px;
-    background: rgba(40, 40, 40, 1);
+    background: var(--darkGrey01);
     opacity: 1;
     position: absolute;
     top: 0px;
@@ -197,7 +197,7 @@ body {
 .v149_175 {
     width: 100%;
     height: 100%;
-    background: rgba(51, 51, 51, 1);
+    background: var(--darkGrey02);
     opacity: 1;
     position: absolute;
     top: 0px;
@@ -247,7 +247,7 @@ body {
 .v149_179 {
     width: 830px;
     height: 277px;
-    background: rgba(59, 59, 59, 1);
+    background: var(--darkGrey03);
     opacity: 1;
     position: absolute;
     top: 0px;
