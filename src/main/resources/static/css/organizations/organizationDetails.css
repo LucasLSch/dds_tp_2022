@@ -183,6 +183,19 @@ body {
     overflow: hidden;
 }
 
+.button-text {
+    color: rgba(0, 0, 0, 1);
+    width: max-content;
+    height: 27px;
+    position: absolute;
+    left: 18px;
+    top: 12px;
+    font-family: Poppins;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 0;
+}
+
 .v104_144 {
     width: 1000px;
     height: 425px;

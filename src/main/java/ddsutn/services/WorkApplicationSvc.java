@@ -1,5 +1,6 @@
 package ddsutn.services;
 
+import ddsutn.domain.organization.Organization;
 import ddsutn.domain.organization.workApplication.WorkApplication;
 import ddsutn.domain.organization.workApplication.WorkApplicationId;
 import ddsutn.domain.organization.workApplication.WorkApplicationState;
@@ -23,6 +24,11 @@ public class WorkApplicationSvc extends GenericSvcImpl<WorkApplication, WorkAppl
 
   public List<WorkApplication> getPendingApplications() {
     return this.findAllByCondition(wa -> wa.stateIs(WorkApplicationState.PENDING));
+  }
+
+  @Override
+  public WorkApplication save(WorkApplication entity) {
+    return super.save(entity);
   }
 
 }
