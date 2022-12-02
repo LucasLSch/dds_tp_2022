@@ -20,7 +20,7 @@ _2 {
 }
 
 .e101_12 {
-    background-color: rgba(40.00000141561031, 40.00000141561031, 40.00000141561031, 1);
+    background: var(--darkGrey01);
     width: 1920px;
     height: 200px;
     position: absolute;

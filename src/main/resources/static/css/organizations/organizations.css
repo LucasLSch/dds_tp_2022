@@ -15,7 +15,7 @@ body {
 .site-body {
     width: 1920px;
     height: 780px;
-    background: rgba(51, 51, 51, 1);
+    background: var(--darkGrey02);
     opacity: 1;
     position: relative;
     top: 100px;
@@ -37,7 +37,7 @@ body {
 .org-info {
     width: 660px;
     height: 212px;
-    background: rgba(59, 59, 59, 1);
+    background: var(--darkGrey03);
     opacity: 1;
     position: relative;
     top: 0px;
@@ -67,7 +67,7 @@ body {
 .v81_119 {
     width: 170px;
     height: 50px;
-    background: rgba(59, 59, 59, 1);
+    background: var(--darkGrey03);
     opacity: 1;
     position: relative;
     top: 0px;
