@@ -1,18 +1,22 @@
 package ddsutn.controllers;
 
 import ddsutn.domain.organization.Organization;
+import ddsutn.domain.organization.Sector;
 import ddsutn.dtos.organization.OrganizationForView;
 import ddsutn.dtos.organization.SectorForView;
+import ddsutn.security.user.StandardUser;
+import ddsutn.security.user.User;
 import ddsutn.services.OrganizationSvc;
+import ddsutn.services.UserSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +30,9 @@ public class OrganizationController {
 
   @Autowired
   private OrganizationSvc organizationSvc;
+
+  @Autowired
+  private UserSvc userSvc;
 
   @GetMapping("")
   public ModelAndView showOrganizations(@RequestParam String like) {
@@ -66,6 +73,30 @@ public class OrganizationController {
     OrganizationForView ofv = new OrganizationForView(org);
     mav.addObject("org", ofv);
     mav.addObject("allOrgSectors", this.getSectorsForOrg(org));
+    return mav;
+  }
+
+  @PostMapping("/{org_id}/sectors/{sector_id}/aplicaciones")
+  public ModelAndView applyToSector(@PathVariable Long org_id, @PathVariable Long sector_id) {
+    ModelAndView mav = new ModelAndView();
+    Organization org = organizationSvc.findById(org_id);
+    Sector sector = org.getSectors().stream().filter(s -> s.getId().equals(sector_id)).findFirst().orElse(null);
+    Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+
+    if (authorities.stream().map(GrantedAuthority::getAuthority).noneMatch(auth -> auth.equals("STANDARD_USER"))) {
+      mav.setStatus(HttpStatus.FORBIDDEN);
+      return mav;
+    } else if (sector == null) {
+      mav.setStatus(HttpStatus.NOT_FOUND);
+      return mav;
+    }
+
+    String name = SecurityContextHolder.getContext().getAuthentication().getName();
+    StandardUser myUser = (StandardUser) userSvc.loadUserByUsername(name);
+
+    myUser.getMember().applyToSector(sector);
+    organizationSvc.save(org);
+    mav.setViewName("redirect:/organizaciones/" + org_id.toString());
     return mav;
   }
 
