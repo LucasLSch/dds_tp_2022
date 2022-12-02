@@ -41,6 +41,11 @@ public class PublicTransport extends Transport {
   }
 
   @Override
+  public String print() {
+    return this.line.print();
+  }
+
+  @Override
   public Distance getDistance(Location start, Location end) {
     //TODO validate startStop has startLocation
     //TODO validate endStop has endLocation

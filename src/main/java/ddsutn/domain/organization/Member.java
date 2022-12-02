@@ -31,7 +31,7 @@ public class Member {
   @ManyToMany(mappedBy = "members")
   private Set<Sector> sectors;
 
-  @ManyToMany
+  @ManyToMany(cascade = CascadeType.ALL)
   @JoinTable(
       name = "member_journey",
       joinColumns = @JoinColumn(name = "member_id"),

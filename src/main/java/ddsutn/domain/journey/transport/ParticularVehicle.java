@@ -28,4 +28,9 @@ public class ParticularVehicle extends Transport {
     return true;
   }
 
+  @Override
+  public String print() {
+    return this.type.name();
+  }
+
 }

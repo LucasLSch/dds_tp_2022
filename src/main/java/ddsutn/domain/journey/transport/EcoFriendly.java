@@ -27,4 +27,9 @@ public class EcoFriendly extends Transport {
   public Boolean isShareable() {
     return false;
   }
+
+  @Override
+  public String print() {
+    return this.type.name();
+  }
 }

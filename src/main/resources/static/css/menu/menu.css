@@ -72,17 +72,16 @@ _623 {
 }
 
 .ei110_626_2_151 {
-    color: rgba(60.00000022351742, 60.00000022351742, 67.00000360608101, 0.6000000238418579);
-    width: 321.1096496582031px;
-    height: 15px;
+    color: rgba(60, 60, 67, 1);
+    width: 260px;
+    height: 24px;
     position: absolute;
-    left: 43.62553024291992px;
-    top: 7.897244930267334px;
+    left: 40px;
+    top: 3px;
     font-family: Roboto;
     text-align: left;
-    font-size: 17px;
-    letter-spacing: 0.5;
-    line-height: px;
+    font-size: 16px;
+    padding-left: 5px;
 }
 
 .nav-information {
@@ -206,8 +205,8 @@ _630 {
     width: 48px;
     height: 21px;
     position: absolute;
-    left: 1710px;
-    top: 36px;
+    right: 15px;
+    top: 3px;
 }
 
 .menu-white-line {

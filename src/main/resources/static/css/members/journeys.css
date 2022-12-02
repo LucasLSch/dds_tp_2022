@@ -7,10 +7,7 @@
 .site-body {
     width: 100%;
     height: 1262px;
-    background: url("../images/v149_174.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+    background: var(--darkGrey02);
     opacity: 1;
     position: absolute;
     top: 100px;
@@ -18,78 +15,22 @@
     overflow: hidden;
 }
 
-.v149_175 {
-    width: 100%;
-    height: 100%;
-    background: var(--darkGrey02);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    overflow: hidden;
-}
-
-.v149_176 {
-    width: 530px;
-    height: 1px;
-    background: url("../images/v149_176.png");
-    opacity: 1;
-    position: absolute;
-    top: 1261px;
-    left: 685px;
-    border: 2px solid rgba(255, 255, 255, 0.75);
-}
-
 .journey-info {
     width: 830px;
     height: 277px;
-    background: url("../images/v149_177.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+    background: var(--darkGrey03);
+    border-radius: 50px;
     opacity: 1;
     position: absolute;
     top: 280px;
     left: 535px;
     overflow: hidden;
+    margin-bottom: 15px;
 }
 
-.v149_178 {
-    width: 830px;
-    height: 277px;
-    background: url("../images/v149_178.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    overflow: hidden;
-}
-
-.v149_179 {
-    width: 830px;
-    height: 277px;
-    background: var(--darkGrey03);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
-    overflow: hidden;
-}
-
-.v149_214 {
+.journey-delete-button {
     width: 123px;
     height: 50px;
-    background: url("../images/v149_214.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     opacity: 1;
     position: absolute;
     top: 206px;
@@ -105,10 +46,7 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-radius: 5px;
     overflow: hidden;
 }
 
@@ -125,11 +63,11 @@
     text-align: center;
 }
 
-.v149_185 {
-    width: 152px;
+.journey-members {
+    width: max-content;
     color: rgba(255, 255, 255, 0.8999999761581421);
     position: absolute;
-    top: 235px;
+    bottom: 10px;
     left: 34px;
     font-family: Poppins;
     font-weight: Light;
@@ -138,33 +76,20 @@
     text-align: left;
 }
 
-.v149_201 {
-    width: 830px;
-    height: 63px;
-    background: url("../images/v149_201.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 107px;
-    left: 0px;
-    overflow: hidden;
-}
-
-.v149_202 {
+.journey-leg {
     width: 830px;
     height: 63px;
     background: rgba(37, 37, 37, 1);
     opacity: 1;
-    position: absolute;
-    top: 0px;
+    position: relative;
+    top: 107px;
     left: 0px;
     overflow: hidden;
+    margin-bottom: 5px;
 }
 
-.v149_207 {
-    width: 133px;
+.leg-transport {
+    width: max-content;
     color: rgba(255, 255, 255, 0.8999999761581421);
     position: absolute;
     top: 17px;
@@ -176,8 +101,8 @@
     text-align: left;
 }
 
-.v149_209 {
-    width: 133px;
+.leg-locations {
+    width: max-content;
     color: rgba(255, 255, 255, 0.8999999761581421);
     position: absolute;
     top: 17px;
@@ -189,7 +114,7 @@
     text-align: left;
 }
 
-.v149_208 {
+.journey-legs-title {
     width: 71px;
     color: rgba(255, 255, 255, 0.8999999761581421);
     position: absolute;
@@ -202,8 +127,8 @@
     text-align: left;
 }
 
-.v149_186 {
-    width: 415px;
+.journey-locations {
+    width: max-content;
     color: rgba(255, 255, 255, 0.8999999761581421);
     position: absolute;
     top: 32px;
@@ -215,13 +140,9 @@
     text-align: left;
 }
 
-.v149_188 {
+.site-info {
     width: 490px;
     height: 78px;
-    background: url("../images/v149_188.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     opacity: 1;
     position: absolute;
     top: 158px;
@@ -229,7 +150,7 @@
     overflow: hidden;
 }
 
-.v149_189 {
+.site-info-text {
     width: 392px;
     color: rgba(255, 255, 255, 0.8999999761581421);
     position: absolute;
@@ -242,7 +163,7 @@
     text-align: left;
 }
 
-.v149_190 {
+.site-info-icon {
     width: 78px;
     height: 78px;
     background: rgba(255, 255, 255, 1);
@@ -253,7 +174,7 @@
     border-radius: 50%;
 }
 
-.v149_191 {
+.site-title {
     width: 257px;
     color: rgba(255, 255, 255, 1);
     position: absolute;

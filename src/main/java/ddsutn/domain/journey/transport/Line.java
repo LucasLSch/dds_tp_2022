@@ -64,4 +64,8 @@ public class Line {
 
     return new Distance(finalValue, new Unit(BaseUnit.METER, 3, Proportionality.DIRECT));
   }
+
+  public String print() {
+    return this.name + " (" + this.type.name() + ")";
+  }
 }

@@ -14,6 +14,6 @@ public class LegForView {
   public LegForView(Leg someLeg) {
     this.startingLocation = someLeg.getStartingLocation().print();
     this.endingLocation = someLeg.getEndingLocation().print();
-    this.transport = someLeg.getTransport().toString(); // TODO poner datos correctos
+    this.transport = someLeg.getTransport().print();
   }
 }

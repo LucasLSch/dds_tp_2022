@@ -26,4 +26,9 @@ public class HiredService extends Transport {
   public Boolean isShareable() {
     return true;
   }
+
+  @Override
+  public String print() {
+    return this.name + " (" + this.hsType.name() + ")";
+  }
 }

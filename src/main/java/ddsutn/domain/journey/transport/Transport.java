@@ -61,4 +61,6 @@ public abstract class Transport {
     );
   }
 
+  public abstract String print();
+
 }
