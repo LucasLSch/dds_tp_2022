@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 public class MemberForView {
+  public String id;
   public String name;
   public String surname;
   public String email;
@@ -22,6 +23,7 @@ public class MemberForView {
 
 
   public MemberForView(Member someMember) {
+    this.id = someMember.getId().toString();
     this.name = someMember.getName();
     this.surname = someMember.getSurname();
     this.email = someMember.getContacts().stream().map(Contact::getEmail).findFirst().orElse("");

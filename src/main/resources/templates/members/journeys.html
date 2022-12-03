@@ -38,10 +38,11 @@
                 </div>
                 <div class="journey-footer">
                     <span class="journey-members">Compartido con:</span>
-
-                    <div class="journey-delete-button">
-                        Borrar
-                    </div>
+                    <form>
+                        <button class="journey-delete-button" type="submit" formmethod="POST" th:formaction="'/miembros/'+${member.id}+'/trayectos/'+${journey.id}">
+                            Borrar
+                        </button>
+                    </form>
                 </div>
 
             </div>

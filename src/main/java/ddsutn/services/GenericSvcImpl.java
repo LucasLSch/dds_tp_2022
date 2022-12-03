@@ -36,4 +36,8 @@ public abstract class GenericSvcImpl<T, ID> {
     return returnList.stream().filter(predicate).collect(Collectors.toList());
   }
 
+  public void deleteById(ID id) {
+    this.getRepo().deleteById(id);
+  }
+
 }
