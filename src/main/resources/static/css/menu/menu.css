@@ -8,6 +8,7 @@ _623 {
     width: 1920px;
     height: 100px;
     position: absolute;
+    z-index: 1;
 }
 
 .e110_624 {

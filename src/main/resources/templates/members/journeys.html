@@ -1,51 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" th:href="@{/css/utils/normalize.css}">
-  <link rel="stylesheet" th:href="@{/css/utils/rootVariables.css}">
-  <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
-  <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
-  <link rel="stylesheet" th:href="@{/css/members/journeys.css}">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/utils/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/utils/rootVariables.css}">
+    <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
+    <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/members/journeys.css}">
 </head>
 <body>
 <div class="site-size">
 
-  <div th:replace="fragments/menu :: menu"></div>
-  <div th:replace="fragments/footer :: footer"></div>
+    <div th:replace="fragments/menu :: menu"></div>
+    <div th:replace="fragments/footer :: footer"></div>
 
-  <div class="site-body">
+    <div class="site-body">
+        <div class="site-header">
+            <span class="site-title">Mis Trayectos</span>
+            <div class="site-info">
+                <div class="site-info-icon"></div>
+                <span class="site-info-text">Busca tus trayectos y agrega otro si lo necesitas!</span>
+            </div>
+        </div>
+        <div class="journey-container">
+            <div class="journey-info" th:each="journey: ${allJourneys}">
+                <div class="journey-title">
+                    <span class="journey-locations"
+                          th:text="${journey.startingLocation}+'    ->    '+${journey.endingLocation}"></span>
 
-    <span class="site-title">Mis Trayectos</span>
+                    <span class="journey-legs-title">Tramos:</span>
+                </div>
+                <div class="journey-leg" th:each="leg: ${journey.legs}">
+                    <span class="leg-transport" th:text="'Transporte: '+${leg.transport}"></span>
+                    <span class="leg-locations" th:text="${leg.startingLocation}+' -> '+${leg.endingLocation}"></span>
+                </div>
+                <div class="journey-footer">
+                    <span class="journey-members">Compartido con:</span>
 
-    <div class="site-info">
-      <div class="site-info-icon"></div>
-      <span class="site-info-text">Busca tus trayectos y agrega otro si lo necesitas!</span>
+                    <div class="journey-delete-button">
+                        Borrar
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
-
-    <div class="journey-info" th:each="journey: ${allJourneys}">
-
-      <span class="journey-locations"
-            th:text="${journey.startingLocation}+'    ->    '+${journey.endingLocation}"></span>
-
-      <span class="journey-legs-title">Tramos:</span>
-
-      <div class="journey-leg" th:each="leg: ${journey.legs}">
-        <span class="leg-transport" th:text="'Transporte: '+${leg.transport}"></span>
-        <span class="leg-locations" th:text="${leg.startingLocation}+' -> '+${leg.endingLocation}"></span>
-      </div>
-
-      <span class="journey-members">Compartido con:</span>
-
-      <div class="journey-delete-button">
-        <div class="v149_215"></div>
-        <span class="v149_216">Borrar</span>
-      </div>
-
-    </div>
-  </div>
 
 </div>
 

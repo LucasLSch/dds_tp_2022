@@ -1,97 +1,77 @@
 .site-size {
     width: 1920px;
     height: 1562px;
-    position: relative;
 }
 
 .site-body {
     width: 100%;
-    height: 1262px;
+    height: 1189px;
     background: var(--darkGrey02);
     opacity: 1;
-    position: absolute;
-    top: 100px;
-    left: 0px;
-    overflow: hidden;
+    padding-top: 173px;
+    overflow-y: scroll;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
+
+.site-header {
+    width: 830px;
+}
+
+.journey-container {
+    display: flex;
+    flex-direction: column;
 }
 
 .journey-info {
     width: 830px;
-    height: 277px;
     background: var(--darkGrey03);
     border-radius: 50px;
-    opacity: 1;
-    position: absolute;
-    top: 280px;
-    left: 535px;
-    overflow: hidden;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .journey-delete-button {
-    width: 123px;
-    height: 50px;
-    opacity: 1;
-    position: absolute;
-    top: 206px;
-    left: 674px;
-    overflow: hidden;
-}
-
-.v149_215 {
-    width: 123px;
-    height: 50px;
-    background: rgba(255, 25, 67, 1);
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
+    padding: 14px 33px;
+    margin-bottom: 21px;
     border-radius: 5px;
-    overflow: hidden;
+    background: #FF1A43;
+
 }
 
-.v149_216 {
-    width: 58px;
-    color: rgba(0, 0, 0, 1);
-    position: absolute;
-    top: 12px;
-    left: 32px;
-    font-family: Poppins;
-    font-weight: SemiBold;
-    font-size: 18px;
-    opacity: 1;
-    text-align: center;
+.journey-footer {
+    height: 107px;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    padding: 0 34px;
 }
 
 .journey-members {
     width: max-content;
     color: rgba(255, 255, 255, 0.8999999761581421);
-    position: absolute;
-    bottom: 10px;
-    left: 34px;
     font-family: Poppins;
     font-weight: Light;
     font-size: 18px;
-    opacity: 1;
     text-align: left;
+    margin-bottom: 12px;
 }
 
 .journey-leg {
-    width: 830px;
-    height: 63px;
-    background: rgba(37, 37, 37, 1);
-    opacity: 1;
-    position: relative;
-    top: 107px;
-    left: 0px;
-    overflow: hidden;
     margin-bottom: 5px;
+    padding: 10px 20px;
+    background: rgba(37, 37, 37, 1);
+}
+
+.journey-title {
+    display: flex;
+    flex-direction: column;
+    padding: 40px 20px 10px;
 }
 
 .leg-transport {
     width: max-content;
     color: rgba(255, 255, 255, 0.8999999761581421);
-    position: absolute;
     top: 17px;
     left: 292px;
     font-family: Poppins;
@@ -104,7 +84,6 @@
 .leg-locations {
     width: max-content;
     color: rgba(255, 255, 255, 0.8999999761581421);
-    position: absolute;
     top: 17px;
     left: 34px;
     font-family: Poppins;
@@ -117,7 +96,6 @@
 .journey-legs-title {
     width: 71px;
     color: rgba(255, 255, 255, 0.8999999761581421);
-    position: absolute;
     top: 77px;
     left: 34px;
     font-family: Poppins;
@@ -130,30 +108,26 @@
 .journey-locations {
     width: max-content;
     color: rgba(255, 255, 255, 0.8999999761581421);
-    position: absolute;
-    top: 32px;
-    left: 34px;
+
     font-family: Poppins;
     font-weight: SemiBold;
     font-size: 30px;
     opacity: 1;
     text-align: left;
+    margin-bottom: 10px;
 }
 
 .site-info {
-    width: 490px;
-    height: 78px;
-    opacity: 1;
-    position: absolute;
-    top: 158px;
-    left: 457px;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 45px;
+    position: relative;
 }
 
 .site-info-text {
     width: 392px;
     color: rgba(255, 255, 255, 0.8999999761581421);
-    position: absolute;
     top: 27px;
     left: 98px;
     font-family: Poppins;
@@ -163,12 +137,15 @@
     text-align: left;
 }
 
+.site-info {
+    margin-top: 50px;
+}
+
 .site-info-icon {
     width: 78px;
     height: 78px;
     background: rgba(255, 255, 255, 1);
     opacity: 1;
-    position: absolute;
     top: 0px;
     left: 0px;
     border-radius: 50%;
@@ -177,7 +154,6 @@
 .site-title {
     width: 257px;
     color: rgba(255, 255, 255, 1);
-    position: absolute;
     top: 73px;
     left: 450px;
     font-family: Poppins;
