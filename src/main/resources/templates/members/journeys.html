@@ -1,55 +1,160 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" th:href="@{/css/utils/normalize.css}">
-    <link rel="stylesheet" th:href="@{/css/utils/rootVariables.css}">
-    <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
-    <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
-    <link rel="stylesheet" th:href="@{/css/members/journeys.css}">
+  <title>Mis Trayectos</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" th:href="@{/css/utils/normalize.css}">
+  <link rel="stylesheet" th:href="@{/css/utils/rootVariables.css}">
+  <link rel="stylesheet" th:href="@{/css/utils/buttons.css}">
+  <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
+  <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
+  <link rel="stylesheet" th:href="@{/css/members/journeys.css}">
 </head>
 <body>
 <div class="site-size">
 
-    <div th:replace="fragments/menu :: menu"></div>
-    <div th:replace="fragments/footer :: footer"></div>
+  <div th:replace="fragments/menu :: menu"></div>
+  <div th:replace="fragments/footer :: footer"></div>
 
-    <div class="site-body">
-        <div class="site-header">
-            <span class="site-title">Mis Trayectos</span>
-            <div class="site-info">
-                <div class="site-info-icon"></div>
-                <span class="site-info-text">Busca tus trayectos y agrega otro si lo necesitas!</span>
-            </div>
-        </div>
-        <div class="journey-container">
-            <div class="journey-info" th:each="journey: ${allJourneys}">
-                <div class="journey-title">
+  <div class="site-body">
+    <div class="site-header">
+      <span class="site-title">Mis Trayectos</span>
+      <div class="site-info">
+        <div class="site-info-icon"></div>
+        <span class="site-info-text">Busca tus trayectos y agrega otro si lo necesitas!</span>
+      </div>
+    </div>
+
+    <div class="journey-container">
+
+      <div class="journey-info" th:each="journey: ${allJourneys}">
+
+        <div class="journey-title">
                     <span class="journey-locations"
                           th:text="${journey.startingLocation}+'    ->    '+${journey.endingLocation}"></span>
 
-                    <span class="journey-legs-title">Tramos:</span>
-                </div>
-                <div class="journey-leg" th:each="leg: ${journey.legs}">
-                    <span class="leg-transport" th:text="'Transporte: '+${leg.transport}"></span>
-                    <span class="leg-locations" th:text="${leg.startingLocation}+' -> '+${leg.endingLocation}"></span>
-                </div>
-                <div class="journey-footer">
-                    <span class="journey-members">Compartido con:</span>
-                    <form>
-                        <button class="journey-delete-button" type="submit" formmethod="POST" th:formaction="'/miembros/'+${member.id}+'/trayectos/'+${journey.id}">
-                            Borrar
-                        </button>
-                    </form>
-                </div>
-
-            </div>
+          <span class="journey-legs-title">Tramos:</span>
         </div>
+
+        <div class="journey-leg" th:each="leg: ${journey.legs}">
+          <span class="leg-transport" th:text="'Transporte: '+${leg.transport}"></span>
+          <span class="leg-locations" th:text="${leg.startingLocation}+' -> '+${leg.endingLocation}"></span>
+        </div>
+
+        <div class="journey-footer">
+          <span class="journey-members">Compartido con:</span>
+          <form>
+            <button class="standard-button journey-delete-button" type="submit" formmethod="post"
+                    th:formaction="'/miembros/'+${member.id}+'/trayectos/'+${journey.id}">
+              <span class="v185_82">Borrar</span>
+            </button>
+          </form>
+        </div>
+
+      </div>
+
     </div>
 
+
+    <section class="new-journey-section">
+
+      <div class="new-journey-section-line"></div>
+
+      <button class="blue-button new-journey-button" id="new-journey-button">
+        <span class="new-journey-button-text">Nuevo</span>
+      </button>
+
+      <div class="new-journey-container">
+
+        <form class="new-journey" id="new-journey" style="display: none;"
+              th:action="'/miembros/'+${member.id}+'/trayectos/'" method="POST" th:object="${newJourney}">
+
+          <!--journey title-->
+          <div class="v186_94">
+            <div class="v186_91"></div>
+            <span class="v186_92">-></span>
+            <div class="v186_93"></div>
+          </div>
+
+          <span class="v185_88">Tramos:</span>
+
+          <div class="new-journey-legs-container" id="new-journey-leg-container"></div>
+
+          <div class="new-leg" id="new-leg" style="display: none">
+
+            <div class="v186_95">
+              <input class="v186_96" placeholder="Direccion1"  th:field="*{}" type="text"/>
+              <span class="v186_97">-></span>
+              <div class="v186_98"></div>
+            </div>
+
+
+            <div class="v186_101">
+              <select class="v186_102">
+                <option class="v186_103" th:each="tt : ${allTransportTypes}"
+                        th:text="${tt}"
+                        th:value="${tt}">
+                </option>
+              </select>
+            </div>
+
+            <div class="standard-button leg-delete-button" onclick="deleteLeg(this)">
+              <span class="leg-button-text">-</span>
+            </div>
+
+          </div>
+
+          <div class="new-journey-footer">
+            <div class="standard-button leg-add-button" onclick="addNewLeg()">
+              <span class="leg-button-text">+</span>
+            </div>
+
+            <button class="blue-button" id="new-journey-submit" type="submit">
+              <span class="v185_82">Finalizar</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+    </section>
+
+  </div>
+
 </div>
+
+<script>
+    const newJourneyDiv = document.getElementById("new-journey");
+    const newJourneyButton = document.getElementById("new-journey-button");
+    newJourneyButton.onclick = function () {
+        if (newJourneyDiv.style.display !== "none") {
+            newJourneyDiv.style.display = "none";
+        } else {
+            newJourneyDiv.setAttribute("style", "display: flex; flex-direction: column;");
+        }
+    };
+
+    let legIdCounter = 0;
+
+    const newJourneyLegContainer = document.getElementById("new-journey-leg-container");
+
+    function addNewLeg() {
+        const newLeg = document.getElementById("new-leg").cloneNode(true);
+        newLeg.removeAttribute("id");
+        newLeg.setAttribute("index", legIdCounter);
+        newLeg.style.display = "flex";
+        legIdCounter = legIdCounter + 1;
+        newJourneyLegContainer.append(newLeg);
+    }
+
+    function deleteLeg(element) {
+        const leg = element.parentNode;
+        leg.remove();
+    }
+
+</script>
 
 </body>
 </html>

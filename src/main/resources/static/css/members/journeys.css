@@ -1,6 +1,6 @@
 .site-size {
     width: 1920px;
-    height: 1562px;
+    min-height: 1562px;
 }
 
 .site-body {
@@ -34,9 +34,7 @@
 .journey-delete-button {
     padding: 14px 33px;
     margin-bottom: 21px;
-    border-radius: 5px;
     background: #FF1A43;
-
 }
 
 .journey-footer {
@@ -50,8 +48,8 @@
 .journey-members {
     width: max-content;
     color: rgba(255, 255, 255, 0.8999999761581421);
-    font-family: Poppins;
-    font-weight: Light;
+    font-family: Poppins, serif;
+    font-weight: 500;
     font-size: 18px;
     text-align: left;
     margin-bottom: 12px;
@@ -74,8 +72,8 @@
     color: rgba(255, 255, 255, 0.8999999761581421);
     top: 17px;
     left: 292px;
-    font-family: Poppins;
-    font-weight: Light;
+    font-family: Poppins, serif;
+    font-weight: 500;
     font-size: 18px;
     opacity: 1;
     text-align: left;
@@ -86,8 +84,8 @@
     color: rgba(255, 255, 255, 0.8999999761581421);
     top: 17px;
     left: 34px;
-    font-family: Poppins;
-    font-weight: Light;
+    font-family: Poppins, serif;
+    font-weight: 500;
     font-size: 18px;
     opacity: 1;
     text-align: left;
@@ -98,8 +96,8 @@
     color: rgba(255, 255, 255, 0.8999999761581421);
     top: 77px;
     left: 34px;
-    font-family: Poppins;
-    font-weight: Light;
+    font-family: Poppins, serif, serif;
+    font-weight: 500;
     font-size: 18px;
     opacity: 1;
     text-align: left;
@@ -109,8 +107,8 @@
     width: max-content;
     color: rgba(255, 255, 255, 0.8999999761581421);
 
-    font-family: Poppins;
-    font-weight: SemiBold;
+    font-family: Poppins, serif, serif;
+    font-weight: 600;
     font-size: 30px;
     opacity: 1;
     text-align: left;
@@ -130,8 +128,8 @@
     color: rgba(255, 255, 255, 0.8999999761581421);
     top: 27px;
     left: 98px;
-    font-family: Poppins;
-    font-weight: Regular;
+    font-family: Poppins, serif;
+    font-weight: 600;
     font-size: 16px;
     opacity: 1;
     text-align: left;
@@ -146,8 +144,6 @@
     height: 78px;
     background: rgba(255, 255, 255, 1);
     opacity: 1;
-    top: 0px;
-    left: 0px;
     border-radius: 50%;
 }
 
@@ -156,9 +152,265 @@
     color: rgba(255, 255, 255, 1);
     top: 73px;
     left: 450px;
-    font-family: Poppins;
+    font-family: Poppins, serif;
     font-weight: Bold;
     font-size: 36px;
     opacity: 1;
     text-align: left;
+}
+
+
+
+.new-journey-section {
+    width: 830px;
+    background-size: cover;
+    opacity: 1;
+    position: relative;
+    margin-bottom: 64px;
+}
+
+.new-journey-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 70px;
+}
+
+.new-journey-section-line {
+    width: 830px;
+    height: 1px;
+    opacity: 1;
+    position: absolute;
+    top: 25px;
+    background-color: white;
+}
+
+.new-journey {
+    width: 830px;
+    background: rgba(59, 59, 59, 1);
+    border-radius: 50px;
+    opacity: 1;
+    top: 76px;
+    overflow: hidden;
+}
+
+#new-journey-submit {
+    width: 123px;
+    height: 50px;
+    /* position: absolute; */
+    top: 248px;
+    left: 674px;
+}
+
+.v185_82 {
+    width: max-content;
+    color: rgba(0, 0, 0, 1);
+    font-family: Poppins, serif;
+    font-weight: 600;
+    font-size: 18px;
+    opacity: 1;
+    text-align: center;
+}
+
+.new-journey-legs-container {margin-top: 8px;}
+
+.new-leg {
+    background: rgba(37, 37, 37, 1);
+    margin-bottom: 4px;
+    /* align-items: center; */
+    flex-direction: column;
+    padding-left: 34px;
+    padding-right: 34px;
+}
+
+.new-journey-footer {
+    /* height: 107px; */
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    padding: 17px 34px;
+    justify-content: space-between;
+}
+
+.leg-add-button {
+    width: 32px;
+    height: 32px;
+    background: #009000;
+    opacity: 1;
+    margin-bottom: 10px;
+    /* bottom: 42px; */
+    /* left: 33px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.leg-button-text {
+    width: max-content;
+    color: black;
+    position: absolute;
+    font-family: Poppins, serif;
+    font-weight: 600;
+    font-size: 18px;
+    opacity: 1;
+    text-align: center;
+}
+
+.leg-delete-button {
+    width: 32px;
+    height: 32px;
+    background: #FF1A43;
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 16px 0;
+}
+
+.v186_110 {
+    width: max-content;
+    color: black;
+    position: absolute;
+    font-family: Poppins, serif;
+    font-weight: 550;
+    font-size: 18px;
+    opacity: 1;
+    text-align: center;
+}
+
+.v186_95 {
+    /* width: 100%; */
+    display: flex;
+    flex-direction: row;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    /* padding-left: 34px; */
+    /* padding-right: 34px; */
+    justify-content: space-between;
+}
+
+.v186_96 {
+    width: 330px;
+    height: 28px;
+    background: rgba(75, 75, 75, 0.699999988079071);
+    opacity: 1;
+    border-radius: 5px;
+}
+
+.v186_97 {
+    width: 23px;
+    color: rgba(255, 255, 255, 0.8999999761581421);
+    left: 370px;
+    font-family: Poppins, serif;
+    font-weight: 600;
+    font-size: 20px;
+    opacity: 1;
+    text-align: left;
+}
+
+.v186_98 {
+    width: 325px;
+    height: 28px;
+    background: rgba(75, 75, 75, 0.699999988079071);
+    opacity: 1;
+    border-radius: 5px;
+}
+
+.v186_101 {
+    width: 325px;
+    height: 32px;
+    opacity: 1;
+}
+
+.v186_102 {
+    width: 325px;
+    height: 32px;
+    background: rgba(255, 255, 255, 1);
+    opacity: 1;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.10000000149011612);
+    overflow: hidden;
+    font-family: Poppins, serif;
+    padding-left: 5px;
+}
+
+.v186_103 {
+    width: 263px;
+    color: rgba(153, 153, 153, 1);
+    position: absolute;
+    top: 3px;
+    left: 25px;
+    font-family: Poppins, serif;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+}
+
+.v185_88 {
+    width: max-content;
+    color: rgba(255, 255, 255, 0.8999999761581421);
+    font-family: Poppins, serif;
+    font-weight: 500;
+    font-size: 18px;
+    opacity: 1;
+    text-align: left;
+    margin-left: 34px;
+    margin-top: 18px;
+}
+
+.v186_94 {
+    display: flex;
+    flex-direction: row;
+    padding-left: 34px;
+    padding-top: 32px;
+    padding-right: 34px;
+    justify-content: space-between;
+}
+
+.v186_91 {
+    width: 325px;
+    height: 28px;
+    background: rgba(75, 75, 75, 0.699999988079071);
+    opacity: 1;
+    border-radius: 5px;
+}
+
+.v186_92 {
+    width: 35px;
+    color: rgba(255, 255, 255, 0.8999999761581421);
+    font-family: Poppins, serif;
+    font-weight: 600;
+    font-size: 30px;
+    text-align: left;
+}
+
+.v186_93 {
+    width: 325px;
+    height: 28px;
+    background: rgba(75, 75, 75, 0.699999988079071);
+    border-radius: 5px;
+}
+
+.new-journey-button {
+    width: 124px;
+    height: 50px;
+    position: absolute;
+    left: 353px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-journey-button-text {
+    width: max-content;
+    color: black;
+    position: absolute;
+    top: 12px;
+    left: 32px;
+    font-family: Poppins, serif;
+    font-weight: 600;
+    font-size: 18px;
+    opacity: 1;
+    text-align: center;
 }

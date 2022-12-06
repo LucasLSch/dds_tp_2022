@@ -3,9 +3,19 @@
     color: #fff;
     border: none;
     border-radius: 3px;
-    padding: 14px 30px;
+    cursor: pointer;
 }
 
 .blue-button:hover {
-    background: #3db1ff;
+    filter: brightness(1.20);
+}
+
+.standard-button {
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.standard-button:hover {
+    filter: brightness(1.20);
 }

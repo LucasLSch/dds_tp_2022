@@ -1,9 +1,14 @@
 package ddsutn.controllers;
 
 import ddsutn.domain.journey.Journey;
+import ddsutn.domain.journey.Leg;
+import ddsutn.domain.journey.transport.*;
+import ddsutn.domain.location.District;
+import ddsutn.domain.location.Location;
 import ddsutn.domain.organization.Member;
 import ddsutn.dtos.member.JourneyForView;
 import ddsutn.dtos.member.MemberForView;
+import ddsutn.dtos.user.UserForView;
 import ddsutn.security.user.StandardUser;
 import ddsutn.security.user.User;
 import ddsutn.services.JourneySvc;
@@ -17,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -65,6 +71,28 @@ public class MemberController {
 
     Member read = memberSvc.findById(id);
 
+    //dsadsa
+    District dt = new District(1);
+
+    Leg[] legs = {
+        new Leg(new Location(dt, "Rue1", "1"),
+            new Location(dt, "Rue1", "2"),
+            new EcoFriendly(EcoFriendlyType.BICYCLE)),
+
+        new Leg(new Location(dt, "Rue1", "2"),
+            new Location(dt, "Rue1", "3"),
+            new ParticularVehicle(0.6, ParticularVehicleType.CAR, Fuel.OIL)),
+
+        new Leg(new Location(dt, "Rue1", "3"),
+            new Location(dt, "Rue1", "4"),
+            new HiredService(0.3, HiredServiceType.APPLICATION, "SUBER"))
+    };
+
+    JourneyForView journey = new JourneyForView(new Journey(Arrays.asList(legs)));
+    List<JourneyForView> journeyss = Arrays.asList(journey);
+
+    /// dsadsa
+
     try {
       validateUser(id, "redirect:/miembros/{id}/trayectos");
       validateMember(read);
@@ -77,10 +105,21 @@ public class MemberController {
     }
 
     List<JourneyForView> journeys = read.getJourneys().stream().map(JourneyForView::new).collect(Collectors.toList());
-    mav.addObject("allJourneys", journeys);
+    mav.addObject("allJourneys", journeyss);
     mav.addObject("member", new MemberForView(read));
+    mav.addObject("newJourney", new JourneyForView());
+    mav.addObject("allTransportTypes", this.transportTypes());
     mav.setViewName(memberJourneysHtml);
     return mav;
+  }
+
+  private List<String> transportTypes() {
+    return Arrays.asList(
+        "-- Elija un tipo de Transporte --",
+        "EcoFriendly",
+        "Vehículo Particular",
+        "Servicio Contratado",
+        "Transporte Público");
   }
 
   @PostMapping("/{m_id}/trayectos/{t_id}")
@@ -106,6 +145,27 @@ public class MemberController {
     mav.setViewName("redirect:/miembros/" + m_id.toString() + "/trayectos");
     return mav;
   }
+
+//  @PostMapping("/{m_id}/trayectos")
+//  public ModelAndView newJourney(@PathVariable Long m_id, @ModelAttribute("newJourney") JourneyForView journey) {
+//    ModelAndView mav = new ModelAndView();
+//
+//    Member m_read = memberSvc.findById(m_id);
+//
+//    try {
+//      validateUser(m_id, "");
+//      validateMember(m_read);
+//    } catch (IncorrectUserException iue) {
+//      mav.setStatus(HttpStatus.FORBIDDEN);
+//      return mav;
+//    } catch (UserNotFoundException unfe) {
+//      mav.setStatus(unfe.getStatus());
+//      return mav;
+//    }
+//
+//    mav.setViewName("redirect:/miembros/" + m_id.toString() + "/trayectos");
+//    return mav;
+//  }
 
   private void validateUser(Long id, String redirectOption) {
     String name = SecurityContextHolder.getContext().getAuthentication().getName();

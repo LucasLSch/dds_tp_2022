@@ -2,6 +2,7 @@ package ddsutn.dtos.member;
 
 import ddsutn.domain.journey.Journey;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class JourneyForView {
   public String id;
   public String startingLocation;
@@ -18,7 +20,9 @@ public class JourneyForView {
   public List<String> members;
 
   public JourneyForView(Journey someJourney) {
-    this.id = someJourney.getId().toString();
+    Long possibleId = someJourney.getId();
+    if(possibleId == null) this.id = "";
+    else this.id = possibleId.toString();
     this.startingLocation = someJourney.getStartingLocation().print();
     this.endingLocation = someJourney.getEndingLocation().print();
     this.legs = someJourney.getLegList().stream().map(LegForView::new).collect(Collectors.toList());
