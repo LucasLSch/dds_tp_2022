@@ -21,7 +21,7 @@ public class Line {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @OneToMany(cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JoinColumn(name = "line_id")
   @OrderColumn(name = "stop_number")
   private List<Stop> stopList;

@@ -1,5 +1,8 @@
 package ddsutn.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import ddsutn.domain.journey.Journey;
 import ddsutn.domain.journey.Leg;
 import ddsutn.domain.journey.transport.*;
@@ -7,13 +10,16 @@ import ddsutn.domain.location.District;
 import ddsutn.domain.location.Location;
 import ddsutn.domain.organization.Member;
 import ddsutn.dtos.member.JourneyForView;
+import ddsutn.dtos.member.LegForView;
 import ddsutn.dtos.member.MemberForView;
 import ddsutn.dtos.user.UserForView;
 import ddsutn.security.user.StandardUser;
 import ddsutn.security.user.User;
 import ddsutn.services.JourneySvc;
+import ddsutn.services.LineSvc;
 import ddsutn.services.MemberSvc;
 import ddsutn.services.UserSvc;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,10 +28,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 @RequestMapping(value = "/miembros")
@@ -42,6 +47,9 @@ public class MemberController {
 
   @Autowired
   private JourneySvc journeySvc;
+
+  @Autowired
+  private LineSvc lineSvc;
 
   @GetMapping("/{id}")
   public ModelAndView showMember(@PathVariable Long id) {
@@ -66,7 +74,7 @@ public class MemberController {
   }
 
   @GetMapping("/{id}/trayectos")
-  public ModelAndView showJourneys(@PathVariable Long id) {
+  public ModelAndView showJourneys(@PathVariable Long id) throws JsonProcessingException {
     ModelAndView mav = new ModelAndView();
 
     Member read = memberSvc.findById(id);
@@ -109,7 +117,32 @@ public class MemberController {
     mav.addObject("member", new MemberForView(read));
     mav.addObject("newJourney", new JourneyForView());
     mav.addObject("allTransportTypes", this.transportTypes());
+    mav.addObject("lines", lineSvc.findAll());
     mav.setViewName(memberJourneysHtml);
+    return mav;
+  }
+
+  @PostMapping("/{id}/trayectos")
+  public ModelAndView addNewJourney(@PathVariable Long id, @RequestParam String journeyJson) throws JsonProcessingException {
+    ModelAndView mav = new ModelAndView();
+
+    Member read = memberSvc.findById(id);
+
+    try {
+      validateUser(id, "");
+      validateMember(read);
+    } catch (IncorrectUserException iue) {
+      mav.setStatus(HttpStatus.FORBIDDEN);
+      return mav;
+    } catch (UserNotFoundException unfe) {
+      mav.setStatus(unfe.getStatus());
+      return mav;
+    }
+
+    JourneyForView journeyForView = new ObjectMapper().readValue(journeyJson, JourneyForView.class);
+    System.out.println(journeyForView.getLegs().stream().findAny().get().getStartingLocation());
+
+    mav.setViewName("redirect:/miembros/" + id.toString() + "/trayectos");
     return mav;
   }
 

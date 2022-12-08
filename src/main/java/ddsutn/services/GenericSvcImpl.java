@@ -40,4 +40,8 @@ public abstract class GenericSvcImpl<T, ID> {
     this.getRepo().deleteById(id);
   }
 
+  public void deleteAll() {
+    this.getRepo().deleteAll();
+  }
+
 }
