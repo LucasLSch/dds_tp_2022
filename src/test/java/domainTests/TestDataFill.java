@@ -237,11 +237,11 @@ public class TestDataFill {
     Line line3 = new Line(Arrays.asList(stop7, stop8, stop9), "FrenchLine", PublicTransportType.TRAIN);
 
     PublicTransport[] publicTransports = {
-        new PublicTransport(0.5, line1, stop1, stop2),
-        new PublicTransport(0.5, line1, stop2, stop3),
-        new PublicTransport(0.3, line1, stop1, stop2),
-        new PublicTransport(0.8, line2, stop4, stop6),
-        new PublicTransport(1.1, line3, stop7, stop9)
+        new PublicTransport(line1, stop1, stop2),
+        new PublicTransport(line1, stop2, stop3),
+        new PublicTransport(line1, stop1, stop2),
+        new PublicTransport(line2, stop4, stop6),
+        new PublicTransport(line3, stop7, stop9)
     };
 
     transportSvc.saveAll(Arrays.asList(publicTransports));
@@ -252,15 +252,15 @@ public class TestDataFill {
         new EcoFriendly(EcoFriendlyType.BICYCLE),
         new EcoFriendly(EcoFriendlyType.SCOOTER),
         new EcoFriendly(EcoFriendlyType.WALKING),
-        new ParticularVehicle(0.6, ParticularVehicleType.CAR, Fuel.OIL),
-        new ParticularVehicle(1.2, ParticularVehicleType.VAN, Fuel.GASOIL),
-        new ParticularVehicle(0.4, ParticularVehicleType.CAR, Fuel.GNC),
-        new ParticularVehicle(0.01, ParticularVehicleType.CAR, Fuel.ELECTRIC),
-        new ParticularVehicle(0.3, ParticularVehicleType.MOTORBIKE, Fuel.OIL),
-        new HiredService(0.5, HiredServiceType.TAXI, "Taxi-Driver"),
-        new HiredService(0.3, HiredServiceType.APPLICATION, "SUBER"),
-        new HiredService(0.01, HiredServiceType.APPLICATION, "ECOFY"),
-        new HiredService(0.6, HiredServiceType.CAB, "Taxin't")
+        new ParticularVehicle(ParticularVehicleType.CAR, Fuel.OIL),
+        new ParticularVehicle(ParticularVehicleType.VAN, Fuel.GASOIL),
+        new ParticularVehicle(ParticularVehicleType.CAR, Fuel.GNC),
+        new ParticularVehicle(ParticularVehicleType.CAR, Fuel.ELECTRIC),
+        new ParticularVehicle(ParticularVehicleType.MOTORBIKE, Fuel.OIL),
+        new HiredService(HiredServiceType.TAXI, "Taxi-Driver"),
+        new HiredService(HiredServiceType.APPLICATION, "SUBER"),
+        new HiredService(HiredServiceType.APPLICATION, "ECOFY"),
+        new HiredService(HiredServiceType.CAB, "Taxin't")
     };
 
     transportSvc.saveAll(Arrays.asList(transports));

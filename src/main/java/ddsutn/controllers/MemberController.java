@@ -74,32 +74,10 @@ public class MemberController {
   }
 
   @GetMapping("/{id}/trayectos")
-  public ModelAndView showJourneys(@PathVariable Long id) throws JsonProcessingException {
+  public ModelAndView showJourneys(@PathVariable Long id) {
     ModelAndView mav = new ModelAndView();
 
     Member read = memberSvc.findById(id);
-
-    //dsadsa
-    District dt = new District(1);
-
-    Leg[] legs = {
-        new Leg(new Location(dt, "Rue1", "1"),
-            new Location(dt, "Rue1", "2"),
-            new EcoFriendly(EcoFriendlyType.BICYCLE)),
-
-        new Leg(new Location(dt, "Rue1", "2"),
-            new Location(dt, "Rue1", "3"),
-            new ParticularVehicle(0.6, ParticularVehicleType.CAR, Fuel.OIL)),
-
-        new Leg(new Location(dt, "Rue1", "3"),
-            new Location(dt, "Rue1", "4"),
-            new HiredService(0.3, HiredServiceType.APPLICATION, "SUBER"))
-    };
-
-    JourneyForView journey = new JourneyForView(new Journey(Arrays.asList(legs)));
-    List<JourneyForView> journeyss = Arrays.asList(journey);
-
-    /// dsadsa
 
     try {
       validateUser(id, "redirect:/miembros/{id}/trayectos");
@@ -113,10 +91,9 @@ public class MemberController {
     }
 
     List<JourneyForView> journeys = read.getJourneys().stream().map(JourneyForView::new).collect(Collectors.toList());
-    mav.addObject("allJourneys", journeyss);
+    mav.addObject("allJourneys", journeys);
     mav.addObject("member", new MemberForView(read));
     mav.addObject("newJourney", new JourneyForView());
-    mav.addObject("allTransportTypes", this.transportTypes());
     mav.addObject("lines", lineSvc.findAll());
     mav.setViewName(memberJourneysHtml);
     return mav;
@@ -140,19 +117,16 @@ public class MemberController {
     }
 
     JourneyForView journeyForView = new ObjectMapper().readValue(journeyJson, JourneyForView.class);
-    System.out.println(journeyForView.getLegs().stream().findAny().get().getStartingLocation());
+
+    Journey newJourney = journeyForView.toJourney(read, lineSvc);
+
+    read.addJourney(newJourney);
+
+    this.journeySvc.save(newJourney);
+    this.memberSvc.save(read);
 
     mav.setViewName("redirect:/miembros/" + id.toString() + "/trayectos");
     return mav;
-  }
-
-  private List<String> transportTypes() {
-    return Arrays.asList(
-        "-- Elija un tipo de Transporte --",
-        "EcoFriendly",
-        "Vehículo Particular",
-        "Servicio Contratado",
-        "Transporte Público");
   }
 
   @PostMapping("/{m_id}/trayectos/{t_id}")
@@ -178,27 +152,6 @@ public class MemberController {
     mav.setViewName("redirect:/miembros/" + m_id.toString() + "/trayectos");
     return mav;
   }
-
-//  @PostMapping("/{m_id}/trayectos")
-//  public ModelAndView newJourney(@PathVariable Long m_id, @ModelAttribute("newJourney") JourneyForView journey) {
-//    ModelAndView mav = new ModelAndView();
-//
-//    Member m_read = memberSvc.findById(m_id);
-//
-//    try {
-//      validateUser(m_id, "");
-//      validateMember(m_read);
-//    } catch (IncorrectUserException iue) {
-//      mav.setStatus(HttpStatus.FORBIDDEN);
-//      return mav;
-//    } catch (UserNotFoundException unfe) {
-//      mav.setStatus(unfe.getStatus());
-//      return mav;
-//    }
-//
-//    mav.setViewName("redirect:/miembros/" + m_id.toString() + "/trayectos");
-//    return mav;
-//  }
 
   private void validateUser(Long id, String redirectOption) {
     String name = SecurityContextHolder.getContext().getAuthentication().getName();

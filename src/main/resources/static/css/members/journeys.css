@@ -38,11 +38,11 @@
 }
 
 .journey-footer {
-    height: 107px;
+    height: 90px;
     display: flex;
     align-items: end;
     justify-content: space-between;
-    padding: 0 34px;
+    padding: 0 30px;
 }
 
 .journey-members {
@@ -52,19 +52,20 @@
     font-weight: 500;
     font-size: 18px;
     text-align: left;
-    margin-bottom: 12px;
+    margin-bottom: 38px;
 }
 
 .journey-leg {
     margin-bottom: 5px;
-    padding: 10px 20px;
+    padding: 10px 30px;
     background: rgba(37, 37, 37, 1);
+    display: flex;
 }
 
 .journey-title {
     display: flex;
     flex-direction: column;
-    padding: 40px 20px 10px;
+    padding: 40px 30px 10px;
 }
 
 .leg-transport {
@@ -80,7 +81,7 @@
 }
 
 .leg-locations {
-    width: max-content;
+    width: 400px;
     color: rgba(255, 255, 255, 0.8999999761581421);
     top: 17px;
     left: 34px;
@@ -101,18 +102,18 @@
     font-size: 18px;
     opacity: 1;
     text-align: left;
+    margin-left: 30px;
 }
 
 .journey-locations {
     width: max-content;
     color: rgba(255, 255, 255, 0.8999999761581421);
-
     font-family: Poppins, serif, serif;
     font-weight: 600;
     font-size: 30px;
     opacity: 1;
     text-align: left;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .site-info {

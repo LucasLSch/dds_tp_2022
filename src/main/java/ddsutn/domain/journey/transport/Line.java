@@ -65,6 +65,10 @@ public class Line {
     return new Distance(finalValue, new Unit(BaseUnit.METER, 3, Proportionality.DIRECT));
   }
 
+  public Stop getStopById(Long id) {
+    return this.stopList.stream().filter(stop -> stop.getId().equals(id)).findFirst().orElse(null);
+  }
+
   public String print() {
     return this.name + " (" + this.type.name() + ")";
   }

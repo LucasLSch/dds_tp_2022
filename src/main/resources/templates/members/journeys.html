@@ -33,14 +33,16 @@
 
                 <div class="journey-title">
                     <span class="journey-locations"
-                          th:text="${journey.startingLocation}+'    ->    '+${journey.endingLocation}"></span>
-
-                    <span class="journey-legs-title">Tramos:</span>
+                          th:text="${journey.startingLocation}+'   ->   '+${journey.endingLocation}"></span>
                 </div>
 
-                <div class="journey-leg" th:each="leg: ${journey.legs}">
-                    <span class="leg-transport" th:text="'Transporte: '+${leg.transportType}"></span>
-                    <span class="leg-locations" th:text="${leg.startingLocation}+' -> '+${leg.endingLocation}"></span>
+                <span class="journey-legs-title">Tramos:</span>
+
+                <div class="leg-container">
+                    <div class="journey-leg" th:each="leg: ${journey.legs}">
+                        <span class="leg-locations" th:text="${leg.startingLocation}+' -> '+${leg.endingLocation}"></span>
+                        <span class="leg-transport" th:text="'Transporte: '+${leg.transportType}"></span>
+                    </div>
                 </div>
 
                 <div class="journey-footer">
@@ -136,51 +138,51 @@
             <div class="v186_101">
               <select class="v186_102" onchange="transportForm(this)" id="transportType-${legIdCounter}">
                 <option class="v186_103" value="">-- Elija un tipo de Transporte --</option>
-                <option class="v186_103" value="EcoFriendly">EcoFriendly</option>
-                <option class="v186_103" value="Vehículo Particular">Vehículo Particular</option>
-                <option class="v186_103" value="Servicio Contratado">Servicio Contratado</option>
-                <option class="v186_103" value="Transporte Público">Transporte Público</option>
+                <option class="v186_103" value="ecoFriendly">EcoFriendly</option>
+                <option class="v186_103" value="particularVehicle">Vehículo Particular</option>
+                <option class="v186_103" value="hiredService">Servicio Contratado</option>
+                <option class="v186_103" value="publicTransport">Transporte Público</option>
               </select>
             </div>
 
-            <div class="v186_101" id="EcoFriendly-${legIdCounter}" style="display: none;">
+            <div class="v186_101" id="ecoFriendly-${legIdCounter}" style="display: none;">
               <select class="v186_102" id="efType-${legIdCounter}">
                 <option class="v186_103" value="">-- Elija una opcion --</option>
-                <option class="v186_103" value="Bicicleta">Bicicleta</option>
-                <option class="v186_103" value="Scooter">Scooter</option>
-                <option class="v186_103" value="caminata">Caminata</option>
+                <option class="v186_103" value="BICYCLE">Bicicleta</option>
+                <option class="v186_103" value="SCOOTER">Scooter</option>
+                <option class="v186_103" value="WALKING">Caminata</option>
               </select>
             </div>
 
-            <div class="v186_101" id="Servicio Contratado-${legIdCounter}" style="display: none;">
+            <div class="v186_101" id="hiredService-${legIdCounter}" style="display: none;">
               <select class="v186_102" id="hsType-${legIdCounter}">
                 <option class="v186_103" value="">-- Elija una opcion --</option>
-                <option class="v186_103" value="Taxi">Taxi</option>
-                <option class="v186_103" value="Remis">Remis</option>
-                <option class="v186_103" value="Aplicacion">Aplicacion</option>
+                <option class="v186_103" value="TAXI">Taxi</option>
+                <option class="v186_103" value="CAB">Remis</option>
+                <option class="v186_103" value="APPLICATION">Aplicacion</option>
               </select>
 
               <input class="v186_96" placeholder="Nombre" type="text" id="hsName-${legIdCounter}"/>
             </div>
 
-            <div class="v186_101" id="Vehículo Particular-${legIdCounter}" style="display: none;">
+            <div class="v186_101" id="particularVehicle-${legIdCounter}" style="display: none;">
               <select class="v186_102" id="pvType-${legIdCounter}">
                 <option class="v186_103" value="">-- Elija una opcion --</option>
-                <option class="v186_103" value="Auto">Auto</option>
-                <option class="v186_103" value="Moto">Moto</option>
-                <option class="v186_103" value="Camioneta">Camioneta</option>
+                <option class="v186_103" value="CAR">Auto</option>
+                <option class="v186_103" value="MOTORBIKE">Moto</option>
+                <option class="v186_103" value="VAN">Camioneta</option>
               </select>
 
               <select class="v186_102" id="pvFuel-${legIdCounter}">
                 <option class="v186_103" value="">-- Elija una opcion --</option>
-                <option class="v186_103" value="Nafta">Nafta</option>
-                <option class="v186_103" value="Gas">Gas</option>
-                <option class="v186_103" value="Gas Oil">Gas Oil</option>
-                <option class="v186_103" value="Electricidad">Electricidad</option>
+                <option class="v186_103" value="OIL">Nafta</option>
+                <option class="v186_103" value="GNC">Gas</option>
+                <option class="v186_103" value="GASOIL">Gas Oil</option>
+                <option class="v186_103" value="ELECTRIC">Electricidad</option>
               </select>
             </div>
 
-            <div class="v186_101" id="Transporte Público-${legIdCounter}" style="display: none;">
+            <div class="v186_101" id="publicTransport-${legIdCounter}" style="display: none;">
               <select class="v186_102" id="ptLineId-${legIdCounter}" onchange="stopForm(this)">
                 <option class="v186_103" value="">-- Elija una opcion --</option>`;
         parseLines.forEach((line) => {
@@ -230,10 +232,10 @@
         let id = element.getAttribute("id");
         let index = id.split("-")[1];
         let value = element.value;
-        document.getElementById(`EcoFriendly-${index}`).setAttribute("style", "display: none");
-        document.getElementById(`Servicio Contratado-${index}`).setAttribute("style", "display: none");
-        document.getElementById(`Vehículo Particular-${index}`).setAttribute("style", "display: none");
-        document.getElementById(`Transporte Público-${index}`).setAttribute("style", "display: none");
+        document.getElementById(`ecoFriendly-${index}`).setAttribute("style", "display: none");
+        document.getElementById(`hiredService-${index}`).setAttribute("style", "display: none");
+        document.getElementById(`particularVehicle-${index}`).setAttribute("style", "display: none");
+        document.getElementById(`publicTransport-${index}`).setAttribute("style", "display: none");
         document.getElementById(`${value}-${index}`).setAttribute("style", "display: flex");
     }
 
@@ -256,23 +258,25 @@
             "endingLocation": undefined,
             "members": undefined,
             "legs": legsArray.map(id => {
-                let lineId = document.getElementById("ptLineName-" + id) === null ? undefined : document.getElementById("ptLineName-" + id).value;
+                let lineId = document.getElementById("ptLineId-" + id) === null ? undefined : document.getElementById("ptLineId-" + id).value;
                 return {
                     startingLocation: document.getElementById("startingLocation-" + id).value,
                     endingLocation: document.getElementById("endingLocation-" + id).value,
                     transportType: document.getElementById("transportType-" + id).value,
                     efType: document.getElementById("efType-" + id) === null ? undefined : document.getElementById("efType-" + id).value,
-                    hfType: document.getElementById("hfType-" + id) === null ? undefined : document.getElementById("hfType-" + id).value,
-                    hfName: document.getElementById("hfName-" + id) === null ? undefined : document.getElementById("hfName-" + id).value,
+                    hsType: document.getElementById("hsType-" + id) === null ? undefined : document.getElementById("hsType-" + id).value,
+                    hsName: document.getElementById("hsName-" + id) === null ? undefined : document.getElementById("hsName-" + id).value,
                     pvType: document.getElementById("pvType-" + id) === null ? undefined : document.getElementById("pvType-" + id).value,
                     pvFuel: document.getElementById("pvFuel-" + id) === null ? undefined : document.getElementById("pvFuel-" + id).value,
                     ptLineId: lineId,
-                    ptStop1: document.getElementById("ptStop1-" + lineId + "_" + id) === null ? undefined : document.getElementById("ptStop1-" + id).value,
-                    ptStop2: document.getElementById("ptStop2-" + lineId + "_" + id) === null ? undefined : document.getElementById("ptStop2-" + id).value
+                    ptStop1: document.getElementById("ptStop1-" + lineId + "_" + id) === null ? undefined : document.getElementById("ptStop1-" + lineId + "_" + id).value,
+                    ptStop2: document.getElementById("ptStop2-" + lineId + "_" + id) === null ? undefined : document.getElementById("ptStop2-" + lineId + "_" + id).value
                 }
             }
             )
         })
+
+        //TODO validar campos vacios y setear un booleano cosa que aparezca un mensaje en el html arriba
 
         document.getElementById("journeyJson").setAttribute("value", result);
         document.getElementById("new-journey").submit();

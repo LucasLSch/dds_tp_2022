@@ -25,11 +25,10 @@ public class PublicTransport extends Transport {
   @JoinColumn(name = "pt_ending_stop_id")
   private Stop endingStop;
 
-  public PublicTransport(Double fuelConsumptionPerKm,
-                         Line line,
+  public PublicTransport(Line line,
                          Stop startingStop,
                          Stop endingStop) {
-    super(fuelConsumptionPerKm);
+    super(5); //TODO fix
     this.line = line;
     this.startingStop = startingStop;
     this.endingStop = endingStop;

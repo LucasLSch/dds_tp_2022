@@ -38,9 +38,9 @@ public class TransportTest extends TestDataFill {
     dummyStops.add(dummyStartStop);
     dummyStops.add(dummyEndStop);
     dummyLine = new Line(dummyStops, "Cool line", PublicTransportType.BUS);
-    dummyPublic = new PublicTransport(5d, dummyLine, dummyStartStop, dummyEndStop);
-    dummyHiredService = new HiredService(10d, HiredServiceType.TAXI, "Radio Taxi");
-    dummyParticularVehicle = new ParticularVehicle(15d, ParticularVehicleType.VAN, Fuel.OIL);
+    dummyPublic = new PublicTransport(dummyLine, dummyStartStop, dummyEndStop);
+    dummyHiredService = new HiredService(HiredServiceType.TAXI, "Radio Taxi");
+    dummyParticularVehicle = new ParticularVehicle(ParticularVehicleType.VAN, Fuel.OIL);
     dummyEco = new EcoFriendly(EcoFriendlyType.BICYCLE);
   }
 

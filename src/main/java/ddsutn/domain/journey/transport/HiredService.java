@@ -16,8 +16,8 @@ public class HiredService extends Transport {
   @Column(name = "hs_name")
   private String name;
 
-  public HiredService(Double fuelConsumptionPerKm, HiredServiceType hsType, String serviceName) {
-    super(fuelConsumptionPerKm);
+  public HiredService(HiredServiceType hsType, String serviceName) {
+    super(10);
     this.hsType = hsType;
     this.name = serviceName;
   }

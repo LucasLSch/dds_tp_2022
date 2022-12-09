@@ -72,11 +72,11 @@ public class OrganizationLoaderForTests implements ApplicationRunner {
 
           new Leg(new Location(dt, "Rue1", "2"),
               new Location(dt, "Rue1", "3"),
-              new ParticularVehicle(0.6, ParticularVehicleType.CAR, Fuel.OIL)),
+              new ParticularVehicle(ParticularVehicleType.CAR, Fuel.OIL)),
 
           new Leg(new Location(dt, "Rue1", "3"),
               new Location(dt, "Rue1", "4"),
-              new HiredService(0.3, HiredServiceType.APPLICATION, "SUBER"))
+              new HiredService(HiredServiceType.APPLICATION, "SUBER"))
       };
 
       Journey journey = new Journey(Arrays.asList(legs));

@@ -1,6 +1,9 @@
 package ddsutn.dtos.member;
 
 import ddsutn.domain.journey.Journey;
+import ddsutn.domain.journey.Leg;
+import ddsutn.domain.organization.Member;
+import ddsutn.services.LineSvc;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,5 +32,10 @@ public class JourneyForView {
     this.endingLocation = someJourney.getEndingLocation().print();
     this.legs = someJourney.getLegList().stream().map(LegForView::new).collect(Collectors.toList());
     this.members = someJourney.getLegList().stream().map(Objects::toString).collect(Collectors.toList());
+  }
+
+  public Journey toJourney(Member owner, LineSvc lineSvc) {
+    List<Leg> resultLegs = this.legs.stream().map(l -> l.toLeg(lineSvc)).collect(Collectors.toList());
+    return new Journey(resultLegs);
   }
 }

@@ -17,8 +17,8 @@ public class ParticularVehicle extends Transport {
   @Enumerated(value = EnumType.STRING)
   private Fuel fuel;
 
-  public ParticularVehicle(Double fuelConsumptionPerKm, ParticularVehicleType type, Fuel fuel) {
-    super(fuelConsumptionPerKm);
+  public ParticularVehicle(ParticularVehicleType type, Fuel fuel) {
+    super(15);
     this.type = type;
     this.fuel = fuel;
   }
