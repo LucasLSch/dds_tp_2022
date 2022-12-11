@@ -218,7 +218,7 @@
         legsArray.push(legIdCounter.toString());
 
         legIdCounter = legIdCounter + 1;
-        newJourneyLegContainer.innerHTML = newJourneyLegContainer.innerHTML + template;
+        newJourneyLegContainer.insertAdjacentHTML("beforeend", template);
     }
 
     function deleteLeg(element) {
