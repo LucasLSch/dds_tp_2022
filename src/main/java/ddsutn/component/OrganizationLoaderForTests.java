@@ -9,13 +9,12 @@ import ddsutn.domain.organization.DocType;
 import ddsutn.domain.organization.Member;
 import ddsutn.domain.organization.OrgType;
 import ddsutn.domain.organization.Organization;
-import ddsutn.services.JourneySvc;
-import ddsutn.services.LocationSvc;
-import ddsutn.services.MemberSvc;
-import ddsutn.services.OrganizationSvc;
+import ddsutn.security.user.OrgAdminUser;
+import ddsutn.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -30,13 +29,21 @@ public class OrganizationLoaderForTests implements ApplicationRunner {
   private MemberSvc memberSvc;
 
   @Autowired
+  private UserSvc userSvc;
+
+  @Autowired
   private LocationSvc locationSvc;
 
   @Autowired
   private JourneySvc journeySvc;
 
+  @Autowired
+  private BCryptPasswordEncoder bCryptPasswordEncoder;
+
   @Override
   public void run(ApplicationArguments args) throws Exception {
+
+    String encodedPassword = bCryptPasswordEncoder.encode("Contr@5enia");
 
     if (this.organizationSvc.findAll().isEmpty()) {
       District dt = new District(1);
@@ -49,10 +56,13 @@ public class OrganizationLoaderForTests implements ApplicationRunner {
       org1.createSector("manzana");
 
       Organization[] orgs = {
-          org1,
           org2,
           org3
       };
+
+      OrgAdminUser orgCeo = new OrgAdminUser("orgAdmin", encodedPassword, org1);
+
+      this.userSvc.save(orgCeo);
 
       this.organizationSvc.saveAll(Arrays.asList(orgs));
     }

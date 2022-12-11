@@ -33,7 +33,7 @@ public class SecurityConfig {
             .disable()
             .authorizeRequests()
             .antMatchers("/calculadoraHC", "/organizaciones/**")
-            .hasAnyAuthority("ADMINISTRATOR_USER", "STANDARD_USER")
+            .hasAnyAuthority("ADMINISTRATOR_USER", "STANDARD_USER", "ORG_ADMIN_USER")
 
             .antMatchers("/miembros/**")
             .hasAuthority("STANDARD_USER")

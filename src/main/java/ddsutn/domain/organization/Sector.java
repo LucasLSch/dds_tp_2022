@@ -98,4 +98,7 @@ public class Sector {
     return getCarbonFootprint(CarbonFootprint.getDefaultUnit());
   }
 
+  public Boolean hasPendingApplications() {
+    return this.workApplications.stream().anyMatch(wa -> wa.stateIs(WorkApplicationState.PENDING));
+  }
 }

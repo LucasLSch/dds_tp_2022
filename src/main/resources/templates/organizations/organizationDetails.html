@@ -39,7 +39,7 @@
                 <tr th:each="sector: ${allOrgSectors}">
                     <div class="v104_145">
                         <div class="v104_138"></div>
-                        <div class="v104_153">
+                        <div class="v104_153" th:if="${isStandardUser}">
                             <div class="v104_155"></div>
                             <form method="POST" th:action="'/organizaciones/'+${org.id}+'/sectors/'+${sector.id}+'/aplicaciones'">
                                 <button class="blue-button" type="submit">

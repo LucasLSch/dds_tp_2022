@@ -44,4 +44,15 @@ public class WorkApplication {
     this.state = WorkApplicationState.REJECTED;
   }
 
+  public String getNames() {
+    return this.member.getName() + " " + this.member.getSurname();
+  }
+
+  public String getDocs() {
+    return this.member.getDocType() + ": " + this.member.getDocNumber();
+  }
+
+  public String getId() {
+    return this.member.getId().toString() + '_' + this.sector.getId().toString();
+  }
 }
