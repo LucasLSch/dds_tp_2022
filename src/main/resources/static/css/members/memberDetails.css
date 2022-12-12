@@ -591,22 +591,15 @@ body {
 .v147_134 {
     width: 123px;
     height: 50px;
-    background: rgba(26, 163, 255, 1);
     opacity: 1;
     position: absolute;
     top: 0px;
     left: 0px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    overflow: hidden;
 }
 
 .v147_135 {
     width: 91px;
     color: rgba(0, 0, 0, 1);
-    position: absolute;
-    top: 12px;
-    left: 16px;
     font-family: Poppins;
     font-weight: SemiBold;
     font-size: 18px;

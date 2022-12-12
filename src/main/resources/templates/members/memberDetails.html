@@ -6,6 +6,7 @@
   <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" th:href="@{/css/utils/normalize.css}">
   <link rel="stylesheet" th:href="@{/css/utils/rootVariables.css}">
+  <link rel="stylesheet" th:href="@{/css/utils/buttons.css}">
   <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
   <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
   <link rel="stylesheet" th:href="@{/css/members/memberDetails.css}">
@@ -56,10 +57,13 @@
             <span class="v147_110" th:text="'Teléfono: '+${member.phoneNumber}"></span>
             <span class="v147_111">Información General</span>
             <span class="v147_112">FuturaFoto?</span>
-            <div class="v147_133">
-                <div class="v147_134"></div>
-                <span class="v147_135">Trayectos</span>
-            </div>
+            <form class="v147_133">
+                <button class="blue-button v147_134" type="submit" formmethod="get"
+                        th:formaction="'/miembros/'+${member.id}+'/trayectos'">
+                    <span class="v147_135">Trayectos</span>
+                </button>
+            </form>
+
         </div>
         <span class="v147_113" th:text="${member.name}+' '+${member.surname}"></span>
 
