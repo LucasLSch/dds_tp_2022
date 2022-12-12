@@ -415,3 +415,9 @@
     opacity: 1;
     text-align: center;
 }
+
+form input {
+    color: white;
+    padding-left: 10px;
+    font-family: Poppins;
+}

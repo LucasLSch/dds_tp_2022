@@ -1,107 +1,108 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mis Trayectos</title>
-    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" th:href="@{/css/utils/normalize.css}">
-    <link rel="stylesheet" th:href="@{/css/utils/rootVariables.css}">
-    <link rel="stylesheet" th:href="@{/css/utils/buttons.css}">
-    <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
-    <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
-    <link rel="stylesheet" th:href="@{/css/members/journeys.css}">
+  <title>Mis Trayectos</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" th:href="@{/css/utils/normalize.css}">
+  <link rel="stylesheet" th:href="@{/css/utils/rootVariables.css}">
+  <link rel="stylesheet" th:href="@{/css/utils/buttons.css}">
+  <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
+  <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
+  <link rel="stylesheet" th:href="@{/css/members/journeys.css}">
 </head>
 <body>
 <div class="site-size">
 
-    <div th:replace="fragments/menu :: menu"></div>
-    <div th:replace="fragments/footer :: footer"></div>
+  <div th:replace="fragments/menu :: menu"></div>
+  <div th:replace="fragments/footer :: footer"></div>
 
-    <div class="site-body">
-        <div class="site-header">
-            <span class="site-title">Mis Trayectos</span>
-            <div class="site-info">
-                <div class="site-info-icon"></div>
-                <span class="site-info-text">Busca tus trayectos y agrega otro si lo necesitas!</span>
-            </div>
-        </div>
+  <div class="site-body">
 
-        <div class="journey-container">
+    <div class="site-header">
+      <span class="site-title">Mis Trayectos</span>
+      <div class="site-info">
+        <img alt="PencilIcon" class="site-info-icon" th:src="@{css/members/img/description_icon.jpg}">
+        <span class="site-info-text">Busca tus trayectos y agrega otro si lo necesitas!</span>
+      </div>
+    </div>
 
-            <div class="journey-info" th:each="journey: ${allJourneys}">
+    <div class="journey-container">
 
-                <div class="journey-title">
+      <div class="journey-info" th:each="journey: ${allJourneys}">
+
+        <div class="journey-title">
                     <span class="journey-locations"
                           th:text="${journey.startingLocation}+'   ->   '+${journey.endingLocation}"></span>
-                </div>
-
-                <span class="journey-legs-title">Tramos:</span>
-
-                <div class="leg-container">
-                    <div class="journey-leg" th:each="leg: ${journey.legs}">
-                        <span class="leg-locations" th:text="${leg.startingLocation}+' -> '+${leg.endingLocation}"></span>
-                        <span class="leg-transport" th:text="'Transporte: '+${leg.transportType}"></span>
-                    </div>
-                </div>
-
-                <div class="journey-footer">
-                    <span class="journey-members">Compartido con:</span>
-                    <form>
-                        <button class="standard-button journey-delete-button" type="submit" formmethod="post"
-                                th:formaction="'/miembros/'+${member.id}+'/trayectos/'+${journey.id}">
-                            <span class="v185_82">Borrar</span>
-                        </button>
-                    </form>
-                </div>
-
-            </div>
-
         </div>
 
+        <span class="journey-legs-title">Tramos:</span>
 
-        <section class="new-journey-section">
+        <div class="leg-container">
+          <div class="journey-leg" th:each="leg: ${journey.legs}">
+            <span class="leg-locations" th:text="${leg.startingLocation}+' -> '+${leg.endingLocation}"></span>
+            <span class="leg-transport" th:text="'Transporte: '+${leg.transportType}"></span>
+          </div>
+        </div>
 
-            <div class="new-journey-section-line"></div>
-
-            <button class="blue-button new-journey-button" id="new-journey-button">
-                <span class="new-journey-button-text">Nuevo</span>
+        <div class="journey-footer">
+          <span class="journey-members">Compartido con:</span>
+          <form>
+            <button class="standard-button journey-delete-button" type="submit" formmethod="post"
+                    th:formaction="'/miembros/'+${member.id}+'/trayectos/'+${journey.id}">
+              <span class="v185_82">Borrar</span>
             </button>
+          </form>
+        </div>
 
-            <div class="new-journey-container">
-
-                <form class="new-journey" id="new-journey" style="display: none;"
-                      th:action="'/miembros/'+${member.id}+'/trayectos/'" method="POST" th:object="${newJourney}">
-
-                  <input style="display: none" id="journeyJson" name="journeyJson"/>
-
-                    <!--journey title-->
-                    <div class="v186_94">
-                        <div class="v186_91" id="init-loc"></div>
-                        <span class="v186_92">-></span>
-                        <div class="v186_93" id="end-loc"></div>
-                    </div>
-
-                    <span class="v185_88">Tramos:</span>
-
-                    <div class="new-journey-legs-container" id="new-journey-leg-container"></div>
-
-                    <div class="new-journey-footer">
-                        <div class="standard-button leg-add-button" onclick="addNewLeg()">
-                            <span class="leg-button-text">+</span>
-                        </div>
-
-                        <button class="blue-button" id="new-journey-submit" onclick="submitJourney()">
-                            <span class="v185_82">Finalizar</span>
-                        </button>
-                    </div>
-
-                </form>
-            </div>
-
-        </section>
+      </div>
 
     </div>
+
+
+    <section class="new-journey-section">
+
+      <div class="new-journey-section-line"></div>
+
+      <button class="blue-button new-journey-button" id="new-journey-button">
+        <span class="new-journey-button-text">Nuevo</span>
+      </button>
+
+      <div class="new-journey-container">
+
+        <form class="new-journey" id="new-journey" style="display: none;"
+              th:action="'/miembros/'+${member.id}+'/trayectos/'" method="POST" th:object="${newJourney}">
+
+          <input style="display: none" id="journeyJson" name="journeyJson"/>
+
+          <!--journey title-->
+          <div class="v186_94">
+            <div class="v186_91" id="init-loc"></div>
+            <span class="v186_92">-></span>
+            <div class="v186_93" id="end-loc"></div>
+          </div>
+
+          <span class="v185_88">Tramos:</span>
+
+          <div class="new-journey-legs-container" id="new-journey-leg-container"></div>
+
+          <div class="new-journey-footer">
+            <div class="standard-button leg-add-button" onclick="addNewLeg()">
+              <span class="leg-button-text">+</span>
+            </div>
+
+            <button class="blue-button" id="new-journey-submit" onclick="submitJourney()">
+              <span class="v185_82">Finalizar</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+    </section>
+
+  </div>
 
 </div>
 
@@ -130,9 +131,9 @@
         let template = `<div class="new-leg" id="newLeg-${legIdCounter}" style="display: flex;">
 
             <div class="v186_95">
-              <input class="v186_96" placeholder="Direccion 1" type="text" id="startingLocation-${legIdCounter}"/>
+              <input class="v186_96" placeholder="Calle - Altura (Desde)" type="text" id="startingLocation-${legIdCounter}"/>
               <span class="v186_97">-></span>
-              <input class="v186_98" placeholder="Direccion 2" type="text" id="endingLocation-${legIdCounter}"/>
+              <input class="v186_98" placeholder="Calle - Altura (Hasta)" type="text" id="endingLocation-${legIdCounter}"/>
             </div>
 
             <div class="v186_101">
@@ -147,7 +148,7 @@
 
             <div class="v186_101" id="ecoFriendly-${legIdCounter}" style="display: none;">
               <select class="v186_102" id="efType-${legIdCounter}">
-                <option class="v186_103" value="">-- Elija una opcion --</option>
+                <option class="v186_103" value="">-- Elija la categoría --</option>
                 <option class="v186_103" value="BICYCLE">Bicicleta</option>
                 <option class="v186_103" value="SCOOTER">Scooter</option>
                 <option class="v186_103" value="WALKING">Caminata</option>
@@ -156,7 +157,7 @@
 
             <div class="v186_101" id="hiredService-${legIdCounter}" style="display: none;">
               <select class="v186_102" id="hsType-${legIdCounter}">
-                <option class="v186_103" value="">-- Elija una opcion --</option>
+                <option class="v186_103" value="">-- Elija la categoría --</option>
                 <option class="v186_103" value="TAXI">Taxi</option>
                 <option class="v186_103" value="CAB">Remis</option>
                 <option class="v186_103" value="APPLICATION">Aplicacion</option>
@@ -167,14 +168,14 @@
 
             <div class="v186_101" id="particularVehicle-${legIdCounter}" style="display: none;">
               <select class="v186_102" id="pvType-${legIdCounter}">
-                <option class="v186_103" value="">-- Elija una opcion --</option>
+                <option class="v186_103" value="">-- Elija la categoría --</option>
                 <option class="v186_103" value="CAR">Auto</option>
                 <option class="v186_103" value="MOTORBIKE">Moto</option>
                 <option class="v186_103" value="VAN">Camioneta</option>
               </select>
 
               <select class="v186_102" id="pvFuel-${legIdCounter}">
-                <option class="v186_103" value="">-- Elija una opcion --</option>
+                <option class="v186_103" value="">-- Elija el tipo de combustible --</option>
                 <option class="v186_103" value="OIL">Nafta</option>
                 <option class="v186_103" value="GNC">Gas</option>
                 <option class="v186_103" value="GASOIL">Gas Oil</option>
@@ -184,7 +185,7 @@
 
             <div class="v186_101" id="publicTransport-${legIdCounter}" style="display: none;">
               <select class="v186_102" id="ptLineId-${legIdCounter}" onchange="stopForm(this)">
-                <option class="v186_103" value="">-- Elija una opcion --</option>`;
+                <option class="v186_103" value="">-- Elija una línea --</option>`;
         parseLines.forEach((line) => {
             template += `<option class="v186_103" value="${line.id}">${line.name}</option>`
         });
@@ -258,21 +259,21 @@
             "endingLocation": undefined,
             "members": undefined,
             "legs": legsArray.map(id => {
-                let lineId = document.getElementById("ptLineId-" + id) === null ? undefined : document.getElementById("ptLineId-" + id).value;
-                return {
-                    startingLocation: document.getElementById("startingLocation-" + id).value,
-                    endingLocation: document.getElementById("endingLocation-" + id).value,
-                    transportType: document.getElementById("transportType-" + id).value,
-                    efType: document.getElementById("efType-" + id) === null ? undefined : document.getElementById("efType-" + id).value,
-                    hsType: document.getElementById("hsType-" + id) === null ? undefined : document.getElementById("hsType-" + id).value,
-                    hsName: document.getElementById("hsName-" + id) === null ? undefined : document.getElementById("hsName-" + id).value,
-                    pvType: document.getElementById("pvType-" + id) === null ? undefined : document.getElementById("pvType-" + id).value,
-                    pvFuel: document.getElementById("pvFuel-" + id) === null ? undefined : document.getElementById("pvFuel-" + id).value,
-                    ptLineId: lineId,
-                    ptStop1: document.getElementById("ptStop1-" + lineId + "_" + id) === null ? undefined : document.getElementById("ptStop1-" + lineId + "_" + id).value,
-                    ptStop2: document.getElementById("ptStop2-" + lineId + "_" + id) === null ? undefined : document.getElementById("ptStop2-" + lineId + "_" + id).value
+                    let lineId = document.getElementById("ptLineId-" + id) === null ? undefined : document.getElementById("ptLineId-" + id).value;
+                    return {
+                        startingLocation: document.getElementById("startingLocation-" + id).value,
+                        endingLocation: document.getElementById("endingLocation-" + id).value,
+                        transportType: document.getElementById("transportType-" + id).value,
+                        efType: document.getElementById("efType-" + id) === null ? undefined : document.getElementById("efType-" + id).value,
+                        hsType: document.getElementById("hsType-" + id) === null ? undefined : document.getElementById("hsType-" + id).value,
+                        hsName: document.getElementById("hsName-" + id) === null ? undefined : document.getElementById("hsName-" + id).value,
+                        pvType: document.getElementById("pvType-" + id) === null ? undefined : document.getElementById("pvType-" + id).value,
+                        pvFuel: document.getElementById("pvFuel-" + id) === null ? undefined : document.getElementById("pvFuel-" + id).value,
+                        ptLineId: lineId,
+                        ptStop1: document.getElementById("ptStop1-" + lineId + "_" + id) === null ? undefined : document.getElementById("ptStop1-" + lineId + "_" + id).value,
+                        ptStop2: document.getElementById("ptStop2-" + lineId + "_" + id) === null ? undefined : document.getElementById("ptStop2-" + lineId + "_" + id).value
+                    }
                 }
-            }
             )
         })
 
