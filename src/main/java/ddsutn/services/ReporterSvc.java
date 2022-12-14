@@ -37,7 +37,7 @@ public class ReporterSvc {
   // --------------- Reportes Pedidos Por Administradores --------------- //
 
   // Todos los sectores territoriales con su última huella
-  public JSONArray territorialSectorCfReport(Set<Unit> units) {
+  public JSONArray territorialSectorsCfReport(Set<Unit> units) {
     JSONArray report = new JSONArray();
     List<TerritorialSector> territorialSectors =
         (List<TerritorialSector>) territorialSectorRepo.findAll();
@@ -166,7 +166,7 @@ public class ReporterSvc {
     return report;
   }
 
-  // Todas las huellas de carbono de una organización, por sector
+  // Todas las huellas de carbono de un miembro, por trayecto
   public JSONObject memberJourneyCFReport(Set<Unit> units,
                                           Long memberId) {
     JSONObject report = new JSONObject();

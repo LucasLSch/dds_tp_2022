@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mis Trayectos</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" th:href="@{/css/utils/normalize.css}">
+  <link rel="stylesheet" th:href="@{/css/utils/rootVariables.css}">
+  <link rel="stylesheet" th:href="@{/css/utils/buttons.css}">
+  <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
+  <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
+  <link rel="stylesheet" th:href="@{/css/reports/reports.css}">
+</head>
+<body>
+<div class="site-size">
+
+  <div th:replace="fragments/menu :: menu"></div>
+  <div th:replace="fragments/footer :: footer"></div>
+
+  <div class="site-body">
+
+    <div class="site-header">
+      <span class="site-title">Mis Huellas de Carbono</span>
+      <div class="site-info">
+        <img alt="PencilIcon" class="site-info-icon" th:src="@{css/reports/img/description_icon.jpg}">
+        <span class="site-info-text">Elige un tipo de reporte y descárgalo!</span>
+      </div>
+    </div>
+
+    <form method="get" th:action="@{/huellas}">
+
+      <div class="v186_101">
+        <span class="form-label">Tipo de Reporte</span>
+        <select class="v186_102" th:name="rt">
+          <option class="v186_103" th:each="reportType : ${allReportTypes}"
+                  th:text="${reportType.name}"
+                  th:value="${reportType.value}">
+          </option>
+        </select>
+      </div>
+
+      <button class="blue-button" type="submit">
+        <span class="v185_82">Descargar</span>
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+</body>
+
+
+</html>
