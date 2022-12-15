@@ -32,7 +32,7 @@
 
       <div class="v186_101">
         <span class="form-label">Tipo de Reporte</span>
-        <select class="v186_102" th:name="rt">
+        <select class="v186_102" th:name="rt" onchange="this.form.submit()">
           <option class="v186_103" th:each="reportType : ${allReportTypes}"
                   th:text="${reportType.name}"
                   th:value="${reportType.value}">
@@ -40,11 +40,25 @@
         </select>
       </div>
 
-      <button class="blue-button" type="submit">
-        <span class="v185_82">Descargar</span>
+    </form>
+
+    <form method="post" th:action="@{/huellas}">
+
+      <input type="hidden" th:name="fp" th:value="${filePath}"/>
+
+<!--      Con button, borra el archivo pero no lo descarga -->
+      <button class="blue-button" th:href="${filePath}" th:download="${fileName}" onclick="this.form.submit()">
+        <span class="v185_82">Descargar!</span>
       </button>
 
+<!--      Con a, te salta la pestaña para descargar, pero no descarga ni tampoco submitea el form -->
+      <a class="blue-button" th:href="${filePath}" th:download="${fileName}" onclick="this.form.submit()">
+        <span class="v185_82">Descargar!</span>
+      </a>
+
     </form>
+
+
 
   </div>
 
