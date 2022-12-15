@@ -14,15 +14,15 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -31,7 +31,8 @@ import java.util.*;
 @RestController
 public class ReportController {
 
-  private final String DIRECTORY_PATH = "temp/reports/";
+  private final String DIRECTORY_PATH = "src/main/resources/static/temp/reports/";
+  private final String RESOURCE_PATH = "/temp/reports/";
   private final String BASE_FILE_NAME = "ReporteHuellasDeCarbono";
   private final String EXTENSION = ".json";
 
@@ -57,14 +58,14 @@ public class ReportController {
     String report = this.getReportFor(role, rt, id);
 
     String fileName = BASE_FILE_NAME + "_uid" + userId + "_" + LocalDate.now();
-    String finalPath = DIRECTORY_PATH + fileName + EXTENSION;
+    String finalPath = RESOURCE_PATH + fileName + EXTENSION;
 
     mav.addObject("report", report);
     mav.addObject("filePath", finalPath);
     mav.addObject("fileName", fileName);
 
     this.createReportsDirectory();
-    this.createReportFile(finalPath, report);
+    this.createReportFile(DIRECTORY_PATH + fileName + EXTENSION, report);
 
     return mav;
   }

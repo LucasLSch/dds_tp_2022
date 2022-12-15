@@ -41,7 +41,7 @@ public class SecurityConfig {
             .antMatchers("/iniciarSesion", "/registrarse", "/registrarseMiembro")
             .anonymous()
 
-            .antMatchers("/css/**", "/")
+            .antMatchers("/css/**", "/", "/temp/**")
             .permitAll()
 
             .anyRequest()
