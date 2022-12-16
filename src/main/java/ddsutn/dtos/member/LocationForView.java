@@ -1,6 +1,7 @@
 package ddsutn.dtos.member;
 
 import ddsutn.domain.location.Location;
+import ddsutn.services.DistrictSvc;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,8 +26,8 @@ public class LocationForView {
     //TODO ver si se necesita el resto
   }
 
-  public Location toLocation() {
-    return new Location();
+  public Location toLocation(DistrictSvc districtSvc) {
+    return new Location(districtSvc.findById(Integer.parseInt(district)), this.street, this.height);
     //TODO reparar
   }
 

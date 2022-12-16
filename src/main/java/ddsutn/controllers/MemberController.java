@@ -122,9 +122,10 @@ public class MemberController {
       return mav;
     }
 
+    System.out.println(journeyJson);
     JourneyForView journeyForView = new ObjectMapper().readValue(journeyJson, JourneyForView.class);
 
-    Journey newJourney = journeyForView.toJourney(read, lineSvc);
+    Journey newJourney = journeyForView.toJourney(districtSvc, lineSvc);
 
     read.addJourney(newJourney);
 

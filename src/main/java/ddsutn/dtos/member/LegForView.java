@@ -3,6 +3,7 @@ package ddsutn.dtos.member;
 import ddsutn.domain.journey.Leg;
 import ddsutn.domain.journey.transport.*;
 import ddsutn.domain.location.Location;
+import ddsutn.services.DistrictSvc;
 import ddsutn.services.LineSvc;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,7 +35,7 @@ public class LegForView {
     this.transportType = someLeg.getTransport().print();
   }
 
-  public Leg toLeg(LineSvc lineSvc) {
+  public Leg toLeg(DistrictSvc districtSvc, LineSvc lineSvc) {
 
     Transport transport;
 
@@ -57,8 +58,8 @@ public class LegForView {
         throw new RuntimeException("No se eligio un tipo de transporte valido");
     }
 
-    Location location1 = this.startingLocation.toLocation();
-    Location location2 = this.endingLocation.toLocation();
+    Location location1 = this.startingLocation.toLocation(districtSvc);
+    Location location2 = this.endingLocation.toLocation(districtSvc);
     return new Leg(location1, location2, transport);
   }
 

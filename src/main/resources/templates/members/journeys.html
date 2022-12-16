@@ -37,9 +37,9 @@
 
         <div class="journey-title">
           <span class="journey-locations"
-                th:text="${journey.startingLocation.street} + ' - ' + ${journey.startingLocation.height}
+                th:text="${journey.startingLocation}
                 +'   ->   '
-                + ${journey.endingLocation.street} + ' - ' + ${journey.endingLocation.height}">
+                + ${journey.endingLocation}">
           </span>
         </div>
 
@@ -48,9 +48,9 @@
         <div class="leg-container">
           <div class="journey-leg" th:each="leg: ${journey.legs}">
             <span class="leg-locations" th:text="
-            ${journey.startingLocation.street} + ' - ' + ${journey.startingLocation.height}
+            ${journey.startingLocation}
             +' -> '
-            + ${journey.endingLocation.street} + ' - ' + ${journey.endingLocation.height}"></span>
+            + ${journey.endingLocation}"></span>
             <span class="leg-transport" th:text="'Transporte: '+${leg.transportType}"></span>
           </div>
         </div>
@@ -183,7 +183,7 @@
         });
         template += `
                 </select>
-                <select class="district-dropdown" id="startingLocationDristrict-${legIdCounter}">
+                <select class="district-dropdown" id="startingLocationDistrict-${legIdCounter}">
                   <option class="v186_103"></option>`;
         parseDistricts.forEach((district) => {
             template += `<option class="v186_103" value="${district.id}">${district.name}</option>`
