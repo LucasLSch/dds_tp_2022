@@ -2,6 +2,9 @@
 <html>
 <head>
   <title>Mis Trayectos</title>
+  <script src="https://code.jquery.com/jquery-3.6.2.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC&display=swap" rel="stylesheet"/>
@@ -33,15 +36,21 @@
       <div class="journey-info" th:each="journey: ${allJourneys}">
 
         <div class="journey-title">
-                    <span class="journey-locations"
-                          th:text="${journey.startingLocation}+'   ->   '+${journey.endingLocation}"></span>
+          <span class="journey-locations"
+                th:text="${journey.startingLocation.street} + ' - ' + ${journey.startingLocation.height}
+                +'   ->   '
+                + ${journey.endingLocation.street} + ' - ' + ${journey.endingLocation.height}">
+          </span>
         </div>
 
         <span class="journey-legs-title">Tramos:</span>
 
         <div class="leg-container">
           <div class="journey-leg" th:each="leg: ${journey.legs}">
-            <span class="leg-locations" th:text="${leg.startingLocation}+' -> '+${leg.endingLocation}"></span>
+            <span class="leg-locations" th:text="
+            ${journey.startingLocation.street} + ' - ' + ${journey.startingLocation.height}
+            +' -> '
+            + ${journey.endingLocation.street} + ' - ' + ${journey.endingLocation.height}"></span>
             <span class="leg-transport" th:text="'Transporte: '+${leg.transportType}"></span>
           </div>
         </div>
@@ -76,7 +85,6 @@
 
           <input style="display: none" id="journeyJson" name="journeyJson"/>
 
-          <!--journey title-->
           <div class="v186_94">
             <div class="v186_91" id="init-loc"></div>
             <span class="v186_92">-></span>
@@ -125,16 +133,109 @@
 
     +]*/
 
+    /*[+
+
+    var parseCountries = [[${allCountries}]];
+    var parseProvinces = [[${allProvinces}]];
+    var parseMunicipalities = [[${allMunicipalities}]];
+    var parseDistricts = [[${allDistricts}]];
+
+    +]*/
+
+    // TODO ver de hacer que los dropdown de location vayan filtrandose segun lo ingresado
+
     const newJourneyLegContainer = document.getElementById("new-journey-leg-container");
 
     function addNewLeg() {
-        let template = `<div class="new-leg" id="newLeg-${legIdCounter}" style="display: flex;">
+        let template =
+            `<div class="new-leg" id="newLeg-${legIdCounter}" style="display: flex;">
 
             <div class="v186_95">
-              <input class="v186_96" placeholder="Calle - Altura (Desde)" type="text" id="startingLocation-${legIdCounter}"/>
-              <span class="v186_97">-></span>
-              <input class="v186_98" placeholder="Calle - Altura (Hasta)" type="text" id="endingLocation-${legIdCounter}"/>
+            <div class="location-input">
+
+              <div class="street-container">
+                <input class="v186_96" placeholder="Calle (Origen)" type="text" id="startingLocationStreet-${legIdCounter}"/>
+                <input class="v186_961" placeholder="Altura" type="text" id="startingLocationHeight-${legIdCounter}"/>
+              </div>
+
+              <div class="dropdown-container">
+                <select class="country-dropdown" id="startingLocationCountry-${legIdCounter}">
+                  <option class="v186_103"></option>`;
+        parseCountries.forEach((country) => {
+            template += `<option class="v186_103" value="${country.id}">${country.name}</option>`
+        });
+        template += `
+                </select>
+                <select class="province-dropdown" id="startingLocationProvince-${legIdCounter}">
+                  <option class="v186_103"></option>`;
+        parseProvinces.forEach((province) => {
+            template += `<option class="v186_103" value="${province.id}">${province.name}</option>`
+        });
+        template += `
+                </select>
+              </div>
+
+              <div class="dropdown-container">
+                <select class="municipality-dropdown" id="startingLocationMunicipality-${legIdCounter}">
+                  <option class="v186_103"></option>`;
+        parseMunicipalities.forEach((municipality) => {
+            template += `<option class="v186_103" value="${municipality.id}">${municipality.name}</option>`
+        });
+        template += `
+                </select>
+                <select class="district-dropdown" id="startingLocationDristrict-${legIdCounter}">
+                  <option class="v186_103"></option>`;
+        parseDistricts.forEach((district) => {
+            template += `<option class="v186_103" value="${district.id}">${district.name}</option>`
+        });
+        template += `
+                </select>
+              </div>
             </div>
+
+            <span class="v186_97">-></span>
+
+            <div class="location-input">
+              <div class="street-container">
+                <input class="v186_96" placeholder="Calle (Destino)" type="text" id="endingLocationStreet-${legIdCounter}"/>
+                <input class="v186_961" placeholder="Altura" type="text" id="endingLocationHeight-${legIdCounter}"/>
+              </div>
+
+              <div class="dropdown-container">
+                <select class="country-dropdown" id="endingLocationCountry-${legIdCounter}">
+                  <option class="v186_103"></option>`;
+        parseCountries.forEach((country) => {
+            template += `<option class="v186_103" value="${country.id}">${country.name}</option>`
+        });
+        template += `
+                </select>
+                <select class="province-dropdown" id="endingLocationProvince-${legIdCounter}">
+                  <option class="v186_103"></option>`;
+        parseProvinces.forEach((province) => {
+            template += `<option class="v186_103" value="${province.id}">${province.name}</option>`
+        });
+        template += `
+                </select>
+              </div>
+
+              <div class="dropdown-container">
+                <select class="municipality-dropdown" id="endingLocationMunicipality-${legIdCounter}">
+                  <option class="v186_103"></option>`;
+        parseMunicipalities.forEach((municipality) => {
+            template += `<option class="v186_103" value="${municipality.id}">${municipality.name}</option>`
+        });
+        template += `
+                </select>
+                <select class="district-dropdown" id="endingLocationDistrict-${legIdCounter}">
+                  <option class="v186_103"></option>`;
+        parseDistricts.forEach((district) => {
+            template += `<option class="v186_103" value="${district.id}">${district.name}</option>`
+        });
+        template += `
+                </select>
+              </div>
+            </div>
+          </div>
 
             <div class="v186_101">
               <select class="v186_102" onchange="transportForm(this)" id="transportType-${legIdCounter}">
@@ -220,6 +321,7 @@
 
         legIdCounter = legIdCounter + 1;
         newJourneyLegContainer.insertAdjacentHTML("beforeend", template);
+        createSelect2();
     }
 
     function deleteLeg(element) {
@@ -261,8 +363,22 @@
             "legs": legsArray.map(id => {
                     let lineId = document.getElementById("ptLineId-" + id) === null ? undefined : document.getElementById("ptLineId-" + id).value;
                     return {
-                        startingLocation: document.getElementById("startingLocation-" + id).value,
-                        endingLocation: document.getElementById("endingLocation-" + id).value,
+                        startingLocation: {
+                            street: document.getElementById("startingLocationStreet-" + id).value,
+                            height: document.getElementById("startingLocationHeight-" + id).value,
+                            country: document.getElementById("startingLocationCountry-" + id).value,
+                            province: document.getElementById("startingLocationProvince-" + id).value,
+                            municipality: document.getElementById("startingLocationMunicipality-" + id).value,
+                            district: document.getElementById("startingLocationDistrict-" + id).value
+                        },
+                        endingLocation: {
+                            street: document.getElementById("endingLocationStreet-" + id).value,
+                            height: document.getElementById("endingLocationHeight-" + id).value,
+                            country: document.getElementById("endingLocationCountry-" + id).value,
+                            province: document.getElementById("endingLocationProvince-" + id).value,
+                            municipality: document.getElementById("endingLocationMunicipality-" + id).value,
+                            district: document.getElementById("endingLocationDistrict-" + id).value
+                        },
                         transportType: document.getElementById("transportType-" + id).value,
                         efType: document.getElementById("efType-" + id) === null ? undefined : document.getElementById("efType-" + id).value,
                         hsType: document.getElementById("hsType-" + id) === null ? undefined : document.getElementById("hsType-" + id).value,
@@ -281,6 +397,29 @@
 
         document.getElementById("journeyJson").setAttribute("value", result);
         document.getElementById("new-journey").submit();
+    }
+
+    function createSelect2() {
+        $(".country-dropdown").select2({
+            placeholder: "País",
+            allowClear: true,
+            width: '170px'
+        })
+        $(".province-dropdown").select2({
+            placeholder: "Provincia",
+            allowClear: true,
+            width: '170px'
+        })
+        $(".municipality-dropdown").select2({
+            placeholder: "Municipalidad",
+            allowClear: true,
+            width: '170px'
+        })
+        $(".district-dropdown").select2({
+            placeholder: "Localidad",
+            allowClear: true,
+            width: '170px'
+        })
     }
 
 </script>

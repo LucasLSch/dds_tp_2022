@@ -46,54 +46,54 @@ public class OrganizationLoaderForTests implements ApplicationRunner {
     String encodedPassword = bCryptPasswordEncoder.encode("Contr@5enia");
 
     if (this.organizationSvc.findAll().isEmpty()) {
-      District dt = new District(1);
-
-      Organization org1 = new Organization("Doodle", new Location(dt, "calle", "123"), "algo", OrgType.COMPANY);
-      Organization org2 = new Organization("HeadBook", new Location(dt, "street", "456"), "otroAlgo", OrgType.COMPANY);
-      Organization org3 = new Organization("MeTube", new Location(dt, "rue", "789"), "nuse", OrgType.COMPANY);
-
-      org1.createSector("banana");
-      org1.createSector("manzana");
-
-      Organization[] orgs = {
-          org2,
-          org3
-      };
-
-      OrgAdminUser orgCeo = new OrgAdminUser("orgAdmin", encodedPassword, org1);
-
-      this.userSvc.save(orgCeo);
-
-      this.organizationSvc.saveAll(Arrays.asList(orgs));
+//      District dt = new District(54835784);
+//
+//      Organization org1 = new Organization("Doodle", new Location(dt, "calle", "123"), "algo", OrgType.COMPANY);
+//      Organization org2 = new Organization("HeadBook", new Location(dt, "street", "456"), "otroAlgo", OrgType.COMPANY);
+//      Organization org3 = new Organization("MeTube", new Location(dt, "rue", "789"), "nuse", OrgType.COMPANY);
+//
+//      org1.createSector("banana");
+//      org1.createSector("manzana");
+//
+//      Organization[] orgs = {
+//          org2,
+//          org3
+//      };
+//
+//      OrgAdminUser orgCeo = new OrgAdminUser("orgAdmin", encodedPassword, org1);
+//
+//      this.userSvc.save(orgCeo);
+//
+//      this.organizationSvc.saveAll(Arrays.asList(orgs));
     }
 
 
 
     if (this.memberSvc.findAll().isEmpty()) {
 
-      Member member = new Member("esteMiembro", "esDePrueba", DocType.DNI, "12345678");
-
-      District dt = new District(1);
-
-      Leg[] legs = {
-          new Leg(new Location(dt, "Rue1", "1"),
-                  new Location(dt, "Rue1", "2"),
-                  new EcoFriendly(EcoFriendlyType.BICYCLE)),
-
-          new Leg(new Location(dt, "Rue1", "2"),
-              new Location(dt, "Rue1", "3"),
-              new ParticularVehicle(ParticularVehicleType.CAR, Fuel.OIL)),
-
-          new Leg(new Location(dt, "Rue1", "3"),
-              new Location(dt, "Rue1", "4"),
-              new HiredService(HiredServiceType.APPLICATION, "SUBER"))
-      };
-
-      Journey journey = new Journey(Arrays.asList(legs));
-
-      member.addJourney(journey);
-
-      this.memberSvc.save(member);
+//      Member member = new Member("esteMiembro", "esDePrueba", DocType.DNI, "12345678");
+//
+//      District dt = new District(574547394);
+//
+//      Leg[] legs = {
+//          new Leg(new Location(dt, "Rue1", "1"),
+//                  new Location(dt, "Rue1", "2"),
+//                  new EcoFriendly(EcoFriendlyType.BICYCLE)),
+//
+//          new Leg(new Location(dt, "Rue1", "2"),
+//              new Location(dt, "Rue1", "3"),
+//              new ParticularVehicle(ParticularVehicleType.CAR, Fuel.OIL)),
+//
+//          new Leg(new Location(dt, "Rue1", "3"),
+//              new Location(dt, "Rue1", "4"),
+//              new HiredService(HiredServiceType.APPLICATION, "SUBER"))
+//      };
+//
+//      Journey journey = new Journey(Arrays.asList(legs));
+//
+//      member.addJourney(journey);
+//
+//      this.memberSvc.save(member);
 
     }
 

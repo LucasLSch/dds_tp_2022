@@ -4,23 +4,24 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Transient;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Embeddable
+@Entity
 public class District {
 
-  @Column(name = "district_number")
+  @Id
   private Integer id;
-  @Transient
   private String name;
-  @Transient
   private Integer postalCode;
-  @Transient
+
+  @ManyToOne
+  @JoinColumn(name = "municipality_id")
   private Municipality municipality;
 
   public District(Integer id) {

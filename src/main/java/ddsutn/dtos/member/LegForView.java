@@ -15,8 +15,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class LegForView {
 
-  public String startingLocation;
-  public String endingLocation;
+  public LocationForView startingLocation;
+  public LocationForView endingLocation;
   public String transportType;
   public String efType;
   public String hsType;
@@ -28,8 +28,9 @@ public class LegForView {
   public String ptStop2;
 
   public LegForView(Leg someLeg) {
-    this.startingLocation = someLeg.getStartingLocation().print();
-    this.endingLocation = someLeg.getEndingLocation().print();
+    this.startingLocation = new LocationForView(someLeg.getStartingLocation());
+    this.endingLocation = new LocationForView(someLeg.getEndingLocation());
+
     this.transportType = someLeg.getTransport().print();
   }
 
@@ -37,7 +38,7 @@ public class LegForView {
 
     Transport transport;
 
-    switch(transportType) {
+    switch (transportType) {
       case "":
         throw new RuntimeException("No se eligio un tipo de transporte");
       case "ecoFriendly":
@@ -56,8 +57,8 @@ public class LegForView {
         throw new RuntimeException("No se eligio un tipo de transporte valido");
     }
 
-    Location location1 = Location.getLocationFor(this.startingLocation);
-    Location location2 = Location.getLocationFor(this.endingLocation);
+    Location location1 = this.startingLocation.toLocation();
+    Location location2 = this.endingLocation.toLocation();
     return new Leg(location1, location2, transport);
   }
 

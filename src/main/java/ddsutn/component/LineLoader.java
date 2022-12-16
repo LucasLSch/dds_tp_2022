@@ -36,31 +36,31 @@ public class LineLoader implements ApplicationRunner {
       return;
     }
 
-    District dt = new District(1);
-
-    Stop stop1 = new Stop(
-            new Location(dt, "calle", "123"),
-            new Distance(15, kilometer(Proportionality.DIRECT))
-    );
-    Stop stop2 = new Stop(
-            new Location(dt, "street", "456"),
-            new Distance(3, kilometer(Proportionality.DIRECT))
-    );
-    Stop stop3 = new Stop(
-            new Location(dt, "street", "456"),
-            new Distance(15, kilometer(Proportionality.DIRECT))
-    );
-    Stop stop4 = new Stop(
-            new Location(dt, "calle", "123"),
-            new Distance(1, kilometer(Proportionality.DIRECT))
-    );
-
-    Line[] lines = {
-            new Line(Arrays.asList(stop1, stop2), "Roca - Ida", PublicTransportType.TRAIN),
-            new Line(Arrays.asList(stop3, stop4), "Roca - Vuelta", PublicTransportType.TRAIN)
-    };
-
-    lineSvc.saveAll(Arrays.asList(lines));
+//    District dt = new District(437824328);
+//
+//    Stop stop1 = new Stop(
+//            new Location(dt, "calle", "123"),
+//            new Distance(15, kilometer(Proportionality.DIRECT))
+//    );
+//    Stop stop2 = new Stop(
+//            new Location(dt, "street", "456"),
+//            new Distance(3, kilometer(Proportionality.DIRECT))
+//    );
+//    Stop stop3 = new Stop(
+//            new Location(dt, "street", "456"),
+//            new Distance(15, kilometer(Proportionality.DIRECT))
+//    );
+//    Stop stop4 = new Stop(
+//            new Location(dt, "calle", "123"),
+//            new Distance(1, kilometer(Proportionality.DIRECT))
+//    );
+//
+//    Line[] lines = {
+//            new Line(Arrays.asList(stop1, stop2), "Roca - Ida", PublicTransportType.TRAIN),
+//            new Line(Arrays.asList(stop3, stop4), "Roca - Vuelta", PublicTransportType.TRAIN)
+//    };
+//
+//    lineSvc.saveAll(Arrays.asList(lines));
 
   }
 }

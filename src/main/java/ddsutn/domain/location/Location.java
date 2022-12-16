@@ -17,7 +17,8 @@ public class Location {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Embedded
+  @ManyToOne
+  @JoinColumn(name = "district_id")
   private District district;
 
   @Column(name = "street_name")
@@ -33,30 +34,9 @@ public class Location {
     this.height = height;
   }
 
-  public static Location getLocationFor(String startingLocation) {
-    //TODO arreglar, guardar datos de la api etc
-    String[] streetArray = startingLocation.split("-");
-    String foundStreet = streetArray[0];
-    String foundHeight = streetArray[1];
-    District foundDistrictXD = new District(3677); //Harcodeado en General LAVALLE
-    return new Location(foundDistrictXD, foundStreet, foundHeight);
-  }
-
   public Distance getDistanceTo(Location someLocation) throws IOException {
     GeoRefAdapter adapter = GeoRefAdapter.getInstance();
     return adapter.getDistance(this, someLocation);
-  }
-
-  public District getDistrict() {
-    return district;
-  }
-
-  public String getStreet() {
-    return street;
-  }
-
-  public String getHeight() {
-    return height;
   }
 
   public String print() {

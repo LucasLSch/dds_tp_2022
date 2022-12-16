@@ -161,7 +161,6 @@
 }
 
 
-
 .new-journey-section {
     width: 830px;
     background-size: cover;
@@ -197,7 +196,6 @@
 #new-journey-submit {
     width: 123px;
     height: 50px;
-    /* position: absolute; */
     top: 248px;
     left: 674px;
 }
@@ -212,19 +210,19 @@
     text-align: center;
 }
 
-.new-journey-legs-container {margin-top: 8px;}
+.new-journey-legs-container {
+    margin-top: 8px;
+}
 
 .new-leg {
     background: rgba(37, 37, 37, 1);
     margin-bottom: 4px;
-    /* align-items: center; */
     flex-direction: column;
     padding-left: 34px;
     padding-right: 34px;
 }
 
 .new-journey-footer {
-    /* height: 107px; */
     display: flex;
     flex-direction: row;
     align-items: end;
@@ -238,8 +236,6 @@
     background: #009000;
     opacity: 1;
     margin-bottom: 10px;
-    /* bottom: 42px; */
-    /* left: 33px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -279,18 +275,23 @@
 }
 
 .v186_95 {
-    /* width: 100%; */
     display: flex;
     flex-direction: row;
     margin-top: 16px;
     margin-bottom: 16px;
-    /* padding-left: 34px; */
-    /* padding-right: 34px; */
     justify-content: space-between;
 }
 
 .v186_96 {
-    width: 330px;
+    width: 240px;
+    height: 28px;
+    background: rgba(75, 75, 75, 0.699999988079071);
+    opacity: 1;
+    border-radius: 5px;
+}
+
+.v186_961 {
+    width: 70px;
     height: 28px;
     background: rgba(75, 75, 75, 0.699999988079071);
     opacity: 1;
@@ -305,15 +306,6 @@
     font-weight: 600;
     font-size: 20px;
     opacity: 1;
-    text-align: left;
-}
-
-.v186_98 {
-    width: 325px;
-    height: 28px;
-    background: rgba(75, 75, 75, 0.699999988079071);
-    opacity: 1;
-    border-radius: 5px;
 }
 
 .v186_101 {
@@ -323,7 +315,7 @@
 }
 
 .v186_102 {
-    width: 325px;
+    width: 345px;
     height: 32px;
     background: rgba(255, 255, 255, 1);
     opacity: 1;
@@ -420,4 +412,15 @@ form input {
     color: white;
     padding-left: 10px;
     font-family: Poppins;
+}
+
+.location-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dropdown-container {
+    margin-left: 1px;
+    margin-top: 1px;
 }

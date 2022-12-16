@@ -2,24 +2,13 @@ package ddsutn.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import ddsutn.domain.journey.Journey;
-import ddsutn.domain.journey.Leg;
-import ddsutn.domain.journey.transport.*;
-import ddsutn.domain.location.District;
-import ddsutn.domain.location.Location;
 import ddsutn.domain.organization.Member;
 import ddsutn.dtos.member.JourneyForView;
-import ddsutn.dtos.member.LegForView;
 import ddsutn.dtos.member.MemberForView;
-import ddsutn.dtos.user.UserForView;
 import ddsutn.security.user.StandardUser;
 import ddsutn.security.user.User;
-import ddsutn.services.JourneySvc;
-import ddsutn.services.LineSvc;
-import ddsutn.services.MemberSvc;
-import ddsutn.services.UserSvc;
-import org.json.JSONObject;
+import ddsutn.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,9 +17,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Controller
 @RequestMapping(value = "/miembros")
@@ -50,6 +39,18 @@ public class MemberController {
 
   @Autowired
   private LineSvc lineSvc;
+
+  @Autowired
+  private CountrySvc countrySvc;
+
+  @Autowired
+  private ProvinceSvc provinceSvc;
+
+  @Autowired
+  private MunicipalitySvc municipalitySvc;
+
+  @Autowired
+  private DistrictSvc districtSvc;
 
   @GetMapping("/{id}")
   public ModelAndView showMember(@PathVariable Long id) {
@@ -95,6 +96,11 @@ public class MemberController {
     mav.addObject("member", new MemberForView(read));
     mav.addObject("newJourney", new JourneyForView());
     mav.addObject("lines", lineSvc.findAll());
+    mav.addObject("allCountries", countrySvc.findAll());
+    mav.addObject("allProvinces", provinceSvc.findAll());
+    mav.addObject("allMunicipalities", municipalitySvc.findAll());
+    mav.addObject("allDistricts", districtSvc.findAll());
+
     mav.setViewName(memberJourneysHtml);
     return mav;
   }
@@ -159,7 +165,7 @@ public class MemberController {
     User myUser = userSvc.loadUserByUsername(name);
 
     if (authorities.stream().noneMatch(ga -> ga.getAuthority().equals("ADMINISTRATOR_USER")) &&
-            !((StandardUser) myUser).getMember().getId().equals(id)) {
+        !((StandardUser) myUser).getMember().getId().equals(id)) {
       throw new IncorrectUserException(((StandardUser) myUser).getMember().getId(), redirectOption);
     }
   }
