@@ -28,44 +28,32 @@
       </div>
     </div>
 
-    <form method="get" th:action="@{/huellas}">
+    <div class="report-forms-container">
+      <form class="form-report" method="get" th:action="@{/huellas}">
 
-      <div class="v186_101">
-        <span class="form-label">Tipo de Reporte</span>
-        <select class="v186_102" th:name="rt" onchange="this.form.submit()">
-          <option class="v186_103" th:each="reportType : ${allReportTypes}"
-                  th:text="${reportType.name}"
-                  th:value="${reportType.value}">
-          </option>
-        </select>
-      </div>
+        <div class="v186_101">
+          <span class="form-label">Tipo de Reporte</span>
+          <select class="v186_102" th:name="rt" onchange="this.form.submit()">
+            <option class="v186_103" th:each="reportType : ${allReportTypes}"
+                    th:text="${reportType.name}"
+                    th:value="${reportType.value}">
+            </option>
+          </select>
+        </div>
 
-    </form>
+      </form>
 
-    <form method="post" th:action="@{/huellas}">
-
-      <input type="hidden" th:name="fp" th:value="${filePath}"/>
-
-<!--      Con button, borra el archivo pero no lo descarga -->
-      <button class="blue-button" th:href="${filePath}" th:download="${fileName}" onclick="this.form.submit()">
-        <span class="v185_82">Descargar!</span>
-      </button>
-
-<!--      Con a, te salta la pestaña para descargar, pero no descarga ni tampoco submitea el form -->
-      <a class="blue-button" th:href="${filePath}" th:download="${fileName}" onclick="this.form.submit()">
-        <span class="v185_82">Descargar!</span>
-      </a>
-
-    </form>
-
-
+      <form class="download-report-form" method="post" th:action="@{/huellas}">
+        <input type="hidden" th:name="fp" th:value="${filePath}"/>
+        <a class="blue-button download-report-button" th:href="${filePath}" th:download="${fileName}"
+           onclick="this.form.submit()">
+          <span class="v185_82">Descargar!</span>
+        </a>
+      </form>
+    </div>
 
   </div>
 
 </div>
-
-
 </body>
-
-
 </html>

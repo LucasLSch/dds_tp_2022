@@ -1,6 +1,6 @@
 .site-size {
     width: 1920px;
-    min-height: 1562px;
+    min-height: 1080px;
 }
 
 .site-body {
@@ -19,7 +19,42 @@
     width: 830px;
 }
 
+.form-report {
+    margin-top: 25px;
+    margin-right: 0px;
+    margin-bottom: 25px;
+    margin-left: 50px;
+}
 
+a, u {
+    text-decoration: none;
+}
+
+.report-forms-container {
+    width: 830px;
+    background: var(--darkGrey03);
+    border-radius: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.download-report-form {
+    margin-top: 25px;
+    margin-right: 50px;
+    margin-bottom: 25px;
+    margin-left: 0px;
+}
+
+.download-report-button {
+    width: 124px;
+    height: 50px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .v186_101 {
     width: 325px;
@@ -118,4 +153,3 @@
     opacity: 1;
     text-align: left;
 }
-
