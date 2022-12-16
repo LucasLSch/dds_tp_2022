@@ -33,8 +33,8 @@ public class TransportTest extends TestDataFill {
   public void beforeTest() {
     mockedLocation = mock(Location.class);
     anotherMockedLocation = mock(Location.class);
-    dummyStartStop = new Stop(mockedLocation, new Distance(10, kilometer(Proportionality.DIRECT)));
-    dummyEndStop = new Stop(anotherMockedLocation, new Distance(0, kilometer(Proportionality.DIRECT)));
+    dummyStartStop = new Stop(mockedLocation, new Distance(10d, kilometer(Proportionality.DIRECT)));
+    dummyEndStop = new Stop(anotherMockedLocation, new Distance(0d, kilometer(Proportionality.DIRECT)));
     dummyStops.add(dummyStartStop);
     dummyStops.add(dummyEndStop);
     dummyLine = new Line(dummyStops, "Cool line", PublicTransportType.BUS);
@@ -53,7 +53,7 @@ public class TransportTest extends TestDataFill {
   @Test
   public void hiredServiceTransportDistance() throws IOException {
     when(mockedLocation.getDistanceTo(anotherMockedLocation))
-        .thenReturn(new Distance(20, kilometer(Proportionality.DIRECT)));
+        .thenReturn(new Distance(20d, kilometer(Proportionality.DIRECT)));
 
     Distance distance = dummyHiredService.getDistance(mockedLocation, anotherMockedLocation);
     assertEquals(distance.getValue(), 20);
@@ -70,7 +70,7 @@ public class TransportTest extends TestDataFill {
   @Test
   public void transportsCanGetItsConsumption() throws IOException {
     when(mockedLocation.getDistanceTo(anotherMockedLocation))
-        .thenReturn(new Distance(10, kilometer(Proportionality.DIRECT)));
+        .thenReturn(new Distance(10d, kilometer(Proportionality.DIRECT)));
 
     Double ptConsumption = dummyPublic.getConsumption(mockedLocation, anotherMockedLocation);
     Double hsConsumption = dummyHiredService.getConsumption(mockedLocation, anotherMockedLocation);

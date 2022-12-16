@@ -130,8 +130,8 @@ public class Journey {
   }
 
   public Distance getJourneyDistance() {
-    int finalDistanceValue = this.legList.stream()
-        .mapToInt(leg -> {
+    Double finalDistanceValue = this.legList.stream()
+        .mapToDouble(leg -> {
           try {
             return leg.getLegDistance().getValue();
           } catch (IOException e) {

@@ -14,7 +14,7 @@ import javax.persistence.Transient;
 @Embeddable
 public class Distance {
 
-  private Integer value;
+  private Double value;
 
   @Transient
   private Unit unit;

@@ -61,6 +61,7 @@ public class GeoRefAdapter {
   }
 
   public Distance getDistance(Location origin, Location destination) throws IOException {
+
     this.api = retrofit.create(GeoRefService.class);
     Call<DistanceResponse> distanceResponseCall = this.api.distance(
         origin.getDistrict().getId(),
@@ -71,8 +72,8 @@ public class GeoRefAdapter {
         destination.getHeight());
     Response<DistanceResponse> response = distanceResponseCall.execute();
 
-    Unit unit = this.getUnitOfString(response.body().unit);
-    return new Distance(response.body().getValue(), unit);
+    Unit unit = this.getUnitOfString(response.body().unidad);
+    return new Distance(response.body().getValor(), unit);
   }
 
   private Unit getUnitOfString(String unit) {

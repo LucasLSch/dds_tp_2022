@@ -56,10 +56,10 @@ public class Line {
         .stopList
         .subList(this.stopList.indexOf(startStop), this.stopList.indexOf(endStop));
 
-    Integer finalValue = stopsBetween
+    Double finalValue = stopsBetween
         .stream()
         .map(Stop::getDistanceToNextStop)
-        .mapToInt(Distance::getValue)
+        .mapToDouble(Distance::getValue)
         .sum();
 
     return new Distance(finalValue, new Unit(BaseUnit.METER, 3, Proportionality.DIRECT));

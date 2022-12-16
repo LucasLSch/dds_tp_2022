@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public class DistanceResponse {
 
-  public int value;
-  public String unit;
+  public double valor;
+  public String unidad;
 
 }

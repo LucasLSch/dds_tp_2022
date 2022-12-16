@@ -28,7 +28,6 @@ public class LocationForView {
 
   public Location toLocation(DistrictSvc districtSvc) {
     return new Location(districtSvc.findById(Integer.parseInt(district)), this.street, this.height);
-    //TODO reparar
   }
 
 }

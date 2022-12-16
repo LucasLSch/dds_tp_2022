@@ -169,6 +169,7 @@ public class ReporterSvc {
   // Todas las huellas de carbono de un miembro, por trayecto
   public JSONObject memberJourneyCFReport(Set<Unit> units,
                                           Long memberId) {
+
     JSONObject report = new JSONObject();
     report.put("memberId", memberId);
     JSONArray journeyReports = new JSONArray();
@@ -180,7 +181,7 @@ public class ReporterSvc {
             .put("id", journey.getId())
             .put("startingLocation", journey.getStartingLocation().print())
             .put("endingLocation", journey.getEndingLocation().print())
-            .put("value", journey.getCarbonFootprint(units)));
+            .put("value", journey.getCarbonFootprint(units).getValue()));
       });
 
       report.put("journeyCarbonFootprints (" + UnitExpression.printUnits(units) + ")", journeyReports);

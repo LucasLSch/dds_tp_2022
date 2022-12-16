@@ -57,9 +57,9 @@ public class JourneyTest extends TestDataFill {
   public void journeyTotalDistance() throws IOException {
 
     when(mockedEcoFriendlyTransport.getDistance(dummyStartLocation, dummyEndLocation))
-        .thenReturn(new Distance(500, kilometer(Proportionality.DIRECT)));
+        .thenReturn(new Distance(500d, kilometer(Proportionality.DIRECT)));
     when(mockedHiredServiceTransport.getDistance(anotherDummyStartLocation, anotherDummyEndLocation))
-        .thenReturn(new Distance(250, kilometer(Proportionality.DIRECT)));
+        .thenReturn(new Distance(250d, kilometer(Proportionality.DIRECT)));
 
     Distance distance = dummyJourney.getJourneyDistance();
 
