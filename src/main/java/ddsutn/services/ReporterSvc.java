@@ -185,7 +185,13 @@ public class ReporterSvc {
       });
 
       report.put("journeyCarbonFootprints (" + UnitExpression.printUnits(units) + ")", journeyReports);
+    } else {
+      return null;
     }
+
+    CarbonFootprint pcf = member.getPersonalCF();
+
+    carbonFootprintRepo.save(pcf);
 
     return report;
   }

@@ -12,15 +12,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -31,7 +30,7 @@ import java.util.*;
 @RestController
 public class ReportController {
 
-  private final String DIRECTORY_PATH = "src/main/resources/static/temp/reports/";
+  private final String DIRECTORY_PATH = "src/main/resources/static";
   private final String RESOURCE_PATH = "/temp/reports/";
   private final String BASE_FILE_NAME = "ReporteHuellasDeCarbono";
   private final String EXTENSION = ".json";
@@ -48,6 +47,8 @@ public class ReportController {
     String role = getUserRole();
     mav.addObject("role", role);
     mav.addObject("allReportTypes", this.reportTypesFor(role));
+    mav.addObject("electedType", rt);
+
 
     if (rt.isEmpty() || rt.equals("0")) {
       return mav;
@@ -57,7 +58,7 @@ public class ReportController {
     Long userId = getUserId();
     String report = this.getReportFor(role, rt, id);
 
-    String fileName = BASE_FILE_NAME + "_uid" + userId + "_" + LocalDate.now();
+    String fileName = BASE_FILE_NAME + rt + "_uid_" + userId + "_" + LocalDate.now();
     String finalPath = RESOURCE_PATH + fileName + EXTENSION;
 
     mav.addObject("report", report);
@@ -65,27 +66,36 @@ public class ReportController {
     mav.addObject("fileName", fileName);
 
     this.createReportsDirectory();
-    this.createReportFile(DIRECTORY_PATH + fileName + EXTENSION, report);
+    this.createReportFile(DIRECTORY_PATH + RESOURCE_PATH + fileName + EXTENSION, report);
 
     return mav;
   }
 
+  @GetMapping("/temp/reports/{file}")
+  public InputStreamResource FileSystemResource (HttpServletResponse response, @PathVariable String file) throws IOException {
+    response.setContentType("application/json");
+    response.setHeader("Content-Disposition", "attachment;filename=" + file);
+    return new InputStreamResource(new FileInputStream(DIRECTORY_PATH + RESOURCE_PATH + file));
+  }
+
   @PostMapping("/huellas")
-  public ModelAndView deleteReport(@RequestParam(value = "fp", required = true) String fp) {
+  public ModelAndView deleteReport(@RequestParam(value = "fp") String fp,
+                                   @RequestParam(value = "rt") String rt) {
+    ModelAndView mav = new ModelAndView("redirect:/huellas");
 
     Long userId = this.getUserId();
 
+    System.out.println(fp.length());
+
     String userSubstring = fp.substring(
-        DIRECTORY_PATH.length() + BASE_FILE_NAME.length(),
-        DIRECTORY_PATH.length() + BASE_FILE_NAME.length() + 5);
+        RESOURCE_PATH.length() + BASE_FILE_NAME.length() + rt.length(),
+        (fp.length()) - EXTENSION.length() - LocalDate.now().toString().length() - 1);
 
     System.out.println(userSubstring);
 
-    System.out.println(fp);
-
-    if (userSubstring.matches("_uid" + userId)) {
+    if (userSubstring.matches("_uid_" + userId)) {
       System.out.println("Path verifies user");
-      File myObj = new File(fp);
+      File myObj = new File(DIRECTORY_PATH + fp);
       if (myObj.delete()) {
         System.out.println("Deleted the file: " + myObj.getName());
       } else {
@@ -96,34 +106,33 @@ public class ReportController {
 
     }
 
-    return this.showReports("");
+    return mav;
   }
 
   private List<ReportType> reportTypesFor(String role) {
 
     List<ReportType> allTypes = new ArrayList<>();
-    allTypes.add(new ReportType("--- Elija un tipo de reporte ---", "0"));
 
     switch (role) {
       case "STANDARD_USER":
         allTypes.addAll(Arrays.asList(
-            new ReportType("Histórico", "1"),
-            new ReportType("Por trayecto", "2")));
+            new ReportType("Histórico", "Histórico"),
+            new ReportType("Por trayecto", "PorTrayecto")));
         break;
       case "ORG_ADMIN_USER":
         allTypes.addAll(Arrays.asList(
-            new ReportType("Histórico", "1"),
-            new ReportType("Por sector", "2")));
+            new ReportType("Histórico", "Histórico"),
+            new ReportType("Por sector", "PorSector")));
         break;
       case "AGENT_USER":
         allTypes.addAll(Arrays.asList(
-            new ReportType("Histórico", "1"),
-            new ReportType("Por organización", "2")));
+            new ReportType("Histórico", "Histórico"),
+            new ReportType("Por organización", "PorOrganización")));
         break;
       case "ADMINISTRATOR_USER":
         allTypes.addAll(Arrays.asList(
-            new ReportType("Por sector territorial", "1"),
-            new ReportType("Por tipo de organización", "2")));
+            new ReportType("Por sector territorial", "PorSectorTerritorial"),
+            new ReportType("Por tipo de organización", "PorTipoDeOrganización")));
         break;
       default:
         return Collections.emptyList();
@@ -135,24 +144,24 @@ public class ReportController {
   private String getReportFor(String role, String rt, Long id) {
     switch (role) {
       case "ADMINISTRATOR_USER":
-        if (rt.equals("1"))
+        if (rt.equals("PorSectorTerritorial"))
           return this.reporterSvc.territorialSectorsCfReport(CarbonFootprint.getDefaultUnit()).toString();
-        if (rt.equals("2"))
+        if (rt.equals("PorTipoDeOrganización"))
           return this.reporterSvc.organizationTypeCfReport(CarbonFootprint.getDefaultUnit()).toString();
       case "STANDARD_USER":
-        if (rt.equals("1"))
+        if (rt.equals("Histórico"))
           return this.reporterSvc.memberHistoricalCFReport(CarbonFootprint.getDefaultUnit(), id).toString();
-        if (rt.equals("2"))
+        if (rt.equals("PorTrayecto"))
           return this.reporterSvc.memberJourneyCFReport(CarbonFootprint.getDefaultUnit(), id).toString();
       case "ORG_ADMIN_USER":
-        if (rt.equals("1"))
+        if (rt.equals("Histórico"))
           return this.reporterSvc.organizationHistoricalCFReport(CarbonFootprint.getDefaultUnit(), id).toString();
-        if (rt.equals("2"))
+        if (rt.equals("PorSector"))
           return this.reporterSvc.organizationSectorCFReport(CarbonFootprint.getDefaultUnit(), id).toString();
       case "AGENT_USER":
-        if (rt.equals("1"))
+        if (rt.equals("Histórico"))
           return this.reporterSvc.territorialSectorHistoricalCFReport(CarbonFootprint.getDefaultUnit(), id).toString();
-        if (rt.equals("2"))
+        if (rt.equals("PorOrganización"))
           return this.reporterSvc.territorialSectorOrganizationCFReport(CarbonFootprint.getDefaultUnit(), id).toString();
       default:
         return "";

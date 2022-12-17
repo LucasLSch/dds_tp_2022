@@ -34,6 +34,7 @@
         <div class="v186_101">
           <span class="form-label">Tipo de Reporte</span>
           <select class="v186_102" th:name="rt" onchange="this.form.submit()">
+            <option class="v186_103" value="0">--- Elija un tipo de reporte ---</option>
             <option class="v186_103" th:each="reportType : ${allReportTypes}"
                     th:text="${reportType.name}"
                     th:value="${reportType.value}">
@@ -45,8 +46,9 @@
 
       <form class="download-report-form" method="post" th:action="@{/huellas}">
         <input type="hidden" th:name="fp" th:value="${filePath}"/>
-        <a class="blue-button download-report-button" th:href="${filePath}" th:download="${fileName}"
-           onclick="this.form.submit()">
+        <input type="hidden" th:name="rt" th:value="${electedType}"/>
+        <a class="blue-button download-report-button" th:href="${filePath}"
+           onclick="this.parentElement.submit()">
           <span class="v185_82">Descargar!</span>
         </a>
       </form>

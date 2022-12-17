@@ -24,6 +24,7 @@
     margin-right: 0px;
     margin-bottom: 25px;
     margin-left: 50px;
+    align-self: baseline;
 }
 
 a, u {
@@ -90,7 +91,7 @@ a, u {
 .form-label {
     width: 170px;
     color: rgba(255, 255, 255, 1);
-    position: absolute;
+    /* position: absolute; */
     top: 2px;
     left: 0px;
     font-family: Poppins;
