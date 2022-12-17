@@ -13,6 +13,7 @@ import ddsutn.services.UserSvc;
 import ddsutn.services.WorkApplicationSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -40,9 +41,6 @@ public class OrganizationController {
   private UserSvc userSvc;
 
   @Autowired
-  private MemberSvc memberSvc;
-
-  @Autowired
   private WorkApplicationSvc workApplicationSvc;
 
   @GetMapping("")
@@ -52,24 +50,6 @@ public class OrganizationController {
     mav.setViewName(organizationsHtml);
     return mav;
   }
-
-  // TODO ver que hacer con esto
-//  @GetMapping("/search")
-//  public String searchOrganizations(Model model) {
-//    OrganizationSvc svc = new OrganizationSvc();
-//    model.addAttribute("organizations", svc.findAll());
-//    return "buscarOrganizacion";
-//  }
-//
-//  @RequestMapping("/search/")//refrescarme como hacer un search
-//  public String searchOrganizacion(@RequestParam(value = "nombre", required = true) String param,
-//                                   Model model) {
-//    OrganizationSvc svc = new OrganizationSvc();
-//    model.addAttribute("organizations",
-//        svc.findAllByCondition((organization) -> organization.getSocialObjective().equals(param))
-//    );
-//    return "buscarOrganizacion";
-//  }
 
   @GetMapping("/{id}")
   public ModelAndView showOrganizatinoById(@PathVariable Long id) {
@@ -91,17 +71,14 @@ public class OrganizationController {
     return mav;
   }
 
+  @PreAuthorize("hasAuthority('STANDARD_USER')")
   @PostMapping("/{org_id}/sectors/{sector_id}/aplicaciones")
   public ModelAndView applyToSector(@PathVariable Long org_id, @PathVariable Long sector_id) {
     ModelAndView mav = new ModelAndView();
     Organization org = organizationSvc.findById(org_id);
     Sector sector = org.getSectors().stream().filter(s -> s.getId().equals(sector_id)).findFirst().orElse(null);
-    Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 
-    if (authorities.stream().map(GrantedAuthority::getAuthority).noneMatch(auth -> auth.equals("STANDARD_USER"))) {
-      mav.setStatus(HttpStatus.FORBIDDEN);
-      return mav;
-    } else if (sector == null) {
+    if (sector == null) {
       mav.setStatus(HttpStatus.NOT_FOUND);
       return mav;
     }
@@ -115,6 +92,7 @@ public class OrganizationController {
     return mav;
   }
 
+  @PreAuthorize("hasAuthority('ORG_ADMIN_USER')")
   @GetMapping("/{id}/solicitudes")
   public ModelAndView showWorkApplications(@PathVariable Long id) {
     ModelAndView mav = new ModelAndView();
@@ -122,7 +100,7 @@ public class OrganizationController {
 
     Set<SectorForView> sfvs = org.getSectors()
             .stream()
-            .filter(sector -> sector.hasPendingApplications())
+            .filter(Sector::hasPendingApplications)
             .map(SectorForView::new)
             .collect(Collectors.toSet());
     mav.addObject("organization", new OrganizationForView(org));
@@ -131,6 +109,7 @@ public class OrganizationController {
     return mav;
   }
 
+  @PreAuthorize("hasAuthority('ORG_ADMIN_USER')")
   @PostMapping("/{org_id}/solicitudes/{wa_id}")
   public ModelAndView resolveApplication(
           @PathVariable Long org_id,
@@ -138,8 +117,8 @@ public class OrganizationController {
           @RequestParam String accept,
           @RequestParam String reject) {
     ModelAndView mav = new ModelAndView();
-    Boolean acceptCond = Boolean.parseBoolean(accept);
-    Boolean rejectCond = Boolean.parseBoolean(reject);
+    boolean acceptCond = Boolean.parseBoolean(accept);
+    boolean rejectCond = Boolean.parseBoolean(reject);
 
     Organization org = organizationSvc.findById(org_id);
 
@@ -173,17 +152,6 @@ public class OrganizationController {
 
     return mav;
   }
-
-//  @GetMapping("/{id}/solicitar")
-//  public String apply(@PathVariable Long id, Model model) {
-//    return "simular que solicita para org " + id;
-//  }
-//
-//  @GetMapping("/{id}/aceptar")
-//  public String accept(@PathVariable Long id, Model model) {//cirtcular view path, que esta pasando
-//    return "aceptarMiembro";
-//  }
-
 
   // --- Utils --- //
 

@@ -11,6 +11,7 @@ import ddsutn.security.user.User;
 import ddsutn.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -52,6 +53,7 @@ public class MemberController {
   @Autowired
   private DistrictSvc districtSvc;
 
+  @PreAuthorize("hasAnyAuthority('STANDARD_USER', 'ADMINISTRATOR_USER')")
   @GetMapping("/{id}")
   public ModelAndView showMember(@PathVariable Long id) {
     ModelAndView mav = new ModelAndView();
@@ -74,6 +76,7 @@ public class MemberController {
     return mav;
   }
 
+  @PreAuthorize("hasAnyAuthority('STANDARD_USER', 'ADMINISTRATOR_USER')")
   @GetMapping("/{id}/trayectos")
   public ModelAndView showJourneys(@PathVariable Long id) {
     ModelAndView mav = new ModelAndView();
@@ -105,6 +108,7 @@ public class MemberController {
     return mav;
   }
 
+  @PreAuthorize("hasAuthority('STANDARD_USER')")
   @PostMapping("/{id}/trayectos")
   public ModelAndView addNewJourney(@PathVariable Long id, @RequestParam String journeyJson) throws JsonProcessingException {
     ModelAndView mav = new ModelAndView();
@@ -136,6 +140,7 @@ public class MemberController {
     return mav;
   }
 
+  @PreAuthorize("hasAuthority('STANDARD_USER')")
   @PostMapping("/{m_id}/trayectos/{t_id}")
   public ModelAndView deleteJourney(@PathVariable Long m_id, @PathVariable Long t_id) {
     ModelAndView mav = new ModelAndView();

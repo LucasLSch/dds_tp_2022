@@ -9,6 +9,7 @@ import ddsutn.services.ConsumptionTypeSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -17,6 +18,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
+@Order(2)
 public class ConsumptionTypeLoader implements ApplicationRunner {
 
   @Autowired
