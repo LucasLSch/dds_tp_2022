@@ -159,36 +159,23 @@
               </div>
 
               <div class="dropdown-container">
-                <select class="country-dropdown" id="startingLocationCountry-${legIdCounter}">
+                <select class="country-dropdown" id="startingLocationCountry-${legIdCounter}" onchange="showProvinces(this)">
                   <option class="v186_103"></option>`;
         parseCountries.forEach((country) => {
             template += `<option class="v186_103" value="${country.id}">${country.name}</option>`
         });
         template += `
                 </select>
-                <select class="province-dropdown" id="startingLocationProvince-${legIdCounter}">
-                  <option class="v186_103"></option>`;
-        parseProvinces.forEach((province) => {
-            template += `<option class="v186_103" value="${province.id}">${province.name}</option>`
-        });
-        template += `
+                <select class="province-dropdown" id="startingLocationProvince-${legIdCounter}"  onchange="showMunicipalities(this)">
+                  <option class="v186_103"></option>
                 </select>
               </div>
-
               <div class="dropdown-container">
-                <select class="municipality-dropdown" id="startingLocationMunicipality-${legIdCounter}">
-                  <option class="v186_103"></option>`;
-        parseMunicipalities.forEach((municipality) => {
-            template += `<option class="v186_103" value="${municipality.id}">${municipality.name}</option>`
-        });
-        template += `
+                <select class="municipality-dropdown" id="startingLocationMunicipality-${legIdCounter}" onchange="showDistricts(this)">
+                  <option class="v186_103"></option>
                 </select>
                 <select class="district-dropdown" id="startingLocationDistrict-${legIdCounter}">
-                  <option class="v186_103"></option>`;
-        parseDistricts.forEach((district) => {
-            template += `<option class="v186_103" value="${district.id}">${district.name}</option>`
-        });
-        template += `
+                  <option class="v186_103"></option>
                 </select>
               </div>
             </div>
@@ -202,36 +189,24 @@
               </div>
 
               <div class="dropdown-container">
-                <select class="country-dropdown" id="endingLocationCountry-${legIdCounter}">
+                <select class="country-dropdown" id="endingLocationCountry-${legIdCounter}" onchange="showProvinces(this)">
                   <option class="v186_103"></option>`;
         parseCountries.forEach((country) => {
             template += `<option class="v186_103" value="${country.id}">${country.name}</option>`
         });
         template += `
                 </select>
-                <select class="province-dropdown" id="endingLocationProvince-${legIdCounter}">
-                  <option class="v186_103"></option>`;
-        parseProvinces.forEach((province) => {
-            template += `<option class="v186_103" value="${province.id}">${province.name}</option>`
-        });
-        template += `
+                <select class="province-dropdown" id="endingLocationProvince-${legIdCounter}" onchange="showMunicipalities(this)">
+                  <option class="v186_103"></option>
                 </select>
               </div>
 
               <div class="dropdown-container">
-                <select class="municipality-dropdown" id="endingLocationMunicipality-${legIdCounter}">
-                  <option class="v186_103"></option>`;
-        parseMunicipalities.forEach((municipality) => {
-            template += `<option class="v186_103" value="${municipality.id}">${municipality.name}</option>`
-        });
-        template += `
+                <select class="municipality-dropdown" id="endingLocationMunicipality-${legIdCounter}" onchange="showDistricts(this)">
+                  <option class="v186_103"></option>
                 </select>
                 <select class="district-dropdown" id="endingLocationDistrict-${legIdCounter}">
-                  <option class="v186_103"></option>`;
-        parseDistricts.forEach((district) => {
-            template += `<option class="v186_103" value="${district.id}">${district.name}</option>`
-        });
-        template += `
+                  <option class="v186_103"></option>
                 </select>
               </div>
             </div>
@@ -398,6 +373,89 @@
         document.getElementById("journeyJson").setAttribute("value", result);
         document.getElementById("new-journey").submit();
     }
+
+    function showProvinces(element) {
+
+        let idFormat = element.id.split("Country");
+        let provinceId = idFormat[0] + "Province" + idFormat[1];
+
+        let previous = document.getElementById(provinceId);
+        if (!!previous) {
+            previous.remove();
+        }
+
+        let parent = element.parentElement;
+
+        let select = `
+                <select class="province-dropdown" id="${provinceId}" onchange="showMunicipalities(this)">
+                  <option class="v186_103"></option>`;
+        parseProvinces
+            .filter(province => province.country.id == element.value)
+            .forEach(province => {
+                select += `<option class="v186_103" value="${province.id}">${province.name}</option>`
+            });
+        select += `</select>`
+
+        parent.insertAdjacentHTML("beforeend", select);
+
+        showMunicipalities(document.getElementById(provinceId));
+        createSelect2();
+    }
+
+    function showMunicipalities(element) {
+
+        let idFormat = element.id.split("Province");
+        let id = idFormat[0] + "Municipality" + idFormat[1];
+
+        let previous = document.getElementById(id);
+        let previousParent = previous.parentElement;
+
+        if (!!previous) {
+            previous.remove();
+        }
+
+        let select = `
+                <select class="municipality-dropdown" id="${id}" onchange="showDistricts(this)">
+                  <option class="v186_103"></option>`;
+        parseMunicipalities
+            .filter(municipality => municipality.province.id == element.value)
+            .forEach(municipality => {
+                select += `<option class="v186_103" value="${municipality.id}">${municipality.name}</option>`
+            });
+        select += `</select>`
+
+        previousParent.insertAdjacentHTML("afterbegin", select);
+        showDistricts(document.getElementById(id));
+        createSelect2();
+    }
+
+    function showDistricts(element) {
+
+        let idFormat = element.id.split("Municipality");
+        let id = idFormat[0] + "District" + idFormat[1];
+
+        let previous = document.getElementById(id);
+        let previousParent = previous.parentElement;
+
+        if (!!previous) {
+            previous.remove();
+        }
+
+        let select = `
+                <select class="district-dropdown" id="${id}">
+                  <option class="v186_103"></option>`;
+        parseDistricts
+            .filter(district => district.municipality.id == element.value)
+            .forEach(district => {
+                select += `<option class="v186_103" value="${district.id}">${district.name}</option>`
+            });
+        select += `</select>`
+
+        previousParent.insertAdjacentHTML("beforeend", select);
+
+        createSelect2();
+    }
+
 
     function createSelect2() {
         $(".country-dropdown").select2({
