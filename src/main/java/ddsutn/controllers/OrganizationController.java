@@ -1,16 +1,21 @@
 package ddsutn.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import ddsutn.domain.organization.OrgType;
 import ddsutn.domain.organization.Organization;
 import ddsutn.domain.organization.Sector;
 import ddsutn.domain.organization.workApplication.WorkApplication;
+import ddsutn.domain.territories.TerritorialSector;
+import ddsutn.dtos.TerritorialSectorForView;
 import ddsutn.dtos.organization.OrganizationForView;
 import ddsutn.dtos.organization.SectorForView;
 import ddsutn.security.user.StandardUser;
 import ddsutn.security.user.User;
-import ddsutn.services.MemberSvc;
-import ddsutn.services.OrganizationSvc;
-import ddsutn.services.UserSvc;
-import ddsutn.services.WorkApplicationSvc;
+import ddsutn.services.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -32,16 +38,32 @@ public class OrganizationController {
   private final String organizationsHtml = "/organizations/organizations";
   private final String organizationDetailsHtml = "/organizations/organizationDetails";
   private final String organizationApplicationsHtml = "/organizations/workApplications";
+  private final String newOrganizationHtml = "/organizations/newOrganization";
 
 
   @Autowired
   private OrganizationSvc organizationSvc;
 
   @Autowired
+  private TerritorialSectorSvc territorialSectorSvc;
+
+  @Autowired
   private UserSvc userSvc;
 
   @Autowired
   private WorkApplicationSvc workApplicationSvc;
+
+  @Autowired
+  private CountrySvc countrySvc;
+
+  @Autowired
+  private ProvinceSvc provinceSvc;
+
+  @Autowired
+  private MunicipalitySvc municipalitySvc;
+
+  @Autowired
+  private DistrictSvc districtSvc;
 
   @GetMapping("")
   public ModelAndView showOrganizations(@RequestParam(defaultValue = "") String like) {
@@ -151,6 +173,39 @@ public class OrganizationController {
     workApplicationSvc.save(workApplication);
 
     return mav;
+  }
+
+  @PreAuthorize("hasAuthority('ADMINISTRATOR_USER')")
+  @GetMapping("/nuevaOrganizacion")
+  public ModelAndView createNewOrganization() {
+    ModelAndView mav = new ModelAndView();
+
+    mav.addObject("newOrg", new OrganizationForView());
+    mav.addObject("allCountries", countrySvc.findAll());
+    mav.addObject("allProvinces", provinceSvc.findAll());
+    mav.addObject("allMunicipalities", municipalitySvc.findAll());
+    mav.addObject("allDistricts", districtSvc.findAll());
+    mav.addObject("allOrgTypes", Arrays.stream(OrgType.values()).map(Enum::name).collect(Collectors.toList()));
+    mav.addObject("allTerritorialSectors", this.territorialSectorSvc.findAll().stream().map(TerritorialSectorForView::new).collect(Collectors.toList()));
+
+    mav.setViewName(newOrganizationHtml);
+
+    return mav;
+  }
+
+  @PreAuthorize("hasAuthority('ADMINISTRATOR_USER')")
+  @PostMapping("")
+  public ModelAndView saveNewOrganization(@ModelAttribute OrganizationForView ofv) {
+    ModelAndView mav = new ModelAndView();
+    Organization newOrganization = ofv.toOrganization(this.districtSvc);
+    TerritorialSector ts = this.territorialSectorSvc.findById(ofv.territorialSectorId);
+    if(ts == null) {
+      return this.createNewOrganization();
+    }
+    ts.addOrganization(newOrganization);
+    this.territorialSectorSvc.save(ts);
+    this.organizationSvc.save(newOrganization);
+    return this.showOrganizations("");
   }
 
   // --- Utils --- //

@@ -75,7 +75,7 @@ public class ReportController {
   public InputStreamResource FileSystemResource (HttpServletResponse response, @PathVariable String file) throws IOException {
     response.setContentType("application/json");
     response.setHeader("Content-Disposition", "attachment;filename=" + file);
-    return new InputStreamResource(new FileInputStream(DIRECTORY_PATH + RESOURCE_PATH + file));
+    return new InputStreamResource(Files.newInputStream(Paths.get(DIRECTORY_PATH + RESOURCE_PATH + file)));
   }
 
   @PostMapping("/huellas")

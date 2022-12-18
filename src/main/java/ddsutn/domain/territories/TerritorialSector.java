@@ -21,6 +21,9 @@ public class TerritorialSector {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(name = "name")
+  private String name;
+
   @Column(name = "type")
   @Enumerated(value = EnumType.STRING)
   private TerritorialSectorType type;
@@ -31,10 +34,11 @@ public class TerritorialSector {
 
   @OneToMany(cascade = CascadeType.PERSIST)
   @JoinColumn(name = "territorial_sector_id")
-  private Set<CarbonFootprint> carbonFootprints;
+  private Set<CarbonFootprint> carbonFootprints = Collections.emptySet();
 
 
-  public TerritorialSector(TerritorialSectorType type, Set<Organization> organizations) {
+  public TerritorialSector(String name, TerritorialSectorType type, Set<Organization> organizations) {
+    this.name = name;
     this.type = type;
     this.organizations = organizations;
   }
@@ -56,4 +60,9 @@ public class TerritorialSector {
     someCarbonFootprint.setDate(LocalDate.now());
     this.carbonFootprints.add(someCarbonFootprint);
   }
+
+  public void addOrganization(Organization someOrganization) {
+    this.organizations.add(someOrganization);
+  }
+
 }

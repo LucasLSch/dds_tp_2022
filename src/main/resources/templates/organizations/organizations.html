@@ -28,7 +28,7 @@
     <tr th:each="org: ${allOrganizations}">
       <div class="org-box">
         <div class="org-info"></div>
-        <span class="v81_128" th:text="'Ubicación: '+${org.location}"></span>
+        <span class="v81_128" th:text="'Ubicación: '+${org.location.street} + ' ' + ${org.location.height}"></span>
         <span class="v82_240" th:text="'Sectores: '+${org.sectors}"></span>
         <span class="v82_239" th:text="'Cantidad de Miembros: '+${org.membersAmount}"></span>
         <span class="v82_238" th:text="${org.socialObj}"></span>

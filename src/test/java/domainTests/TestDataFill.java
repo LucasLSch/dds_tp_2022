@@ -330,10 +330,10 @@ public class TestDataFill {
 
   private void createTerritorialSector() {
     TerritorialSector[] territorialSectors = {
-        new TerritorialSector(TerritorialSectorType.CITY, new HashSet<>()),
-        new TerritorialSector(TerritorialSectorType.STATE, new HashSet<>()),
-        new TerritorialSector(TerritorialSectorType.CITY, new HashSet<>()),
-        new TerritorialSector(TerritorialSectorType.STATE, new HashSet<>())
+        new TerritorialSector("Pepe1", TerritorialSectorType.CITY, new HashSet<>()),
+        new TerritorialSector("Pepe2", TerritorialSectorType.STATE, new HashSet<>()),
+        new TerritorialSector("Pepe3", TerritorialSectorType.CITY, new HashSet<>()),
+        new TerritorialSector("Pepe4", TerritorialSectorType.STATE, new HashSet<>())
     };
 
     territorialSectorSvc.saveAll(Arrays.asList(territorialSectors));

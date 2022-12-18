@@ -1,63 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Solicitudes de Trabajo</title>
-    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" th:href="@{/css/utils/normalize.css}">
-    <link rel="stylesheet" th:href="@{/css/utils/buttons.css}">
-    <link rel="stylesheet" th:href="@{/css/utils/rootVariables.css}">
-    <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
-    <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
-    <link rel="stylesheet" th:href="@{/css/organizations/workApplications.css}">
+  <meta charset="UTF-8">
+  <title>Solicitudes de Trabajo</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" th:href="@{/css/utils/normalize.css}">
+  <link rel="stylesheet" th:href="@{/css/utils/buttons.css}">
+  <link rel="stylesheet" th:href="@{/css/utils/rootVariables.css}">
+  <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
+  <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
+  <link rel="stylesheet" th:href="@{/css/organizations/workApplications.css}">
 </head>
 <body>
 <div class="site-size">
-    <div th:replace="fragments/menu :: menu"></div>
+  <div th:replace="fragments/menu :: menu"></div>
 
 
-    <div class="site-body">
-        <div class="site-header">
-            <span class="site-title">Sectores con solicitudes</span>
-            <div class="site-info">
-                <div class="site-info-icon"></div>
-                <span class="site-info-text">Administra las solicitudes de trabajo de tu organización</span>
-            </div>
-        </div>
-
-        <div class="sectors-container">
-            <div class="sector-info" th:each="sector: ${allSectorsWithApplications}">
-
-                <div class="sector-title">
-                    <span class="sector-name" th:text="${sector.name}"></span>
-                </div>
-
-                <div class="application-container">
-                    <div class="application-info" th:each="solicitud: ${sector.workApplications}">
-                        <span class="member-names" th:text="${solicitud.memberNames}"></span>
-                        <span class="member-docs" th:text="${solicitud.memberDocs}"></span>
-                        <form class="accept-member" th:action="'/organizaciones/'+${organization.id}+'/solicitudes/'+${solicitud.id}" method="POST">
-                            <input class="hidden-input" name="accept" value="true"/>
-                            <input class="hidden-input" name="reject" value="false"/>
-                            <button class="standard-button blue-button workapplication-button" type="submit">
-                                <span class="button-text">Aceptar</span>
-                            </button>
-                        </form>
-                        <form class="reject-member" th:action="'/organizaciones/'+${organization.id}+'/solicitudes/'+${solicitud.id}" method="POST">
-                            <input class="hidden-input" name="accept" value="false"/>
-                            <input class="hidden-input" name="reject" value="true"/>
-                            <button class="standard-button red-button workapplication-button" type="submit">
-                                <span class="button-text">Rechazar</span>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="site-body">
+    <div class="site-header">
+      <span class="site-title">Sectores con solicitudes</span>
+      <div class="site-info">
+        <div class="site-info-icon"></div>
+        <span class="site-info-text">Administra las solicitudes de trabajo de tu organización</span>
+      </div>
     </div>
 
-    <div th:replace="fragments/footer :: footer"></div>
+    <div class="sectors-container">
+      <div class="sector-info" th:each="sector: ${allSectorsWithApplications}">
+
+        <div class="sector-title">
+          <span class="sector-name" th:text="${sector.name}"></span>
+        </div>
+
+        <div class="application-container">
+          <div class="application-info" th:each="solicitud: ${sector.workApplications}">
+            <span class="member-names" th:text="${solicitud.memberNames}"></span>
+            <span class="member-docs" th:text="${solicitud.memberDocs}"></span>
+            <form class="accept-member"
+                  th:action="'/organizaciones/'+${organization.id}+'/solicitudes/'+${solicitud.id}" method="POST">
+              <input class="hidden-input" name="accept" value="true"/>
+              <input class="hidden-input" name="reject" value="false"/>
+              <button class="standard-button blue-button workapplication-button" type="submit">
+                <span class="button-text">Aceptar</span>
+              </button>
+            </form>
+            <form class="reject-member"
+                  th:action="'/organizaciones/'+${organization.id}+'/solicitudes/'+${solicitud.id}" method="POST">
+              <input class="hidden-input" name="accept" value="false"/>
+              <input class="hidden-input" name="reject" value="true"/>
+              <button class="standard-button red-button workapplication-button" type="submit">
+                <span class="button-text">Rechazar</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div th:replace="fragments/footer :: footer"></div>
+</div>
 </body>
 </html>
