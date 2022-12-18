@@ -18,7 +18,6 @@
 <div class="site-size">
   <div th:replace="fragments/menu :: menu"></div>
 
-
   <div class="site-body">
 
     <div class="site-header">
@@ -46,7 +45,7 @@
         <div class="org-dropdown-container">
           <label>Tipo de Organización</label>
           <select class="org-dropdown-select" th:field="*{orgType}">
-            <option class="org-dropdown-option" th:value="-1" disabled>-- Seleccione una opción --</option>
+            <option class="org-dropdown-option" value="-1" disabled>-- Seleccione una opción --</option>
             <option class="org-dropdown-option" th:each="ot : ${allOrgTypes}"
                     th:text="${ot}"
                     th:value="${ot}">
@@ -57,7 +56,7 @@
         <div class="org-dropdown-container">
           <label>Sector Territorial</label>
           <select class="org-dropdown-select" th:field="*{territorialSectorId}">
-            <option class="org-dropdown-option" th:value="-1" disabled>-- Seleccione una opción --</option>
+            <option class="org-dropdown-option" value="-1" disabled>-- Seleccione una opción --</option>
             <option class="org-dropdown-option" th:each="ts : ${allTerritorialSectors}"
                     th:text="${ts.name}"
                     th:value="${ts.name}">
@@ -76,14 +75,14 @@
 
           <div class="dropdown-container">
             <select class="country-dropdown" th:field="*{location.country}">
-              <option class="select2-option" value="-1"></option>
+              <option value="-1" id="country-dropdown-empty-option"></option>
               <option class="select2-option" th:each="c : ${allCountries}"
                       th:text="${c.name}"
                       th:value="${c.id}">
               </option>
             </select>
             <select class="province-dropdown" th:field="*{location.province}">
-              <option class="select2-option" value="-1"></option>
+              <option value="-1" id="province-dropdown-empty-option"></option>
               <option class="select2-option" th:each="p : ${allProvinces}"
                       th:text="${p.name}"
                       th:value="${p.id}">
@@ -92,14 +91,14 @@
           </div>
           <div class="dropdown-container">
             <select class="municipality-dropdown" th:field="*{location.municipality}">
-              <option class="select2-option" value="-1"></option>
+              <option value="-1" id="municipality-dropdown-empty-option"></option>
               <option class="select2-option" th:each="m : ${allMunicipalities}"
                       th:text="${m.name}"
                       th:value="${m.id}">
               </option>
             </select>
             <select class="district-dropdown" th:field="*{location.district}">
-              <option class="select2-option" value="-1"></option>
+              <option value="-1" id="district-dropdown-empty-option"></option>
               <option class="select2-option" th:each="d : ${allDistricts}"
                       th:text="${d.name}"
                       th:value="${d.id}">
@@ -128,6 +127,12 @@
     });
 
     function createSelect2() {
+
+        document.getElementById("country-dropdown-empty-option").removeAttribute("value");
+        document.getElementById("province-dropdown-empty-option").removeAttribute("value");
+        document.getElementById("municipality-dropdown-empty-option").removeAttribute("value");
+        document.getElementById("district-dropdown-empty-option").removeAttribute("value");
+
         $(".country-dropdown").select2({
             placeholder: "País",
             allowClear: true,

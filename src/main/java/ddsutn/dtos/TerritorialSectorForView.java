@@ -1,6 +1,7 @@
 package ddsutn.dtos;
 
 import ddsutn.domain.territories.TerritorialSector;
+import ddsutn.domain.territories.TerritorialSectorType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,5 +21,9 @@ public class TerritorialSectorForView {
     this.id = someTs.getId();
     this.name = someTs.getName();
     this.type = someTs.getType().name();
+  }
+
+  public TerritorialSector toTerritorialSector() {
+    return new TerritorialSector(this.name, TerritorialSectorType.valueOf(this.type));
   }
 }

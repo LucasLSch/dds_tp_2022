@@ -43,6 +43,12 @@ public class TerritorialSector {
     this.organizations = organizations;
   }
 
+  public TerritorialSector(String name, TerritorialSectorType type) {
+    this.name = name;
+    this.type = type;
+  }
+
+
   public CarbonFootprint getCarbonFootprint(Set<Unit> units) {
     CarbonFootprint finalCf = CarbonFootprint.sum(units, this.getOrganizations()
         .stream()

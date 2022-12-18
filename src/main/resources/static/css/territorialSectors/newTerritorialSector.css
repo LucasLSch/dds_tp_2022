@@ -1,0 +1,207 @@
+.site-size {
+    /* width: 1920px; */
+    min-height: 1080px;
+    display: flex;
+    flex-direction: column;
+}
+
+.site-body {
+    width: 100%;
+    height: 1189px;
+    background: var(--darkGrey02);
+    opacity: 1;
+    padding-top: 173px;
+    overflow-y: scroll;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
+
+.site-header {
+    width: fit-content;
+}
+
+.site-title {
+    width: 257px;
+    color: rgba(255, 255, 255, 1);
+    top: 73px;
+    left: 450px;
+    font-family: Poppins, serif;
+    font-weight: Bold;
+    font-size: 36px;
+    opacity: 1;
+    text-align: left;
+}
+
+.site-info {
+    margin: 50px 0px 32px;
+    display: flex;
+    align-items: center;
+}
+
+.site-info-icon {
+    width: 78px;
+    height: 78px;
+    background: rgba(255, 255, 255, 1);
+    opacity: 1;
+    border-radius: 50%;
+}
+
+.site-info-text {
+    width: fit-content;
+    color: rgba(255, 255, 255, 0.8999999761581421);
+    /* top: 27px; */
+    /* left: 98px; */
+    font-family: Poppins, serif;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+    padding: 0px 20px;
+}
+
+.select2-option {
+    width: 263px;
+    color: rgba(153, 153, 153, 1);
+    position: absolute;
+    top: 3px;
+    left: 25px;
+    font-family: Poppins, serif;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+}
+
+.button-text {
+    width: max-content;
+    color: rgba(0, 0, 0, 1);
+    font-family: Poppins, serif;
+    font-weight: 600;
+    font-size: 18px;
+    opacity: 1;
+    text-align: center;
+}
+
+form input {
+    color: white;
+    padding-left: 10px;
+    font-family: Poppins;
+}
+
+.location-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.dropdown-container {
+    margin-left: 1px;
+    margin-top: 1px;
+}
+
+.street-name-input {
+    width: 340px;
+    height: 28px;
+    background: rgba(75, 75, 75, 0.699999988079071);
+    opacity: 1;
+    border-radius: 5px;
+}
+
+.street-height-input {
+    width: 124px;
+    height: 28px;
+    background: rgba(75, 75, 75, 0.699999988079071);
+    opacity: 1;
+    border-radius: 5px;
+}
+
+.ts-type-container {
+    width: 325px;
+    height: 32px;
+    opacity: 1;
+}
+
+.ts-dropdown-select {
+    width: 296px;
+    height: 36px;
+    background: rgba(255, 255, 255, 1);
+    opacity: 1;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.10000000149011612);
+    overflow: hidden;
+    font-family: Poppins, serif;
+    padding-left: 5px;
+}
+
+.ts-dropdown-option {
+    width: 263px;
+    color: rgba(153, 153, 153, 1);
+    font-family: Poppins, serif;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+}
+
+.ts-input-container {
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.ts-dropdown-container {
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+form label {
+    width: 170px;
+    opacity: 1;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.800000011920929);
+    font-family: Poppins;
+    font-weight: Light;
+    font-size: 16px;
+}
+
+.form-input-background {
+    width: 280px;
+    height: 36px;
+    background: rgba(75, 75, 75, 0.699999988079071);
+    opacity: 1;
+    border-radius: 5px;
+}
+
+.new-ts-container {
+    width: 600px;
+    background: var(--darkGrey03);
+    border-radius: 40px;
+    margin-bottom: 20px;
+    padding-top: 25px;
+    padding-bottom: 20px;
+}
+
+.street-container {
+    margin-top: 5px;
+    margin-bottom: 2px;
+}
+
+.submit-ts {
+    width: 100px;
+    height: 50px;
+    margin-top: 20px;
+    margin-left: 400px;
+}
+
+.new-ts-form {
+    margin-left: 45px;
+    margin-right: 20px;
+}
