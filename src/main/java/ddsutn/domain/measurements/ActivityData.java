@@ -4,6 +4,7 @@ import ddsutn.domain.measurements.unit.Unit;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -39,7 +40,7 @@ public class ActivityData {
   private Set<CarbonFootprint> carbonFootprints;
 
   public ActivityData(
-      ConsumptionType consumptionType,
+      @NotNull ConsumptionType consumptionType,
       Double consumptionValue,
       PeriodicityFormat periodicityFormat,
       String periodicity

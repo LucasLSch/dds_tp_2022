@@ -1,8 +1,5 @@
 package ddsutn.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import ddsutn.domain.organization.OrgType;
 import ddsutn.domain.organization.Organization;
 import ddsutn.domain.organization.Sector;
@@ -12,10 +9,7 @@ import ddsutn.dtos.TerritorialSectorForView;
 import ddsutn.dtos.organization.OrganizationForView;
 import ddsutn.dtos.organization.SectorForView;
 import ddsutn.security.user.StandardUser;
-import ddsutn.security.user.User;
 import ddsutn.services.*;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,12 +17,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import javax.servlet.http.HttpSession;
+import java.io.*;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -39,6 +33,7 @@ public class OrganizationController {
   private final String organizationDetailsHtml = "/organizations/organizationDetails";
   private final String organizationApplicationsHtml = "/organizations/workApplications";
   private final String newOrganizationHtml = "/organizations/newOrganization";
+  private final String loadActivityDataHtml = "/organizations/loadActivityData";
 
 
   @Autowired
@@ -64,6 +59,12 @@ public class OrganizationController {
 
   @Autowired
   private DistrictSvc districtSvc;
+
+  @Autowired
+  private ConsumptionTypeSvc consumptionTypeSvc;
+
+  @Autowired
+  private ActivityDataSvc activityDataSvc;
 
   @GetMapping("")
   public ModelAndView showOrganizations(@RequestParam(defaultValue = "") String like) {
@@ -196,7 +197,6 @@ public class OrganizationController {
   @PreAuthorize("hasAuthority('ADMINISTRATOR_USER')")
   @PostMapping("")
   public ModelAndView saveNewOrganization(@ModelAttribute OrganizationForView ofv) {
-    ModelAndView mav = new ModelAndView();
     Organization newOrganization = ofv.toOrganization(this.districtSvc);
     TerritorialSector ts = this.territorialSectorSvc.findById(ofv.territorialSectorId);
     if(ts == null) {
@@ -206,6 +206,64 @@ public class OrganizationController {
     this.territorialSectorSvc.save(ts);
     this.organizationSvc.save(newOrganization);
     return this.showOrganizations("");
+  }
+
+  @PreAuthorize("hasAuthority('ORG_ADMIN_USER')")
+  @GetMapping("/{id}/actividades/nuevaActividad")
+  public ModelAndView activityDataLoader(@PathVariable Long id) {
+    ModelAndView mav = new ModelAndView();
+    Organization read = this.organizationSvc.findById(id);
+
+    if (read == null) {
+      mav.setStatus(HttpStatus.NOT_FOUND);
+      return mav;
+    }
+
+    mav.addObject("path", "/organizaciones/" + id.toString() + "/actividades");
+
+    mav.setViewName(loadActivityDataHtml);
+    return mav;
+  }
+
+  @PreAuthorize("hasAuthority('ORG_ADMIN_USER')")
+  @PostMapping("/{id}/actividades")
+  public ModelAndView saveActivityData(
+          @PathVariable Long id,
+          @RequestParam MultipartFile activityDataFile,
+          HttpSession session) throws IOException {
+    ModelAndView mav = new ModelAndView();
+    Organization read = this.organizationSvc.findById(id);
+
+    if (read == null) {
+      mav.setStatus(HttpStatus.BAD_REQUEST);
+      return mav;
+    }
+
+    String path = session.getServletContext().getRealPath("/");
+    String filename = activityDataFile.getOriginalFilename();
+
+    byte[] bytes = activityDataFile.getBytes();
+
+    BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(path + "/" + filename));
+
+    bout.write(bytes);
+    bout.flush();
+    bout.close();
+
+    Scanner sc = new Scanner(new File(path + "/" + filename));
+    while (sc.hasNext()) {
+      try {
+        this.consumptionTypeSvc.parseLine(read, sc.nextLine());
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+      }
+    }
+
+    this.activityDataSvc.saveAll(read.getActivitiesData());
+    this.organizationSvc.save(read);
+
+    mav.setViewName("redirect:/organizaciones/" + id.toString() + "/actividades/nuevaActividad");
+    return mav;
   }
 
   // --- Utils --- //
