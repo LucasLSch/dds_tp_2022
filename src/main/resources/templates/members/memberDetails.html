@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" th:href="@{/css/utils/normalize.css}">
-  <link rel="stylesheet" th:href="@{/css/utils/rootVariables.css}">
-  <link rel="stylesheet" th:href="@{/css/utils/buttons.css}">
-  <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
-  <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
-  <link rel="stylesheet" th:href="@{/css/members/memberDetails.css}">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/utils/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/utils/rootVariables.css}">
+    <link rel="stylesheet" th:href="@{/css/utils/buttons.css}">
+    <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
+    <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/members/memberDetails.css}">
+    <link rel="stylesheet" th:href="@{/css/utils/siteSize.css}">
 </head>
 <body>
 
 <div class="site-size">
     <div th:replace="fragments/menu :: menu"></div>
-    <div th:replace="fragments/footer :: footer"></div>
-
     <div class="site-body">
 
         <div class="v147_85"></div>
@@ -68,7 +67,7 @@
         <span class="v147_113" th:text="${member.name}+' '+${member.surname}"></span>
 
     </div>
-
+    <div th:replace="fragments/footer :: footer"></div>
 </div>
 
 </body>

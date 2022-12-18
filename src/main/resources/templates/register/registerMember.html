@@ -10,12 +10,12 @@
   <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
   <link rel="stylesheet" th:href="@{/css/register/registerMember.css}">
   <link rel="stylesheet" th:href="@{/css/utils/buttons.css}">
+  <link rel="stylesheet" th:href="@{/css/utils/siteSize.css}">
+
 </head>
 <body>
 <div class="site-size">
   <div th:replace="fragments/menu :: menu"></div>
-  <div th:replace="fragments/footer :: footer"></div>
-
   <div class="site-body">
 
     <span class="v118_211">Nuevo Miembro</span>
@@ -60,6 +60,7 @@
     </form>
 
   </div>
+  <div th:replace="fragments/footer :: footer"></div>
 
 </div>
 </body>

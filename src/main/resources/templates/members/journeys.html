@@ -14,13 +14,12 @@
   <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
   <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
   <link rel="stylesheet" th:href="@{/css/members/journeys.css}">
+  <link rel="stylesheet" th:href="@{/css/utils/siteSize.css}">
 </head>
 <body>
 <div class="site-size">
 
   <div th:replace="fragments/menu :: menu"></div>
-  <div th:replace="fragments/footer :: footer"></div>
-
   <div class="site-body">
 
     <div class="site-header">
@@ -111,6 +110,8 @@
     </section>
 
   </div>
+  <div th:replace="fragments/footer :: footer"></div>
+
 
 </div>
 

@@ -16,17 +16,20 @@
   <link rel="stylesheet" th:href="@{/css/utils/rootVariables.css}">
   <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
   <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
+  <link rel="stylesheet" th:href="@{/css/utils/siteSize.css}">
 </head>
 
 <body>
 
-<header th:insert="fragments/menu.html :: menu">
+<div class="site-size">
+  <header th:insert="fragments/menu.html :: menu">
 
-</header>
+  </header>
 
-<section th:insert="fragments/footer.html :: footer">
+  <section th:insert="fragments/footer.html :: footer">
 
-</section>
+  </section>
+</div>
 
 </body>
 </html>

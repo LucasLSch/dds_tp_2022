@@ -10,14 +10,13 @@
     <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
     <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
     <link rel="stylesheet" th:href="@{/css/organizations/organizationDetails.css}">
+    <link rel="stylesheet" th:href="@{/css/utils/siteSize.css}">
 </head>
 
 <body>
 
 <div class="page-size">
     <div th:replace="fragments/menu :: menu"></div>
-    <div th:replace="fragments/footer :: footer"></div>
-
     <div class="site-body">
 
         <div class="v81_86"></div>
@@ -65,6 +64,8 @@
         </div>
         <span class="v81_136" th:text="${org.socialObj}"></span>
     </div>
+    <div th:replace="fragments/footer :: footer"></div>
+
 
 </div>
 

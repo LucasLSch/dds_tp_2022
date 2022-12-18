@@ -16,14 +16,13 @@
   <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
   <link rel="stylesheet" th:href="@{/css/login/login.css}">
   <link rel="stylesheet" th:href="@{/css/utils/buttons.css}">
-
+  <link rel="stylesheet" th:href="@{/css/utils/siteSize.css}">
 </head>
 
 <body>
 
 <div class="site-size">
   <div th:replace="fragments/menu :: menu"></div>
-  <div th:replace="fragments/footer :: footer"></div>
 
   <div class="e1_70">
     <div class="e1_71"></div>
@@ -53,6 +52,8 @@
       <span class="e1_100">¿Olvidaste tu contraseña?</span>
     </form>
   </div>
+  <div th:replace="fragments/footer :: footer"></div>
+
 </div>
 </body>
 </html>

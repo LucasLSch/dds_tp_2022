@@ -6,12 +6,6 @@ body {
     font-size: 14px;
 }
 
-.site-size {
-    width: 1920px;
-    height: 1080px;
-    position: relative;
-}
-
 .site-body {
     width: 1920px;
     height: 780px;

@@ -11,15 +11,13 @@
   <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
   <link rel="stylesheet" th:href="@{/css/register/register.css}">
   <link rel="stylesheet" th:href="@{/css/utils/buttons.css}">
-
+  <link rel="stylesheet" th:href="@{/css/utils/siteSize.css}">
 </head>
 
 <body>
 
 <div class="site-size">
   <div th:replace="fragments/menu :: menu"></div>
-  <div th:replace="fragments/footer :: footer"></div>
-
   <div class="v1_114">
     <div class="v1_115"></div>
 
@@ -66,6 +64,8 @@
     <div class="v1_144"></div>
     <span class="v1_145">Mi Impacto Ambiental</span>
   </div>
+  <div th:replace="fragments/footer :: footer"></div>
+
 </div>
 
 </body>
