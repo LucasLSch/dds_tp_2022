@@ -75,35 +75,23 @@
           </div>
 
           <div class="dropdown-container">
-            <select class="country-dropdown" th:field="*{location.country}">
+            <select class="country-dropdown" th:field="*{location.country}" onchange="showDynamicLoc(this, 'province')">
               <option value="-1" id="country-dropdown-empty-option"></option>
               <option class="select2-option" th:each="c : ${allCountries}"
                       th:text="${c.name}"
                       th:value="${c.id}">
               </option>
             </select>
-            <select class="province-dropdown" th:field="*{location.province}">
+            <select class="province-dropdown" th:field="*{location.province}" onchange="showDynamicLoc(this, 'municipality')">
               <option value="-1" id="province-dropdown-empty-option"></option>
-              <option class="select2-option" th:each="p : ${allProvinces}"
-                      th:text="${p.name}"
-                      th:value="${p.id}">
-              </option>
             </select>
           </div>
           <div class="dropdown-container">
-            <select class="municipality-dropdown" th:field="*{location.municipality}">
+            <select class="municipality-dropdown" th:field="*{location.municipality}" onchange="showDynamicLoc(this, 'district')">
               <option value="-1" id="municipality-dropdown-empty-option"></option>
-              <option class="select2-option" th:each="m : ${allMunicipalities}"
-                      th:text="${m.name}"
-                      th:value="${m.id}">
-              </option>
             </select>
             <select class="district-dropdown" th:field="*{location.district}">
               <option value="-1" id="district-dropdown-empty-option"></option>
-              <option class="select2-option" th:each="d : ${allDistricts}"
-                      th:text="${d.name}"
-                      th:value="${d.id}">
-              </option>
             </select>
           </div>
         </div>
@@ -123,16 +111,102 @@
 
 <script th:inline="javascript">
 
+  let first = true
+
+  /*[+
+
+    var parseCountries = [[${allCountries}]];
+    var parseProvinces = [[${allProvinces}]];
+    var parseMunicipalities = [[${allMunicipalities}]];
+    var parseDistricts = [[${allDistricts}]];
+
+    +]*/
+
+  function showDynamicLoc(element, type) {
+
+    if (type == "non-type") {
+      return;
+    }
+
+    let where = "beforeend"
+
+    if (type == "municipality") {
+      where = "afterbegin"
+    }
+
+    let id = "location." + type
+    let previous = document.getElementById(id)
+    let parent = previous.parentElement
+
+    if (!!previous) {
+      previous.remove()
+    }
+
+    let select = `<select class="${type + '-dropdown'}" id="${id}" name="${id}" onchange="showDynamicLoc(this, nextLevel('${type}'))">
+                    <option class="select2-option"></option>
+                 `;
+
+    let capitalizedType = capitalize(type)
+    let pluralizedType = pluralize(capitalizedType)
+
+    console.log(pluralizedType);
+    console.log(window["parse" + pluralizedType]);
+
+    window["parse" + pluralizedType]
+            .filter(locValue => element.value == locValue[previousLevel(type)].id)
+            .forEach(locValue => {
+              select += `<option class="select2-option" value="${locValue.id}">
+                            ${locValue.name}
+                        </option>`;
+            });
+    select += `</select>`
+
+    parent.insertAdjacentHTML(where, select);
+
+    showDynamicLoc(document.getElementById(id), nextLevel(type));
+    createSelect2();
+  }
+
+  function nextLevel(type) {
+    if (type == "country") return "province"
+    if (type == "province") return "municipality"
+    if (type == "municipality") return "district"
+    return "non-type"
+  }
+
+  function previousLevel(type) {
+    if (type == "district") return "municipality"
+    if (type == "municipality") return "province"
+    if (type == "province") return "country"
+    return "non-type"
+  }
+
+  function capitalize(word) {
+    let firstChar= word.charAt(0);
+    let remainingChars = word.slice(1);
+    let capitalizedFirstChar = firstChar.toUpperCase()
+    return capitalizedFirstChar + remainingChars;
+  }
+
+  function pluralize(word) {
+    let pluralizedWord = word
+    if (pluralizedWord.endsWith("y")) pluralizedWord = pluralizedWord.slice(0, pluralizedWord.length - 1) + "ie"
+    return pluralizedWord + "s"
+  }
+
     $(document).ready(function () {
         createSelect2();
     });
 
     function createSelect2() {
 
+      if (first) {
         document.getElementById("country-dropdown-empty-option").removeAttribute("value");
         document.getElementById("province-dropdown-empty-option").removeAttribute("value");
         document.getElementById("municipality-dropdown-empty-option").removeAttribute("value");
         document.getElementById("district-dropdown-empty-option").removeAttribute("value");
+        first = false
+      }
 
         $(".country-dropdown").select2({
             placeholder: "País",
