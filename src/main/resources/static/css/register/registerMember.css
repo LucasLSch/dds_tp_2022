@@ -1,15 +1,9 @@
 * {
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
 }
 
 body {
     font-size: 14px;
-}
-
-.site-size {
-    width: 1920px;
-    height: 1080px;
-    position: relative;
 }
 
 .v118_177 {
@@ -180,43 +174,39 @@ body {
     overflow: hidden;
 }
 
+
 .site-body {
-    width: 100%;
-    height: 780px;
+    /* width: 100%; */
+    /* height: 1189px; */
     background: var(--darkGrey02);
     opacity: 1;
-    position: absolute;
-    top: 100px;
-    left: 0px;
-    overflow: hidden;
+    /* padding-top: 173px; */
+    padding: 50px 0px;
+    /* overflow-y: scroll; */
+    flex-direction: column;
+    display: flex;
+    align-items: center;
 }
 
 .member-form {
     width: 450px;
-    height: 326px;
+    /* height: 326px; */
     background: url("../images/v118_191.png");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     opacity: 1;
-    position: absolute;
-    top: 296px;
-    left: 460px;
-    overflow: hidden;
+    /* position: absolute; */
+    /* top: 296px; */
+    /* left: 460px; */
+    /* overflow: hidden; */
+    display: flex;
+    flex-direction: column;
 }
 
 .member-form-button {
     width: 123px;
     height: 50px;
-    background: url("../images/v118_192.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 276px;
-    left: 0px;
-    overflow: hidden;
 }
 
 .v118_194 {
@@ -235,11 +225,11 @@ body {
 }
 
 .v118_195 {
-    width: 77px;
+    width: max-content;
     color: rgba(0, 0, 0, 1);
-    position: absolute;
-    top: 12px;
-    left: 23px;
+    /* position: absolute; */
+    /* top: 12px; */
+    /* left: 23px; */
     font-family: Poppins;
     font-weight: SemiBold;
     font-size: 18px;
@@ -255,18 +245,22 @@ body {
     background-position: center center;
     background-size: cover;
     opacity: 1;
-    position: absolute;
-    top: 184px;
-    left: 0px;
-    overflow: hidden;
+    /* position: absolute; */
+    /* top: 184px; */
+    /* left: 0px; */
+    /* overflow: hidden; */
+    padding-bottom: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .v118_197 {
-    width: 227px;
+    width: max-content;
     color: rgba(255, 255, 255, 1);
-    position: absolute;
-    top: 0px;
-    left: 0px;
+    /* position: absolute; */
+    /* top: 0px; */
+    /* left: 0px; */
     font-family: Poppins;
     font-weight: SemiBold;
     font-size: 16px;
@@ -279,9 +273,9 @@ body {
     height: 28px;
     background: rgba(75, 75, 75, 0.699999988079071);
     opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 170px;
+    /* position: absolute; */
+    /* top: 0px; */
+    /* left: 170px; */
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -297,18 +291,22 @@ body {
     background-position: center center;
     background-size: cover;
     opacity: 1;
-    position: absolute;
-    top: 120px;
-    left: 0px;
-    overflow: hidden;
+    /* position: absolute; */
+    /* top: 120px; */
+    /* left: 0px; */
+    /* overflow: hidden; */
+    padding-bottom: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .form-label {
-    width: 170px;
+    width: max-content;
     color: rgba(255, 255, 255, 1);
-    position: absolute;
-    top: 2px;
-    left: 0px;
+    /* position: absolute; */
+    /* top: 2px; */
+    /* left: 0px; */
     font-family: Poppins;
     font-weight: SemiBold;
     font-size: 16px;
@@ -317,12 +315,12 @@ body {
 }
 
 .form-dropdown {
-    width: 280px;
+    width: 296px;
     height: 32px;
     opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 170px;
+    /* position: absolute; */
+    /* top: 0px; */
+    /* left: 170px; */
     overflow: hidden;
     background: rgba(255, 255, 255, 1);
     border-top-left-radius: 8px;
@@ -338,9 +336,9 @@ body {
     height: 32px;
     background: rgba(255, 255, 255, 1);
     opacity: 1;
-    position: relative;
-    top: 0px;
-    left: 0px;
+    /* position: relative; */
+    /* top: 0px; */
+    /* left: 0px; */
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     border-bottom-left-radius: 8px;
@@ -386,14 +384,14 @@ body {
     background-position: center center;
     background-size: cover;
     opacity: 1;
-    position: absolute;
-    top: 60px;
-    left: 0px;
-    overflow: hidden;
+    /* position: absolute; */
+    /* top: 60px; */
+    /* left: 0px; */
+    /* overflow: hidden; */
 }
 
 .v118_200 {
-    width: 84px;
+    width: max-content;
     color: rgba(255, 255, 255, 1);
     position: relative;
     top: 0px;
@@ -410,36 +408,40 @@ body {
     height: 28px;
     background: rgba(75, 75, 75, 0.699999988079071);
     opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 170px;
+    /* position: absolute; */
+    /* top: 0px; */
+    /* left: 170px; */
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .v118_220 {
     width: 450px;
-    height: 28px;
-    background: url("../images/v118_220.png");
+    /* height: 28px; */
+    /* background: url("../images/v118_220.png"); */
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     opacity: 1;
-    position: relative;
-    top: 0px;
-    left: 0px;
-    overflow: hidden;
+    /* position: relative; */
+    /* top: 0px; */
+    /* left: 0px; */
+    /* overflow: hidden; */
+    padding-bottom: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .v118_221 {
-    width: 83px;
+    width: max-content;
     color: rgba(255, 255, 255, 1);
-    position: relative;
-    top: 0px;
-    left: 0px;
+    /* position: relative; */
+    /* top: 0px; */
+    /* left: 0px; */
     font-family: Poppins;
     font-weight: SemiBold;
     font-size: 16px;
@@ -452,14 +454,14 @@ body {
     height: 28px;
     background: rgba(75, 75, 75, 0.699999988079071);
     opacity: 1;
-    position: absolute;
-    top: 0px;
-    left: 170px;
+    /* position: absolute; */
+    /* top: 0px; */
+    /* left: 170px; */
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 form input {
@@ -619,4 +621,58 @@ form input {
     font-size: 36px;
     opacity: 1;
     text-align: center;
+}
+
+
+.site-header {
+    width: fit-content;
+}
+
+.site-title {
+    width: 257px;
+    color: rgba(255, 255, 255, 1);
+    top: 73px;
+    left: 450px;
+    font-family: Poppins, serif;
+    font-weight: Bold;
+    font-size: 36px;
+    opacity: 1;
+    text-align: left;
+}
+
+.site-info {
+    margin: 50px 0px 32px;
+    display: flex;
+    align-items: center;
+}
+
+.site-info-icon {
+    width: 78px;
+    height: 78px;
+    background: rgba(255, 255, 255, 1);
+    opacity: 1;
+    border-radius: 50%;
+}
+
+.site-info-text {
+    width: fit-content;
+    color: rgba(255, 255, 255, 0.8999999761581421);
+    /* top: 27px; */
+    /* left: 98px; */
+    font-family: Poppins, serif;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+    padding: 0px 20px;
+}
+
+.new-member-container {
+    width: 672px;
+    background: var(--darkGrey03);
+    border-radius: 40px;
+    margin-bottom: 20px;
+    padding-top: 34px;
+    padding-bottom: 20px;
+    padding-left: 34px;
 }

@@ -10,56 +10,59 @@
   <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
   <link rel="stylesheet" th:href="@{/css/register/registerMember.css}">
   <link rel="stylesheet" th:href="@{/css/utils/buttons.css}">
+  <link rel="stylesheet" th:href="@{/css/utils/siteSize.css}">
+
 </head>
 <body>
 <div class="site-size">
   <div th:replace="fragments/menu :: menu"></div>
-  <div th:replace="fragments/footer :: footer"></div>
-
   <div class="site-body">
 
-    <span class="v118_211">Nuevo Miembro</span>
-
-    <div class="v118_208">
-      <div class="v118_209"></div>
-      <span class="v118_210">Complete los datos siguientes para finalizar la creación de su cuenta</span>
+    <div class="site-header">
+      <span class="site-title">Nuevo Miembro</span>
+      <div class="site-info">
+        <div class="site-info-icon"></div>
+        <span class="site-info-text">Complete los datos siguientes para finalizar la creación de su cuenta</span>
+      </div>
     </div>
 
-    <form class="member-form" method="POST" th:action="${path}" th:object="${newMember}">
+    <div class="new-member-container">
+      <form class="member-form" method="POST" th:action="${path}" th:object="${newMember}">
 
-      <div class="v118_220">
-        <label class="v118_221">Nombre/s</label>
-        <input class="v118_222" th:field="*{name}" type="text"/>
-      </div>
+        <div class="v118_220">
+          <label class="v118_221">Nombre/s</label>
+          <input class="v118_222" th:field="*{name}" type="text"/>
+        </div>
 
-      <div class="v118_199">
-        <label class="v118_200">Apellido/s</label>
-        <input class="v118_201" th:field="*{surname}" type="text"/>
-      </div>
+        <div class="v118_220">
+          <label class="v118_221">Apellido/s</label>
+          <input class="v118_222" th:field="*{surname}" type="text"/>
+        </div>
 
-      <div class="form-doc-type">
-        <span class="form-label">Tipo Documento</span>
-        <select class="form-dropdown" th:field="*{docType}">
-          <option class="form-dropdown-text" th:each="dt : ${allDocTypes}"
-                  th:text="${dt}"
-                  th:value="${dt}">
-          </option>
-        </select>
-      </div>
+        <div class="form-doc-type">
+          <span class="form-label">Tipo Documento</span>
+          <select class="form-dropdown" th:field="*{docType}">
+            <option class="form-dropdown-text" th:each="dt : ${allDocTypes}"
+                    th:text="${dt}"
+                    th:value="${dt}">
+            </option>
+          </select>
+        </div>
 
-      <div class="v118_196">
-        <label class="v118_197">Nro. Documento</label>
-        <input class="v118_198" th:field="*{docNumber}" type="text"/>
-      </div>
+        <div class="v118_196">
+          <label class="v118_197">Nro. Documento</label>
+          <input class="v118_198" th:field="*{docNumber}" type="text"/>
+        </div>
 
-      <button class="blue-button member-form-button" type="submit">
-        <div class="v118_194"></div>
-        <span class="v118_195">Finalizar</span>
-      </button>
+        <button class="blue-button member-form-button" type="submit">
+          <span class="button-text">Finalizar</span>
+        </button>
 
-    </form>
+      </form>
+    </div>
 
   </div>
+  <div th:replace="fragments/footer :: footer"></div>
 
 </div>
 </body>

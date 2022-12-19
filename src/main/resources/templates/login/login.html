@@ -1,58 +1,56 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <title>Iniciar Sesión</title>
-  <meta content="Figma htmlGenerator" name="description">
-  <meta content="htmlGenerator" name="author">
-  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=SF+Pro Display&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Patrick+Hand SC&display=swap" rel="stylesheet">
-  <link rel="stylesheet" th:href="@{/css/utils/normalize.css}">
-  <link rel="stylesheet" th:href="@{/css/utils/rootVariables.css}">
-  <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
-  <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
-  <link rel="stylesheet" th:href="@{/css/login/login.css}">
-  <link rel="stylesheet" th:href="@{/css/utils/buttons.css}">
-
+    <title>Iniciar Sesión</title>
+    <meta content="Figma htmlGenerator" name="description">
+    <meta content="htmlGenerator" name="author">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=SF+Pro Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Patrick+Hand SC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/utils/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/utils/rootVariables.css}">
+    <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
+    <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/login/login.css}">
+    <link rel="stylesheet" th:href="@{/css/utils/buttons.css}">
+    <link rel="stylesheet" th:href="@{/css/utils/siteSize.css}">
 </head>
 
 <body>
 
 <div class="site-size">
-  <div th:replace="fragments/menu :: menu"></div>
-  <div th:replace="fragments/footer :: footer"></div>
+    <div th:replace="fragments/menu :: menu"></div>
+    <div class="site-body">
+        <form class="e1_73" method="POST" th:action="@{/iniciarSesion}" th:object="${user}">
 
-  <div class="e1_70">
-    <div class="e1_71"></div>
+            <div class="e1_74"><span class="e1_86">Iniciar Sesión</span>
+                <div class="e1_83">
+                    <label class="e1_85">Nombre de usuario</label>
+                    <input class="e1_84" type="text" th:field="*{username}">
+                </div>
+                <div class="e1_79">
+                    <label class="e1_82">Contraseña</label>
+                    <input class="e1_80" type="password" th:field="*{password}">
+                    <span class="e1_81">Mostrar contraseña</span>
+                </div>
+                <button class="blue-button e1_76" type="submit">
 
-    <form class="e1_73" method="POST" th:action="@{/iniciarSesion}" th:object="${user}">
+                    <span class="e1_78">Iniciar Sesión</span>
+                </button>
+                <div class="footer-login">
+                    <span class="e1_100">¿Olvidaste tu contraseña?</span>
+                    <a class="e1_75" th:href="@{../registrarse}">¿No tenés cuenta? Registrarse</a>
+                </div>
+            </div>
 
-      <div class="e1_74"></div>
-      <span class="e1_86">Iniciar Sesión</span>
 
-      <div class=e1_83>
-        <label class="e1_85">Nombre de usuario</label>
-        <input class="e1_84" th:field="*{username}" type="text"/>
-      </div>
-
-      <div class=e1_79>
-        <label class="e1_82">Contraseña</label>
-        <input class="e1_80" th:field="*{password}" type="password"/>
-        <span class="e1_81">Mostrar contraseña</span>
-      </div>
-
-      <button class="blue-button e1_76" type="submit"/>
-        <div class="e1_77"></div>
-        <span class="e1_78">Iniciar Sesión</span>
-      </button>
-
-      <a class="e1_75" th:href="@{../registrarse}">¡No tenés cuenta? Registrarse</a>
-      <span class="e1_100">¿Olvidaste tu contraseña?</span>
-    </form>
-  </div>
+        </form>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
 </div>
 </body>
 </html>

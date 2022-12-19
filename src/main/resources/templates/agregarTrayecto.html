@@ -16,7 +16,7 @@
   <link rel="stylesheet" th:href="@{/css/menu/menu.css}">
   <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
   <link rel="stylesheet" th:href="@{/css/agregarTrayecto.css}">
-
+  <link rel="stylesheet" th:href="@{/css/utils/siteSize.css}">
   <style>
       /*
         Figma Background for illustrative/preview purposes only.
@@ -30,8 +30,8 @@
 </head>
 
 <body><!-- hay que hacer los botones dropdown !-->
+
 <div th:replace="fragments/menu :: menu"></div>
-<div th:replace="fragments/footer :: footer"></div>
 <span class="e111_11511">Agregar trayecto</span>
 <div class=e111_50320>
   <div class="e111_11512"></div>
@@ -156,6 +156,6 @@
     <div class=ei111_50365_288_222124><span class="ei111_50365_288_222124_1_4738">Nuevo Tramo</span></div>
   </div>
 </div>
-</div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

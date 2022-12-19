@@ -15,12 +15,14 @@ public class SectorForView {
   public Long id;
   public String name;
   public Integer membersAmount;
+  public OrganizationForView organization;
   public Set<WorkApplicationForView> workApplications;
 
   public SectorForView(Sector someSector) {
     this.setId(someSector.getId());
     this.setName(someSector.getName());
     this.setMembersAmount(someSector.membersAmount());
+    this.setOrganization(new OrganizationForView(someSector.getOrganization()));
     this.workApplications = someSector.getWorkApplications()
             .stream()
             .filter(wa -> wa.stateIs(WorkApplicationState.PENDING))

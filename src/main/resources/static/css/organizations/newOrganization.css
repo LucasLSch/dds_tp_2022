@@ -1,9 +1,4 @@
-.site-size {
-    /* width: 1920px; */
-    min-height: 1080px;
-    display: flex;
-    flex-direction: column;
-}
+
 
 .site-body {
     width: 100%;
