@@ -1,7 +1,3 @@
-* {
-    box-sizing: border-box;
-}
-
 body {
     font-size: 14px;
 }
@@ -186,13 +182,17 @@ body {
 }
 
 .site-body {
-    width: 1920px;
-    height: 1262px;
+    min-width: fit-content;
+    min-height: fit-content;
     opacity: 1;
-    position: absolute;
-    top: 100px;
-    left: 0px;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    /* position: absolute; */
+    /* top: 100px; */
+    /* left: 0px; */
+    /* overflow: hidden; */
+    background: var(--darkGrey02);
 }
 
 .v147_85 {

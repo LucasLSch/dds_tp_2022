@@ -11,6 +11,8 @@
     <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
     <link rel="stylesheet" th:href="@{/css/organizations/organizationDetails.css}">
     <link rel="stylesheet" th:href="@{/css/utils/siteSize.css}">
+    <link rel="stylesheet" th:href="@{/css/utils/buttons.css}">
+
 </head>
 
 <body>
@@ -18,36 +20,37 @@
 <div class="page-size">
     <div th:replace="fragments/menu :: menu"></div>
     <div class="site-body">
-
-        <div class="v81_86"></div>
-        <div class="v81_87"></div>
         <div class="v104_159">
-            <div class="v104_160"></div>
-
-            <div class="v104_172">
-                <div class="v104_173"></div>
-                <span class="v104_174">Más Información</span></div>
-            <div class="v104_161">
-                <span class="v104_167">Cantidad de Huellas Registradas:</span>
-                <span class="v104_166">Valor Última Huella:</span>
+            <div class="v104_160">
+                <div class="v104_172">
+                    <div class="v104_173">
+                        <span class="v104_174">Más Información</span>
+                    </div>
+                </div>
+                <div class="v104_161">
+                    <span class="v104_167">Cantidad de Huellas Registradas:</span>
+                    <span class="v104_166">Valor Última Huella:</span>
+                </div>
+                <span class="v104_168">Huellas de Carbono</span>
             </div>
-            <span class="v104_168">Huellas de Carbono</span></div>
+        </div>
 
         <div class="v104_136">
             <div class="v104_144">
                 <tr th:each="sector: ${allOrgSectors}">
                     <div class="v104_145">
-                        <div class="v104_138"></div>
+                        <div class="v104_138">
+                            <span class="v104_157" th:text="${sector.name}"></span>
+                            <span class="v104_158" th:text="'Cantidad de Miembros: '+${sector.membersAmount}"</span>
+                        </div>
                         <div class="v104_153" th:if="${isStandardUser}">
-                            <div class="v104_155"></div>
-                            <form method="POST" th:action="'/organizaciones/'+${org.id}+'/sectors/'+${sector.id}+'/aplicaciones'">
-                                <button class="blue-button" type="submit">
-                                  <span class="button-text">Aplicar</span>
+                            <form method="POST"
+                                  th:action="'/organizaciones/'+${org.id}+'/sectors/'+${sector.id}+'/aplicaciones'">
+                                <button class="blue-button button-dim" type="submit">
+                                    <span class="button-text">Aplicar</span>
                                 </button>
                             </form>
                         </div>
-                        <span class="v104_157" th:text="${sector.name}"></span>
-                        <span class="v104_158" th:text="'Cantidad de Miembros: '+${sector.membersAmount}"</span>
                     </div>
                 </tr>
 
@@ -55,11 +58,12 @@
         </div>
 
         <div class="v81_116">
-            <div class="v81_117"></div>
-            <span class="v81_128" th:text="'Ubicación: '+${org.location.street} + ' ' + ${org.location.height}"></span>
-            <span class="v82_240" th:text="'Teléfono: '+${org.phoneNumber}"></span>
-            <span class="v82_239" th:text="'Cantidad de Miembros: '+${org.membersAmount}"></span>
-            <span class="v82_238">Información General</span>
+            <div class="v81_117">
+                <span class="v82_238">Información General</span>
+                <span class="v81_128" th:text="'Ubicación: '+${org.location.street} + ' ' + ${org.location.height}"></span>
+                <span class="v81_128" th:text="'Cantidad de Miembros: '+${org.membersAmount}"></span>
+                <span class="v81_128" th:text="'Teléfono: '+${org.phoneNumber}"></span>
+            </div>
             <span class="v82_242">FuturoLogo?</span>
         </div>
         <span class="v81_136" th:text="${org.socialObj}"></span>
