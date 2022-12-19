@@ -2,6 +2,7 @@ package ddsutn.dtos.member;
 
 import ddsutn.domain.contact.Contact;
 import ddsutn.domain.organization.Member;
+import ddsutn.dtos.organization.SectorForView;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +20,7 @@ public class MemberForView {
   public String docType;
   public String documentNumber;
   public String phoneNumber;
-  public List<String> sectors;
+  public List<SectorForView> sectors;
 
 
   public MemberForView(Member someMember) {
@@ -30,7 +31,7 @@ public class MemberForView {
     this.phoneNumber = someMember.getContacts().stream().map(Contact::getPhoneNumber).findFirst().orElse("");
     this.docType = someMember.getDocType().toString();
     this.documentNumber = someMember.getDocNumber();
-    this.sectors = someMember.getSectors().stream().map(Objects::toString).collect(Collectors.toList());
+    this.sectors = someMember.getSectors().stream().map(SectorForView::new).collect(Collectors.toList());
   }
 
 }

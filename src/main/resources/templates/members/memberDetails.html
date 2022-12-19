@@ -17,44 +17,42 @@
 <div class="site-size">
     <div th:replace="fragments/menu :: menu"></div>
     <div class="site-body">
-
-        <div class="v147_85"></div>
-        <div class="v147_86"></div>
         <div class="v147_87">
-            <div class="v147_88"></div>
-
-            <div class="v147_89">
-                <div class="v147_90"></div>
-                <span class="v147_91">Más Información</span>
+            <div class="v147_88">
+                <div class="v147_89">
+                    <div class="v147_90">
+                        <span class="v147_91">Más Información</span>
+                    </div>
+                </div>
+                <div class="v147_92">
+                    <span class="v147_93">Cantidad de Huellas Registradas:</span>
+                    <span class="v147_94">Valor Última Huella:</span>
+                </div>
+                <span class="v147_95">Huellas de Carbono</span>
             </div>
-
-            <div class="v147_92">
-                <span class="v147_93">Cantidad de Huellas Registradas:</span>
-                <span class="v147_94">Valor Última Huella:</span>
-            </div>
-            <span class="v147_95">Huellas de Carbono</span>
         </div>
 
         <div class="v147_96">
             <div class="v147_97">
                 <tr th:each="sector: ${member.sectors}">
                     <div class="v147_98">
-                        <div class="v147_99"></div>
-                        <span class="v147_103" th:text="${sector.name}"></span>
-                        <span class="v147_104" th:text="'Organización: '+${sector.orgName}"></span>
+                        <div class="sector-info">
+                            <span class="v147_103" th:text="${sector.name}"></span>
+                            <span class="v147_104" th:text="'Organización: '+${sector.organization.socialObj}"></span>
+                        </div>
                     </div>
                 </tr>
-
                 <span class="v147_105">Sectores</span>
             </div>
         </div>
 
         <div class="v147_106">
-            <div class="v147_107"></div>
-            <span class="v147_108" th:text="'Email: '+${member.email}"></span>
-            <span class="v147_109" th:text="'Documento: '+${member.documentNumber}"></span>
-            <span class="v147_110" th:text="'Teléfono: '+${member.phoneNumber}"></span>
-            <span class="v147_111">Información General</span>
+            <div class="v147_107">
+                <span class="v147_111">Información General</span>
+                <span class="v147_109" th:text="'Documento: '+${member.documentNumber}"></span>
+                <span class="v147_109" th:text="'Email: '+${member.email}"></span>
+                <span class="v147_109" th:text="'Teléfono: '+${member.phoneNumber}"></span>
+            </div>
             <span class="v147_112">FuturaFoto?</span>
             <form class="v147_133">
                 <button class="blue-button v147_134" type="submit" formmethod="get"
