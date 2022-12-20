@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -30,11 +31,11 @@ public class TerritorialSector {
 
   @OneToMany()
   @JoinColumn(name = "organization_id")
-  private Set<Organization> organizations = Collections.emptySet();
+  private Set<Organization> organizations = new HashSet<>();
 
   @OneToMany(cascade = CascadeType.PERSIST)
   @JoinColumn(name = "territorial_sector_id")
-  private Set<CarbonFootprint> carbonFootprints = Collections.emptySet();
+  private Set<CarbonFootprint> carbonFootprints = new HashSet<>();
 
 
   public TerritorialSector(String name, TerritorialSectorType type, Set<Organization> organizations) {

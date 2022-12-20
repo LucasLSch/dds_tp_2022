@@ -45,7 +45,7 @@ public class Leg {
   }
 
   public ActivityData createDataActivities() {
-    Double consumption = null;
+    Double consumption;
     try {
       consumption = this.transport.getConsumption(this.startingLocation, this.endingLocation);
     } catch (IOException io) {

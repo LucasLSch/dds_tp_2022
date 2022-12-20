@@ -37,7 +37,6 @@ public enum PeriodicityFormat {
   }
 
   public void validateDate(String periodicity) {
-    System.out.println(this.getDate(periodicity).toString() + LocalDate.now());
     boolean greaterThanNow = this.getDate(periodicity).isAfter(LocalDate.now());
     if (greaterThanNow) {
       throw new IncorrectInputException(periodicity);
@@ -46,13 +45,13 @@ public enum PeriodicityFormat {
 
   public abstract LocalDate getDate(String abc);
 
-  public static PeriodicityFormat periodicityValueOf(String format) {
-    if (format.toLowerCase(Locale.ROOT).equals("mensual")) {
+  public static PeriodicityFormat periodicityValueOf(String period) {
+    if (period.toLowerCase(Locale.ROOT).equals("mensual")) {
       return PeriodicityFormat.MMAAAA;
     }
-    if (format.toLowerCase(Locale.ROOT).equals("anual")) {
+    if (period.toLowerCase(Locale.ROOT).equals("anual")) {
       return PeriodicityFormat.AAAA;
     }
-    throw new IncorrectInputException(format);
+    throw new IncorrectInputException(period);
   }
 }

@@ -19,7 +19,7 @@ public class PasswordCriteriaTest {
         "Esperaba que la validacion falle y no lo hizo."
     );
 
-    assertTrue(thrown.getMessage().contains("The password must have 8 characters"));
+    assertTrue(thrown.getMessage().contains("Debe tener al menos 8 caracteres"));
   }
 
   @Test
@@ -43,7 +43,7 @@ public class PasswordCriteriaTest {
         "Esperaba que la validacion falle y no lo hizo."
     );
 
-    assertTrue(thrown.getMessage().contains("The password is not a safe password"));
+    assertTrue(thrown.getMessage().contains("La contraseña es muy común"));
   }
 
   @Test
@@ -67,7 +67,7 @@ public class PasswordCriteriaTest {
         "Esperaba que la validacion falle y no lo hizo."
     );
 
-    assertTrue(thrown.getMessage().contains("The password does not have a capital letter"));
+    assertTrue(thrown.getMessage().contains("Debe tener por lo menos una mayúscula"));
   }
 
   @Test
@@ -91,7 +91,7 @@ public class PasswordCriteriaTest {
         "Esperaba que la validacion falle y no lo hizo."
     );
 
-    assertTrue(thrown.getMessage().contains("The password must have a number"));
+    assertTrue(thrown.getMessage().contains("Debe tener algún número"));
   }
 
   @Test
@@ -115,7 +115,7 @@ public class PasswordCriteriaTest {
         "Esperaba que la validacion falle y no lo hizo."
     );
 
-    assertTrue(thrown.getMessage().contains("The password must have a special character"));
+    assertTrue(thrown.getMessage().contains("Debe tener al menos un caracter especial"));
   }
 
   @Test
