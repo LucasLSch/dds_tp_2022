@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface GeoRefService {
 
-  @Headers("Authorization: Bearer sf6bewWg3jWqH+3QYKBmpdg4nmWk5ZXYj8c1/U/67I8=")
+  @Headers("Authorization: Bearer *****")
   @GET("distancia")
   Call<DistanceResponse> distance(@Query("localidadOrigenId") int originDistrct,
                                   @Query("calleOrigen") String originStreet,
